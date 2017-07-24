@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gamestatus: MyString
+  giver_id: 1
+  guesser_id: 
+
+two:
+  gamestatus: MyString
+  giver_id: 1
+  guesser_id: 

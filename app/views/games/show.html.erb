@@ -1,0 +1,7 @@
+<% if @game.gamestatus == "give" %>
+  <%= render "give" %>
+<% elsif @game.gamestatus == "guess"%>
+  <%= render "guess" %>
+<% else %>
+  <%= render "done" %>
+<% end %>

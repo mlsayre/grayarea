@@ -1,0 +1,16 @@
+<div class="menulinks">
+  <% if current_user %>
+    Welcome, <%= current_user.username %>!
+  <% else %>
+    Welcome, guest! Create an account or login using Google, Facebook, or Twitter to keep track of your scores and compare your games to others'.
+  <% end %>
+</div>
+
+<%= form_for(@game) do |f| %>
+
+  <div class="actions" style="font-size: 150%;">
+    <%= f.submit "Give Clues", :class => "button mainplay" %>
+  </div>
+  <br>
+  
+<% end %>
