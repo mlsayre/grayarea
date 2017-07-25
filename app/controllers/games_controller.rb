@@ -40,7 +40,8 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
   	@allthewords = @game.allwords
-
+  	@badword = @game.loseword
+  	@targetwords = @game.correctwords
   end
 
   private
