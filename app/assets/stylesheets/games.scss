@@ -4,6 +4,7 @@
 
 body {
 	font-family: 'Montserrat', sans-serif;
+  background-color: #f8fff8;
 }
 
 .allwords {
@@ -49,4 +50,85 @@ body {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.disabled {
+	opacity: .5;
+	pointer-events: none;
+	cursor: initial;
+}
+.hintarea {
+  text-align: center;
+  margin-top: 10px;
+}
+.hints {
+  margin-bottom: 6px;
+}
+.hints textarea {
+  position: relative;
+  top: 4px;
+  resize: none;
+  width: 196px;
+}
+.hintheadline {
+	font-size: 20px;
+}
+.wordnumarea {
+  margin-top: 8px;
+}
+.wordnumarea select {
+  position: relative;
+  bottom: 2px;
+}
+.hidden {
+  display: none;
+}
+.button {
+  cursor: pointer;
+  padding: 8px 6px;
+  background-color: #008604;
+  font-size: 16px;
+  border: 1px solid darkgreen;
+  transition: 500ms all;
+  margin: 10px auto 6px;
+  color: white;
+  border-radius: 4px;
+  display: block;
+}
+.button:hover {
+  background-color: darkgreen;
+}
+.messagebox {
+  display: none;
+  position: fixed;
+  top: 16%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  width: 60%;
+  text-align: center;
+  background-color: aliceblue;
+  padding: 24px 20px;
+  border-radius: 12px;
+  border: 2px solid rosybrown;
+}
+.messagetitle {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.messagesubtext {
+  font-size: 11px;
+  width: 80%;
+  margin: 24px auto 0;
+}
+.pagecover {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .8;
+  z-index: 4;
 }

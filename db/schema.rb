@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724221734) do
+ActiveRecord::Schema.define(version: 20170725151340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20170724221734) do
     t.string "allwords", default: [], array: true
     t.string "correctwords", default: [], array: true
     t.string "loseword"
+    t.string "hintword1", default: ""
+    t.string "hintword2", default: ""
+    t.integer "hintnum1", default: 0
+    t.integer "hintnum2", default: 0
   end
 
   create_table "users", force: :cascade do |t|

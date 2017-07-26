@@ -23,7 +23,7 @@ class GamesController < ApplicationController
 
 		@game = Game.new
 		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => current_user.id)
+			:loseword => @loseword, :giver_id => current_user.id, :guesser_id => "")
 
 		respond_to do |format|
       if @game.save
