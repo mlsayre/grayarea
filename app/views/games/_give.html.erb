@@ -1,4 +1,4 @@
-<div class="gametop">New Game</div>
+<div class="gametop" data-gameid="<%= @game.id %>">New Game</div>
 
 <div class="allwords">
 	<span id="allwordslist">
@@ -11,7 +11,7 @@
 		<span class="hintheadline">Enter your hints</span>
 		<div class="hints hint1">
 			<span class="hintlabel">Hint 1:</span>
-			<textarea class="hintenter hint1word" rows="1" placeholder="One word (two if person)"></textarea>
+			<textarea class="hintenter hint1word" rows="1" placeholder="One word"></textarea>
 			<div class="wordnumarea">
 				<span class="hintnumheading">For this many words:</span>
 				<select class="selections hint1number">
@@ -27,7 +27,7 @@
 		</div>
 		<div class="hints hint2 hidden">
 			<span class="hintlabel">Hint 2:</span>
-			<textarea class="hintenter hint2word" rows="1" placeholder="One word (two if person)"></textarea>
+			<textarea class="hintenter hint2word" rows="1" placeholder="One word"></textarea>
 			<div class="wordnumarea">
 				<span class="hintnumheading">For this many words:</span>
 				<select class="selections hint2number">
@@ -39,8 +39,19 @@
 				  <option value="6">6</option>
 				</select>
 			</div>
+			<div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div>
 			<button class="button submithint2">Submit Second Hint</button>
-			<button class="button skiphint2">Skip Second Hint</button>
+			<!--<button class="button skiphint2">Skip Second Hint</button>-->
+		</div>
+		<div class="hints submitted hidden">
+			<span class="hintlabel">You've submitted your game!</span>
+			<div class="wordnumarea">
+				<span class="hintnumheading">Your hints: 
+					<span class="submittedword1"></span> applies to <span class="submittednum1"></span><br>
+					and <span class="submittedword2"></span> applies to <span class="submittednum2"></span>.
+				</span>
+			</div>
+			<button class="button returntomain">Return to Main</button>
 		</div>
 	</div>
 </div>

@@ -23,7 +23,7 @@ class GamesController < ApplicationController
 
 		@game = Game.new
 		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => current_user.id, :guesser_id => "")
+			:loseword => @loseword, :giver_id => "", :guesser_ids => [])
 
 		respond_to do |format|
       if @game.save
@@ -42,6 +42,14 @@ class GamesController < ApplicationController
   	@allthewords = @game.allwords
   	@badword = @game.loseword
   	@targetwords = @game.correctwords
+  end
+
+  def submithints
+  	@thisgame = Game.find(params[:game_id])
+		@thisgame.update(:giver_id => current_user.id, :hintword1 => params[:word1], :gamestatus => "guess",
+			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num])
+
+		render body: nil
   end
 
   private
