@@ -1,6 +1,6 @@
 <div class="gametop" data-gameid="<%= @game.id %>">Guessing the Words in 
 	<%= User.find(@game.giver_id).username%>'s Game ("<%= @game.gamename %>")<br>
-	<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span></div>
+	<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
 </div>
 
 <div class="allwords guesswordslist">
@@ -13,9 +13,13 @@
 	<div class="hintheading">
 		<span class="hintheadline">Your first hint is...</span>
 		<div class="hints hint1">
-			<div class="hintlabel guessword"><span><%= @game.hintword1 %> (<%= @game.hintnum1 %>)</span></div>
-			<div class="hintlabel guessnum"><span>The word <%= @game.hintword1 %> applies 
-				to <%= @game.hintnum1 %> <%= @game.hintnum1 > 1 ? "words" : "word" %>. Click on a word to guess it...</span></div>
+			<div class="hintlabel guessword">
+				<span class="guessinfo">
+					<span class="thehintword"></span> (<span class="thehintnum"></span>)
+				</span>
+			</div>
+			<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
+				to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
 			</div>
 			<button class="button skip1">Too risky? Go to next hint...</button>
 			<button class="menu"><img src="/assets/menu.png"></button>

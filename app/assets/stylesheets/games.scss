@@ -215,7 +215,7 @@ body {
 .hintlabel.guessword, {
   margin: 16px 0;
 }
-.guessword span {
+.guessword span.guessinfo {
   padding: 6px 30px;
   font-size: 26px;
   background-color: #cefdff;
@@ -239,6 +239,12 @@ body {
 .scoreSection {
     font-size: 14px;
     margin: 4px 0;
+}
+.button.yesnobtn {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 72px;
 }
 button.button.skip1 {
   display: inline-block;

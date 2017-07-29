@@ -5,6 +5,10 @@ $(document).ready(function() {
 	var hint1num = 0;
 	var hint2 = "";
 	var hint2num = 0;
+	var scoring = {0:0, 1:10, 2:20, 3:35, 4:50, 5:70, 6:100};
+	var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
+	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
+	     "This is making the highlight reel!"]
 
 	$(".submithint1").click(function() {
 		var enteredtext = $(".hint1word").val();
@@ -218,51 +222,136 @@ $(document).ready(function() {
   });
 
   if ($(".allwords").hasClass("guesswordslist")) {
-  	var twords = gon.targetwords;
-  	var bword = gon.badword;
-  	var hintword1 = gon.hintword1;
-  	var hintword2 = gon.hintword2;
-  	var hintnum1 = gon.hintnum1;
-  	var hintnum2 = gon.hintnum2;
+  	var GUESS = (function() {
 
-  	//state
-  	var currenthint = hintword1;
-  	var guessedwords = gon.guessedwords;
+	  	var twords = gon.targetwords;
+	  	var bword = gon.badword;
+	  	var hintword1 = gon.hintword1;
+	  	var hintword2 = gon.hintword2;
+	  	var hintnum1 = gon.hintnum1;
+	  	var hintnum2 = gon.hintnum2;
 
-  	//setup
-  	if (guessedwords.length > 0) {
-  		for (var i = 0; i < guessedwords.length; i++) {
-	  		$("[data-guessword='" + guessedword[i] + "']").addClass("guessedword");
+	  	//beginning state
+	  	var guessedwords = gon.guessedwords;
+	  	var guessstatus = gon.guessstatus
+	  	var currenthint = hintword1;
+	  	var currenthintnum = hintnum1;
+	  	if (guessstatus.split(",")[0] === "hint2") {
+	  		currenthint = hintword2;
+	  		currenthintnum = hintnum2;
 	  	}
-  	}
-  	$(".guessedword").each(function() {
-  		var theword = $(this).attr("data-guessword");
-  		if (twords.indexOf(theword) !== -1) {
-  			$(this).addClass("targetword");
-  		} else if (bword === theword) {
-  			$(this).addClass("badword");
-  		} else {
-  			$(this).addClass("neutralword");
-  		}
-  	})
+	  	var correctwordsguessed = [];
+	  	for (var i = 0; i < guessedwords.length; i++) {
+	  		if (twords.indexOf(guessedwords[i]) !== -1) {
+	  			correctwordsguessed.push(guessedwords[i]);
+	  		}
+	  	}
+	  	boardupdate();
 
-  	$(".guesswordslist .word").click(function() {
-  		var selected = $(this).find("span").text();
-  		$(".messagetitle").text("Confirm")
-			$(".messageinfo").html('You have selected the word "' + selected + '" based on the hint "' +
-			                        currenthint + '" . Submit this guess?');
-			$(".messageaction").html('<button class="button submitguessyes">Yes</button>' +
-				                       '<button class="button closemessagebox">No</button>');
-			$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
-			$(".submitguessyes").click(function() {
+	  	//board setup/update
+	  	function boardupdate() {
+		  	if (guessedwords.length > 0) {
+		  		for (var i = 0; i < guessedwords.length; i++) {
+			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
+			  	}
+		  	}
+		  	$(".guessedword").each(function() {
+		  		var theword = $(this).attr("data-guessword");
+		  		if (twords.indexOf(theword) !== -1) {
+		  			$(this).addClass("targetword");
+		  		} 
+		  		if (bword === theword) {
+		  			$(this).addClass("badword");
+		  		}
+		  		if (bword !== theword && twords.indexOf(theword) === -1) {
+		  			$(this).addClass("neutralword");
+		  		}
+		  	})
+		  	$(".wordcount").text(correctwordsguessed.length);
+		  	$(".scorecount").text(scoring[correctwordsguessed.length]);
+		  	$(".thehintword").text(currenthint);
+		  	$(".thehintnum").text(currenthintnum);
+		  	if (currenthintnum === 1) {var thewordword = "word";} else {var thewordword = "words";}
+		  	$(".thewordword").text(thewordword);
+		  	if (currenthint === hintword2) {
+		  		$(".skip1").text("Too risky? End game now.");
+		  		$(".hintheadline").text("Your final hint is...")
+		  	}
+		  }
 
-				closemessagebox();
-			})
-			$(".closemessagebox").click(function() { closemessagebox(); });
-			$(".pagecover").click(function() { closemessagebox(); });
-			$(".messagebox").show();
-			$(".pagecover").show();
-  	})
-  }
+	  	$(".guesswordslist .word").click(function() {
+	  		var selected = $(this).find("span").text();
+	  		$(".messagetitle").text("Confirm")
+				$(".messageinfo").html('You have selected the word "' + selected + '" based on the hint "' +
+				                        currenthint + '" . Submit this guess?');
+				$(".messageaction").html('<button class="button submitguessyes yesnobtn">Yes</button>' +
+					                       '<button class="button closemessagebox yesnobtn">No</button>');
+				$(".messagesubtext").text("Push No or click anywhere outside this box to cancel.");
+				$(".submitguessyes").click(function() {
+					closemessagebox();
+					guessoutcome(selected);
+				})
+				$(".closemessagebox").click(function() { closemessagebox(); });
+				$(".pagecover").click(function() { closemessagebox(); });
+				$(".messagebox").show();
+				$(".pagecover").show();
+	  	})
 
+	  	function guessoutcome(chosen) {
+	  		guessedwords.push(chosen);
+	  		// correct word 
+	  		if (twords.indexOf(chosen) !== -1) {
+	  			correctwordsguessed.push(chosen);
+	  			$(".messagetitle").text("Correct!")
+	  			if (currenthint === hintword1 && correctwordsguessed.length === currenthintnum) {
+	  				$(".messageinfo").html("You found all the words for the first hint! " + 
+							keepitup[Math.floor(Math.random() * keepitup.length)]);
+						$(".messageaction").html('<button class="button closemessagebox">Continue to Second Hint</button>');
+						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+						currenthint = hintword2;
+	  				currenthintnum = hintnum2;
+	  				guessstatus = "hint2,word1";
+	  			} else if (correctwordsguessed.length < 6) {
+						$(".messageinfo").html(chosen + " is one of the six words you're looking for! " + 
+							keepitup[Math.floor(Math.random() * keepitup.length)]);
+						$(".messageaction").html('<button class="button closemessagebox">Continue</button>');
+						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+					} else {
+						$(".messageinfo").html("You got all six words! Very difficult to do... Well done!");
+						$(".messageaction").html('<button class="button closemessagebox">Continue</button>');
+						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+					}
+					$(".closemessagebox").click(function() { 
+						closemessagebox();
+					});
+					$(".pagecover").click(function() { 
+						closemessagebox(); 
+					});
+					boardupdate();
+					$(".messagebox").show();
+					$(".pagecover").show();
+	  		}
+	  		// bad word
+	  		if (bword === chosen) {
+
+	  		}
+	  		// neutral word
+	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
+
+	  		}
+	  	}
+
+	  	$(".skip1").click(function() {
+	  		if (currenthint === hintword1) {
+	  			currenthint = hintword2;
+  				currenthintnum = hintnum2;
+  				guessstatus = "hint2,word1";
+	  		} else {
+
+	  		}
+	  		boardupdate();
+	  	});
+
+	  })();
+	}
 });
