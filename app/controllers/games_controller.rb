@@ -3,11 +3,46 @@ class GamesController < ApplicationController
 	# GET /games/new
   def new
     @game = Game.new
+
+    @gameguesser = Game.where.not(:giver_id => "").first || 1
     # if current_user
     #   @playergames = Gamedata.where(:user_id => current_user.id).order('game_id DESC').all
     #   @playergameslist = @playergames.page(params[:page]).per(8)
 
     # end
+  end
+
+  def startguesser
+  	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
+  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id)
+
+  	if @availgames.length > 0
+
+	  	@game = @availgames.order("RANDOM()").first
+
+	  	if @game.guesser_id1 == 0
+	  		@game.update(:guesser_id1 => current_user.id)
+	  	elsif @game.guesser_id2 == 0
+	  		@game.update(:guesser_id2 => current_user.id)
+	  	elsif @game.guesser_id3 == 0
+	  		@game.update(:guesser_id3 => current_user.id)
+	  	end
+
+	    respond_to do |format|
+	      format.html { redirect_to @game, notice: '' }
+	      format.json { render :show, status: :created, location: @game }
+	    end
+
+	  else
+	  	@game = Game.new
+
+	  	respond_to do |format|
+	      format.html { redirect_to main_path, notice: 'No games available to play. Maybe start a game or two while you wait!' }
+	      format.json { render :show}
+	    end
+	    flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
+	  end
+
   end
 
   # POST /games
@@ -21,9 +56,11 @@ class GamesController < ApplicationController
 		@loseword = @correctwords[0]
 		@correctwords.slice!(0)
 
+		@gamename = @allwords.sample(2).join(" ").titleize
+
 		@game = Game.new
 		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => "", :guesser_ids => [])
+			:loseword => @loseword, :giver_id => "", :gamename => @gamename)
 
 		respond_to do |format|
       if @game.save
@@ -42,6 +79,8 @@ class GamesController < ApplicationController
   	@allthewords = @game.allwords
   	@badword = @game.loseword
   	@targetwords = @game.correctwords
+  	gon.badword = @badword
+  	gon.targetwords = @targetwords
   end
 
   def submithints

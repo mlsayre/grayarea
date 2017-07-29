@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726210244) do
+ActiveRecord::Schema.define(version: 20170728233315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,19 @@ ActiveRecord::Schema.define(version: 20170726210244) do
     t.string "hintword2", default: ""
     t.integer "hintnum1", default: 0
     t.integer "hintnum2", default: 0
-    t.string "guesser_ids", default: [], array: true
+    t.string "gsr1_words", default: [], array: true
+    t.string "gsr2_words", default: [], array: true
+    t.string "gsr3_words", default: [], array: true
+    t.integer "gsr1_score"
+    t.integer "gsr2_score"
+    t.integer "gsr3_score"
+    t.string "gamename", default: ""
+    t.integer "guesser_id1", default: 0
+    t.integer "guesser_id2", default: 0
+    t.integer "guesser_id3", default: 0
+    t.string "gsr1_status", default: "hint1,word1"
+    t.string "gsr2_status", default: "hint1,word1"
+    t.string "gsr3_status", default: "hint1,word1"
   end
 
   create_table "users", force: :cascade do |t|

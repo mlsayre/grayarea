@@ -1,0 +1,44 @@
+<div class="gametop" data-gameid="<%= @game.id %>">Guessing the Words in 
+	<%= User.find(@game.giver_id).username%>'s Game ("<%= @game.gamename %>")<br>
+	<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span>
+</div>
+
+<div class="allwords guesswordslist">
+	<span id="allwordslist">
+    <%= render 'allwordsguess' %>
+  </span>
+</div>
+
+<div class="hintarea guess">
+	<div class="hintheading">
+		<span class="hintheadline">Your first hint is...</span>
+		<div class="hints hint1">
+			<div class="hintlabel guessword"><span><%= @game.hintword1 %> (<%= @game.hintnum1 %>)</span></div>
+			<div class="hintlabel guessnum"><span>The word <%= @game.hintword1 %> applies 
+				to <%= @game.hintnum1 %> <%= @game.hintnum1 > 1 ? "words" : "word" %>. Click on a word to guess it...</span></div>
+			</div>
+			<button class="button skip1">Skip to Next Hint</button>
+		</div>
+		<div class="hints submitted hidden">
+			<span class="hintlabel">You've submitted your game!</span>
+			<div class="wordnumarea">
+				<span class="hintnumheading">Your hints: 
+					<span class="submittedword1"></span> applies to <span class="submittednum1"></span><br>
+					and <span class="submittedword2"></span> applies to <span class="submittednum2"></span>.
+				</span>
+			</div>
+			<button class="button returntomain">Return to Main</button>
+		</div>
+	</div>
+</div>
+
+<div class="gamebottom"></div>
+
+<div class="messagebox">
+	<div class="messagetitle"></div>
+	<div class="messageinfo"></div>
+	<div class="messageaction"></div>
+	<div class="messagesubtext"></div>
+</div>
+
+<div class="pagecover"></div>

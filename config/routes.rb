@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	resources :games do
     collection do
       post 'submithints'
+      post 'startguesser'
     end
   end
 

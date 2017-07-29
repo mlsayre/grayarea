@@ -9,8 +9,20 @@
 <%= form_for(@game) do |f| %>
 
   <div class="actions" style="font-size: 150%;">
-    <%= f.submit "Give Clues", :class => "button mainplay" %>
+    <%= f.submit "Be the Hint Giver", :class => "button mainplay" %>
   </div>
   <br>
-  
+
 <% end %>
+
+<button class="button startguess">Be a Word Guesser</button>
+<p id="notice"><%= notice %></p>
+
+<script>
+$(".startguess").click(function() {
+	$.ajax({
+    url: "/games/startguesser",
+    type: "POST"
+  })
+})
+</script>

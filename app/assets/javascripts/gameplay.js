@@ -217,4 +217,11 @@ $(document).ready(function() {
   	}
   });
 
+  if ($(".allwords").hasClass("guesswordslist")) {
+  	var twords = gon.targetwords;
+  	var bword = gon.badword;
+  	console.log("target words: " + twords);
+  	console.log("bad word: " + bword);
+  }
+
 });
