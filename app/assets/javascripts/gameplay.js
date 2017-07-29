@@ -220,8 +220,49 @@ $(document).ready(function() {
   if ($(".allwords").hasClass("guesswordslist")) {
   	var twords = gon.targetwords;
   	var bword = gon.badword;
-  	console.log("target words: " + twords);
-  	console.log("bad word: " + bword);
+  	var hintword1 = gon.hintword1;
+  	var hintword2 = gon.hintword2;
+  	var hintnum1 = gon.hintnum1;
+  	var hintnum2 = gon.hintnum2;
+
+  	//state
+  	var currenthint = hintword1;
+  	var guessedwords = gon.guessedwords;
+
+  	//setup
+  	if (guessedwords.length > 0) {
+  		for (var i = 0; i < guessedwords.length; i++) {
+	  		$("[data-guessword='" + guessedword[i] + "']").addClass("guessedword");
+	  	}
+  	}
+  	$(".guessedword").each(function() {
+  		var theword = $(this).attr("data-guessword");
+  		if (twords.indexOf(theword) !== -1) {
+  			$(this).addClass("targetword");
+  		} else if (bword === theword) {
+  			$(this).addClass("badword");
+  		} else {
+  			$(this).addClass("neutralword");
+  		}
+  	})
+
+  	$(".guesswordslist .word").click(function() {
+  		var selected = $(this).find("span").text();
+  		$(".messagetitle").text("Confirm")
+			$(".messageinfo").html('You have selected the word "' + selected + '" based on the hint "' +
+			                        currenthint + '" . Submit this guess?');
+			$(".messageaction").html('<button class="button submitguessyes">Yes</button>' +
+				                       '<button class="button closemessagebox">No</button>');
+			$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+			$(".submitguessyes").click(function() {
+
+				closemessagebox();
+			})
+			$(".closemessagebox").click(function() { closemessagebox(); });
+			$(".pagecover").click(function() { closemessagebox(); });
+			$(".messagebox").show();
+			$(".pagecover").show();
+  	})
   }
 
 });

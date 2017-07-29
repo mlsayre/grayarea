@@ -81,6 +81,20 @@ class GamesController < ApplicationController
   	@targetwords = @game.correctwords
   	gon.badword = @badword
   	gon.targetwords = @targetwords
+  	gon.hintword1 = @game.hintword1
+  	gon.hintword2 = @game.hintword2
+  	gon.hintnum1 = @game.hintnum1
+  	gon.hintnum2 = @game.hintnum2
+  	if current_user.id == @game.guesser_id1
+  		gon.guessedwords = @game.gsr1_words
+  		gon.guessstatus = @game.gsr1_status
+  	elsif current_user.id == @game.guesser_id2
+  		gon.guessedwords = @game.gsr2_words
+  		gon.guessstatus = @game.gsr2_status
+  	elsif current_user.id == @game.guesser_id3
+  		gon.guessedwords = @game.gsr3_words
+  		gon.guessstatus = @game.gsr3_status
+  	end
   end
 
   def submithints

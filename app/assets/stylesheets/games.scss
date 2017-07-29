@@ -222,6 +222,14 @@ body {
   border: 4px outset silver;
   border-radius: 50px;
 }
+.guessedword {
+  cursor: auto;
+  pointer-events: none;
+}
+.neutralword {
+  background-color: darkgrey;
+  opacity: .25;
+}
 .hintlabel.guessnum, {
   margin: 10px 0;
 }
@@ -231,6 +239,27 @@ body {
 .scoreSection {
     font-size: 14px;
     margin: 4px 0;
+}
+button.button.skip1 {
+  display: inline-block;
+}
+button.menu {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    width: 38px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: 200ms all;
+    border-radius: 5px;
+}
+button.menu:hover {
+    background-color: lightgrey;
+}
+.menu img {
+    width: 100%;
+    position: relative;
+    top: 1px;
 }
 
 
