@@ -246,7 +246,24 @@ body {
   margin-right: 8px;
   width: 72px;
 }
-button.button.skip1 {
+.gameover {
+  font-size: 20px;
+}
+.gameoverinfo {
+  margin-top: 6px;
+}
+.clickagain {
+  position: relative;
+  transition: 300ms all;
+  border-radius: 4px;
+  opacity: 0;
+}
+.wordsubmitanim {
+  opacity: 1;
+  background-color: #ffce75;
+  transform: translateY(-110%);
+}
+button.button.skip1, button.button.returntomain {
   display: inline-block;
 }
 button.menu {

@@ -192,7 +192,7 @@ $(document).ready(function() {
 		$(".pagecover").show();
 	}
 
-	$(".returntomain").click(function() {
+	$(document).on("click", ".returntomain", function() {
 		window.location = "/main";
 	})
 
@@ -241,11 +241,13 @@ $(document).ready(function() {
 	  		currenthintnum = hintnum2;
 	  	}
 	  	var correctwordsguessed = [];
+	  	var correctwordshint2 = [];
 	  	for (var i = 0; i < guessedwords.length; i++) {
 	  		if (twords.indexOf(guessedwords[i]) !== -1) {
 	  			correctwordsguessed.push(guessedwords[i]);
 	  		}
 	  	}
+	  	var gamespoiled = 0;
 	  	boardupdate();
 
 	  	//board setup/update
@@ -277,24 +279,32 @@ $(document).ready(function() {
 		  		$(".skip1").text("Too risky? End game now.");
 		  		$(".hintheadline").text("Your final hint is...")
 		  	}
+		  	if (guessstatus === "over,over") {
+		  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
+		  		for (var i = 0; i < twords.length; i++) {
+		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");
+		  		}
+		  		$("[data-guessword='" + bword + "']").removeClass("neutralword").addClass("badword");
+		  		$(".hintheading").remove();
+		  		$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+		  		$(".submitted").removeClass("hidden");
+		  		gamespoiled = 1
+		  	}
+		  	//ajax call to update db
 		  }
 
 	  	$(".guesswordslist .word").click(function() {
 	  		var selected = $(this).find("span").text();
-	  		$(".messagetitle").text("Confirm")
-				$(".messageinfo").html('You have selected the word "' + selected + '" based on the hint "' +
-				                        currenthint + '" . Submit this guess?');
-				$(".messageaction").html('<button class="button submitguessyes yesnobtn">Yes</button>' +
-					                       '<button class="button closemessagebox yesnobtn">No</button>');
-				$(".messagesubtext").text("Push No or click anywhere outside this box to cancel.");
-				$(".submitguessyes").click(function() {
-					closemessagebox();
+	  		//$(".reallysubmit").off("click");
+	  		$(".clickagain").removeClass("wordsubmitanim")
+	  		$(".word").removeClass("reallysubmit");
+	  		$(this).find(".clickagain").addClass("wordsubmitanim");
+	  		$(this).addClass("reallysubmit");
+				$(".reallysubmit").on("click", function() {
 					guessoutcome(selected);
+					$(this).find(".clickagain").removeClass("wordsubmitanim");
+	  			$(this).removeClass("reallysubmit");
 				})
-				$(".closemessagebox").click(function() { closemessagebox(); });
-				$(".pagecover").click(function() { closemessagebox(); });
-				$(".messagebox").show();
-				$(".pagecover").show();
 	  	})
 
 	  	function guessoutcome(chosen) {
@@ -302,6 +312,9 @@ $(document).ready(function() {
 	  		// correct word 
 	  		if (twords.indexOf(chosen) !== -1) {
 	  			correctwordsguessed.push(chosen);
+	  			if (currenthint === hintword2) {
+	  				correctwordshint2.push(chosen);
+	  			}
 	  			$(".messagetitle").text("Correct!")
 	  			if (currenthint === hintword1 && correctwordsguessed.length === currenthintnum) {
 	  				$(".messageinfo").html("You found all the words for the first hint! " + 
@@ -311,16 +324,22 @@ $(document).ready(function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
+	  			} else if (correctwordsguessed.length === 6) {
+						$(".messageinfo").html("You got all six words! Very difficult to do... Well done!");
+						$(".messageaction").html('<button class="button closemessagebox">Continue</button>');
+						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+						guessstatus = "over,over";
+					} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
+	  				$(".messageinfo").html("You found all the words for the second hint!");
+						$(".messageaction").html('<button class="button closemessagebox">End Game</button>');
+						$(".messagesubtext").text("Push End Game or click anywhere outside this box to end the game.");
+	  				guessstatus = "over,over";
 	  			} else if (correctwordsguessed.length < 6) {
 						$(".messageinfo").html(chosen + " is one of the six words you're looking for! " + 
 							keepitup[Math.floor(Math.random() * keepitup.length)]);
 						$(".messageaction").html('<button class="button closemessagebox">Continue</button>');
 						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
-					} else {
-						$(".messageinfo").html("You got all six words! Very difficult to do... Well done!");
-						$(".messageaction").html('<button class="button closemessagebox">Continue</button>');
-						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
-					}
+					} 
 					$(".closemessagebox").click(function() { 
 						closemessagebox();
 					});
@@ -333,11 +352,49 @@ $(document).ready(function() {
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
-
+	  			$(".messagetitle").text("Agh, The Spoiler!")
+  				$(".messageinfo").html(chosen + ' was the "Spoiler". That means the game is now over and ' + 
+  					'you and the clue giver will receive no points for the game. Better luck next game!');
+					$(".messageaction").html('<button class="button closemessagebox">End Game</button>');
+					$(".messagesubtext").text("Push End Game or click anywhere outside this box to end the game.");
+  				guessstatus = "over,over";
+					$(".closemessagebox").click(function() { 
+						closemessagebox();
+					});
+					$(".pagecover").click(function() { 
+						closemessagebox(); 
+					});
+					boardupdate();
+					$(".messagebox").show();
+					$(".pagecover").show();
 	  		}
 	  		// neutral word
 	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
-
+	  			$(".messagetitle").text("Not Quite...")
+	  			if (currenthint === hintword1) {
+	  				$(".messageinfo").html(chosen + " was not one of the target words, unfortunately. " + 
+	  					"Moving on to the second hint...");
+						$(".messageaction").html('<button class="button closemessagebox">Continue to Second Hint</button>');
+						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+						currenthint = hintword2;
+	  				currenthintnum = hintnum2;
+	  				guessstatus = "hint2,word1";
+	  			} else if (currenthint === hintword2) {
+						$(".messageinfo").html(chosen + " was not one of the target words, unfortunately. " +
+							"Since that was the second hint, the game is now over.");
+						$(".messageaction").html('<button class="button closemessagebox">End Game</button>');
+						$(".messagesubtext").text("Push End Game or click anywhere outside this box to end the game.");
+						guessstatus = "over,over";
+					} 
+					$(".closemessagebox").click(function() { 
+						closemessagebox();
+					});
+					$(".pagecover").click(function() { 
+						closemessagebox(); 
+					});
+					boardupdate();
+					$(".messagebox").show();
+					$(".pagecover").show();
 	  		}
 	  	}
 
@@ -347,7 +404,7 @@ $(document).ready(function() {
   				currenthintnum = hintnum2;
   				guessstatus = "hint2,word1";
 	  		} else {
-
+	  			guessstatus = "over,over";
 	  		}
 	  		boardupdate();
 	  	});

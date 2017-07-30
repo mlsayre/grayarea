@@ -25,14 +25,28 @@
 			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
 		<div class="hints submitted hidden">
-			<span class="hintlabel">You've submitted your game!</span>
-			<div class="wordnumarea">
-				<span class="hintnumheading">Your hints: 
-					<span class="submittedword1"></span> applies to <span class="submittednum1"></span><br>
-					and <span class="submittedword2"></span> applies to <span class="submittednum2"></span>.
+			<span class="hintlabel gameover">Game Over</span>
+			<div class="gameoverinfo">
+				<span class="hintnumheading">Final Score:<br>
+					Words: <span class="wordcount"></span> for <span class="scorecount"></span> points
+				</span><br>
+				<span class="hintnumheading allguesserinfo"><u>All Guesser's Scores</u><br>
+					<div class="guesserinfo">
+						<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
+						<span><%= @game.gsr1_score ? @game.gsr1_score : "-" %> points
+					</div>
+					<div class="guesserinfo">
+						<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
+						<span><%= @game.gsr2_score ? @game.gsr2_score : "-" %> points
+					</div>
+					<div class="guesserinfo">
+						<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
+						<span><%= @game.gsr3_score ? @game.gsr3_score : "-" %> points
+					</div>
 				</span>
 			</div>
 			<button class="button returntomain">Return to Main</button>
+			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
 	</div>
 </div>

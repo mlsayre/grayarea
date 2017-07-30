@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728233315) do
+ActiveRecord::Schema.define(version: 20170730065228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20170728233315) do
     t.string "gsr1_status", default: "hint1,word1"
     t.string "gsr2_status", default: "hint1,word1"
     t.string "gsr3_status", default: "hint1,word1"
+    t.integer "gsr1_spoiler", default: 0
+    t.integer "gsr2_spoiler", default: 0
+    t.integer "gsr3_spoiler", default: 0
+    t.integer "gsr1_cheat", default: 0
+    t.integer "gsr2_cheat", default: 0
+    t.integer "gsr3_cheat", default: 0
   end
 
   create_table "users", force: :cascade do |t|

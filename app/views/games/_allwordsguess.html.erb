@@ -1,3 +1,6 @@
 <% @allthewords.each do |word| %>
-    <li class="word" data-guessword="<%= word %>"><span><%= word %></span></li>
+    <li class="word" data-guessword="<%= word %>">
+    	<div class="clickagain">Click again to submit</div>
+    	<span><%= word %></span>
+    </li>
 <% end %>
