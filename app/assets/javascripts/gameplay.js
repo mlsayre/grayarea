@@ -286,29 +286,36 @@ $(document).ready(function() {
 		  		}
 		  		$("[data-guessword='" + bword + "']").removeClass("neutralword").addClass("badword");
 		  		$(".hintheading").remove();
-		  		$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
 		  		$(".submitted").removeClass("hidden");
 		  		gamespoiled = 1
+		  		for (var i = 0; i < guessedwords.length; i++) {
+			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("finalguessesshow");
+			  	}
+
 		  	}
 		  	//ajax call to update db
+		  	// when ajax done always 
+		  	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
 		  }
 
-	  	$(".guesswordslist .word").click(function() {
+	  	$(document).on("click", ".firstclick", function() {
 	  		var selected = $(this).find("span").text();
-	  		//$(".reallysubmit").off("click");
+	  		$(".word").addClass("firstclick");
 	  		$(".clickagain").removeClass("wordsubmitanim")
-	  		$(".word").removeClass("reallysubmit");
+	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
 	  		$(this).find(".clickagain").addClass("wordsubmitanim");
-	  		$(this).addClass("reallysubmit");
+	  		$(this).addClass("reallysubmit").removeClass("firstclick");
 				$(".reallysubmit").on("click", function() {
 					guessoutcome(selected);
-					$(this).find(".clickagain").removeClass("wordsubmitanim");
-	  			$(this).removeClass("reallysubmit");
+					$(".clickagain").removeClass("wordsubmitanim");
+	  			$(".reallysubmit").removeClass("reallysubmit");
 				})
 	  	})
 
 	  	function guessoutcome(chosen) {
 	  		guessedwords.push(chosen);
+	  		$(".clickagain").removeClass("wordsubmitanim");
+	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		// correct word 
 	  		if (twords.indexOf(chosen) !== -1) {
 	  			correctwordsguessed.push(chosen);

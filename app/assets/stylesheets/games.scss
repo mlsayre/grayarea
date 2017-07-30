@@ -32,6 +32,7 @@ body {
   margin: 3px;
   border-radius: 4px;
   background-color: #e6efff;
+  transition: 250ms all;
 }
 @media (max-width: 480px) {
   .allwords li {
@@ -75,7 +76,7 @@ body {
     font-size: 11px;
   }
   .hintarea {
-    margin-top: 16px;
+    margin-top: 2px !important;
   }
   .allwords li.badword {
     border: 1px solid black;
@@ -151,6 +152,14 @@ body {
 .firstinfo {
   font-size: 12px;
   margin-top: 4px;
+}
+.allguesserinfo {
+  margin-top: 8px;
+  display: block;
+}
+.finalguessesshow {
+  box-shadow: inset 0px 0px 5px 5px #00b8ff;
+  opacity: 1 !important;
 }
 .hidden {
   display: none;
@@ -257,11 +266,19 @@ body {
   transition: 300ms all;
   border-radius: 4px;
   opacity: 0;
+  padding: 4px;
+  font-size: 13px;
 }
 .wordsubmitanim {
   opacity: 1;
   background-color: #ffce75;
   transform: translateY(-110%);
+}
+@media (max-width: 768px) {
+  .clickagain {
+    padding: 2px;
+    font-size: 11px;
+  }
 }
 button.button.skip1, button.button.returntomain {
   display: inline-block;
