@@ -322,12 +322,12 @@ $(document).ready(function() {
 	  			if (currenthint === hintword2) {
 	  				correctwordshint2.push(chosen);
 	  			}
-	  			$(".messagetitle").text("Correct!")
+	  			//$(".messagetitle").text("Correct!")
 	  			if (currenthint === hintword1 && correctwordsguessed.length === currenthintnum) {
-	  				$(".messageinfo").html("You found all the words for the first hint! " + 
-							keepitup[Math.floor(Math.random() * keepitup.length)]);
-						$(".messageaction").html('<button class="button closemessagebox">Continue to Second Hint</button>');
-						$(".messagesubtext").text("Push Continue or click anywhere outside this box to continue.");
+	  				$(".gamenotify").html("You found all the words for the first hint! On to second hint..."); 
+						//	keepitup[Math.floor(Math.random() * keepitup.length)]
+						shownotification();
+						hidenotification();
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
@@ -415,6 +415,20 @@ $(document).ready(function() {
 	  		}
 	  		boardupdate();
 	  	});
+
+	  	function shownotification() {
+	  		$(".hintheadline").fadeOut(125, function() {
+					$(".gamenotify").fadeIn(125);
+				});
+	  	}
+
+	  	function hidenotification() {
+	  		setTimeout(function() {
+	  			$(".gamenotify").fadeOut(125, function() {
+						$(".hintheadline").fadeIn(125);
+					});
+	  		}, 4000)
+	  	}
 
 	  })();
 	}
