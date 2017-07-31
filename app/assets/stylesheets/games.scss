@@ -161,6 +161,11 @@ body {
   left: 0;
   right: 0;
 }
+.unselected {
+  filter: brightness(0.7);
+  opacity: .6;
+  transform: scale(0.94);
+}
 .wordnumarea {
   margin-top: 20px;
 }
