@@ -300,14 +300,16 @@ $(document).ready(function() {
 		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");
 		  		}
 		  		$("[data-guessword='" + bword + "']").removeClass("neutralword").addClass("badword");
-		  		$(".hintheading").remove();
-		  		$(".submitted").removeClass("hidden");
-		  		for (var i = 0; i < guessedwords.length; i++) {
-			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("finalguessesshow");
-			  	}
-			  	if (gamespoiled === 1) {
-			  		playerscore = 0;
-			  	}
+			  	setTimeout(function() {
+			  		$(".hintheading").remove();
+			  		$(".submitted").removeClass("hidden");
+			  		for (var i = 0; i < guessedwords.length; i++) {
+				  		$("[data-guessword='" + guessedwords[i] + "']").addClass("finalguessesshow");
+				  	}
+				  	if (gamespoiled === 1) {
+				  		playerscore = 0;
+				  	}
+				  }, 4000);
 		  	}
 		  	//ajax call to update db
 		  	// when ajax done always 
@@ -348,32 +350,35 @@ $(document).ready(function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
-	  				boardupdate();
 	  			} else if (correctwordsguessed.length === 6) {
 	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
 						shownotification();
 						guessstatus = "over,over";
-						setTimeout(function() {
-	  					boardupdate();
-	  				}, 4000);
 					} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 						$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification();
 	  				guessstatus = "bonus,bonus";
-	  				boardupdate();
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === (currenthintnum + 1)) {
 						$(".gamenotify").html("You found all the words for the second hint!");
 						shownotification();
 	  				guessstatus = "over,over";
-	  				setTimeout(function() {
-	  					boardupdate();
-	  				}, 4000);
 	  			} else if (correctwordsguessed.length < 6) {
 	  				$(".gamenotify").html(chosen + " is one of the six words you're looking for! " + 
 							keepitup[Math.floor(Math.random() * keepitup.length)]);
 						shownotification();
-						boardupdate();
 					} 
+					$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
+					setTimeout(function() {
+						$("img.animating").fadeOut(1200, function() {
+							$("img.animating").remove();
+						})
+					}, 1100);
+					setTimeout(function() {
+						$("div.animating").css("transform", "translateY(-500%)").fadeOut(400, function() {
+							$("div.animating").remove();
+						})
+					}, 3100);
+					boardupdate();
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
@@ -382,9 +387,7 @@ $(document).ready(function() {
 					shownotification();
   				guessstatus = "over,over";
   				gamespoiled = 1;
-  				setTimeout(function() {
-  					boardupdate();
-  				}, 4000);
+  				boardupdate();
 	  		}
 	  		// neutral word
 	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
@@ -395,16 +398,13 @@ $(document).ready(function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
-	  				boardupdate();
 	  			} else if (currenthint === hintword2) {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
 	  					"The game is now over.");
 						shownotification();
 						guessstatus = "over,over";
-						setTimeout(function() {
-	  					boardupdate();
-	  				}, 4000);
 					}
+					boardupdate();
 	  		}
 	  	}
 

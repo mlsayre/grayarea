@@ -241,7 +241,7 @@ body {
 .guesswordslist li {
   cursor: pointer;
 }
-.guesswordslist li:hover {
+.guesswordslist li:not(.guessedword):hover {
   background-color: white;
   transition: 200ms all;
 }
@@ -393,4 +393,35 @@ select:focus, select:active {
       height:0;
       visibility:hidden;
   }
+}
+.anim_correct {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: darkgreen;
+  top: 0;
+  left: 0;
+}
+img.anim_correct {
+  transition: 2000ms transform;
+  transform: scale(.4);
+}
+div.anim_correct {
+  transition: 1500ms transform;
+  text-shadow:
+       1px 1px 0 white,
+     -1px -1px 0 white,  
+      1px -1px 0 white,
+      -1px 1px 0 white,
+       1px 1px 0 white;
+}
+div.anim_correct.animating {
+  transform: translateY(-110%);
+}
+img.anim_correct.animating {
+  transform: rotate(360deg) scale(2.2) translateY(-70%) rotateY(360deg);
 }
