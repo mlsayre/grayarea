@@ -425,3 +425,36 @@ div.anim_correct.animating {
 img.anim_correct.animating {
   transform: rotate(360deg) scale(2.2) translateY(-70%) rotateY(360deg);
 }
+.anim_spoiler {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: red;
+  top: 0;
+  left: 0;
+}
+img.anim_spoiler {
+  transition: 2000ms transform;
+  transform: scale(0.4) translateY(-100%);
+}
+div.anim_spoiler {
+  transition: 1500ms transform;
+  text-shadow:
+       1px 1px 0 white,
+     -1px -1px 0 white,  
+      1px -1px 0 white,
+      -1px 1px 0 white,
+       1px 1px 0 white;
+}
+div.anim_spoiler.animating {
+  transform: translateY(110%);
+  z-index: 11;
+}
+img.anim_spoiler.animating {
+  transform: rotate(360deg) scale(1.5) translateY(-20%) rotateY(360deg);
+  z-index: 10;
+}

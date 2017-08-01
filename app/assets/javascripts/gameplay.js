@@ -382,11 +382,21 @@ $(document).ready(function() {
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
-	  			$(".gamenotify").html('Oh no! ' + chosen + ' was the "Spoiler". Game over and all points lost. ' +
-	  				' Better luck next game!');
+	  			$(".gamenotify").html('Oh no! ' + chosen + ' was the "Spoiler". Game over and all points lost.');
 					shownotification();
   				guessstatus = "over,over";
   				gamespoiled = 1;
+  				$("[data-guessword='" + chosen + "'] .anim_spoiler").fadeIn(200).addClass("animating");
+					setTimeout(function() {
+						$("img.animating").fadeOut(1200, function() {
+							$("img.animating").remove();
+						})
+					}, 1100);
+					setTimeout(function() {
+						$("div.animating").css("transform", "translateY(500%)").fadeOut(400, function() {
+							$("div.animating").remove();
+						})
+					}, 3100);
   				boardupdate();
 	  		}
 	  		// neutral word
