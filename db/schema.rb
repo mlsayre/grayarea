@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730065228) do
+ActiveRecord::Schema.define(version: 20170801232346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170730065228) do
     t.integer "gsr1_score"
     t.integer "gsr2_score"
     t.integer "gsr3_score"
-    t.string "gamename", default: ""
     t.integer "guesser_id1", default: 0
     t.integer "guesser_id2", default: 0
     t.integer "guesser_id3", default: 0

@@ -259,9 +259,11 @@ body {
   cursor: auto;
   pointer-events: none;
 }
-.neutralword {
+li.neutralword {
   background-color: darkgrey;
-  opacity: .25;
+  /*opacity: .25;*/
+  color: lightgrey;
+  background-color: #f9f9f9;
 }
 .hintlabel.guessnum, {
   margin: 10px 0;
@@ -456,5 +458,41 @@ div.anim_spoiler.animating {
 }
 img.anim_spoiler.animating {
   transform: rotate(360deg) scale(1.5) translateY(-20%) rotateY(360deg);
+  z-index: 10;
+}
+
+.anim_neutral {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: grey;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}
+img.anim_neutral {
+  transition: 2000ms transform;
+  transform: scale(0.4) translateY(-100%);
+}
+div.anim_neutral {
+  transition: 1500ms transform;
+  opacity: 1;
+  text-shadow:
+       1px 1px 0 black,
+     -1px -1px 0 black,  
+      1px -1px 0 black,
+      -1px 1px 0 black,
+       1px 1px 0 black;
+}
+div.anim_neutral.animating {
+  transform: translateY(-110%);
+  z-index: 11;
+}
+img.anim_neutral.animating {
+  transform: rotate(360deg) scale(1.4) translateY(10%) rotateY(360deg);
   z-index: 10;
 }

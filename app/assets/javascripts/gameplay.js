@@ -1,4 +1,4 @@
-$(document).ready(function() {
+var ready = function() {
 
 	var gameid = $(".gametop").data("gameid");
 	var hint1 = "";
@@ -223,7 +223,6 @@ $(document).ready(function() {
 
   if ($(".allwords").hasClass("guesswordslist")) {
   	var GUESS = (function() {
-
 	  	var twords = gon.targetwords;
 	  	var bword = gon.badword;
 	  	var hintword1 = gon.hintword1;
@@ -369,13 +368,13 @@ $(document).ready(function() {
 					} 
 					$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
 					setTimeout(function() {
-						$("img.animating").fadeOut(1200, function() {
-							$("img.animating").remove();
+						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+							$("[data-guessword='" + chosen + "'] img.animating").remove();
 						})
 					}, 1100);
 					setTimeout(function() {
-						$("div.animating").css("transform", "translateY(-500%)").fadeOut(400, function() {
-							$("div.animating").remove();
+						$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(-500%)").fadeOut(400, function() {
+							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
 					boardupdate();
@@ -388,13 +387,13 @@ $(document).ready(function() {
   				gamespoiled = 1;
   				$("[data-guessword='" + chosen + "'] .anim_spoiler").fadeIn(200).addClass("animating");
 					setTimeout(function() {
-						$("img.animating").fadeOut(1200, function() {
-							$("img.animating").remove();
+						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+							$("[data-guessword='" + chosen + "'] img.animating").remove();
 						})
 					}, 1100);
 					setTimeout(function() {
-						$("div.animating").css("transform", "translateY(500%)").fadeOut(400, function() {
-							$("div.animating").remove();
+						$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(500%)").fadeOut(400, function() {
+							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
   				boardupdate();
@@ -414,6 +413,17 @@ $(document).ready(function() {
 						shownotification();
 						guessstatus = "over,over";
 					}
+					$("[data-guessword='" + chosen + "'] .anim_neutral").fadeIn(200).addClass("animating");
+					setTimeout(function() {
+						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+							$("[data-guessword='" + chosen + "'] img.animating").remove();
+						})
+					}, 1100);
+					setTimeout(function() {
+						$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(200%)").fadeOut(400, function() {
+							$("[data-guessword='" + chosen + "'] div.animating").remove();
+						})
+					}, 3100);
 					boardupdate();
 	  		}
 	  	}
@@ -442,4 +452,7 @@ $(document).ready(function() {
 
 	  })();
 	}
-});
+}
+
+// $(document).ready(ready);
+$(document).on('turbolinks:load', ready);

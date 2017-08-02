@@ -30,7 +30,7 @@ class GamesController < ApplicationController
 
 	    respond_to do |format|
 	      format.html { redirect_to @game, notice: '' }
-	      format.json { render :show, status: :created, location: @game }
+	      #format.json { render :show, status: :created, location: @game }
 	    end
 
 	  else
@@ -56,11 +56,9 @@ class GamesController < ApplicationController
 		@loseword = @correctwords[0]
 		@correctwords.slice!(0)
 
-		@gamename = @allwords.sample(2).join(" ").titleize
-
 		@game = Game.new
 		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => "", :gamename => @gamename)
+			:loseword => @loseword, :giver_id => "")
 
 		respond_to do |format|
       if @game.save
