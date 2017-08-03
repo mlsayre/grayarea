@@ -45,6 +45,23 @@ class GamesController < ApplicationController
 
   end
 
+  def updategame
+    @thisgame = Game.find(params[:game_id])
+
+    if current_user.id == @thisgame.guesser_id1
+      @thisgame.update(:gsr1_words => params[:guessedwords], :gsr1_status => params[:guessstatus], 
+        :gsr1_spoiler => params[:gamespoiled])
+    elsif current_user.id == @thisgame.guesser_id2
+      @thisgame.update(:gsr2_words => params[:guessedwords], :gsr2_status => params[:guessstatus], 
+        :gsr2_spoiler => params[:gamespoiled])
+    elsif current_user.id == @thisgame.guesser_id3
+      @thisgame.update(:gsr3_words => params[:guessedwords], :gsr3_status => params[:guessstatus], 
+        :gsr3_spoiler => params[:gamespoiled])
+    end
+    
+    render body: nil
+  end
+
   # POST /games
   # POST /games.json
   def create
@@ -86,12 +103,15 @@ class GamesController < ApplicationController
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
   		gon.guessstatus = @game.gsr1_status
+      gon.spoiler = @game.gsr1_spoiler
   	elsif current_user.id == @game.guesser_id2
   		gon.guessedwords = @game.gsr2_words
   		gon.guessstatus = @game.gsr2_status
+      gon.spoiler = @game.gsr2_spoiler
   	elsif current_user.id == @game.guesser_id3
   		gon.guessedwords = @game.gsr3_words
   		gon.guessstatus = @game.gsr3_status
+      gon.spoiler = @game.gsr3_spoiler
   	end
   end
 

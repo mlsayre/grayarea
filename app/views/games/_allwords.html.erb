@@ -1,9 +1,9 @@
 <% @allthewords.each do |word| %>
   <% if word == @badword %>
-    <li class="word badword"><span><%= word %></span></li>
+    <li class="word shrunken badword"><span><%= word %></span></li>
   <% elsif @targetwords.include?(word) %>
-    <li class="word targetword"><span><%= word %></span></li>
+    <li class="word shrunken targetword"><span><%= word %></span></li>
   <% else %>
-    <li class="word"><span><%= word %></span></li>
+    <li class="word shrunken"><span><%= word %></span></li>
   <% end %>
 <% end %>

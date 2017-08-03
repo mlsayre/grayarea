@@ -20,6 +20,9 @@ body {
   display: block;
   margin: 0 auto;
 }
+.allwords li.word.shrunken {
+  transform: scale(0);
+}
 .allwords li {
   display: inline-block;
   width: 136px;
@@ -32,7 +35,8 @@ body {
   margin: 3px;
   border-radius: 4px;
   background-color: #e6efff;
-  transition: 250ms all;
+  transition: 250ms all, 100ms transform;
+  transform: scale(1);
 }
 @media (max-width: 480px) {
   .allwords li {

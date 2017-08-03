@@ -9,6 +9,81 @@ var ready = function() {
 	var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
 	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
 	     "This is making the highlight reel!"]
+	//word show anim
+	var wordindarr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+	function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+	}
+	wordindarr = shuffleArray(wordindarr);
+	var speedtoshow = 120;
+	function removeShrunken(k) {
+		setTimeout(function() {
+			$(".word").eq(wordindarr[k]).removeClass("shrunken")
+		}, (speedtoshow + 110))
+	}
+	for (var i = 0; i < wordindarr.length; i++) {
+		(function() {
+			var tm = speedtoshow * (i + 2);
+			var toremove = wordindarr[i];
+			if ($(".allwords").length !== 0) {
+				var k = i;
+				setTimeout(function() {
+					if (k === 0) {
+						wordshow0.on("play", removeShrunken(k));
+						wordshow0.play();
+					} else if (k === 1) {
+						wordshow1.on("play", removeShrunken(k));
+						wordshow1.play();
+					} else if (k === 2) {
+						wordshow2.on("play", removeShrunken(k));
+						wordshow2.play();
+					} else if (k === 3) {
+						wordshow3.on("play", removeShrunken(k));
+						wordshow3.play();
+					} else if (k === 4) {
+						wordshow4.on("play", removeShrunken(k));
+						wordshow4.play();
+					} else if (k === 5) {
+						wordshow5.on("play", removeShrunken(k));
+						wordshow5.play();
+					} else if (k === 6) {
+						wordshow6.on("play", removeShrunken(k));
+						wordshow6.play();
+					} else if (k === 7) {
+						wordshow7.on("play", removeShrunken(k));
+						wordshow7.play();
+					} else if (k === 8) {
+						wordshow8.on("play", removeShrunken(k));
+						wordshow8.play();
+					} else if (k === 9) {
+						wordshow9.on("play", removeShrunken(k));
+						wordshow9.play();
+					} else if (k === 10) {
+						wordshow10.on("play", removeShrunken(k));
+						wordshow10.play();
+					} else if (k === 11) {
+						wordshow11.on("play", removeShrunken(k));
+						wordshow11.play();
+					} else if (k === 12) {
+						wordshow12.on("play", removeShrunken(k));
+						wordshow12.play();
+					} else if (k === 13) {
+						wordshow13.on("play", removeShrunken(k));
+						wordshow13.play();
+					} else if (k === 14) {
+						wordshow14.on("play", removeShrunken(k));
+						wordshow14.play();
+					}
+				}, tm)
+			}
+		})(i);
+	}
 
 	$(".submithint1").click(function() {
 		var enteredtext = $(".hint1word").val();
@@ -233,6 +308,7 @@ var ready = function() {
 	  	//beginning state
 	  	var guessedwords = gon.guessedwords;
 	  	var guessstatus = gon.guessstatus
+	  	var gamespoiled = gon.spoiler;
 	  	var currenthint = hintword1;
 	  	var currenthintnum = hintnum1;
 	  	if (guessstatus.split(",")[0] === "hint2") {
@@ -247,12 +323,11 @@ var ready = function() {
 	  		}
 	  	}
 	  	var playerscore = scoring[correctwordsguessed.length];
-	  	var gamespoiled = 0;
 	  	var notifytimeout;
-	  	boardupdate();
+	  	boardupdate(0);
 
 	  	//board setup/update
-	  	function boardupdate() {
+	  	function boardupdate(endgametime) {
 		  	if (guessedwords.length > 0) {
 		  		for (var i = 0; i < guessedwords.length; i++) {
 			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
@@ -308,11 +383,24 @@ var ready = function() {
 				  	if (gamespoiled === 1) {
 				  		playerscore = 0;
 				  	}
-				  }, 4000);
+				  	if (gamespoiled === 0 && endgametime !== 0) {
+				  		gameovergoodsfx.play();
+				  	}
+				  }, endgametime);
 		  	}
 		  	//ajax call to update db
-		  	// when ajax done always 
-		  	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+		  	$.ajax({
+	        url: "/games/updategame",
+	        type: "POST",
+	        dataType:'json',
+	        data: { 'game_id' : parseInt(gameid),
+	                'guessedwords' : guessedwords,
+	                'guessstatus' : guessstatus,
+	                'gamespoiled' : gamespoiled }
+	      })
+	        .always(function() {
+	        	$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+	        })
 		  }
 
 	  	$(document).on("click", ".firstclick", function() {
@@ -351,11 +439,12 @@ var ready = function() {
 	  				guessstatus = "hint2,word1";
 	  			} else if (correctwordsguessed.length === 6) {
 	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
+	  				resultscheersfx.play();
 						shownotification();
 						guessstatus = "over,over";
 					} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 						$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
-						shownotification();
+						shownotification("bonus");
 	  				guessstatus = "bonus,bonus";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === (currenthintnum + 1)) {
 						$(".gamenotify").html("You found all the words for the second hint!");
@@ -377,7 +466,8 @@ var ready = function() {
 							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
-					boardupdate();
+					targetwordsfx.play();
+					boardupdate(4000);
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
@@ -396,7 +486,7 @@ var ready = function() {
 							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
-  				boardupdate();
+  				boardupdate(4000);
 	  		}
 	  		// neutral word
 	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
@@ -424,7 +514,8 @@ var ready = function() {
 							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
-					boardupdate();
+					neutralwordsfx.play();
+					boardupdate(4000);
 	  		}
 	  	}
 
@@ -436,10 +527,10 @@ var ready = function() {
 	  		} else {
 	  			guessstatus = "over,over";
 	  		}
-	  		boardupdate();
+	  		boardupdate(4000);
 	  	});
 
-	  	function shownotification() {
+	  	function shownotification(trigger) {
 	  		$(".hintheadline").fadeOut(125, function() {
 					$(".gamenotify").fadeIn(125);
 				});
@@ -447,6 +538,9 @@ var ready = function() {
 	  			$(".gamenotify").fadeOut(125, function() {
 						$(".hintheadline").fadeIn(125);
 					});
+					if (trigger === "bonus") {
+						bonusstartsfx.play();
+					}
 	  		}, 4000)
 	  	}
 

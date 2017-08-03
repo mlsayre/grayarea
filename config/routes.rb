@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       post 'submithints'
       post 'startguesser'
+      post 'updategame'
     end
   end
 
