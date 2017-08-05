@@ -21,27 +21,29 @@
   <%= link_to "See all rankings", rankings_pages_path %>
 </div>
 
-<p id="notice"><%= notice %></p>
-
 <div class="maingamelist">
   Your Games<br>
   <div class="guessergames">
     <span class="gamelisttitle">Giver:</span>
-    <% @gamesgiver.each do |game| %>
-      <li class="gamelist">
-        <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}", game_path(game.id) %>
-      </li>
-    <% end %>
+    <span id="gamesgiverlist">
+      <%= render 'giverlist' %>
+    </span>
+    <div id="paginator" style="margin-top: 10px; text-align: center;">
+      <%= paginate @gamesgiverlist, remote: true, :param_name => 'page' %>
+    </div>
   </div>
   <div class="guessergames">
     <span class="gamelisttitle">Guesser:</span>
-    <% @gamesguesser.each do |game| %>
-      <li class="gamelist">
-        <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}", game_path(game.id) %>
-      </li>
-    <% end %>
+    <span id="gamesguesserlist">
+      <%= render 'guesserlist' %>
+    </span>
+    <div id="paginator2" style="margin-top: 10px; text-align: center;">
+      <%= paginate @gamesguesserlist, remote: true, :param_name => 'page_2' %>
+    </div>
   </div>
 </div>
+
+<p id="notice"><%= notice %></p>
 
 
 <%= link_to "Edit your information", edit_user_registration_path %><br>

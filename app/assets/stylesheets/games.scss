@@ -35,6 +35,7 @@ body {
 }
 .maingamelist li {
   list-style: none;
+  font-size: 14px;
 }
 .guessergames {
   width: 49%;
@@ -299,6 +300,7 @@ form#new_game {
   background-color: #cefdff;
   border: 4px outset silver;
   border-radius: 50px;
+  display: block;
 }
 .guessedword {
   cursor: auto;
@@ -370,7 +372,7 @@ button.menu:hover {
 .menu img {
     width: 100%;
     position: relative;
-    top: 1px;
+    top: 4px;
     cursor: pointer;
 }
 
@@ -415,7 +417,7 @@ select:focus, select:active {
   outline:0;
 }
 #notice {
-  font-size: 12px;
+  font-size: 13px;
   text-align: center;
   color: red;
   -moz-animation: cssAnimation 0s ease-in 5s forwards;
@@ -427,8 +429,20 @@ select:focus, select:active {
   animation: cssAnimation 0s ease-in 5s forwards;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  margin: 0 auto;
+  position: fixed;
+  top: 40%;
+  max-width: 480px;
+  left: 0;
+  right: 0;
+  text-shadow:
+       1px 1px 0 white,
+     -1px -1px 0 white,  
+      1px -1px 0 white,
+      -1px 1px 0 white,
+       1px 1px 0 white;
   padding: 0;
-  margin: 0;
+  background-color: lightgrey;
 }
 @keyframes cssAnimation {
   to {

@@ -6,10 +6,13 @@ class GamesController < ApplicationController
 
     @gameguesser = Game.where.not(:giver_id => "").first || 1
 
-    @gamesgiver = Game.where(:giver_id => current_user.id)
+    @gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all
     @gamesguesser = Game.where(:guesser_id1 => current_user.id)
       .or(Game.where(:guesser_id2 => current_user.id))
-      .or(Game.where(:guesser_id3 => current_user.id))
+      .or(Game.where(:guesser_id3 => current_user.id)).order('updated_at DESC').all
+
+    @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(8)
+    @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(8)
     # if current_user
     #   @playergames = Gamedata.where(:user_id => current_user.id).order('game_id DESC').all
     #   @playergameslist = @playergames.page(params[:page]).per(8)

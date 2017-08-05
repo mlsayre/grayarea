@@ -1,0 +1,5 @@
+<% @gamesgiverlist.each do |game| %>
+  <li class="gamelist">
+    <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}", game_path(game.id) %>
+  </li>
+<% end %>
