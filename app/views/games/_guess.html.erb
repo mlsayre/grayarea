@@ -36,15 +36,15 @@
 				<span class="hintnumheading allguesserinfo"><u>All Guesser's Scores</u><br>
 					<div class="guesserinfo">
 						<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
-						<span><%= @game.gsr1_score ? @game.gsr1_score : "-" %> points
+						<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %> points</span>
 					</div>
 					<div class="guesserinfo">
 						<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
-						<span><%= @game.gsr2_score ? @game.gsr2_score : "-" %> points
+						<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %> points</span>
 					</div>
 					<div class="guesserinfo">
 						<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
-						<span><%= @game.gsr3_score ? @game.gsr3_score : "-" %> points
+						<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %> points</span>
 					</div>
 				</span>
 			</div>

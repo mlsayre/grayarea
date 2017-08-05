@@ -6,6 +6,42 @@ body {
 	font-family: 'Montserrat', sans-serif;
   background-color: #f8fff8;
 }
+.menulinks {
+  text-align: center;
+  margin: 24px 0 0;
+  font-size: 20px;
+}
+.mainmenubuttons {
+  text-align: center;
+  margin: 12px auto;
+  border: 1px solid darkgrey;
+  border-radius: 12px;
+  padding: 8px 0;
+  max-width: 480px;
+}
+.mainmenubuttons a {
+  display: block;
+}
+.mainmenubuttons button, .mainmenubuttons input {
+  width: 140px;
+}
+.maingamelist {
+  text-align: center;
+  margin: 12px auto;
+  border: 1px solid darkgrey;
+  border-radius: 12px;
+  padding: 8px 0;
+  max-width: 480px;
+}
+.maingamelist li {
+  list-style: none;
+}
+.guessergames {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
 .gametop {
   font-size: 20px;
   text-align: center;
@@ -202,10 +238,15 @@ body {
   margin: 10px auto 6px;
   color: white;
   border-radius: 4px;
-  display: block;
+  display: inline-block;
+  vertical-align: middle;
 }
 .button:hover {
   background-color: darkgreen;
+}
+form#new_game {
+  display: inline-block;
+  vertical-align: top;
 }
 .messagebox {
   display: none;
@@ -330,6 +371,7 @@ button.menu:hover {
     width: 100%;
     position: relative;
     top: 1px;
+    cursor: pointer;
 }
 
 
@@ -385,6 +427,8 @@ select:focus, select:active {
   animation: cssAnimation 0s ease-in 5s forwards;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  padding: 0;
+  margin: 0;
 }
 @keyframes cssAnimation {
   to {
@@ -499,4 +543,19 @@ div.anim_neutral.animating {
 img.anim_neutral.animating {
   transform: rotate(360deg) scale(1.4) translateY(10%) rotateY(360deg);
   z-index: 10;
+}
+.menubox {
+  display: none;
+  position: fixed;
+  top: 16%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  width: 60%;
+  text-align: center;
+  background-color: aliceblue;
+  padding: 24px 20px;
+  border-radius: 12px;
+  border: 2px solid rosybrown;
 }

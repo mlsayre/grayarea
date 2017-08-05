@@ -1,0 +1,30 @@
+<div class="gametop" data-gameid="<%= @game.id %>">
+	Game Underway<br>
+</div>
+
+<div class="allwords guesswordslist">
+	<span id="allwordslist">
+    <%= render 'allwordsguess' %>
+  </span>
+</div>
+
+<span class="hintnumheading allguesserinfo" style="text-align: center;"><u>All Guesser's Scores So Far...</u><br>
+	<div class="guesserinfo">
+		<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
+		<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %> points</span>
+	</div>
+	<div class="guesserinfo">
+		<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
+		<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %> points</span>
+	</div>
+	<div class="guesserinfo">
+		<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
+		<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %> points</span>
+	</div>
+</span>
+
+<div class="hintarea guess">
+  This game is being played, stay tuned!<br>
+	<button class="button returntomain">Return to Main</button>
+
+</div>

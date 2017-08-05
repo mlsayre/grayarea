@@ -5,6 +5,11 @@ class GamesController < ApplicationController
     @game = Game.new
 
     @gameguesser = Game.where.not(:giver_id => "").first || 1
+
+    @gamesgiver = Game.where(:giver_id => current_user.id)
+    @gamesguesser = Game.where(:guesser_id1 => current_user.id)
+      .or(Game.where(:guesser_id2 => current_user.id))
+      .or(Game.where(:guesser_id3 => current_user.id))
     # if current_user
     #   @playergames = Gamedata.where(:user_id => current_user.id).order('game_id DESC').all
     #   @playergameslist = @playergames.page(params[:page]).per(8)
@@ -50,13 +55,13 @@ class GamesController < ApplicationController
 
     if current_user.id == @thisgame.guesser_id1
       @thisgame.update(:gsr1_words => params[:guessedwords], :gsr1_status => params[:guessstatus], 
-        :gsr1_spoiler => params[:gamespoiled])
+        :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore])
     elsif current_user.id == @thisgame.guesser_id2
       @thisgame.update(:gsr2_words => params[:guessedwords], :gsr2_status => params[:guessstatus], 
-        :gsr2_spoiler => params[:gamespoiled])
+        :gsr2_spoiler => params[:gamespoiled], :gsr2_score => params[:gamescore])
     elsif current_user.id == @thisgame.guesser_id3
       @thisgame.update(:gsr3_words => params[:guessedwords], :gsr3_status => params[:guessstatus], 
-        :gsr3_spoiler => params[:gamespoiled])
+        :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore])
     end
     
     render body: nil
@@ -75,7 +80,7 @@ class GamesController < ApplicationController
 
 		@game = Game.new
 		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => "")
+			:loseword => @loseword, :giver_id => current_user.id)
 
 		respond_to do |format|
       if @game.save
@@ -100,18 +105,23 @@ class GamesController < ApplicationController
   	gon.hintword2 = @game.hintword2
   	gon.hintnum1 = @game.hintnum1
   	gon.hintnum2 = @game.hintnum2
+    gon.sound = current_user.sound
+
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
   		gon.guessstatus = @game.gsr1_status
       gon.spoiler = @game.gsr1_spoiler
+      gon.guessernum = "1"
   	elsif current_user.id == @game.guesser_id2
   		gon.guessedwords = @game.gsr2_words
   		gon.guessstatus = @game.gsr2_status
       gon.spoiler = @game.gsr2_spoiler
+      gon.guessernum = "2"
   	elsif current_user.id == @game.guesser_id3
   		gon.guessedwords = @game.gsr3_words
   		gon.guessstatus = @game.gsr3_status
       gon.spoiler = @game.gsr3_spoiler
+      gon.guessernum = "3"
   	end
   end
 

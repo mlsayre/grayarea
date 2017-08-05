@@ -1,4 +1,46 @@
 var ready = function() {
+	if(!!window.performance && window.performance.navigation.type == 2)
+		{
+		  window.location.reload();
+		}
+
+	$(".menu").on("click", function() {
+		$(".pagecover").show();
+		$(".menubox").show();
+	});
+
+	$(".menuclose").on("click", function() {
+		$(".pagecover").hide();
+		$(".menubox").hide();
+	});
+
+	$(".pagecover").on("click", function() {
+		$(".pagecover").hide();
+		$(".menubox").hide();
+	});
+
+	var sound = gon.sound || 1;
+	console.log(sound)
+	soundOnOff(sound);
+
+	$(".soundon").on("click", function() {
+		if (sound === 1) {
+			sound = 0;
+		} else {
+			sound = 1;
+		}
+		soundOnOff(sound);
+	})
+
+	function soundOnOff(onoff) {
+		if (onoff === 0) {
+			$(".soundon").text("Turn Sound On");
+			Howler.mute(true);
+		} else {
+			$(".soundon").text("Turn Sound Off");
+			Howler.mute(false);
+		}
+	}
 
 	var gameid = $(".gametop").data("gameid");
 	var hint1 = "";
@@ -304,9 +346,11 @@ var ready = function() {
 	  	var hintword2 = gon.hintword2;
 	  	var hintnum1 = gon.hintnum1;
 	  	var hintnum2 = gon.hintnum2;
+	  	var guessernum = gon.guessernum;
 
 	  	//beginning state
 	  	var guessedwords = gon.guessedwords;
+	  	if (guessedwords === null) {guessedwords = [];}
 	  	var guessstatus = gon.guessstatus
 	  	var gamespoiled = gon.spoiler;
 	  	var currenthint = hintword1;
@@ -324,10 +368,10 @@ var ready = function() {
 	  	}
 	  	var playerscore = scoring[correctwordsguessed.length];
 	  	var notifytimeout;
-	  	boardupdate(0);
+	  	boardupdate(0, "true");
 
 	  	//board setup/update
-	  	function boardupdate(endgametime) {
+	  	function boardupdate(endgametime, firstload) {
 		  	if (guessedwords.length > 0) {
 		  		for (var i = 0; i < guessedwords.length; i++) {
 			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
@@ -374,33 +418,37 @@ var ready = function() {
 		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");
 		  		}
 		  		$("[data-guessword='" + bword + "']").removeClass("neutralword").addClass("badword");
+		  		if (gamespoiled === 1) {
+			  		playerscore = 0;
+			  	}
 			  	setTimeout(function() {
 			  		$(".hintheading").remove();
 			  		$(".submitted").removeClass("hidden");
 			  		for (var i = 0; i < guessedwords.length; i++) {
 				  		$("[data-guessword='" + guessedwords[i] + "']").addClass("finalguessesshow");
 				  	}
-				  	if (gamespoiled === 1) {
-				  		playerscore = 0;
-				  	}
 				  	if (gamespoiled === 0 && endgametime !== 0) {
 				  		gameovergoodsfx.play();
 				  	}
+				  	$(".finalpoints" + guessernum).text(playerscore + " points");
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
-		  	$.ajax({
-	        url: "/games/updategame",
-	        type: "POST",
-	        dataType:'json',
-	        data: { 'game_id' : parseInt(gameid),
-	                'guessedwords' : guessedwords,
-	                'guessstatus' : guessstatus,
-	                'gamespoiled' : gamespoiled }
-	      })
-	        .always(function() {
-	        	$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-	        })
+		  	if (firstload !== "true") {
+			  	$.ajax({
+		        url: "/games/updategame",
+		        type: "POST",
+		        dataType:'json',
+		        data: { 'game_id' : parseInt(gameid),
+		                'guessedwords' : guessedwords,
+		                'guessstatus' : guessstatus,
+		                'gamespoiled' : gamespoiled,
+		                'gamescore' : playerscore }
+		      })
+		        .always(function() {
+		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+		        })
+		     }
 		  }
 
 	  	$(document).on("click", ".firstclick", function() {
@@ -486,6 +534,7 @@ var ready = function() {
 							$("[data-guessword='" + chosen + "'] div.animating").remove();
 						})
 					}, 3100);
+					badwordsfx.play();
   				boardupdate(4000);
 	  		}
 	  		// neutral word

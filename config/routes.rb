@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pages do
+    collection do
+      get 'rankings' => 'pages#rankings'
+    end
+  end
+
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # authenticated :user do

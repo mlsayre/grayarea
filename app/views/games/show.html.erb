@@ -1,7 +1,25 @@
-<% if @game.gamestatus == "give" %>
-  <%= render "give" %>
-<% elsif @game.gamestatus == "guess"%>
-  <%= render "guess" %>
+<% if (@game.giver_id != nil && @game.giver_id != current_user.id) && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3) %>
+	<%= render "sorry" %>
 <% else %>
-  <%= render "done" %>
+	<% if @game.gamestatus == "give" && @game.giver_id == current_user.id%>
+	  <%= render "give" %>
+	<% elsif @game.gamestatus == "give" && @game.giver_id != current_user.id%>
+	  <%= render "underway" %>
+	<% elsif @game.gamestatus == "guess" && @game.giver_id == current_user.id%>
+	  <%= render "underwayforgiver" %>
+	<% elsif @game.gamestatus == "guess" && (current_user.id == @game.guesser_id1 || current_user.id == @game.guesser_id2 || current_user.id == @game.guesser_id3) %>
+	  <%= render "guess" %>
+	<% elsif @game.gamestatus == "guess" && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3) %>
+	  <%= render "sorry" %>
+	<% else %>
+	  <%= render "done" %>
+	<% end %>
 <% end %>
+
+<div class="menubox">
+	<div class="menutitle">Menu</div>
+	<button class="button soundon"></button><br>
+	<button class="button returntomain">Return to Main</button>
+	<button class="button menuclose">Close</button>
+	<div class="menusubtext">Click Close or click anywhere outside box to close</div>
+</div>
