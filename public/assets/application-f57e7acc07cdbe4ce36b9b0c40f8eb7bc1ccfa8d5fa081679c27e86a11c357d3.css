@@ -1,0 +1,723 @@
+/* line 5, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f8fff8;
+}
+
+/* line 9, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.menulinks {
+  text-align: center;
+  margin: 24px 0 0;
+  font-size: 20px;
+}
+
+/* line 14, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.mainmenubuttons {
+  text-align: center;
+  margin: 12px auto;
+  border: 1px solid darkgrey;
+  border-radius: 12px;
+  padding: 8px 0;
+  max-width: 480px;
+}
+
+/* line 22, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.mainmenubuttons a {
+  display: block;
+}
+
+/* line 25, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.mainmenubuttons button, .mainmenubuttons input {
+  width: 140px;
+}
+
+/* line 28, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.maingamelist {
+  text-align: center;
+  margin: 12px auto;
+  border: 1px solid darkgrey;
+  border-radius: 12px;
+  padding: 8px 0;
+  max-width: 480px;
+}
+
+/* line 36, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.maingamelist li {
+  list-style: none;
+  font-size: 14px;
+}
+
+/* line 40, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guessergames {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+
+/* line 46, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.gametop {
+  font-size: 20px;
+  text-align: center;
+  margin: 12px 0 10px;
+}
+
+/* line 51, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allwords {
+  text-align: center;
+  width: 100%;
+}
+
+/* line 55, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+#allwordslist {
+  max-width: 700px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 60, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allwords li.word.shrunken {
+  transform: scale(0);
+}
+
+/* line 63, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allwords li {
+  display: inline-block;
+  width: 136px;
+  height: 42px;
+  border: 1px solid lightgrey;
+  padding: 4px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  margin: 3px;
+  border-radius: 4px;
+  background-color: #e6efff;
+  transition: 250ms all, 100ms transform;
+  transform: scale(1);
+}
+
+@media (max-width: 480px) {
+  /* line 79, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .allwords li {
+    display: inline-block;
+    width: 101px;
+    height: 36px;
+    border: 1px solid lightgrey;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin: 5px 2px;
+    border-radius: 4px;
+    background-color: #e6efff;
+    font-size: 12px;
+  }
+
+  /* line 93, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .allwords li.badword {
+    border: 1px solid black;
+    background-color: #773333;
+    background-image: url(skull.png);
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: 2% 4%;
+    color: #ffc04d;
+    font-weight: bold;
+  }
+}
+@media (max-width: 359px) {
+  /* line 105, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .allwords li {
+    display: inline-block;
+    width: 92px;
+    height: 32px;
+    border: 1px solid lightgrey;
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin: 4px 0px;
+    border-radius: 4px;
+    background-color: #e6efff;
+    font-size: 11px;
+  }
+
+  /* line 119, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .hintarea {
+    margin-top: 2px !important;
+  }
+
+  /* line 122, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .allwords li.badword {
+    border: 1px solid black;
+    background-color: #773333;
+    background-image: url(skull.png);
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: 2% 4%;
+    color: #ffc04d;
+    font-weight: bold;
+  }
+}
+/* line 133, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.gamenotify {
+  display: none;
+  font-size: 14px;
+  color: darkred;
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+/* line 143, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allwords li.targetword {
+  border: 1px solid darkgreen;
+  background-color: green;
+  color: white;
+}
+
+/* line 148, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allwords li.badword {
+  border: 1px solid black;
+  background-color: #773333;
+  background-image: url(skull.png);
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: 2% 10%;
+  color: #ffc04d;
+  font-weight: bold;
+}
+
+/* line 158, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.word span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* line 165, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.disabled {
+  opacity: .5;
+  pointer-events: none;
+  cursor: initial;
+}
+
+/* line 170, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hintarea {
+  text-align: center;
+  margin-top: 0;
+}
+
+/* line 174, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hints {
+  margin-bottom: 6px;
+}
+
+/* line 177, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hints textarea {
+  position: relative;
+  top: 8px;
+  resize: none;
+  width: 288px;
+  border-bottom: 2px dashed #3498DB;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  margin-left: 3px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* line 190, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hints textarea:focus {
+  outline: none;
+}
+
+/* line 193, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.notifyarea {
+  height: 37px;
+  position: relative;
+}
+
+/* line 197, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hintheadline {
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+/* line 205, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.unselected {
+  filter: brightness(0.7);
+  opacity: .6;
+  transform: scale(0.94);
+}
+
+/* line 210, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.wordnumarea {
+  margin-top: 20px;
+}
+
+/* line 213, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.wordnumarea select {
+  position: relative;
+  bottom: 2px;
+}
+
+/* line 217, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.firstinfo {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* line 221, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.allguesserinfo {
+  margin-top: 8px;
+  display: block;
+}
+
+/* line 225, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.finalguessesshow {
+  box-shadow: inset 0px 0px 5px 5px #00b8ff;
+  opacity: 1 !important;
+}
+
+/* line 229, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hidden {
+  display: none;
+}
+
+/* line 232, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.button {
+  cursor: pointer;
+  padding: 8px 6px;
+  background-color: #008604;
+  font-size: 16px;
+  border: 1px solid darkgreen;
+  transition: 500ms all;
+  margin: 10px auto 6px;
+  color: white;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 245, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.button:hover {
+  background-color: darkgreen;
+}
+
+/* line 248, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+form#new_game {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* line 252, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.messagebox {
+  display: none;
+  position: fixed;
+  top: 16%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  width: 60%;
+  text-align: center;
+  background-color: aliceblue;
+  padding: 24px 20px;
+  border-radius: 12px;
+  border: 2px solid rosybrown;
+}
+
+/* line 267, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.messagetitle {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+/* line 271, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.messagesubtext {
+  font-size: 11px;
+  width: 80%;
+  margin: 24px auto 0;
+}
+
+/* line 276, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.pagecover {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .8;
+  z-index: 4;
+}
+
+/* line 287, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guesswordslist li {
+  cursor: pointer;
+}
+
+/* line 290, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guesswordslist li:not(.guessedword):hover {
+  background-color: white;
+  transition: 200ms all;
+}
+
+/* line 294, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hintlabel.guessword {
+  margin: 16px 0;
+}
+
+/* line 297, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guessword span.guessinfo {
+  padding: 6px 30px;
+  font-size: 26px;
+  background-color: #cefdff;
+  border: 4px outset silver;
+  border-radius: 50px;
+  display: block;
+}
+
+/* line 305, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guessedword {
+  cursor: auto;
+  pointer-events: none;
+}
+
+/* line 309, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+li.neutralword {
+  background-color: darkgrey;
+  /*opacity: .25;*/
+  color: lightgrey;
+  background-color: #f9f9f9;
+}
+
+/* line 315, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.hintlabel.guessnum {
+  margin: 10px 0;
+}
+
+/* line 318, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.guessnum span {
+  font-size: 14px;
+}
+
+/* line 321, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.scoreSection {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+/* line 325, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.button.yesnobtn {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 72px;
+}
+
+/* line 331, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.gameover {
+  font-size: 20px;
+}
+
+/* line 334, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.gameoverinfo {
+  margin-top: 6px;
+}
+
+/* line 337, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.clickagain {
+  position: relative;
+  transition: 300ms all;
+  border-radius: 4px;
+  opacity: 0;
+  padding: 4px;
+  font-size: 13px;
+}
+
+/* line 345, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.wordsubmitanim {
+  opacity: 1;
+  background-color: #ffce75;
+  transform: translateY(-110%);
+}
+
+@media (max-width: 768px) {
+  /* line 351, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+  .clickagain {
+    padding: 2px;
+    font-size: 11px;
+  }
+}
+/* line 356, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+button.button.skip1, button.button.returntomain {
+  display: inline-block;
+}
+
+/* line 359, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+button.menu {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  width: 38px;
+  display: inline-block;
+  vertical-align: middle;
+  transition: 200ms all;
+  border-radius: 5px;
+}
+
+/* line 369, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+button.menu:hover {
+  background-color: lightgrey;
+}
+
+/* line 372, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.menu img {
+  width: 100%;
+  position: relative;
+  top: 4px;
+  cursor: pointer;
+}
+
+/* line 380, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+select {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>");
+  background-color: #3498DB;
+  background-repeat: no-repeat;
+  background-position: right 2px top 5px;
+  background-size: 16px 16px;
+  color: white;
+  padding: 4px 22px 4px 6px;
+  width: auto;
+  font-family: arial,tahoma;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  -webkit-border-radius: 5px;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  -webkit-transition: 0.3s ease all;
+  -moz-transition: 0.3s ease all;
+  -ms-transition: 0.3s ease all;
+  -o-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+}
+
+/* line 407, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.selections {
+  background-color: #3498DB;
+}
+
+/* line 411, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.selections:hover {
+  background-color: #2980B9;
+}
+
+/* line 415, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+select:focus, select:active {
+  border: 0;
+  outline: 0;
+}
+
+/* line 419, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+#notice {
+  font-size: 13px;
+  text-align: center;
+  color: red;
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  margin: 0 auto;
+  position: fixed;
+  top: 40%;
+  max-width: 480px;
+  left: 0;
+  right: 0;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white,   1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+  padding: 0;
+  background-color: lightgrey;
+}
+
+@keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+}
+@-webkit-keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+}
+/* line 461, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.anim_correct {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: darkgreen;
+  top: 0;
+  left: 0;
+}
+
+/* line 473, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_correct {
+  transition: 2000ms transform;
+  transform: scale(0.4);
+}
+
+/* line 477, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_correct {
+  transition: 1500ms transform;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white,   1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+
+/* line 486, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_correct.animating {
+  transform: translateY(-110%);
+}
+
+/* line 489, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_correct.animating {
+  transform: rotate(360deg) scale(2.2) translateY(-70%) rotateY(360deg);
+}
+
+/* line 492, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.anim_spoiler {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: red;
+  top: 0;
+  left: 0;
+}
+
+/* line 504, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_spoiler {
+  transition: 2000ms transform;
+  transform: scale(0.4) translateY(-100%);
+}
+
+/* line 508, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_spoiler {
+  transition: 1500ms transform;
+  text-shadow: 1px 1px 0 white, -1px -1px 0 white,   1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+
+/* line 517, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_spoiler.animating {
+  transform: translateY(110%);
+  z-index: 11;
+}
+
+/* line 521, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_spoiler.animating {
+  transform: rotate(360deg) scale(1.5) translateY(-20%) rotateY(360deg);
+  z-index: 10;
+}
+
+/* line 526, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.anim_neutral {
+  position: absolute;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 22px;
+  display: none;
+  width: 100%;
+  /*font-weight: 700;*/
+  color: grey;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}
+
+/* line 539, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_neutral {
+  transition: 2000ms transform;
+  transform: scale(0.4) translateY(-100%);
+}
+
+/* line 543, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_neutral {
+  transition: 1500ms transform;
+  opacity: 1;
+  text-shadow: 1px 1px 0 black, -1px -1px 0 black,   1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+/* line 553, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+div.anim_neutral.animating {
+  transform: translateY(-110%);
+  z-index: 11;
+}
+
+/* line 557, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+img.anim_neutral.animating {
+  transform: rotate(360deg) scale(1.4) translateY(10%) rotateY(360deg);
+  z-index: 10;
+}
+
+/* line 561, /home/matt/grayarea/app/assets/stylesheets/games.scss */
+.menubox {
+  display: none;
+  position: fixed;
+  top: 16%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  width: 60%;
+  text-align: center;
+  background-color: aliceblue;
+  padding: 24px 20px;
+  border-radius: 12px;
+  border: 2px solid rosybrown;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+

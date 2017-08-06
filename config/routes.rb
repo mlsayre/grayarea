@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       post 'submithints'
       post 'startguesser'
       post 'updategame'
+      post 'soundonoff'
     end
   end
 

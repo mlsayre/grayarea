@@ -19,8 +19,7 @@ var ready = function() {
 		$(".menubox").hide();
 	});
 
-	var sound = gon.sound || 1;
-	console.log(sound)
+	var sound = gon.sound;
 	soundOnOff(sound);
 
 	$(".soundon").on("click", function() {
@@ -30,9 +29,16 @@ var ready = function() {
 			sound = 1;
 		}
 		soundOnOff(sound);
+		$.ajax({
+      url: "/games/soundonoff",
+      type: "POST",
+      dataType:'json',
+      data: { 'sound' : sound }
+    })
 	})
 
 	function soundOnOff(onoff) {
+		console.log("soundonoff running" + onoff)
 		if (onoff === 0) {
 			$(".soundon").text("Turn Sound On");
 			Howler.mute(true);

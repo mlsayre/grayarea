@@ -136,6 +136,11 @@ class GamesController < ApplicationController
 		render body: nil
   end
 
+  def soundonoff
+    current_user.update(:sound => params[:sound])
+    render body: nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
