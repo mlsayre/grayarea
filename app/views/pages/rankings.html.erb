@@ -9,23 +9,29 @@
 
 <div class="lifetimerankings">
 	<div style="margin-bottom: 8px; text-align: center;">World Top 30 Players<br><span style="font-size: 80%; padding-top:15px;"><u>(Combined Average Score - min 5 games)</u></span></div>
-  <% User.all.sort {|a,b| Game.combinedrankings(b.id, 5) <=> Game.combinedrankings(a.id, 5)}.first(30).each do |user| %>
-  	  <% if Game.combinedrankings(user.id, 5) != "na" %>
-    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.combinedrankings(user.id, 5) %></span></li>
-    	<% end %>
-  <% end %>
+	<ul>
+	  <% User.all.sort {|a,b| Game.combinedrankings(b.id, 5) <=> Game.combinedrankings(a.id, 5)}.first(30).each do |user| %>
+	  	  <% if Game.combinedrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.combinedrankings(user.id, 5) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
   <br><br>
   <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Giver Average Score - min 5 games)</u></span>
-  <% User.all.sort {|a,b| Game.giverrankings(b.id, 5) <=> Game.giverrankings(a.id, 5)}.first(30).each do |user| %>
-  	  <% if Game.giverrankings(user.id, 5) != "na" %>
-    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.giverrankings(user.id, 5) %></span></li>
-    	<% end %>
-  <% end %>
+  <ul>
+	  <% User.all.sort {|a,b| Game.giverrankings(b.id, 5) <=> Game.giverrankings(a.id, 5)}.first(30).each do |user| %>
+	  	  <% if Game.giverrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.giverrankings(user.id, 5) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
   <br><br>
   <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Guesser Average Score - min 5 games)</u></span>
-  <% User.all.sort {|a,b| Game.guesserrankings(b.id, 5) <=> Game.guesserrankings(a.id, 5)}.first(30).each do |user| %>
-  	  <% if Game.guesserrankings(user.id, 5) != "na" %>
-    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.guesserrankings(user.id, 5) %></span></li>
-    	<% end %>
-  <% end %>
+  <ul>
+	  <% User.all.sort {|a,b| Game.guesserrankings(b.id, 5) <=> Game.guesserrankings(a.id, 5)}.first(30).each do |user| %>
+	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.guesserrankings(user.id, 5) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
 </div>

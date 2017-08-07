@@ -14,7 +14,7 @@ class Game < ApplicationRecord
  
   	allscores = allscores1 + allscores2 + allscores3
   	if allscores.length < min
-  		average = "na"
+  		average = -1
   	else
 			average = (allscores.sum.to_f / allscores.length.to_f).round(2)
 		end
@@ -32,7 +32,7 @@ class Game < ApplicationRecord
   	  .collect(&:gsr3_score)    
   	allscores = allscores1 + allscores2 + allscores3
   	if allscores.length < min
-  		average = "na"
+  		average = -1
   	else
 			average = (allscores.sum.to_f / allscores.length.to_f).round(2)
 		end
@@ -56,7 +56,7 @@ class Game < ApplicationRecord
 
   	allscores = allscores1a + allscores2a + allscores3a + allscores1b + allscores2b + allscores3b
   	if allscores.length < min
-  		average = "na"
+  		average = -1
   	else
 			average = (allscores.sum.to_f / allscores.length.to_f).round(2)
 		end
