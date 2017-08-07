@@ -22,7 +22,7 @@ class GamesController < ApplicationController
 
   def startguesser
   	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
-  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id)
+  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id).where(:gamestatus => "guess")
 
   	if @availgames.length > 0
 
