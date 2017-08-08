@@ -109,23 +109,37 @@ class GamesController < ApplicationController
   	gon.hintnum1 = @game.hintnum1
   	gon.hintnum2 = @game.hintnum2
     gon.sound = current_user.sound
+    @chatshow = false
 
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
   		gon.guessstatus = @game.gsr1_status
       gon.spoiler = @game.gsr1_spoiler
       gon.guessernum = "1"
+      if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
   	elsif current_user.id == @game.guesser_id2
   		gon.guessedwords = @game.gsr2_words
   		gon.guessstatus = @game.gsr2_status
       gon.spoiler = @game.gsr2_spoiler
       gon.guessernum = "2"
+      if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
   	elsif current_user.id == @game.guesser_id3
   		gon.guessedwords = @game.gsr3_words
   		gon.guessstatus = @game.gsr3_status
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
+      if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
   	end
+
+    if current_user.id == @game.giver_id && @game.gamestatus != "give"
+      @chatshow = true
+    end
   end
 
   def submithints

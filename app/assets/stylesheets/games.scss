@@ -301,6 +301,8 @@ form#new_game {
   border: 4px outset silver;
   border-radius: 50px;
   display: block;
+  max-width: 380px;
+  margin: 0 auto;
 }
 .guessedword {
   cursor: auto;
@@ -586,4 +588,14 @@ img.anim_neutral.animating {
 }
 .centered {
   text-align: center;
+}
+.chatopenbutton {
+  position: fixed;
+  top: 5px;
+  right: 8px;
+  width: 50px;
+  cursor: pointer;
+}
+.chatopenbutton img {
+  width: 100%;
 }
