@@ -49,6 +49,19 @@ var ready = function() {
 			$(".chatbox").slideToggle(200);	
 			$(".chatenter").focus();
 		});
+		$(document).on("click", ".messageenter", function() {
+			var msg = $(".chatenter").val();
+			if (msg !== "") {
+				$.ajax({
+		      url: "/games/entermessage",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'message' : msg,
+		              'game_id' : gameid }
+		    })
+			}
+			refreshChat();
+		});
 	}
 	if ($(".chatcontent").length > 0) {
 		chatButton();
@@ -63,6 +76,7 @@ var ready = function() {
 	}
 	function showChat() {
 		$(document).off("click", ".chatopenbutton");
+		$(document).off("click", ".messageenter");
 	  var wrapper = $('.chatarea');
 		wrapper.load(pathname + " .chatarea", function() {
 		   wrapper.children('.chatarea').unwrap();
@@ -70,19 +84,6 @@ var ready = function() {
 		chatButton();
 	}
 
-	$(document).on("click", ".messageenter", function() {
-		var msg = $(".chatenter").val();
-		if (msg !== "") {
-			$.ajax({
-	      url: "/games/entermessage",
-	      type: "POST",
-	      dataType:'json',
-	      data: { 'message' : msg,
-	              'game_id' : gameid }
-	    })
-		}
-		refreshChat();
-	});
 	$(document).on("keypress", ".chatenter", function(e) {
 		if (e.keyCode == 13) {
 			e.preventDefault();
