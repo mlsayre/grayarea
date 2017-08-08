@@ -50,7 +50,9 @@ var ready = function() {
 			$(".chatenter").focus();
 		});
 	}
-	chatButton();
+	if ($(".chatcontent").length > 0) {
+		chatButton();
+	}
 
 	var pathname = window.location.pathname;
 	function refreshChat() {
@@ -310,6 +312,9 @@ var ready = function() {
           $(".submittednum2").text(hint2num + " " + wordword2);
           $(".submitted").show();
 					closemessagebox();
+					if ($(".chatcontent").length === 0) {
+        		showChat();
+        	}
         })
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
@@ -505,7 +510,9 @@ var ready = function() {
 		      })
 		        .always(function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-		        	showChat();
+		        	if ($(".chatcontent").length === 0) {
+		        		showChat();
+		        	}
 		        })
 		     }
 		  }
