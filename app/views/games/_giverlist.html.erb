@@ -1,5 +1,20 @@
 <% @gamesgiverlist.each do |game| %>
+  <% if Game.find(game.id).guesser_id1 == 0 %>
+    <% numplayers = "0" %>
+  <% elsif Game.find(game.id).guesser_id2 == 0 %>
+    <% numplayers = "1" %>
+  <% elsif Game.find(game.id).guesser_id3 == 0 %>
+    <% numplayers = "2" %>
+  <% elsif Game.find(game.id).guesser_id4 == 0 %>
+    <% numplayers = "3" %>
+  <% elsif Game.find(game.id).guesser_id5 == 0 %>
+    <% numplayers = "4" %>
+  <% elsif Game.find(game.id).guesser_id6 == 0 %>
+    <% numplayers = "5" %>
+  <% else %>
+    <% numplayers = "6" %>
+  <% end %>
   <li class="gamelist">
-    <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}", game_path(game.id) %>
+    <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}" + " (" + numplayers + "/6)", game_path(game.id) %>
   </li>
 <% end %>

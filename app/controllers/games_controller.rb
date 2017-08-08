@@ -9,7 +9,10 @@ class GamesController < ApplicationController
     @gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all
     @gamesguesser = Game.where(:guesser_id1 => current_user.id)
       .or(Game.where(:guesser_id2 => current_user.id))
-      .or(Game.where(:guesser_id3 => current_user.id)).order('updated_at DESC').all
+      .or(Game.where(:guesser_id3 => current_user.id))
+      .or(Game.where(:guesser_id4 => current_user.id))
+      .or(Game.where(:guesser_id5 => current_user.id))
+      .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
 
     @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(8)
     @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(8)
@@ -22,7 +25,8 @@ class GamesController < ApplicationController
 
   def startguesser
   	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
-  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id).where(:gamestatus => "guess")
+  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
+      :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess")
 
   	if @availgames.length > 0
 
@@ -34,6 +38,12 @@ class GamesController < ApplicationController
 	  		@game.update(:guesser_id2 => current_user.id)
 	  	elsif @game.guesser_id3 == 0
 	  		@game.update(:guesser_id3 => current_user.id)
+      elsif @game.guesser_id4 == 0
+        @game.update(:guesser_id4 => current_user.id)
+      elsif @game.guesser_id5 == 0
+        @game.update(:guesser_id5 => current_user.id)
+      elsif @game.guesser_id6 == 0
+        @game.update(:guesser_id6 => current_user.id)
 	  	end
 
 	    respond_to do |format|
@@ -65,6 +75,15 @@ class GamesController < ApplicationController
     elsif current_user.id == @thisgame.guesser_id3
       @thisgame.update(:gsr3_words => params[:guessedwords], :gsr3_status => params[:guessstatus], 
         :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore])
+    elsif current_user.id == @thisgame.guesser_id4
+      @thisgame.update(:gsr4_words => params[:guessedwords], :gsr4_status => params[:guessstatus], 
+        :gsr4_spoiler => params[:gamespoiled], :gsr4_score => params[:gamescore])
+    elsif current_user.id == @thisgame.guesser_id5
+      @thisgame.update(:gsr5_words => params[:guessedwords], :gsr5_status => params[:guessstatus], 
+        :gsr5_spoiler => params[:gamespoiled], :gsr5_score => params[:gamescore])
+    elsif current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gsr6_words => params[:guessedwords], :gsr6_status => params[:guessstatus], 
+        :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore])
     end
     
     render body: nil
@@ -133,6 +152,30 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
       if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
+    elsif current_user.id == @game.guesser_id4
+      gon.guessedwords = @game.gsr4_words
+      gon.guessstatus = @game.gsr4_status
+      gon.spoiler = @game.gsr4_spoiler
+      gon.guessernum = "4"
+      if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
+    elsif current_user.id == @game.guesser_id5
+      gon.guessedwords = @game.gsr5_words
+      gon.guessstatus = @game.gsr5_status
+      gon.spoiler = @game.gsr5_spoiler
+      gon.guessernum = "5"
+      if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
+        @chatshow = true
+      end
+    elsif current_user.id == @game.guesser_id6
+      gon.guessedwords = @game.gsr6_words
+      gon.guessstatus = @game.gsr6_status
+      gon.spoiler = @game.gsr6_spoiler
+      gon.guessernum = "6"
+      if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
   	end

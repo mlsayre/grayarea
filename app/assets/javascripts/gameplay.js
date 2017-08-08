@@ -436,7 +436,7 @@ var ready = function() {
 				  	if (gamespoiled === 0 && endgametime !== 0) {
 				  		gameovergoodsfx.play();
 				  	}
-				  	$(".finalpoints" + guessernum).text(playerscore + " points");
+				  	$(".finalpoints" + guessernum).text(playerscore + "pts");
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db

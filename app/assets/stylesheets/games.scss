@@ -219,8 +219,13 @@ body {
   margin-top: 4px;
 }
 .allguesserinfo {
-  margin-top: 8px;
+  margin: 8px auto 0;
   display: block;
+  max-width: 400px;
+}
+.guesserinfo {
+  display: inline-block;
+  width: 49%;
 }
 .finalguessesshow {
   box-shadow: inset 0px 0px 5px 5px #00b8ff;
