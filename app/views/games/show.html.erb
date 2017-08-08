@@ -24,8 +24,22 @@
 	<div class="menusubtext">Click Close or click anywhere outside box to close</div>
 </div>
 
-<% if @chatshow == true %>
-	<div class="chatopenbutton"><img src="/assets/chat.png"></div>
-	<div class="chatbox">
-	</div>
-<% end %>
+<span class="chatarea">
+	<% if @chatshow == true %>
+		<div class="chatopenbutton"><img src="/assets/chat.png"></div>
+		<div class="chatbox" data-chatopen="closed">
+			<div class="chattitle">Chat</div>
+			<div class="chatcontent">
+				<% Chat.where(:game_id => @game.id).order('created_at DESC').all.each do |chat| %>
+				  <div class="messageline">
+				  	<span class="messageauthor"><%= User.find(chat.user_id).username %>: </span>
+				  	<span class="messagetext"><%= chat.message %></span>
+				  	<span class="messagetime"><%= chat.time_ago_in_words(chat.created_at) %></span>
+				  </div>
+				<% end %>
+			</div>
+			<textarea maxlength="300" placeholder="Enter message here" class="chatenter"></textarea>
+			<button class="button messageenter"><img src="/assets/chatbutton.png"></button>
+		</div>
+	<% end %>
+</span>

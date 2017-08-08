@@ -36,6 +36,58 @@ var ready = function() {
       data: { 'sound' : sound }
     })
 	})
+	function chatButton() {
+		$(document).on("click", ".chatopenbutton", function() {
+			refreshChat();
+			if ($(".chatbox").attr("data-chatopen") === "open") {
+				clearInterval(refreshingChat);
+				$(".chatbox").attr("data-chatopen", "closed");
+			} else {
+				refreshingChat = setInterval(refreshChat, 5000);
+				$(".chatbox").attr("data-chatopen", "open")
+			}
+			$(".chatbox").slideToggle(200);	
+			$(".chatenter").focus();
+		});
+	}
+	chatButton();
+
+	var pathname = window.location.pathname;
+	function refreshChat() {
+	  var wrapper = $('.chatcontent');
+		wrapper.load(pathname + " .chatcontent", function() {
+		   wrapper.children('.chatcontent').unwrap();
+		});
+	}
+	function showChat() {
+		$(document).off("click", ".chatopenbutton");
+	  var wrapper = $('.chatarea');
+		wrapper.load(pathname + " .chatarea", function() {
+		   wrapper.children('.chatarea').unwrap();
+		});
+		chatButton();
+	}
+
+	$(document).on("click", ".messageenter", function() {
+		var msg = $(".chatenter").val();
+		if (msg !== "") {
+			$.ajax({
+	      url: "/games/entermessage",
+	      type: "POST",
+	      dataType:'json',
+	      data: { 'message' : msg,
+	              'game_id' : gameid }
+	    })
+		}
+		refreshChat();
+	});
+	$(document).on("keypress", ".chatenter", function(e) {
+		if (e.keyCode == 13) {
+			e.preventDefault();
+       $(".messageenter").click();
+       $(".chatenter").val("");
+    }
+	})
 
 	function soundOnOff(onoff) {
 		console.log("soundonoff running" + onoff)
@@ -453,6 +505,7 @@ var ready = function() {
 		      })
 		        .always(function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+		        	showChat();
 		        })
 		     }
 		  }

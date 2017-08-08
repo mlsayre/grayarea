@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'startguesser'
       post 'updategame'
       post 'soundonoff'
+      post 'entermessage'
     end
   end
 

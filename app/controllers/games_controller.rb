@@ -198,6 +198,14 @@ class GamesController < ApplicationController
     render body: nil
   end
 
+  def entermessage
+    @gamechat = Chat.create!(:message => params[:message], :user_id => current_user.id, :game_id => params[:game_id])
+
+    Chat.where(:game_id => params[:game_id]).where('id NOT IN (?)', Chat.where(:game_id => params[:game_id]).last(25)).destroy_all
+    
+    render body: nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
