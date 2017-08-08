@@ -4,6 +4,16 @@ var ready = function() {
 		  window.location.reload();
 		}
 
+	$(document).off("click", ".chatopenbutton");
+	$(document).off("click", ".messageenter");
+
+	$(".startguess").click(function() {
+    $.ajax({
+      url: "/games/startguesser",
+      type: "POST"
+    })
+  })
+
 	$(".menu").on("click", function() {
 		$(".pagecover").show();
 		$(".menubox").show();
@@ -60,6 +70,7 @@ var ready = function() {
 		              'game_id' : gameid }
 		    })
 			}
+			$(".chatenter").val("");
 			refreshChat();
 		});
 	}
@@ -88,7 +99,6 @@ var ready = function() {
 		if (e.keyCode == 13) {
 			e.preventDefault();
        $(".messageenter").click();
-       $(".chatenter").val("");
     }
 	})
 
@@ -664,5 +674,5 @@ var ready = function() {
 	}
 }
 
-// $(document).ready(ready);
+//$(document).ready(ready);
 $(document).on('turbolinks:load', ready);

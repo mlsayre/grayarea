@@ -48,7 +48,7 @@ class GamesController < ApplicationController
 
 	    respond_to do |format|
 	      format.html { redirect_to @game, notice: '' }
-	      #format.json { render :show, status: :created, location: @game }
+	      format.json { render :show, status: :created, location: @game }
 	    end
 
 	  else
