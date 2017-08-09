@@ -7,7 +7,8 @@
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-      <span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a>
+      <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span></a>
+      <!--<span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a> -->
     
     
   </li>
