@@ -697,3 +697,26 @@ span.messagetext {
   display: inline-block;
   vertical-align: top;
 }
+span.unreadchats {
+  position: absolute;
+  top: 14%;
+  left: 52%;
+  color: red;
+  font-size: 14px;
+}
+span.listnotify {
+  color: red;
+  position: relative;
+}
+.listnotify img {
+  position: absolute;
+  width: 24px;
+  left: 0;
+  opacity: .4;
+}
+.listnotify span {
+  position: absolute;
+  left: 8px;
+  font-size: 17px;
+  bottom: 0;
+}

@@ -202,7 +202,32 @@ class GamesController < ApplicationController
     @gamechat = Chat.create!(:message => params[:message], :user_id => current_user.id, :game_id => params[:game_id])
 
     Chat.where(:game_id => params[:game_id]).where('id NOT IN (?)', Chat.where(:game_id => params[:game_id]).last(25)).destroy_all
+    @thegame = Game.find(params[:game_id])
+    @thegame.increment!(:giver_chats, by = 1).increment!(:gsr1_chats, by = 1).increment!(:gsr2_chats, by = 1)
+      .increment!(:gsr3_chats, by = 1).increment!(:gsr4_chats, by = 1).increment!(:gsr5_chats, by = 1)
+      .increment!(:gsr6_chats, by = 1)
     
+    render body: nil
+  end
+
+  def resetchatnotify
+    thegame = Game.find(params[:game_id])
+    if current_user.id == thegame.giver_id
+      thegame.update(:giver_chats => 0)
+    elsif current_user.id == thegame.guesser_id1
+      thegame.update(:gsr1_chats => 0)
+    elsif current_user.id == thegame.guesser_id2
+      thegame.update(:gsr2_chats => 0)
+    elsif current_user.id == thegame.guesser_id3
+      thegame.update(:gsr3_chats => 0)
+    elsif current_user.id == thegame.guesser_id4
+      thegame.update(:gsr4_chats => 0)
+    elsif current_user.id == thegame.guesser_id5
+      thegame.update(:gsr5_chats => 0)
+    elsif current_user.id == thegame.guesser_id6
+      thegame.update(:gsr6_chats => 0)
+    end
+
     render body: nil
   end
 

@@ -26,7 +26,10 @@
 
 <span class="chatarea">
 	<% if @chatshow == true %>
-		<div class="chatopenbutton"><img src="/assets/chat.png"></div>
+		<div class="chatopenbutton">
+			<img src="/assets/chat.png">
+			<span class="unreadchats"><%= Game.getchatnumber(current_user.id, @game.id) %></span>
+		</div>
 		<div class="chatbox" data-chatopen="closed">
 			<div class="chattitle">Chat</div>
 			<div class="chatcontent">

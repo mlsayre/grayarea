@@ -58,6 +58,13 @@ var ready = function() {
 			}
 			$(".chatbox").slideToggle(200);	
 			$(".chatenter").focus();
+			$.ajax({
+		      url: "/games/resetchatnotify",
+		      type: "POST",
+		      dataType:'json',
+		      data: {'game_id' : gameid }
+		    })
+			$(".unreadchats").text("");
 		});
 		$(document).on("click", ".messageenter", function() {
 			var msg = $(".chatenter").val();

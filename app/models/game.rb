@@ -81,4 +81,32 @@ class Game < ApplicationRecord
 		end
   	return average
   end
+
+  def self.getchatnumber(userid, gameid)
+    thegame = Game.find(gameid)
+    chats = 0
+    if userid == thegame.giver_id
+      chats = thegame.giver_chats
+    elsif userid == thegame.guesser_id1
+      chats = thegame.gsr1_chats
+    elsif userid == thegame.guesser_id2
+      chats = thegame.gsr2_chats
+    elsif userid == thegame.guesser_id3
+      chats = thegame.gsr3_chats
+    elsif userid == thegame.guesser_id4
+      chats = thegame.gsr4_chats
+    elsif userid == thegame.guesser_id5
+      chats = thegame.gsr5_chats
+    elsif userid == thegame.guesser_id6
+      chats = thegame.gsr6_chats
+    end
+    if chats == 0
+      chats = ""
+    elsif chats > 9
+      chats = "9+"
+    else
+      chats = chats.to_s
+    end
+    return chats
+  end
 end
