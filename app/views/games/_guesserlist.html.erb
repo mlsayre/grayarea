@@ -1,11 +1,14 @@
 <% @gamesguesserlist.each do |game| %>
   <li class="gamelist">
-    <%= link_to "#{User.find(Game.find(game.id).giver_id).username  + " " + Game.find(game.id).id.to_s}", game_path(game.id) %>
-    <span class='listnotify'> 
-      <% if Game.getchatnumber(current_user.id, game.id) != "" %>
-        <img src="/assets/chat.png">
-      <% end %>
-      <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
-    </span>
+    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %> 
+      <span class='listnotify'> 
+        <% if Game.getchatnumber(current_user.id, game.id) != "" %>
+          <img src="/assets/chat.png">
+        <% end %>
+        <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
+      </span>
+      <span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a>
+    
+    
   </li>
 <% end %>

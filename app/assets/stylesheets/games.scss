@@ -8,7 +8,7 @@ body {
 }
 .menulinks {
   text-align: center;
-  margin: 24px 0 0;
+  margin: 4px 0 0;
   font-size: 20px;
 }
 .mainmenubuttons {
@@ -719,4 +719,18 @@ span.listnotify {
   left: 8px;
   font-size: 17px;
   bottom: 0;
+}
+li.gamelist {
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    background-color: white;
+}
+span.timeshow {
+  color: grey;
+  font-size: 11px;
+  display: block;
+  text-decoration: none;
+}
+.gamelist a {
+    text-decoration: none;
 }
