@@ -281,5 +281,5 @@ Devise.setup do |config|
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET'],
     :secure_image_url => 'true', :image_size => 'large'
   config.omniauth :google_oauth2, ENV["GOOGLE_APP_ID"], ENV["GOOGLE_APP_SECRET"],
-    { :image_size => 200 }
+    { :image_size => 200, verify_iss: false }
 end

@@ -53,6 +53,7 @@ class User < ApplicationRecord
       else # Google login
         user.username = auth.info.first_name[0...12] + rand(1000).to_s
         user.email = auth["info"]["email"]
+        #user.email = "temporary@email.com" + rand(10000).to_s
         user.avatar = auth["info"]["image"]
       end
 
@@ -61,7 +62,7 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
-      new(session["devise.user_attributes"], without_protection: true) do |user|
+      new(session["devise.user_attributes"]) do |user|
         user.attributes = params
         user.valid?
       end
