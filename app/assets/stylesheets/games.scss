@@ -411,17 +411,21 @@ select {
   transition: 0.3s ease all;
 }
 
-.selections {
-  background-color:#3498DB;
-}
-
-.selections:hover {
-  background-color:#2980B9;
-}
-
 select:focus, select:active {
   border:0;
   outline:0;
+}
+.selections button.button {
+  width: 40px;
+  border-radius: 100%;
+  background-color: deepskyblue;
+  border: none;
+  margin: 6px 0;
+  color: black;
+  outline: none !important;
+}
+.wordnumselected {
+  box-shadow: inset 0px 0px 3px 5px green;
 }
 #notice {
   font-size: 13px;

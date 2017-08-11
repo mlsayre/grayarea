@@ -204,34 +204,44 @@ var ready = function() {
 			}
 		})(i);
 	}
+	var hint1numselected = 0;
+	var hint2numselected = 0;
+	$(".hint1number button").on("click", function() {
+		$(".hint1number button").removeClass("wordnumselected");
+		$(this).addClass("wordnumselected");
+		hint1numselected = parseInt($(this).attr("value"));
+	})
+	$(".hint2number button").on("click", function() {
+		$(".hint2number button").removeClass("wordnumselected");
+		$(this).addClass("wordnumselected");
+		hint2numselected = parseInt($(this).attr("value"));
+	})
 
 	$(".submithint1").click(function() {
 		var enteredtext = $(".hint1word").val();
-		var val = validate(enteredtext);
+		var val = validate(enteredtext, hint1numselected);
 		if (val === false) {
 			return false;
 		}
 		hint1 = enteredtext.toUpperCase();
-		hint1num = parseInt($(".hint1number").val())
-		submithint1(hint1, hint1num);
+		submithint1(hint1, hint1numselected);
 	});
 
 	$(".submithint2").click(function() {
 		var enteredtext = $(".hint2word").val();
-		var val = validate(enteredtext);
+		var val = validate(enteredtext, hint2numselected);
 		if (val === false) {
 			return false;
 		}
 		hint2 = enteredtext.toUpperCase();
-		hint2num = parseInt($(".hint2number").val())
-		submithint2(hint2, hint2num);
+		submithint2(hint2, hint2numselected);
 	});
 
 	$(".skiphint2").click(function() {
 		skiphint("false");
 	});
 
-	function validate(word) {
+	function validate(word, num) {
 		var letters = /^[a-zA-Z\s]+$/;
 		var numberofwords = word.trim().split(/\s+/).length
 		if (word.length === 0) {
@@ -245,6 +255,10 @@ var ready = function() {
 			return false;
 		} else if (numberofwords > 1) {
 			errorbox("Please make sure your hint is one word only.");
+			return false;
+		}
+		if (num === 0) {
+			errorbox("Please select a number of words this hint applies to.");
 			return false;
 		}
 	}
@@ -307,17 +321,17 @@ var ready = function() {
         dataType:'json',
         data: { 'game_id' : parseInt(gameid),
                 'word1' : hint1,
-                'word1num' : hint1num,
+                'word1num' : hint1numselected,
                 'word2' : hint2,
-                'word2num' : hint2num }
+                'word2num' : hint2numselected }
       })
         .always(function() {
-        	if (hint1num === 1) {
+        	if (hint1numselected === 1) {
 						var wordword1 = "word";
 					} else {
 						var wordword1 = "words"
 					}
-					if (hint2num === 1) {
+					if (hint2numselected === 1) {
 						var wordword2 = "word";
 					} else {
 						var wordword2 = "words"
@@ -325,9 +339,9 @@ var ready = function() {
           $(".hint2").hide();
           $(".hintheadline").hide();
           $(".submittedword1").text(hint1);
-          $(".submittednum1").text(hint1num + " " + wordword1);
+          $(".submittednum1").text(hint1numselected + " " + wordword1);
           $(".submittedword2").text(hint2);
-          $(".submittednum2").text(hint2num + " " + wordword2);
+          $(".submittednum2").text(hint2numselected + " " + wordword2);
           $(".submitted").show();
 					closemessagebox();
 					if ($(".chatcontent").length === 0) {
@@ -359,17 +373,17 @@ var ready = function() {
         dataType:'json',
         data: { 'game_id' : parseInt(gameid),
                 'word1' : hint1,
-                'word1num' : hint1num,
+                'word1num' : hint1numselected,
                 'word2' : hint2,
-                'word2num' : hint2num }
+                'word2num' : hint2numselected }
       })
         .always(function() {
-        	if (hint1num === 1) {
+        	if (hint1numselected === 1) {
 						var wordword1 = "word";
 					} else {
 						var wordword1 = "words"
 					}
-					if (hint2num === 1) {
+					if (hint2numselected === 1) {
 						var wordword2 = "word";
 					} else {
 						var wordword2 = "words"
@@ -377,9 +391,9 @@ var ready = function() {
           $(".hint2").hide();
           $(".hintheadline").hide();
           $(".submittedword1").text(hint1);
-          $(".submittednum1").text(hint1num + " " + wordword1);
+          $(".submittednum1").text(hint1numselected + " " + wordword1);
           $(".submittedword2").text(hint2);
-          $(".submittednum2").text(hint2num + " " + wordword2);
+          $(".submittednum2").text(hint2numselected + " " + wordword2);
           $(".submitted").show();
 					closemessagebox();
         })
