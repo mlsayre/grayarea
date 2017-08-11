@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :pages do
     collection do
       get 'rankings' => 'pages#rankings'
+      get 'howtoplay' => 'pages#howtoplay'
     end
   end
 

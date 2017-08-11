@@ -6,6 +6,9 @@ body {
 	font-family: 'Montserrat', sans-serif;
   background-color: #f8fff8;
 }
+a.button {
+  text-decoration: none !important;
+}
 .menulinks {
   text-align: center;
   margin: 4px 0 0;
@@ -20,10 +23,14 @@ body {
   max-width: 480px;
 }
 .mainmenubuttons a {
-  display: block;
+  display: inline-block;
+  margin: 0 4px;
 }
 .mainmenubuttons button, .mainmenubuttons input {
   width: 140px;
+}
+.howtoplay {
+  font-size: 15px;
 }
 .maingamelist {
   text-align: center;
