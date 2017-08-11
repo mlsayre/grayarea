@@ -1,6 +1,7 @@
 <div id="landing-topbar"></div>
 <div class="landingtitle">
-  <div>Word Stretch</div>
+  <span>Word Stretch</span>
+  <div class="subtitle">Stretch your mind as you stretch your words!</div>
 
   <div id="landing-signin">
     <br>
@@ -32,3 +33,12 @@
 </div>
 
 <div id="landing-bottombar"></div>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  $(".landingtitle span").addClass("stretched");
+  setInterval(function() {
+    $(".landingtitle span").toggleClass("stretched");
+  }, 5000)
+});
+</script>

@@ -6,6 +6,38 @@ body {
 	font-family: 'Montserrat', sans-serif;
   background-color: #f8fff8;
 }
+.landingtitle {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+.landingtitle span {
+  font-size: 36px;
+  margin: 60px 0 0;
+  display: block;
+  color: green;
+  text-shadow: 3px 1px 0 lightgreen, 
+      3px -1px 0 lightgreen, 
+      3px -1px 0 lightgreen, 
+      3px 1px 0 lightgreen, 
+      3px 1px 0 lightgreen;
+  transition: all 5s;
+  transform: scaleX(1);
+}
+.landingtitle span.stretched {
+  transform: scaleX(1.5);
+}
+.landingtitle .subtitle {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+#signin-with {
+  text-align: center;
+}
+.login-logos {
+  display: inline-block;
+  margin: 10px 12px 0;
+}
 a.button {
   text-decoration: none !important;
 }
