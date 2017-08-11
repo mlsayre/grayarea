@@ -25,7 +25,7 @@ body {
   transform: scaleX(1);
 }
 .landingtitle span.stretched {
-  transform: scaleX(1.5);
+  transform: scaleX(1.5) scaleY(.75);
 }
 .landingtitle .subtitle {
   font-size: 16px;
