@@ -588,7 +588,11 @@ var ready = function() {
 	  				resultscheersfx.play();
 						shownotification();
 						guessstatus = "over,over";
-					} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
+					} else if (currenthint === hintword2 && guessstatus === "bonus,bonus") {
+						$(".gamenotify").html("You picked up a bonus word. Nice way to end the game!");
+						shownotification();
+	  				guessstatus = "over,over";
+	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 						$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification("bonus");
 	  				guessstatus = "bonus,bonus";
@@ -644,11 +648,16 @@ var ready = function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
-	  			} else if (currenthint === hintword2) {
+	  			} else if (currenthint === hintword2 && guessstatus === "bonus,bonus") {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"The game is now over.");
+	  					"Game over.");
 						shownotification();
 						guessstatus = "over,over";
+					} else if (currenthint === hintword2) {
+	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  					"You may still try for a bonus.");
+						shownotification("bonus");
+						guessstatus = "bonus,bonus";
 					}
 					$("[data-guessword='" + chosen + "'] .anim_neutral").fadeIn(200).addClass("animating");
 					setTimeout(function() {
