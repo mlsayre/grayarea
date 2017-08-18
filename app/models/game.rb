@@ -109,4 +109,15 @@ class Game < ApplicationRecord
     end
     return chats
   end
+
+  def self.playedgamesgiver(userid)
+    allusergivergames = Game.where(:giver_id => userid).all
+    return allusergivergames.length
+  end
+
+  def self.playedgamesguesser(userid)
+    alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+      userid, userid, userid, userid, userid, userid).all
+    return alluserguessergames.length
+  end
 end

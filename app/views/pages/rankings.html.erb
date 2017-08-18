@@ -34,6 +34,35 @@
 	    	<% end %>
 	  <% end %>
 	</ul>
+	<br><br>
+  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Total)</u></span>
+  <ul>
+	  <% User.all.sort {|a,b| (b.lifetimegamesgiver + b.lifetimegamesguesser) <=> (a.lifetimegamesgiver + a.lifetimegamesguesser)}.first(30).each do |user| %>
+	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesgiver + user.lifetimegamesguesser) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
+	<br><br>
+  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Giver)</u></span>
+  <ul>
+	  <% User.all.sort {|a,b| (b.lifetimegamesgiver) <=> (a.lifetimegamesgiver)}.first(30).each do |user| %>
+	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesgiver) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
+	<br><br>
+  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Guesser)</u></span>
+  <ul>
+	  <% User.all.sort {|a,b| (b.lifetimegamesguesser) <=> (a.lifetimegamesguesser)}.first(30).each do |user| %>
+	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesguesser) %></span></li>
+	    	<% end %>
+	  <% end %>
+	</ul>
+
+
 </div>
 
 <div class="centered">

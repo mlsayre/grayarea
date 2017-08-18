@@ -85,6 +85,10 @@ class GamesController < ApplicationController
       @thisgame.update(:gsr6_words => params[:guessedwords], :gsr6_status => params[:guessstatus], 
         :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore])
     end
+
+    if params[:guessstatus] == "over,over"
+      current_user.increment!(:lifetimegamesguesser, by = 1)
+    end
     
     render body: nil
   end
@@ -189,6 +193,7 @@ class GamesController < ApplicationController
   	@thisgame = Game.find(params[:game_id])
 		@thisgame.update(:giver_id => current_user.id, :hintword1 => params[:word1], :gamestatus => "guess",
 			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num])
+    current_user.increment!(:lifetimegamesgiver, by = 1)
 
 		render body: nil
   end

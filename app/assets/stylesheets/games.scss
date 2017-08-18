@@ -206,6 +206,15 @@ a.button {
 	pointer-events: none;
 	cursor: initial;
 }
+span.guessermsg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  max-width: 310px;
+  margin: 0 auto;
+  color: red;
+}
 .hintarea {
   text-align: center;
   margin-top: 0;
@@ -288,6 +297,9 @@ a.button {
 }
 .button:hover {
   background-color: darkgreen;
+}
+.messagebox button.button {
+  margin: 10px 4px 6px;
 }
 form#new_game {
   display: inline-block;
@@ -462,9 +474,14 @@ select:focus, select:active {
   margin: 6px 0;
   color: black;
   outline: none !important;
+  transition: 300ms all;
 }
-.wordnumselected {
-  box-shadow: inset 0px 0px 3px 5px green;
+.selections button.button.wordnumselected {
+  box-shadow: inset 0px 0px 2px 2px darkblue;
+  border-radius: 4px;
+  background-color: #d4fffd;
+  font-weight: 700;
+  text-decoration: underline;
 }
 #notice {
   font-size: 13px;

@@ -312,8 +312,15 @@ var ready = function() {
 		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
 		                        num + '</bold> ' + wordword + '. Submit final hint and let people play the game?');
 		$(".messageaction").html('<button class="button submithint2final">Submit - Ready for Players!</button>' +
+														 '<button class="button submitredo">Start Over</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		$(".submitredo").click(function() {
+			$(".hint2").hide();
+			$(".hint1").show();
+			$(".hintenter").val("");
+			closemessagebox();
+		})
 		$(".submithint2final").click(function() {
 			$.ajax({
         url: "/games/submithints",
@@ -502,7 +509,7 @@ var ready = function() {
 		  	}
 
 		  	if (guessstatus === "bonus,bonus") {
-		  		$(".hintheadline").text("Bonus! Go for one more?")
+		  		$(".hintheadline").text("Extra try! Go for one more?")
 		  		$(".guessword").remove();
 		  		$(".guessnum").text("This game's hints were " + hintword1 + " and " + hintword2 + ".");
 		  	}
@@ -655,7 +662,7 @@ var ready = function() {
 						guessstatus = "over,over";
 					} else if (currenthint === hintword2) {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"You may still try for a bonus.");
+	  					"You may still try for an extra word.");
 						shownotification("bonus");
 						guessstatus = "bonus,bonus";
 					}

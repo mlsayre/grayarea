@@ -11,7 +11,12 @@
   <%= form_for(@game) do |f| %>
 
     <div class="actions">
-      <%= f.button "Be the Hint Giver", :class => "button mainplay" %>
+      <% if current_user.lifetimegamesguesser > 2 %>
+        <%= f.button "Be the Hint Giver", :class => "button mainplay" %>
+      <% else %>
+        <%= f.button "Be the Hint Giver", :class => "button mainplay disabled" %>
+        <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
+      <% end %>
     </div>
     <br>
 
