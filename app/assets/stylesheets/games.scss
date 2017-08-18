@@ -207,13 +207,14 @@ a.button {
 	cursor: initial;
 }
 span.guessermsg {
-  position: absolute;
+  /*position: absolute;
   left: 0;
-  right: 0;
+  right: 0;*/
   font-size: 12px;
   max-width: 310px;
   margin: 0 auto;
   color: red;
+  display: block;
 }
 .hintarea {
   text-align: center;
