@@ -5,6 +5,7 @@ var ready = function() {
 		}
 
 	$(document).off("click", ".chatopenbutton");
+	$(document).off("click", ".chatclosebutton");
 	$(document).off("click", ".messageenter");
 
 	$(".startguess").click(function() {
