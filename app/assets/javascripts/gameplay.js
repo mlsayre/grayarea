@@ -8,6 +8,12 @@ var ready = function() {
 	$(document).off("click", ".chatclosebutton");
 	$(document).off("click", ".messageenter");
 
+	$(document).on("click", ".chatclosebutton", function() {
+		clearInterval(refreshingChat);
+		$(".chatbox").attr("data-chatopen", "closed");
+		$(".chatbox").slideToggle(200);	
+	});
+
 	$(".startguess").click(function() {
     $.ajax({
       url: "/games/startguesser",
@@ -66,11 +72,6 @@ var ready = function() {
 		      data: {'game_id' : gameid }
 		    })
 			$(".unreadchats").text("");
-		});
-		$(document).on("click", ".chatclosebutton", function() {
-			clearInterval(refreshingChat);
-			$(".chatbox").attr("data-chatopen", "closed");
-			$(".chatbox").slideToggle(200);	
 		});
 		$(document).on("click", ".messageenter", function() {
 			var msg = $(".chatenter").val();
