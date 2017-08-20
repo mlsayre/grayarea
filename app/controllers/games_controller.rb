@@ -68,22 +68,28 @@ class GamesController < ApplicationController
 
     if current_user.id == @thisgame.guesser_id1
       @thisgame.update(:gsr1_words => params[:guessedwords], :gsr1_status => params[:guessstatus], 
-        :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore])
+        :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore], 
+        :gsr1_penalty => params[:bonuspenalty])
     elsif current_user.id == @thisgame.guesser_id2
       @thisgame.update(:gsr2_words => params[:guessedwords], :gsr2_status => params[:guessstatus], 
-        :gsr2_spoiler => params[:gamespoiled], :gsr2_score => params[:gamescore])
+        :gsr2_spoiler => params[:gamespoiled], :gsr2_score => params[:gamescore], 
+        :gsr2_penalty => params[:bonuspenalty])
     elsif current_user.id == @thisgame.guesser_id3
       @thisgame.update(:gsr3_words => params[:guessedwords], :gsr3_status => params[:guessstatus], 
-        :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore])
+        :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore], 
+        :gsr3_penalty => params[:bonuspenalty])
     elsif current_user.id == @thisgame.guesser_id4
       @thisgame.update(:gsr4_words => params[:guessedwords], :gsr4_status => params[:guessstatus], 
-        :gsr4_spoiler => params[:gamespoiled], :gsr4_score => params[:gamescore])
+        :gsr4_spoiler => params[:gamespoiled], :gsr4_score => params[:gamescore], 
+        :gsr4_penalty => params[:bonuspenalty])
     elsif current_user.id == @thisgame.guesser_id5
       @thisgame.update(:gsr5_words => params[:guessedwords], :gsr5_status => params[:guessstatus], 
-        :gsr5_spoiler => params[:gamespoiled], :gsr5_score => params[:gamescore])
+        :gsr5_spoiler => params[:gamespoiled], :gsr5_score => params[:gamescore], 
+        :gsr5_penalty => params[:bonuspenalty])
     elsif current_user.id == @thisgame.guesser_id6
       @thisgame.update(:gsr6_words => params[:guessedwords], :gsr6_status => params[:guessstatus], 
-        :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore])
+        :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore], 
+        :gsr6_penalty => params[:bonuspenalty])
     end
 
     if params[:guessstatus] == "over,over"
@@ -139,6 +145,7 @@ class GamesController < ApplicationController
   		gon.guessstatus = @game.gsr1_status
       gon.spoiler = @game.gsr1_spoiler
       gon.guessernum = "1"
+      gon.bonuspenalty = @game.gsr1_penalty
       if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -147,6 +154,7 @@ class GamesController < ApplicationController
   		gon.guessstatus = @game.gsr2_status
       gon.spoiler = @game.gsr2_spoiler
       gon.guessernum = "2"
+      gon.bonuspenalty = @game.gsr2_penalty
       if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -155,6 +163,7 @@ class GamesController < ApplicationController
   		gon.guessstatus = @game.gsr3_status
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
+      gon.bonuspenalty = @game.gsr3_penalty
       if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -163,6 +172,7 @@ class GamesController < ApplicationController
       gon.guessstatus = @game.gsr4_status
       gon.spoiler = @game.gsr4_spoiler
       gon.guessernum = "4"
+      gon.bonuspenalty = @game.gsr4_penalty
       if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -171,6 +181,7 @@ class GamesController < ApplicationController
       gon.guessstatus = @game.gsr5_status
       gon.spoiler = @game.gsr5_spoiler
       gon.guessernum = "5"
+      gon.bonuspenalty = @game.gsr5_penalty
       if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -179,6 +190,7 @@ class GamesController < ApplicationController
       gon.guessstatus = @game.gsr6_status
       gon.spoiler = @game.gsr6_spoiler
       gon.guessernum = "6"
+      gon.bonuspenalty = @game.gsr6_penalty
       if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end

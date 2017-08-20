@@ -1,14 +1,28 @@
 <% @gamesguesserlist.each do |game| %>
+  <% if game.guesser_id1 == current_user.id %>
+    <% gscore = game.gsr1_score %>
+  <% elsif game.guesser_id2 == current_user.id %>
+    <% gscore = game.gsr2_score %>
+  <% elsif game.guesser_id3 == current_user.id %>
+    <% gscore = game.gsr3_score %>
+  <% elsif game.guesser_id4 == current_user.id %>
+    <% gscore = game.gsr4_score %>
+  <% elsif game.guesser_id5 == current_user.id %>
+    <% gscore = game.gsr5_score %>
+  <% elsif game.guesser_id6 == current_user.id %>
+    <% gscore = game.gsr6_score %>
+  <% end %>
   <li class="gamelist">
-    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %> 
+    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %><span style="font-size: 12px;">(<%= gscore %>p)</span>
       <span class='listnotify'> 
         <% if Game.getchatnumber(current_user.id, game.id) != "" %>
           <img src="/assets/chat.png">
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-      <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span></a>
-      <!--<span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a> -->
+      <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span>
+    </a>
+    <!--<span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a> -->
     
     
   </li>

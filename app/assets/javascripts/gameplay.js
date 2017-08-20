@@ -66,6 +66,11 @@ var ready = function() {
 		    })
 			$(".unreadchats").text("");
 		});
+		$(document).on("click", ".chatclosebutton", function() {
+			clearInterval(refreshingChat);
+			$(".chatbox").attr("data-chatopen", "closed");
+			$(".chatbox").slideToggle(200);	
+		});
 		$(document).on("click", ".messageenter", function() {
 			var msg = $(".chatenter").val();
 			if (msg !== "") {
@@ -455,6 +460,7 @@ var ready = function() {
 	  	if (guessedwords === null) {guessedwords = [];}
 	  	var guessstatus = gon.guessstatus
 	  	var gamespoiled = gon.spoiler;
+	  	var bonuspenalty = gon.bonuspenalty;
 	  	var currenthint = hintword1;
 	  	var currenthintnum = hintnum1;
 	  	if (guessstatus.split(",")[0] === "hint2") {
@@ -468,7 +474,7 @@ var ready = function() {
 	  			correctwordsguessed.push(guessedwords[i]);
 	  		}
 	  	}
-	  	var playerscore = scoring[correctwordsguessed.length];
+	  	var playerscore = scoring[correctwordsguessed.length] - bonuspenalty;
 	  	var notifytimeout;
 	  	boardupdate(0, "true");
 
@@ -491,7 +497,7 @@ var ready = function() {
 		  			$(this).addClass("neutralword");
 		  		}
 		  	})
-		  	playerscore = scoring[correctwordsguessed.length];
+		  	playerscore = scoring[correctwordsguessed.length] - bonuspenalty;
 		  	var correctwordcount = correctwordsguessed.length
 		  	if (gamespoiled === 1) {
 		  		playerscore = 0;
@@ -511,7 +517,8 @@ var ready = function() {
 		  	if (guessstatus === "bonus,bonus") {
 		  		$(".hintheadline").text("Extra try! Go for one more?")
 		  		$(".guessword").remove();
-		  		$(".guessnum").text("This game's hints were " + hintword1 + " and " + hintword2 + ".");
+		  		$(".guessnum").text("This game's hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  			"(" + hintnum2 + ").");
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
@@ -545,7 +552,8 @@ var ready = function() {
 		                'guessedwords' : guessedwords,
 		                'guessstatus' : guessstatus,
 		                'gamespoiled' : gamespoiled,
-		                'gamescore' : playerscore }
+		                'gamescore' : playerscore,
+		                'bonuspenalty' : bonuspenalty }
 		      })
 		        .always(function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
@@ -580,6 +588,9 @@ var ready = function() {
 	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		// correct word 
 	  		if (twords.indexOf(chosen) !== -1) {
+	  			if (guessstatus === "bonus,bonus") {
+	  				bonuspenalty = 5;
+	  			}
 	  			correctwordsguessed.push(chosen);
 	  			if (currenthint === hintword2) {
 	  				correctwordshint2.push(chosen);
