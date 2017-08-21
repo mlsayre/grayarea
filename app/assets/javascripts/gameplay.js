@@ -21,6 +21,15 @@ var ready = function() {
     })
   })
 
+  $(".gd").click(function() {
+  	$.ajax({
+      url: "/games/delgame",
+      type: "POST",
+      dataType:'json',
+      data: {'game_id' : gameid }
+    })
+  })
+
 	$(".menu").on("click", function() {
 		$(".pagecover").show();
 		$(".menubox").show();

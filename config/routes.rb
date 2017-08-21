@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'soundonoff'
       post 'entermessage'
       post 'resetchatnotify'
+      post 'delgame'
     end
   end
 
