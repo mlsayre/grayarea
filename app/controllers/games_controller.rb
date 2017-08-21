@@ -273,14 +273,9 @@ class GamesController < ApplicationController
 
   def delgame
     @todelete = Game.find(params[:game_id])
-    
-
-    respond_to do |format|
-      format.html { redirect_to main_path, notice: 'Game deleted' }
-      format.json { render :show}
-    end
-    flash[:notice] = 'Game deleted'
     @todelete.delete
+
+    render body: nil
   end
 
   private

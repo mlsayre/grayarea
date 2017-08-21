@@ -28,6 +28,9 @@ var ready = function() {
       dataType:'json',
       data: {'game_id' : gameid }
     })
+    .always(function() {
+    	location.href = '/main';
+    })
   })
 
 	$(".menu").on("click", function() {
