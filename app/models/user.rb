@@ -54,7 +54,8 @@ class User < ApplicationRecord
         user.username = auth.info.first_name[0...12] + rand(1000).to_s
         user.email = auth["info"]["email"]
         #user.email = "temporary@email.com" + rand(10000).to_s
-        user.avatar = auth["info"]["image"]
+        #user.avatar = auth["info"]["image"]
+        user.avatar = 'https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png'
       end
 
     end

@@ -215,6 +215,8 @@ span.guessermsg {
   margin: 0 auto;
   color: red;
   display: block;
+  position: relative;
+  bottom: 10px;
 }
 .hintarea {
   text-align: center;

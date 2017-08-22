@@ -15,7 +15,6 @@
         <%= f.button "Be the Hint Giver", :class => "button mainplay" %>
       <% else %>
         <%= f.button "Be the Hint Giver", :class => "button mainplay disabled" %>
-        <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
       <% end %>
     </div>
     <br>
@@ -23,6 +22,11 @@
   <% end %>
 
   <button class="button startguess">Be a Guesser</button><br>
+
+  <% if current_user.lifetimegamesguesser < 3 %>
+    <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
+  <% end %>
+
   <%= link_to "How to play", howtoplay_pages_path %>
   <%= link_to "See rankings", rankings_pages_path %>
 </div>
