@@ -715,7 +715,7 @@ var ready = function() {
 	  		} else {
 	  			guessstatus = "over,over";
 	  		}
-	  		boardupdate(4000);
+	  		boardupdate(0);
 	  	});
 
 	  	function shownotification(trigger) {
@@ -734,6 +734,63 @@ var ready = function() {
 
 	  })();
 	}
+
+	if ($(".allguesserinfo").hasClass("underwayforgiver")) {
+		var UFG = (function() {
+			var twords = gon.targetwords;
+	  	var bword = gon.badword;
+	  	var hintword1 = gon.hintword1;
+	  	var hintword2 = gon.hintword2;
+	  	var hintnum1 = gon.hintnum1;
+	  	var hintnum2 = gon.hintnum2;
+
+	  	var pl1words = gon.g1words;
+	  	var pl2words = gon.g2words;
+	  	var pl3words = gon.g3words;
+	  	var pl4words = gon.g4words;
+	  	var pl5words = gon.g5words;
+	  	var pl6words = gon.g6words;
+
+	  	$(".word").each(function() {
+	  		var word = $(this).attr("data-guessword");
+	  		if (twords.indexOf(word) !== -1) {
+	  			$(this).addClass("targetword");
+	  		} else if (bword === word) {
+	  			$(this).addClass("badword");
+	  		} // else {
+	  		// 	$(this).addClass("neutralword");
+	  		// }
+	  	})
+
+	  	function showplayerwords(playernum, wordvar) {
+	  		$(".word").removeClass("guesser1show").removeClass("guesser2show").removeClass("guesser3show")
+	  		          .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
+	  		for (var i = 0; i < wordvar.length; i++) {
+	  			$('[data-guessword="' + wordvar[i] + '"]').addClass("guesser" + playernum + "show");
+	  		}
+	  	}
+
+	  	$(".guesser1").click(function() {
+	  		showplayerwords(1, pl1words);
+	  	});
+	  	$(".guesser2").click(function() {
+	  		showplayerwords(2, pl2words);
+	  	});
+	  	$(".guesser3").click(function() {
+	  		showplayerwords(3, pl3words);
+	  	});
+	  	$(".guesser4").click(function() {
+	  		showplayerwords(4, pl4words);
+	  	});
+	  	$(".guesser5").click(function() {
+	  		showplayerwords(5, pl5words);
+	  	});
+	  	$(".guesser6").click(function() {
+	  		showplayerwords(6, pl6words);
+	  	});
+		})();
+	}
+
 }
 
 //$(document).ready(ready);

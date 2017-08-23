@@ -140,6 +140,14 @@ class GamesController < ApplicationController
     gon.sound = current_user.sound
     @chatshow = false
 
+    # underway vars
+    gon.g1words = @game.gsr1_words
+    gon.g2words = @game.gsr2_words
+    gon.g3words = @game.gsr3_words
+    gon.g4words = @game.gsr4_words
+    gon.g5words = @game.gsr5_words
+    gon.g6words = @game.gsr6_words
+
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
   		gon.guessstatus = @game.gsr1_status

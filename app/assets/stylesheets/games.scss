@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-	font-family: 'Montserrat', sans-serif;
+	/*font-family: 'Montserrat', sans-serif;*/
+  font-family: 'Noto Sans', sans-serif;
   background-color: #f8fff8;
 }
 .landingtitle {
@@ -153,7 +154,7 @@ a.button {
     margin: 4px 0px;
     border-radius: 4px;
     background-color: #e6efff;
-    font-size: 11px;
+    font-size: 12px;
   }
   .hintarea {
     margin-top: 2px !important;
@@ -277,6 +278,9 @@ span.guessermsg {
 .guesserinfo {
   display: inline-block;
   width: 49%;
+}
+.underwayforgiver .guesserinfo {
+  cursor: pointer;
 }
 .finalguessesshow {
   box-shadow: inset 0px 0px 5px 5px #00b8ff;
@@ -812,4 +816,40 @@ span.timeshow {
   bottom: 0;
   left: 0;
   font-size: 12px;
+}
+.guesser1 {
+  background-color: #35e2d2;
+}
+.guesser1show {
+  box-shadow: #35e2d2 0 0 2px 4px inset;
+}
+.guesser2 {
+  background-color: lightgreen;
+}
+.guesser2show {
+  box-shadow: lightgreen 0 0 2px 4px inset;
+}
+.guesser3 {
+  background-color: aqua;
+}
+.guesser3show {
+  box-shadow: aqua 0 0 2px 4px inset;
+}
+.guesser4 {
+  background-color: goldenrod;
+}
+.guesser4show {
+  box-shadow: goldenrod 0 0 2px 4px inset;
+}
+.guesser5 {
+  background-color: deepskyblue;
+}
+.guesser5show {
+  box-shadow: deepskyblue 0 0 2px 4px inset;
+}
+.guesser6 {
+  background-color: #c7b6e8;
+}
+.guesser6show {
+  box-shadow: #c7b6e8 0 0 2px 4px inset;
 }
