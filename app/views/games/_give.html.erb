@@ -47,12 +47,33 @@
 			<button class="menu"><img src="/assets/menu.png"></button>
 			<!--<button class="button skiphint2">Skip Second Hint</button>-->
 		</div>
+		<div class="hints hint3 hidden">
+			<!-- <span class="hintlabel">Hint 2:</span> -->
+			<textarea class="hintenter hint3word" rows="1" placeholder="Hint 3 (One word)"></textarea>
+			<div class="wordnumarea">
+				<span class="hintnumheading">Applies to this many words:</span>
+				<div class="selections hint3number">
+				  <button class="button" value="1">1</button>
+				  <button class="button" value="2">2</button>
+				  <button class="button" value="3">3</button>
+				  <button class="button" value="4">4</button>
+				  <button class="button" value="5">5</button>
+				  <button class="button" value="6">6</button>
+				</div>
+			</div>
+			<div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div>
+			<div class="firstinfo">(Second hint was: <span class="secondinfoword"></span> for <span class="secondinfonum">.</span>)</div>
+			<button class="button submithint3">Submit Third Hint</button>
+			<button class="menu"><img src="/assets/menu.png"></button>
+			<!--<button class="button skiphint2">Skip Second Hint</button>-->
+		</div>
 		<div class="hints submitted hidden">
 			<span class="hintlabel">You've submitted your game!</span>
 			<div class="wordnumarea">
 				<span class="hintnumheading">Your hints: 
-					<span class="submittedword1"></span> applies to <span class="submittednum1"></span><br>
-					and <span class="submittedword2"></span> applies to <span class="submittednum2"></span>.
+					<span class="submittedword1"></span> (<span class="submittednum1"></span>)<br>
+					<span class="submittedword2"></span> (<span class="submittednum2"></span>)<br>
+					<span class="submittedword3"></span> (<span class="submittednum3"></span>)<br>
 				</span>
 			</div>
 			<button class="button returntomain">Return to Main</button>

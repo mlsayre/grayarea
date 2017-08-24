@@ -144,7 +144,9 @@ var ready = function() {
 	var hint1num = 0;
 	var hint2 = "";
 	var hint2num = 0;
-	var scoring = {0:0, 1:10, 2:20, 3:35, 4:50, 5:70, 6:100};
+	var hint3 = "";
+	var hint3num = 0;
+	var scoring = {0:0, 1:10, 2:15, 3:25, 4:40, 5:50, 6:60};
 	var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
 	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
 	     "This is making the highlight reel!"]
@@ -225,6 +227,7 @@ var ready = function() {
 	}
 	var hint1numselected = 0;
 	var hint2numselected = 0;
+	var hint3numselected = 0;
 	$(".hint1number button").on("click", function() {
 		$(".hint1number button").removeClass("wordnumselected");
 		$(this).addClass("wordnumselected");
@@ -234,6 +237,11 @@ var ready = function() {
 		$(".hint2number button").removeClass("wordnumselected");
 		$(this).addClass("wordnumselected");
 		hint2numselected = parseInt($(this).attr("value"));
+	})
+	$(".hint3number button").on("click", function() {
+		$(".hint3number button").removeClass("wordnumselected");
+		$(this).addClass("wordnumselected");
+		hint3numselected = parseInt($(this).attr("value"));
 	})
 
 	$(".submithint1").click(function() {
@@ -254,6 +262,16 @@ var ready = function() {
 		}
 		hint2 = enteredtext.toUpperCase();
 		submithint2(hint2, hint2numselected);
+	});
+
+	$(".submithint3").click(function() {
+		var enteredtext = $(".hint3word").val();
+		var val = validate(enteredtext, hint3numselected);
+		if (val === false) {
+			return false;
+		}
+		hint3 = enteredtext.toUpperCase();
+		submithint3(hint3, hint3numselected);
 	});
 
 	$(".skiphint2").click(function() {
@@ -301,7 +319,7 @@ var ready = function() {
 		}
 		$(".messagetitle").text("Submit Hint?")
 		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
-		                        num + '</bold> ' + wordword + '. Submit this hint and move to the final hint?');
+		                        num + '</bold> ' + wordword + '. Submit this hint and move to the next hint?');
 		$(".messageaction").html('<button class="button submithint1final">Submit Hint 1</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
@@ -325,22 +343,50 @@ var ready = function() {
 		if (num === 1) {
 			var wordword = "word";
 		} else {
-			var wordword = "words"
+			wordword = "words"
 		}
 		$(".messagetitle").text("Submit Second Hint?")
 		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
+		                        num + '</bold> ' + wordword + '. Submit this hint and move to the final hint?');
+		$(".messageaction").html('<button class="button submithint2final">Submit Hint 2</button>' +
+			                       '<button class="button closemessagebox">Cancel</button>');
+		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		$(".submithint2final").click(function() {
+			$(".hint2").hide();
+			$(".secondinfoword").text(hint);
+			$(".secondinfonum").text(num + " " + wordword);
+			$(".hint3").show();
+			closemessagebox();
+			// if (num === 6) {
+			// 	skiphint("true");
+			// }
+		})
+		$(".closemessagebox").click(function() { closemessagebox(); });
+		$(".pagecover").click(function() { closemessagebox(); });
+		$(".messagebox").show();
+		$(".pagecover").show();
+	}
+
+	function submithint3(hint, num) {
+		if (num === 1) {
+			var wordword = "word";
+		} else {
+			var wordword = "words"
+		}
+		$(".messagetitle").text("Submit Final Hint?")
+		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
 		                        num + '</bold> ' + wordword + '. Submit final hint and let people play the game?');
-		$(".messageaction").html('<button class="button submithint2final">Submit - Ready for Players!</button>' +
+		$(".messageaction").html('<button class="button submithint3final">Submit - Ready for Players!</button>' +
 														 '<button class="button submitredo">Start Over</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
 		$(".submitredo").click(function() {
-			$(".hint2").hide();
+			$(".hint3").hide();
 			$(".hint1").show();
 			$(".hintenter").val("");
 			closemessagebox();
 		})
-		$(".submithint2final").click(function() {
+		$(".submithint3final").click(function() {
 			$.ajax({
         url: "/games/submithints",
         type: "POST",
@@ -349,7 +395,9 @@ var ready = function() {
                 'word1' : hint1,
                 'word1num' : hint1numselected,
                 'word2' : hint2,
-                'word2num' : hint2numselected }
+                'word2num' : hint2numselected,
+                'word3' : hint3,
+                'word3num' : hint3numselected,}
       })
         .always(function() {
         	if (hint1numselected === 1) {
@@ -362,12 +410,19 @@ var ready = function() {
 					} else {
 						var wordword2 = "words"
 					}
-          $(".hint2").hide();
+					if (hint3numselected === 1) {
+						var wordword3 = "word";
+					} else {
+						var wordword3 = "words"
+					}
+          $(".hint3").hide();
           $(".hintheadline").hide();
           $(".submittedword1").text(hint1);
           $(".submittednum1").text(hint1numselected + " " + wordword1);
           $(".submittedword2").text(hint2);
           $(".submittednum2").text(hint2numselected + " " + wordword2);
+          $(".submittedword3").text(hint3);
+          $(".submittednum3").text(hint3numselected + " " + wordword3);
           $(".submitted").show();
 					closemessagebox();
 					if ($(".chatcontent").length === 0) {

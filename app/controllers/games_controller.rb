@@ -212,7 +212,8 @@ class GamesController < ApplicationController
   def submithints
   	@thisgame = Game.find(params[:game_id])
 		@thisgame.update(:giver_id => current_user.id, :hintword1 => params[:word1], :gamestatus => "guess",
-			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num])
+			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num], 
+      :hintword3 => params[:word3], :hintnum3 => params[:word3num])
     current_user.increment!(:lifetimegamesgiver, by = 1)
 
 		render body: nil
