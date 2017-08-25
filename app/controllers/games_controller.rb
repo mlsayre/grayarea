@@ -68,32 +68,36 @@ class GamesController < ApplicationController
 
     if current_user.id == @thisgame.guesser_id1
       @thisgame.update(:gsr1_words => params[:guessedwords], :gsr1_status => params[:guessstatus], 
-        :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore], 
-        :gsr1_penalty => params[:bonuspenalty])
+        :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore], :gsr1_h1words => params[:hint1words], 
+        :gsr1_h2words => params[:hint2words], :gsr1_h3words => params[:hint3words])
     elsif current_user.id == @thisgame.guesser_id2
       @thisgame.update(:gsr2_words => params[:guessedwords], :gsr2_status => params[:guessstatus], 
-        :gsr2_spoiler => params[:gamespoiled], :gsr2_score => params[:gamescore], 
-        :gsr2_penalty => params[:bonuspenalty])
+        :gsr2_spoiler => params[:gamespoiled], :gsr2_score => params[:gamescore], :gsr2_h1words => params[:hint1words], 
+        :gsr2_h2words => params[:hint2words], :gsr2_h3words => params[:hint3words])
     elsif current_user.id == @thisgame.guesser_id3
       @thisgame.update(:gsr3_words => params[:guessedwords], :gsr3_status => params[:guessstatus], 
-        :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore], 
-        :gsr3_penalty => params[:bonuspenalty])
+        :gsr3_spoiler => params[:gamespoiled], :gsr3_score => params[:gamescore], :gsr3_h1words => params[:hint1words], 
+        :gsr3_h2words => params[:hint2words], :gsr3_h3words => params[:hint3words])
     elsif current_user.id == @thisgame.guesser_id4
       @thisgame.update(:gsr4_words => params[:guessedwords], :gsr4_status => params[:guessstatus], 
-        :gsr4_spoiler => params[:gamespoiled], :gsr4_score => params[:gamescore], 
-        :gsr4_penalty => params[:bonuspenalty])
+        :gsr4_spoiler => params[:gamespoiled], :gsr4_score => params[:gamescore], :gsr4_h1words => params[:hint1words], 
+        :gsr4_h2words => params[:hint2words], :gsr4_h3words => params[:hint3words])
     elsif current_user.id == @thisgame.guesser_id5
       @thisgame.update(:gsr5_words => params[:guessedwords], :gsr5_status => params[:guessstatus], 
-        :gsr5_spoiler => params[:gamespoiled], :gsr5_score => params[:gamescore], 
-        :gsr5_penalty => params[:bonuspenalty])
+        :gsr5_spoiler => params[:gamespoiled], :gsr5_score => params[:gamescore], :gsr5_h1words => params[:hint1words], 
+        :gsr5_h2words => params[:hint2words], :gsr5_h3words => params[:hint3words])
     elsif current_user.id == @thisgame.guesser_id6
       @thisgame.update(:gsr6_words => params[:guessedwords], :gsr6_status => params[:guessstatus], 
-        :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore], 
-        :gsr6_penalty => params[:bonuspenalty])
+        :gsr6_spoiler => params[:gamespoiled], :gsr6_score => params[:gamescore], :gsr6_h1words => params[:hint1words], 
+        :gsr6_h2words => params[:hint2words], :gsr6_h3words => params[:hint3words])
     end
 
     if params[:guessstatus] == "over,over"
       current_user.increment!(:lifetimegamesguesser, by = 1)
+    end
+
+    if params[:guessstatus] == "over,over" && current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gamestatus => "done")
     end
     
     render body: nil
@@ -135,8 +139,10 @@ class GamesController < ApplicationController
   	gon.targetwords = @targetwords
   	gon.hintword1 = @game.hintword1
   	gon.hintword2 = @game.hintword2
+    gon.hintword3 = @game.hintword3
   	gon.hintnum1 = @game.hintnum1
   	gon.hintnum2 = @game.hintnum2
+    gon.hintnum3 = @game.hintnum3
     gon.sound = current_user.sound
     @chatshow = false
 
@@ -150,55 +156,73 @@ class GamesController < ApplicationController
 
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
+      gon.wordsh1 = @game.gsr1_h1words
+      gon.wordsh2 = @game.gsr1_h2words
+      gon.wordsh3 = @game.gsr1_h3words
   		gon.guessstatus = @game.gsr1_status
       gon.spoiler = @game.gsr1_spoiler
       gon.guessernum = "1"
-      gon.bonuspenalty = @game.gsr1_penalty
+      gon.playerscore = @game.gsr1_score
       if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
   	elsif current_user.id == @game.guesser_id2
   		gon.guessedwords = @game.gsr2_words
+      gon.wordsh1 = @game.gsr2_h1words
+      gon.wordsh2 = @game.gsr2_h2words
+      gon.wordsh3 = @game.gsr2_h3words
   		gon.guessstatus = @game.gsr2_status
       gon.spoiler = @game.gsr2_spoiler
       gon.guessernum = "2"
-      gon.bonuspenalty = @game.gsr2_penalty
+      gon.playerscore = @game.gsr2_score
       if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
   	elsif current_user.id == @game.guesser_id3
   		gon.guessedwords = @game.gsr3_words
+      gon.wordsh1 = @game.gsr3_h1words
+      gon.wordsh2 = @game.gsr3_h2words
+      gon.wordsh3 = @game.gsr3_h3words
   		gon.guessstatus = @game.gsr3_status
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
-      gon.bonuspenalty = @game.gsr3_penalty
+      gon.playerscore = @game.gsr3_score
       if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
     elsif current_user.id == @game.guesser_id4
       gon.guessedwords = @game.gsr4_words
+      gon.wordsh1 = @game.gsr4_h1words
+      gon.wordsh2 = @game.gsr4_h2words
+      gon.wordsh3 = @game.gsr4_h3words
       gon.guessstatus = @game.gsr4_status
       gon.spoiler = @game.gsr4_spoiler
       gon.guessernum = "4"
-      gon.bonuspenalty = @game.gsr4_penalty
+      gon.playerscore = @game.gsr4_score
       if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
     elsif current_user.id == @game.guesser_id5
       gon.guessedwords = @game.gsr5_words
+      gon.wordsh1 = @game.gsr5_h1words
+      gon.wordsh2 = @game.gsr5_h2words
+      gon.wordsh3 = @game.gsr5_h3words
       gon.guessstatus = @game.gsr5_status
       gon.spoiler = @game.gsr5_spoiler
       gon.guessernum = "5"
-      gon.bonuspenalty = @game.gsr5_penalty
+      gon.playerscore = @game.gsr5_score
       if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
     elsif current_user.id == @game.guesser_id6
       gon.guessedwords = @game.gsr6_words
+      gon.wordsh1 = @game.gsr6_h1words
+      gon.wordsh2 = @game.gsr6_h2words
+      gon.wordsh3 = @game.gsr6_h3words
       gon.guessstatus = @game.gsr6_status
       gon.spoiler = @game.gsr6_spoiler
       gon.guessernum = "6"
-      gon.bonuspenalty = @game.gsr6_penalty
+      gon.playerscore = @game.gsr6_score
       if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end

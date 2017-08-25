@@ -520,8 +520,10 @@ var ready = function() {
 	  	var bword = gon.badword;
 	  	var hintword1 = gon.hintword1;
 	  	var hintword2 = gon.hintword2;
+	  	var hintword3 = gon.hintword3;
 	  	var hintnum1 = gon.hintnum1;
 	  	var hintnum2 = gon.hintnum2;
+	  	var hintnum3 = gon.hintnum3;
 	  	var guessernum = gon.guessernum;
 
 	  	//beginning state
@@ -529,26 +531,30 @@ var ready = function() {
 	  	if (guessedwords === null) {guessedwords = [];}
 	  	var guessstatus = gon.guessstatus
 	  	var gamespoiled = gon.spoiler;
-	  	var bonuspenalty = gon.bonuspenalty;
 	  	var currenthint = hintword1;
 	  	var currenthintnum = hintnum1;
 	  	if (guessstatus.split(",")[0] === "hint2") {
 	  		currenthint = hintword2;
 	  		currenthintnum = hintnum2;
+	  	} else if (guessstatus.split(",")[0] === "hint3") {
+	  		currenthint = hintword3;
+	  		currenthintnum = hintnum3;
 	  	}
 	  	var correctwordsguessed = [];
-	  	var correctwordshint2 = [];
+	  	var correctwordshint1 = gon.wordsh1;
+	  	var correctwordshint2 = gon.wordsh2;
+	  	var correctwordshint3 = gon.wordsh3;
 	  	for (var i = 0; i < guessedwords.length; i++) {
 	  		if (twords.indexOf(guessedwords[i]) !== -1) {
 	  			correctwordsguessed.push(guessedwords[i]);
 	  		}
 	  	}
-	  	var playerscore = scoring[correctwordsguessed.length] - bonuspenalty;
+	  	var playerscore = gon.playerscore;
 	  	var notifytimeout;
-	  	boardupdate(0, "true");
+	  	boardupdate(0, "true", 0);
 
 	  	//board setup/update
-	  	function boardupdate(endgametime, firstload) {
+	  	function boardupdate(endgametime, firstload, scoreadd) {
 		  	if (guessedwords.length > 0) {
 		  		for (var i = 0; i < guessedwords.length; i++) {
 			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
@@ -566,7 +572,7 @@ var ready = function() {
 		  			$(this).addClass("neutralword");
 		  		}
 		  	})
-		  	playerscore = scoring[correctwordsguessed.length] - bonuspenalty;
+		  	playerscore = playerscore + scoreadd;
 		  	var correctwordcount = correctwordsguessed.length
 		  	if (gamespoiled === 1) {
 		  		playerscore = 0;
@@ -579,15 +585,25 @@ var ready = function() {
 		  	if (currenthintnum === 1) {var thewordword = "word";} else {var thewordword = "words";}
 		  	$(".thewordword").text(thewordword);
 		  	if (currenthint === hintword2) {
+		  		$(".skip1").text("Too risky? See final hint.");
+		  		$(".hintheadline").text("Your second hint is...")
+		  	} else if (currenthint === hintword3) {
 		  		$(".skip1").text("Too risky? End game now.");
 		  		$(".hintheadline").text("Your final hint is...")
 		  	}
 
-		  	if (guessstatus === "bonus,bonus") {
-		  		$(".hintheadline").text("Extra try! Go for one more?")
+		  	if (guessstatus === "bonus,hint2") {
+		  		$(".hintheadline").text("Bonus! Go for one more?")
 		  		$(".guessword").remove();
-		  		$(".guessnum").text("This game's hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  		$(".guessnum").text("This first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ").");
+		  	}
+
+		  	if (guessstatus === "bonus,hint3") {
+		  		$(".hintheadline").text("Bonus! Go for one more?")
+		  		$(".guessword").remove();
+		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
@@ -622,7 +638,9 @@ var ready = function() {
 		                'guessstatus' : guessstatus,
 		                'gamespoiled' : gamespoiled,
 		                'gamescore' : playerscore,
-		                'bonuspenalty' : bonuspenalty }
+		                'hint1words' : correctwordshint1,
+		                'hint2words' : correctwordshint2,
+		                'hint3words' : correctwordshint3 }
 		      })
 		        .always(function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
@@ -652,39 +670,59 @@ var ready = function() {
 	  	})
 
 	  	function guessoutcome(chosen) {
+	  		var scoretoadd = 0;
 	  		guessedwords.push(chosen);
 	  		$(".clickagain").removeClass("wordsubmitanim");
 	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		// correct word 
 	  		if (twords.indexOf(chosen) !== -1) {
-	  			if (guessstatus === "bonus,bonus") {
-	  				bonuspenalty = 5;
-	  			}
 	  			correctwordsguessed.push(chosen);
+	  			if (currenthint === hintword1) {
+	  				correctwordshint1.push(chosen);
+	  				scoretoadd = scoring[correctwordshint1.length];
+	  			}
 	  			if (currenthint === hintword2) {
 	  				correctwordshint2.push(chosen);
+	  				scoretoadd = scoring[correctwordshint2.length];
 	  			}
-	  			if (currenthint === hintword1 && correctwordsguessed.length === currenthintnum) {
+	  			if (currenthint === hintword3) {
+	  				correctwordshint3.push(chosen);
+	  				scoretoadd = scoring[correctwordshint3.length];
+	  			}
+	  			if (guessstatus.split(",")[0] === "bonus") {
+	  				scoretoadd = 15;
+	  			}
+	  			if (correctwordsguessed.length === 6) {
+	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
+	  				resultscheersfx.play();
+						shownotification();
+						guessstatus = "over,over";
+					} else if (currenthint === hintword1 && correctwordshint1.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
 						shownotification();
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
-	  			} else if (correctwordsguessed.length === 6) {
-	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
-	  				resultscheersfx.play();
-						shownotification();
-						guessstatus = "over,over";
-					} else if (currenthint === hintword2 && guessstatus === "bonus,bonus") {
-						$(".gamenotify").html("You picked up a bonus word. Nice way to end the game!");
-						shownotification();
-	  				guessstatus = "over,over";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
-						$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
+	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification("bonus");
-	  				guessstatus = "bonus,bonus";
-	  			} else if (currenthint === hintword2 && correctwordshint2.length === (currenthintnum + 1)) {
-						$(".gamenotify").html("You found all the words for the second hint!");
+	  				guessstatus = "bonus,hint2";
+	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
+	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
+						shownotification("bonus");
+	  				guessstatus = "bonus,hint3";
+	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
+	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
+						shownotification("bonus");
+	  				guessstatus = "bonus,hint3";
+	  			} else if (guessstatus === "bonus,hint2") {
+						$(".gamenotify").html("You picked up a bonus word. On to the third hint...");
+						shownotification();
+						currenthint = hintword3;
+	  				currenthintnum = hintnum3;
+	  				guessstatus = "hint3,word1";
+	  			}  else if (guessstatus === "bonus,hint3") {
+						$(".gamenotify").html("You picked up a bonus word. Great way to end the game!");
 						shownotification();
 	  				guessstatus = "over,over";
 	  			} else if (correctwordsguessed.length < 6) {
@@ -692,6 +730,7 @@ var ready = function() {
 							keepitup[Math.floor(Math.random() * keepitup.length)]);
 						shownotification();
 					} 
+					$("div.anim_correct").text("+" + scoretoadd);
 					$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
 					setTimeout(function() {
 						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
@@ -704,7 +743,7 @@ var ready = function() {
 						})
 					}, 3100);
 					targetwordsfx.play();
-					boardupdate(4000);
+					boardupdate(4000, "false", scoretoadd);
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
@@ -735,16 +774,30 @@ var ready = function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
-	  			} else if (currenthint === hintword2 && guessstatus === "bonus,bonus") {
+	  			} else if (guessstatus === "bonus,hint3") {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
 	  					"Game over.");
 						shownotification();
 						guessstatus = "over,over";
+					} else if (guessstatus === "bonus,hint2") {
+	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  					"Moving on to the final hint...");
+						shownotification();
+						currenthint = hintword3;
+	  				currenthintnum = hintnum3;
+						guessstatus = "hint3,word1";
 					} else if (currenthint === hintword2) {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"You may still try for an extra word.");
-						shownotification("bonus");
-						guessstatus = "bonus,bonus";
+	  					"Moving on to the final hint...");
+						shownotification();
+						currenthint = hintword3;
+	  				currenthintnum = hintnum3;
+						guessstatus = "hint3,word1";
+					} else if (currenthint === hintword3) {
+	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  					"Game over.");
+						shownotification();
+						guessstatus = "over,over";
 					}
 					$("[data-guessword='" + chosen + "'] .anim_neutral").fadeIn(200).addClass("animating");
 					setTimeout(function() {
@@ -758,7 +811,7 @@ var ready = function() {
 						})
 					}, 3100);
 					neutralwordsfx.play();
-					boardupdate(4000);
+					boardupdate(4000, "false", 0);
 	  		}
 	  	}
 
@@ -767,10 +820,14 @@ var ready = function() {
 	  			currenthint = hintword2;
   				currenthintnum = hintnum2;
   				guessstatus = "hint2,word1";
+	  		} else if (currenthint === hintword2) {
+	  			currenthint = hintword3;
+  				currenthintnum = hintnum3;
+  				guessstatus = "hint3,word1";
 	  		} else {
 	  			guessstatus = "over,over";
 	  		}
-	  		boardupdate(0);
+	  		boardupdate(0, "false", 0);
 	  	});
 
 	  	function shownotification(trigger) {
@@ -796,8 +853,11 @@ var ready = function() {
 	  	var bword = gon.badword;
 	  	var hintword1 = gon.hintword1;
 	  	var hintword2 = gon.hintword2;
+	  	var hintword3 = gon.hintword3;
 	  	var hintnum1 = gon.hintnum1;
 	  	var hintnum2 = gon.hintnum2;
+	  	var hintnum3 = gon.hintnum3;
+
 
 	  	var pl1words = gon.g1words;
 	  	var pl2words = gon.g2words;

@@ -8,7 +8,7 @@
   </span>
 </div>
 
-<span class="hintnumheading allguesserinfo underwayforgiver" style="text-align: center;"><u>Scores So Far (click to see guesses)...</u><br>
+<span class="hintnumheading allguesserinfo underwayforgiver" style="text-align: center;"><u>Final Scores (click to see guesses)...</u><br>
 	<div class="guesserinfo guesser1">
 		<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
 		<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>

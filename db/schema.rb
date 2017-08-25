@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824061412) do
+ActiveRecord::Schema.define(version: 20170825063144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,9 +38,6 @@ ActiveRecord::Schema.define(version: 20170824061412) do
     t.string "gsr1_words", default: [], array: true
     t.string "gsr2_words", default: [], array: true
     t.string "gsr3_words", default: [], array: true
-    t.integer "gsr1_score"
-    t.integer "gsr2_score"
-    t.integer "gsr3_score"
     t.integer "guesser_id1", default: 0
     t.integer "guesser_id2", default: 0
     t.integer "guesser_id3", default: 0
@@ -68,9 +65,6 @@ ActiveRecord::Schema.define(version: 20170824061412) do
     t.string "gsr4_words", default: [], array: true
     t.string "gsr5_words", default: [], array: true
     t.string "gsr6_words", default: [], array: true
-    t.integer "gsr4_score"
-    t.integer "gsr5_score"
-    t.integer "gsr6_score"
     t.integer "giver_chats", default: 0
     t.integer "gsr1_chats", default: 0
     t.integer "gsr2_chats", default: 0
@@ -78,14 +72,32 @@ ActiveRecord::Schema.define(version: 20170824061412) do
     t.integer "gsr4_chats", default: 0
     t.integer "gsr5_chats", default: 0
     t.integer "gsr6_chats", default: 0
-    t.integer "gsr1_penalty", default: 0
-    t.integer "gsr2_penalty", default: 0
-    t.integer "gsr3_penalty", default: 0
-    t.integer "gsr4_penalty", default: 0
-    t.integer "gsr5_penalty", default: 0
-    t.integer "gsr6_penalty", default: 0
     t.string "hintword3", default: ""
     t.integer "hintnum3", default: 0
+    t.integer "gsr1_score", default: 0
+    t.integer "gsr2_score", default: 0
+    t.integer "gsr3_score", default: 0
+    t.integer "gsr4_score", default: 0
+    t.integer "gsr5_score", default: 0
+    t.integer "gsr6_score", default: 0
+    t.string "gsr1_h1words", default: [], array: true
+    t.string "gsr2_h1words", default: [], array: true
+    t.string "gsr3_h1words", default: [], array: true
+    t.string "gsr4_h1words", default: [], array: true
+    t.string "gsr5_h1words", default: [], array: true
+    t.string "gsr6_h1words", default: [], array: true
+    t.string "gsr1_h2words", default: [], array: true
+    t.string "gsr2_h2words", default: [], array: true
+    t.string "gsr3_h2words", default: [], array: true
+    t.string "gsr4_h2words", default: [], array: true
+    t.string "gsr5_h2words", default: [], array: true
+    t.string "gsr6_h2words", default: [], array: true
+    t.string "gsr1_h3words", default: [], array: true
+    t.string "gsr2_h3words", default: [], array: true
+    t.string "gsr3_h3words", default: [], array: true
+    t.string "gsr4_h3words", default: [], array: true
+    t.string "gsr5_h3words", default: [], array: true
+    t.string "gsr6_h3words", default: [], array: true
   end
 
   create_table "users", force: :cascade do |t|
