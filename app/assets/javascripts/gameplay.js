@@ -703,6 +703,12 @@ var ready = function() {
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
+	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
+	  				$(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
+						shownotification();
+	  				currenthint = hintword3;
+	  				currenthintnum = hintnum3;
+	  				guessstatus = "hint3,word1";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification("bonus");
