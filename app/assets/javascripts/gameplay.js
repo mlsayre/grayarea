@@ -594,14 +594,14 @@ var ready = function() {
 
 		  	if (guessstatus === "bonus,hint2") {
 		  		$(".hintheadline").text("Bonus! Go for one more?")
-		  		$(".guessword").remove();
+		  		$(".guessword").hide();
 		  		$(".guessnum").text("This first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ").");
 		  	}
 
 		  	if (guessstatus === "bonus,hint3") {
 		  		$(".hintheadline").text("Bonus! Go for one more?")
-		  		$(".guessword").remove();
+		  		$(".guessword").hide();
 		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
 		  	}
@@ -670,6 +670,7 @@ var ready = function() {
 	  	})
 
 	  	function guessoutcome(chosen) {
+	  		$(".guessword").show();
 	  		var scoretoadd = 0;
 	  		guessedwords.push(chosen);
 	  		$(".clickagain").removeClass("wordsubmitanim");
@@ -704,15 +705,15 @@ var ready = function() {
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
+	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
+						shownotification("bonus");
+	  				guessstatus = "bonus,hint2";
+	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
 						shownotification();
 	  				currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
-	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
-	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
-						shownotification("bonus");
-	  				guessstatus = "bonus,hint2";
 	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
 						shownotification("bonus");
@@ -822,6 +823,7 @@ var ready = function() {
 	  	}
 
 	  	$(".skip1").click(function() {
+	  		$(".guessword").show();
 	  		if (currenthint === hintword1) {
 	  			currenthint = hintword2;
   				currenthintnum = hintnum2;
