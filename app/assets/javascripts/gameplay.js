@@ -129,7 +129,6 @@ var ready = function() {
 	})
 
 	function soundOnOff(onoff) {
-		console.log("soundonoff running" + onoff)
 		if (onoff === 0) {
 			$(".soundon").text("Turn Sound On");
 			Howler.mute(true);

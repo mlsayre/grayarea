@@ -66,6 +66,16 @@ class GamesController < ApplicationController
   def updategame
     @thisgame = Game.find(params[:game_id])
 
+    if params[:hint1words] == nil
+      params[:hint1words] = []
+    end
+    if params[:hint2words] == nil
+      params[:hint2words] = []
+    end
+    if params[:hint3words] == nil
+      params[:hint3words] = []
+    end
+
     if current_user.id == @thisgame.guesser_id1
       @thisgame.update(:gsr1_words => params[:guessedwords], :gsr1_status => params[:guessstatus], 
         :gsr1_spoiler => params[:gamespoiled], :gsr1_score => params[:gamescore], :gsr1_h1words => params[:hint1words], 
