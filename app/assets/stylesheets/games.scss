@@ -538,6 +538,7 @@ select:focus, select:active {
   padding: 4px;
   font-size: 20px;
   display: none;
+  width: 100%;
   /*font-weight: 700;*/
   color: darkgreen;
   top: 0;
@@ -574,6 +575,9 @@ img.anim_correct.animating {
 div.anim_correct.inarow.animating {
   transform: translateY(55%);
   z-index: 5;
+  background-color: rgba(144, 238, 144, .8);
+  border-radius: 20%;
+  padding: 0;
 }
 /*div.anim_correct.inarow.animating:before, div.anim_correct.inarow.animating:after {
   transform: translateZ(1em);
