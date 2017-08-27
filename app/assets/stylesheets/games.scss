@@ -113,7 +113,7 @@ a.button {
   border-radius: 4px;
   background-color: #e6efff;
   transition: 250ms all, 100ms transform;
-  transform: scale(1);
+  /*transform: scale(1);*/
 }
 @media (max-width: 480px) {
   .allwords li {
@@ -536,13 +536,21 @@ select:focus, select:active {
   position: absolute;
   border-radius: 4px;
   padding: 4px;
-  font-size: 22px;
+  font-size: 20px;
   display: none;
-  width: 100%;
   /*font-weight: 700;*/
   color: darkgreen;
   top: 0;
   left: 0;
+  text-align: center;
+  margin: 0 auto;
+  right: 0;
+}
+.anim_correct.scoretxt {
+  font-size: 25px;
+  width: 50%;
+  background-color: rgba(0,150,250,.8);
+  border-radius: 50%;
 }
 img.anim_correct {
   transition: 2000ms transform;
@@ -563,6 +571,13 @@ div.anim_correct.animating {
 img.anim_correct.animating {
   transform: rotate(360deg) scale(2.2) translateY(-70%) rotateY(360deg);
 }
+div.anim_correct.inarow.animating {
+  transform: translateY(55%);
+  z-index: 5;
+}
+/*div.anim_correct.inarow.animating:before, div.anim_correct.inarow.animating:after {
+  transform: translateZ(1em);
+}*/
 .anim_spoiler {
   position: absolute;
   border-radius: 4px;

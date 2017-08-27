@@ -146,6 +146,7 @@ var ready = function() {
 	var hint3 = "";
 	var hint3num = 0;
 	var scoring = {0:0, 1:10, 2:15, 3:25, 4:40, 5:50, 6:60};
+	var scoringrow = {0: "", 1: "", 2: "Two in a row!", 3: "One, two, THREE!", 4: "Four in a row!", 5: "Five in a row!", 6: "SIX in a row!!"}
 	var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
 	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
 	     "This is making the highlight reel!"]
@@ -671,6 +672,7 @@ var ready = function() {
 	  	function guessoutcome(chosen) {
 	  		$(".guessword").show();
 	  		var scoretoadd = 0;
+	  		var inarowmsg = "";
 	  		guessedwords.push(chosen);
 	  		$(".clickagain").removeClass("wordsubmitanim");
 	  		$(".reallysubmit").removeClass("reallysubmit");
@@ -680,17 +682,21 @@ var ready = function() {
 	  			if (currenthint === hintword1) {
 	  				correctwordshint1.push(chosen);
 	  				scoretoadd = scoring[correctwordshint1.length];
+	  				inarowmsg = scoringrow[correctwordshint1.length];
 	  			}
 	  			if (currenthint === hintword2) {
 	  				correctwordshint2.push(chosen);
 	  				scoretoadd = scoring[correctwordshint2.length];
+	  				inarowmsg = scoringrow[correctwordshint2.length];
 	  			}
 	  			if (currenthint === hintword3) {
 	  				correctwordshint3.push(chosen);
 	  				scoretoadd = scoring[correctwordshint3.length];
+	  				inarowmsg = scoringrow[correctwordshint3.length];
 	  			}
 	  			if (guessstatus.split(",")[0] === "bonus") {
-	  				scoretoadd = 15;
+	  				scoretoadd = 5;
+	  				inarowmsg = "";
 	  			}
 	  			if (correctwordsguessed.length === 6) {
 	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
@@ -737,6 +743,7 @@ var ready = function() {
 						shownotification();
 					} 
 					$("div.anim_correct").text("+" + scoretoadd);
+					$("div.anim_correct.inarow").text(inarowmsg);
 					$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
 					setTimeout(function() {
 						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
