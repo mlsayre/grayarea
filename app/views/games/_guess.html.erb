@@ -30,8 +30,9 @@
 		<div class="hints submitted hidden">
 			<span class="hintlabel gameover">Game Over</span>
 			<div class="gameoverinfo">
-				<span class="hintnumheading">Final Score:<br>
-					Words: <span class="wordcount"></span> for <span class="scorecount"></span> points
+				<span class="hintnumheading">
+					<span class="giveheart"></span><br>
+					Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points
 				</span><br>
 				<span class="hintnumheading allguesserinfo"><u>All Guesser's Scores</u><br>
 					<div class="guesserinfo">
@@ -59,6 +60,7 @@
 						<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
 					</div>
 				</span>
+				Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) 
 			</div>
 			<button class="button returntomain">Return to Main</button>
 			<button class="menu"><img src="/assets/menu.png"></button>
