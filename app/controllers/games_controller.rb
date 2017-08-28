@@ -270,7 +270,7 @@ class GamesController < ApplicationController
       gon.playerscore = @game.gsr6_score
       gon.heartstatus = @game.gsr6_heart
       if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
+        @chatshow = true  
       end
   	end
 

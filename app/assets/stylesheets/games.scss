@@ -870,6 +870,38 @@ li.gamelist {
     border: 1px solid lightgrey;
     border-radius: 3px;
     background-color: white;
+    position: relative;
+}
+.givelistheart {
+  width: 9px;
+  position: absolute;
+}
+.givelistheart img {
+  width: 100%;
+}
+.glh1 {
+  top: -4px;
+  left: 1px;
+}
+.glh2 {
+  top: 7px;
+  left: 1px;
+}
+.glh3 {
+  bottom: -3px;
+  left: 1px;
+}
+.glh4 {
+  top: -4px;
+  right: 1px;
+}
+.glh5 {
+  top: 7px;
+  right: 1px;
+}
+.glh6 {
+  bottom: -3px;
+  right: 1px;
 }
 span.timeshow {
   color: grey;

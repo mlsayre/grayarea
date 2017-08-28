@@ -23,8 +23,25 @@
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-      <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span></a>
-    
+    <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span></a>
+    <% if Game.find(game.id).gsr1_heart != 0 %>
+      <div class="givelistheart glh1"><img src="/assets/Heart-48.png"></div>
+    <% end %>
+    <% if Game.find(game.id).gsr2_heart != 0 %>
+      <div class="givelistheart glh2"><img src="/assets/Heart-48.png"></div>
+    <% end %>
+    <% if Game.find(game.id).gsr3_heart != 0 %>
+      <div class="givelistheart glh3"><img src="/assets/Heart-48.png"></div>
+    <% end %>
+    <% if Game.find(game.id).gsr4_heart != 0 %>
+      <div class="givelistheart glh4"><img src="/assets/Heart-48.png"></div>
+    <% end %>
+    <% if Game.find(game.id).gsr5_heart != 0 %>
+      <div class="givelistheart glh5"><img src="/assets/Heart-48.png"></div>
+    <% end %>
+    <% if Game.find(game.id).gsr6_heart != 0 %>
+      <div class="givelistheart glh6"><img src="/assets/Heart-48.png"></div>
+    <% end %>
     
   </li>
 <% end %>
