@@ -436,6 +436,10 @@ var ready = function() {
 		$(".pagecover").show();
 	}
 
+	function connectionError() {
+		$("body").html("Please check your connection. Please reload game when you have reconnected to the internet.")
+	}
+
 	function skiphint(auto) {
 		if (auto === "true") {
 
@@ -551,6 +555,35 @@ var ready = function() {
 	  	}
 	  	var playerscore = gon.playerscore;
 	  	var notifytimeout;
+	  	var heartstatus = gon.heartstatus;
+			if (heartstatus === 1) {
+				$(".giveheart").remove();
+			}
+
+			$(".giveheart").click(function() {
+				$.ajax({
+	        url: "/games/addheart",
+	        type: "POST",
+	        dataType:'json',
+	        data: { 'game_id' : parseInt(gameid),
+	                'heartgiven' : 1 }
+	      })
+	        .done(function() {
+	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+	        	$(".giveheart").remove();
+	        	$(".giveheartsuccess").css("display", "block");
+	        	var wrapper = $('.allguesserinfo');
+						wrapper.load(pathname + " .allguesserinfo", function() {
+						   wrapper.children('.allguesserinfo').unwrap();
+						});
+	        	setTimeout(function() {
+	        		$(".giveheartsuccess").fadeOut();
+	        	}, 3500);
+	        })
+	        .fail(function() {
+	        	connectionError();
+	        })
+			})
 	  	boardupdate(0, "true", 0);
 
 	  	//board setup/update
@@ -607,6 +640,9 @@ var ready = function() {
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
+		  		if (playerscore < 50) {
+		  			$(".giveheart").remove();
+		  		}
 		  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
 		  		for (var i = 0; i < twords.length; i++) {
 		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");

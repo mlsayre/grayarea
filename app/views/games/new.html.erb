@@ -29,6 +29,12 @@
 
   <%= link_to "How to play", howtoplay_pages_path %>
   <%= link_to "See rankings", rankings_pages_path %>
+  <%= link_to "Feats of Stretch", feats_pages_path, :class => "featslink" %>
+  <% if current_user.heartnotify > 0 %>
+    <span class="heartsnotify"><img src="/assets/Heart-48.png">
+      <span class="notifynumber"><%= current_user.heartnotify %></span>
+    </span>
+  <% end %>
 </div>
 
 <div class="maingamelist">
@@ -55,6 +61,15 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= link_to "About the Game (Aug 25, 2017)", about_pages_path, :style => "color: red;" %><br>
+<%= link_to "About the Game (Aug 27, 2017)", about_pages_path, :style => "color: red;" %><br>
 <%= link_to "Edit your information", edit_user_registration_path %><br>
 <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+
+<script>
+$(".featslink").click(function() {
+  $.ajax({
+      url: "/games/resetheartnotify",
+      type: "POST"
+    })
+})
+</script>

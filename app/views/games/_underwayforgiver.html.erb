@@ -12,26 +12,44 @@
 	<div class="guesserinfo guesser1">
 		<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
 		<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
+		<% if @game.gsr1_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 	<div class="guesserinfo guesser2">
 		<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
 		<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %>pts</span>
+		<% if @game.gsr2_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 	<div class="guesserinfo guesser3">
 		<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
 		<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %>pts</span>
+		<% if @game.gsr3_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 	<div class="guesserinfo guesser4">
 		<span><%= @game.guesser_id4 != 0 ? User.find(@game.guesser_id4).username : "-" %></span>: 
 		<span class="finalpoints4"><%= @game.gsr4_score ? @game.gsr4_score : "-" %>pts</span>
+		<% if @game.gsr4_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 	<div class="guesserinfo guesser5">
 		<span><%= @game.guesser_id5 != 0 ? User.find(@game.guesser_id5).username  : "-" %></span>: 
 		<span class="finalpoints5"><%= @game.gsr5_score ? @game.gsr5_score : "-" %>pts</span>
+		<% if @game.gsr5_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 	<div class="guesserinfo guesser6">
 		<span><%= @game.guesser_id6 != 0 ? User.find(@game.guesser_id6).username  : "-" %></span>: 
 		<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
+		<% if @game.gsr6_heart == 1 %>
+			<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+		<% end %>
 	</div>
 </span>
 

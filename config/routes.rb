@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       post 'entermessage'
       post 'resetchatnotify'
       post 'delgame'
+      post 'addheart'
+      post 'resetheartnotify'
     end
   end
 
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
       get 'rankings' => 'pages#rankings'
       get 'howtoplay' => 'pages#howtoplay'
       get 'about' => 'pages#about'
+      get 'feats' => 'pages#feats'
     end
   end
 

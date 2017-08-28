@@ -246,13 +246,63 @@ span.guessermsg {
   height: 37px;
   position: relative;
 }
-.hintheadline {
-	font-size: 20px;
+span.giveheart {
+  position: relative;
+  bottom: 4px;
+  font-style: italic;
+  background-color: lightpink;
+  padding: 2px 4px;
+  transition: 200ms all;
+  border-radius: 4px;
+  display: block;
+  width: 190px;
+  margin: 0 auto;
+  line-height: 1.2;
+  cursor: pointer;
+}
+span.giveheart:hover {
+  background-color: pink;
+}
+.giveheart img, .giveheartsuccess img {
+  width: 20px;
+  position: relative;
+  top: 3px;
+}
+.giveheartsuccess {
+  display: none;
+}
+span.heartshow img {
+  width: 18px;
+  position: relative;
+  top: 2px;
+}
+span.heartsnotify {
+  position: relative;
+  width: 26px;
+  display: inline-block;
+  vertical-align: top;
+  top: -1px;
+}
+.heartsnotify img {
+  width: 26px;
   position: absolute;
-  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+span.notifynumber {
+  position: absolute;
   margin: 0 auto;
   left: 0;
   right: 0;
+  top: 2px;
+}
+.hintheadline {
+	position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 1px;
 }
 .unselected {
   filter: brightness(0.7);

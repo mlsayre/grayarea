@@ -1,0 +1,8 @@
+<div class="gametop"><%= current_user.username %>'s Feats of Stretch</div>
+
+<div class="lifetimerankings howtoplay">
+  Hearts received: <%= current_user.lifetimehearts %><br><br>
+
+  Hearts received per game created: <%= current_user.lifetimegamesgiver == 0 ? "0" : (current_user.lifetimehearts.to_f  / current_user.lifetimegamesgiver.to_f).round(2)  %><br><br>
+  <%= link_to "Back", :back, :class => "howtoback" %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825063144) do
+ActiveRecord::Schema.define(version: 20170827114502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,12 @@ ActiveRecord::Schema.define(version: 20170825063144) do
     t.string "gsr4_h3words", default: [], array: true
     t.string "gsr5_h3words", default: [], array: true
     t.string "gsr6_h3words", default: [], array: true
+    t.integer "gsr1_heart", default: 0
+    t.integer "gsr2_heart", default: 0
+    t.integer "gsr3_heart", default: 0
+    t.integer "gsr4_heart", default: 0
+    t.integer "gsr5_heart", default: 0
+    t.integer "gsr6_heart", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -125,6 +131,8 @@ ActiveRecord::Schema.define(version: 20170825063144) do
     t.datetime "avatar_updated_at"
     t.integer "lifetimegamesgiver", default: 0
     t.integer "lifetimegamesguesser", default: 0
+    t.integer "lifetimehearts", default: 0
+    t.integer "heartnotify", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

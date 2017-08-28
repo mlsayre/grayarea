@@ -113,6 +113,36 @@ class GamesController < ApplicationController
     render body: nil
   end
 
+  def addheart
+    @thisgame = Game.find(params[:game_id])
+    @gamegiver = User.find(@thisgame.giver_id)
+    @gamegiver.increment!(:lifetimehearts, by = 1).increment!(:heartnotify, by = 1)
+
+    if current_user.id == @thisgame.guesser_id1
+      @thisgame.update(:gsr1_heart => params[:heartgiven])
+    elsif current_user.id == @thisgame.guesser_id2
+      @thisgame.update(:gsr2_heart => params[:heartgiven])
+    elsif current_user.id == @thisgame.guesser_id3
+      @thisgame.update(:gsr3_heart => params[:heartgiven])
+    elsif current_user.id == @thisgame.guesser_id4
+      @thisgame.update(:gsr4_heart => params[:heartgiven])
+    elsif current_user.id == @thisgame.guesser_id5
+      @thisgame.update(:gsr5_heart => params[:heartgiven])
+    elsif current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gsr6_heart => params[:heartgiven])
+    end
+
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
+  end
+
+  def resetheartnotify
+    current_user.update(:heartnotify => 0)
+
+    render body: nil
+  end
+
   # POST /games
   # POST /games.json
   def create
@@ -173,6 +203,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr1_spoiler
       gon.guessernum = "1"
       gon.playerscore = @game.gsr1_score
+      gon.heartstatus = @game.gsr1_heart
       if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -185,6 +216,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr2_spoiler
       gon.guessernum = "2"
       gon.playerscore = @game.gsr2_score
+      gon.heartstatus = @game.gsr2_heart
       if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -197,6 +229,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
       gon.playerscore = @game.gsr3_score
+      gon.heartstatus = @game.gsr3_heart
       if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -209,6 +242,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr4_spoiler
       gon.guessernum = "4"
       gon.playerscore = @game.gsr4_score
+      gon.heartstatus = @game.gsr4_heart
       if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -221,6 +255,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr5_spoiler
       gon.guessernum = "5"
       gon.playerscore = @game.gsr5_score
+      gon.heartstatus = @game.gsr5_heart
       if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -233,6 +268,7 @@ class GamesController < ApplicationController
       gon.spoiler = @game.gsr6_spoiler
       gon.guessernum = "6"
       gon.playerscore = @game.gsr6_score
+      gon.heartstatus = @game.gsr6_heart
       if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
