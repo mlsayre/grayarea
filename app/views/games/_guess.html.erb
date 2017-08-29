@@ -160,6 +160,14 @@
 
 <div class="gamebottom"></div>
 
+<span class="cheatstatus">
+	<% if @cheatstatus == 0 %>
+	  <button class="button thumbdown"><img src="/assets/Thumbs-Down.png"></button>
+	<% else %>
+	  <div class="gamereported">Game reported.(<span class="cheatnum"><%= @cheatnum %></span>)</div>
+	<% end %>
+</span>
+
 <div class="messagebox">
 	<div class="messagetitle"></div>
 	<div class="messageinfo"></div>

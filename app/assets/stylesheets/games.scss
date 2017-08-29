@@ -389,6 +389,20 @@ button.deletegameoff img {
   color: floralwhite;
   font-weight: bold;
 }
+button.button.thumbdown {
+  position: absolute;
+  right: 4px;
+  width: 36px;
+  padding: 3px 4px;
+}
+button.button.thumbdown img {
+  width: 100%;
+  vertical-align: middle;
+}
+.gamereported {
+  position: absolute;
+  right: 4px;
+}
 .messagebox button.button {
   margin: 10px 4px 6px;
 }

@@ -314,8 +314,8 @@ var ready = function() {
 	$(".deletegame").click(function() {
 		$(".messagetitle").text("Delete game?")
 		$(".messageinfo").html("No good hints coming to mind? You may " +
-			"delete this game. Note you can only delete at most one out of every 7 games. Once you've created " +
-			"another 6 games, you'll be able to delete another unfinished game.");
+			"delete this game. Note you can only delete at most one out of every 4 games. Once you've created " +
+			"another 3 games, you'll be able to delete another unfinished game.");
 		$(".messageaction").html('<button class="button deleteunfinished">Delete the Game</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
@@ -936,6 +936,47 @@ var ready = function() {
 					}
 	  		}, 4000)
 	  	}
+
+	  	$(".thumbdown").click(function() {
+	  		$(".messagetitle").text("Report game?")
+				$(".messageinfo").html("If this game uses hints you consider to be cheating or offensive, " +
+					"feel free to report it. If half of the players in the game (3) report the game, it will be deleted. " +
+					"<br>Current reports: " + gon.currentcheatnum);
+				$(".messageaction").html('<button class="button reportacheat">Report the Game</button>' +
+					                       '<button class="button closemessagebox">Cancel</button>');
+				$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+				$(".reportacheat").click(function() {
+					guessingreportgame();
+					closemessagebox();
+				})
+				$(".closemessagebox").click(function() { closemessagebox(); });
+				$(".pagecover").click(function() { closemessagebox(); });
+				$(".messagebox").show();
+				$(".pagecover").show();
+			});
+
+			function guessingreportgame() {
+				$.ajax({
+		      url: "/games/guessingreportgame",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'game_id' : parseInt(gameid)},
+		      statusCode: {
+				    666: function() {
+				      location.href = '/main';
+				    },
+				    200: function() {
+				      var wrapper = $('.cheatstatus');
+							wrapper.load(pathname + " .cheatstatus", function() {
+							   wrapper.children('.cheatstatus').unwrap();
+							});
+				    },
+				  }
+		    })
+		    // .fail(function() {
+		    // 	connectionError();
+		    // })
+			}
 
 	  })();
 	}

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post 'addheart'
       post 'resetheartnotify'
       post 'givingdeletegame'
+      post 'guessingreportgame'
     end
   end
 

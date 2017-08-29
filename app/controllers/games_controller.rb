@@ -204,6 +204,10 @@ class GamesController < ApplicationController
     gon.g5words = @game.gsr5_words
     gon.g6words = @game.gsr6_words
 
+    @cheatnum = @game.gsr1_cheat + @game.gsr2_cheat + @game.gsr3_cheat + @game.gsr4_cheat + @game.gsr5_cheat + 
+                @game.gsr6_cheat
+    gon.currentcheatnum = @cheatnum
+
   	if current_user.id == @game.guesser_id1
   		gon.guessedwords = @game.gsr1_words
       gon.wordsh1 = @game.gsr1_h1words
@@ -215,6 +219,7 @@ class GamesController < ApplicationController
       gon.guessernum = "1"
       gon.playerscore = @game.gsr1_score
       gon.heartstatus = @game.gsr1_heart
+      @cheatstatus = @game.gsr1_cheat
       if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -229,6 +234,7 @@ class GamesController < ApplicationController
       gon.guessernum = "2"
       gon.playerscore = @game.gsr2_score
       gon.heartstatus = @game.gsr2_heart
+      @cheatstatus = @game.gsr2_cheat
       if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -243,6 +249,7 @@ class GamesController < ApplicationController
       gon.guessernum = "3"
       gon.playerscore = @game.gsr3_score
       gon.heartstatus = @game.gsr3_heart
+      @cheatstatus = @game.gsr3_cheat
       if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -257,6 +264,7 @@ class GamesController < ApplicationController
       gon.guessernum = "4"
       gon.playerscore = @game.gsr4_score
       gon.heartstatus = @game.gsr4_heart
+      @cheatstatus = @game.gsr4_cheat
       if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -271,6 +279,7 @@ class GamesController < ApplicationController
       gon.guessernum = "5"
       gon.playerscore = @game.gsr5_score
       gon.heartstatus = @game.gsr5_heart
+      @cheatstatus = @game.gsr5_cheat
       if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true
       end
@@ -285,6 +294,7 @@ class GamesController < ApplicationController
       gon.guessernum = "6"
       gon.playerscore = @game.gsr6_score
       gon.heartstatus = @game.gsr6_heart
+      @cheatstatus = @game.gsr6_cheat
       if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
         @chatshow = true  
       end
@@ -312,13 +322,52 @@ class GamesController < ApplicationController
     @thisgame = Game.find(params[:game_id])
     @thisgame.delete
 
-    current_user.update(:giverdeletegamesleft => 6)
+    current_user.update(:giverdeletegamesleft => 3)
 
     respond_to do |format|
       format.json  { render json: {} , status: 200 }
     end
 
     flash[:notice] = 'Game was successfully deleted.'
+  end
+
+  def guessingreportgame
+    @thisgame = Game.find(params[:game_id])
+    if current_user.id == @thisgame.guesser_id1
+      @thisgame.update(:gsr1_cheat => 1)
+    elsif current_user.id == @thisgame.guesser_id2
+      @thisgame.update(:gsr2_cheat => 1)
+    elsif current_user.id == @thisgame.guesser_id3
+      @thisgame.update(:gsr3_cheat => 1)
+    elsif current_user.id == @thisgame.guesser_id4
+      @thisgame.update(:gsr4_cheat => 1)
+    elsif current_user.id == @thisgame.guesser_id5
+      @thisgame.update(:gsr5_cheat => 1)
+    elsif current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gsr6_cheat => 1)
+    end
+
+    @cheatnum = @thisgame.gsr1_cheat + @thisgame.gsr2_cheat + @thisgame.gsr3_cheat + @thisgame.gsr4_cheat + @thisgame.gsr5_cheat + 
+                @thisgame.gsr6_cheat
+
+    current_user.increment!(:lifetimecheatreports, by = 1)
+
+    if @cheatnum > 2
+      respond_to do |format|
+        format.json { render json: {} , status: 666 }
+      end
+      User.find(@thisgame.giver_id).increment!(:lifetimecheatgames, by = 1)
+      @thisgame.delete
+      flash[:notice] = 'Third cheat report received. Game deleted.'
+    else
+      respond_to do |format|
+        format.json { render json: {} , status: 200 }
+      end
+    end
+
+    current_user.update(:giverdeletegamesleft => 3)
+
+    flash[:notice] = 'Third cheat report received. Game deleted'
   end
 
   def soundonoff
