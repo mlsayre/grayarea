@@ -575,6 +575,7 @@ var ready = function() {
 	        	var wrapper = $('.allguesserinfo');
 						wrapper.load(pathname + " .allguesserinfo", function() {
 						   wrapper.children('.allguesserinfo').unwrap();
+						   GuessFuncDuring.seeguessesafter();
 						});
 	        	setTimeout(function() {
 	        		$(".giveheartsuccess").fadeOut();
@@ -661,6 +662,7 @@ var ready = function() {
 				  		gameovergoodsfx.play();
 				  	}
 				  	$(".finalpoints" + guessernum).text(playerscore + "pts");
+				  	$(".allguesserinfo").addClass("underwayforgiver");
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
@@ -682,6 +684,14 @@ var ready = function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
 		        	if ($(".chatcontent").length === 0) {
 		        		showChat();
+		        	}
+		        	if (guessstatus === "over,over") {
+		        		console.log("game is over, should load stuff")
+		        		var wrapper = $('.allguesserinfo');
+								wrapper.load(pathname + " .allguesserinfo", function() {
+								   wrapper.children('.allguesserinfo').unwrap();
+								   GuessFuncDuring.seeguessesafter();
+								});
 		        	}
 		        })
 		     }
@@ -899,63 +909,129 @@ var ready = function() {
 
 	if ($(".allguesserinfo").hasClass("underwayforgiver")) {
 		var UFG = (function() {
-			var twords = gon.targetwords;
-	  	var bword = gon.badword;
-	  	var hintword1 = gon.hintword1;
-	  	var hintword2 = gon.hintword2;
-	  	var hintword3 = gon.hintword3;
-	  	var hintnum1 = gon.hintnum1;
-	  	var hintnum2 = gon.hintnum2;
-	  	var hintnum3 = gon.hintnum3;
-
-
-	  	var pl1words = gon.g1words;
-	  	var pl2words = gon.g2words;
-	  	var pl3words = gon.g3words;
-	  	var pl4words = gon.g4words;
-	  	var pl5words = gon.g5words;
-	  	var pl6words = gon.g6words;
-
-	  	$(".word").each(function() {
-	  		var word = $(this).attr("data-guessword");
-	  		if (twords.indexOf(word) !== -1) {
-	  			$(this).addClass("targetword");
-	  		} else if (bword === word) {
-	  			$(this).addClass("badword");
-	  		} // else {
-	  		// 	$(this).addClass("neutralword");
-	  		// }
-	  	})
-
-	  	function showplayerwords(playernum, wordvar) {
-	  		$(".word").removeClass("guesser1show").removeClass("guesser2show").removeClass("guesser3show")
-	  		          .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
-	  		for (var i = 0; i < wordvar.length; i++) {
-	  			$('[data-guessword="' + wordvar[i] + '"]').addClass("guesser" + playernum + "show");
-	  		}
-	  	}
-
-	  	$(".guesser1").click(function() {
-	  		showplayerwords(1, pl1words);
-	  	});
-	  	$(".guesser2").click(function() {
-	  		showplayerwords(2, pl2words);
-	  	});
-	  	$(".guesser3").click(function() {
-	  		showplayerwords(3, pl3words);
-	  	});
-	  	$(".guesser4").click(function() {
-	  		showplayerwords(4, pl4words);
-	  	});
-	  	$(".guesser5").click(function() {
-	  		showplayerwords(5, pl5words);
-	  	});
-	  	$(".guesser6").click(function() {
-	  		showplayerwords(6, pl6words);
-	  	});
+	  	seeguesses();
 		})();
 	}
 
+	function seeguesses() {
+		var twords = gon.targetwords;
+  	var bword = gon.badword;
+  	var hintword1 = gon.hintword1;
+  	var hintword2 = gon.hintword2;
+  	var hintword3 = gon.hintword3;
+  	var hintnum1 = gon.hintnum1;
+  	var hintnum2 = gon.hintnum2;
+  	var hintnum3 = gon.hintnum3;
+
+
+  	var pl1words = gon.g1words;
+  	var pl2words = gon.g2words;
+  	var pl3words = gon.g3words;
+  	var pl4words = gon.g4words;
+  	var pl5words = gon.g5words;
+  	var pl6words = gon.g6words;
+
+  	$(".word").each(function() {
+  		var word = $(this).attr("data-guessword");
+  		if (twords.indexOf(word) !== -1) {
+  			$(this).addClass("targetword");
+  		} else if (bword === word) {
+  			$(this).addClass("badword");
+  		} // else {
+  		// 	$(this).addClass("neutralword");
+  		// }
+  	})
+
+		function showplayerwords(playernum, wordvar) {
+  		$(".word").removeClass("guesser1show").removeClass("guesser2show").removeClass("guesser3show")
+  		          .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
+  		for (var i = 0; i < wordvar.length; i++) {
+  			$('[data-guessword="' + wordvar[i] + '"]').addClass("guesser" + playernum + "show");
+  		}
+  	}
+
+  	$(".guesser1").click(function() {
+  		showplayerwords(1, pl1words);
+  	});
+  	$(".guesser2").click(function() {
+  		showplayerwords(2, pl2words);
+  	});
+  	$(".guesser3").click(function() {
+  		showplayerwords(3, pl3words);
+  	});
+  	$(".guesser4").click(function() {
+  		showplayerwords(4, pl4words);
+  	});
+  	$(".guesser5").click(function() {
+  		showplayerwords(5, pl5words);
+  	});
+  	$(".guesser6").click(function() {
+  		showplayerwords(6, pl6words);
+  	});
+	}
+
+	GuessFuncDuring = {
+					  seeguessesafter: function() {
+						console.log("loading seeguessesafter")
+						$(".guesswordslist").addClass("guessednotdone");
+						var gsrnum = gon.guessernum;
+						var twords = gon.targetwords;
+				  	var bword = gon.badword;
+				  	var hintword1 = gon.hintword1;
+				  	var hintword2 = gon.hintword2;
+				  	var hintword3 = gon.hintword3;
+				  	var hintnum1 = gon.hintnum1;
+				  	var hintnum2 = gon.hintnum2;
+				  	var hintnum3 = gon.hintnum3;
+
+				  	pl1words = [];
+				  	pl2words = [];
+				  	pl3words = [];
+				  	pl4words = [];
+				  	pl5words = [];
+				  	pl6words = [];
+
+				  	pl1words = $(".guesser1").attr("data-gsrwords").split(",");
+				  	pl2words = $(".guesser2").attr("data-gsrwords").split(",");
+				  	pl3words = $(".guesser3").attr("data-gsrwords").split(",");
+				  	pl4words = $(".guesser4").attr("data-gsrwords").split(",");
+				  	pl5words = $(".guesser5").attr("data-gsrwords").split(",");
+				  	pl6words = $(".guesser6").attr("data-gsrwords").split(",");
+
+				  	$(".neutralword").removeClass("neutralword");
+
+						function showplayerwords(playernum, wordvar) {
+							$(".finalguessesshow").removeClass("finalguessesshow")
+				  		$(".word").removeClass("guesser1show").removeClass("guesser2show").removeClass("guesser3show")
+				  		          .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
+				  		for (var i = 0; i < wordvar.length; i++) {
+				  			$('[data-guessword="' + wordvar[i] + '"]').addClass("guesser" + playernum + "show");
+				  		}
+				  	}
+
+				  	$(".guesser1").click(function() {
+				  		showplayerwords(1, pl1words);
+				  	});
+				  	$(".guesser2").click(function() {
+				  		showplayerwords(2, pl2words);
+				  	});
+				  	$(".guesser3").click(function() {
+				  		showplayerwords(3, pl3words);
+				  	});
+				  	$(".guesser4").click(function() {
+				  		showplayerwords(4, pl4words);
+				  	});
+				  	$(".guesser5").click(function() {
+				  		showplayerwords(5, pl5words);
+				  	});
+				  	$(".guesser6").click(function() {
+				  		showplayerwords(6, pl6words);
+				  	});
+				  	$(".guesser" + gsrnum).click();
+				  	}
+				  }
+					//GuessFunc.seeguessesafter();
+	
 }
 
 //$(document).ready(ready);

@@ -200,6 +200,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr1_h2words
       gon.wordsh3 = @game.gsr1_h3words
   		gon.guessstatus = @game.gsr1_status
+      @gsrstatus = @game.gsr1_status
       gon.spoiler = @game.gsr1_spoiler
       gon.guessernum = "1"
       gon.playerscore = @game.gsr1_score
@@ -213,6 +214,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr2_h2words
       gon.wordsh3 = @game.gsr2_h3words
   		gon.guessstatus = @game.gsr2_status
+      @gsrstatus = @game.gsr2_status
       gon.spoiler = @game.gsr2_spoiler
       gon.guessernum = "2"
       gon.playerscore = @game.gsr2_score
@@ -226,6 +228,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr3_h2words
       gon.wordsh3 = @game.gsr3_h3words
   		gon.guessstatus = @game.gsr3_status
+      @gsrstatus = @game.gsr3_status
       gon.spoiler = @game.gsr3_spoiler
       gon.guessernum = "3"
       gon.playerscore = @game.gsr3_score
@@ -239,6 +242,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr4_h2words
       gon.wordsh3 = @game.gsr4_h3words
       gon.guessstatus = @game.gsr4_status
+      @gsrstatus = @game.gsr4_status
       gon.spoiler = @game.gsr4_spoiler
       gon.guessernum = "4"
       gon.playerscore = @game.gsr4_score
@@ -252,6 +256,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr5_h2words
       gon.wordsh3 = @game.gsr5_h3words
       gon.guessstatus = @game.gsr5_status
+      @gsrstatus = @game.gsr5_status
       gon.spoiler = @game.gsr5_spoiler
       gon.guessernum = "5"
       gon.playerscore = @game.gsr5_score
@@ -265,6 +270,7 @@ class GamesController < ApplicationController
       gon.wordsh2 = @game.gsr6_h2words
       gon.wordsh3 = @game.gsr6_h3words
       gon.guessstatus = @game.gsr6_status
+      @gsrstatus = @game.gsr6_status
       gon.spoiler = @game.gsr6_spoiler
       gon.guessernum = "6"
       gon.playerscore = @game.gsr6_score

@@ -329,12 +329,19 @@ span.notifynumber {
   display: inline-block;
   width: 49%;
 }
-.underwayforgiver .guesserinfo {
+.underwayforgiver .guesserinfo, .playerplayed .guesserinfo {
   cursor: pointer;
 }
 .finalguessesshow {
   box-shadow: inset 0px 0px 5px 5px #00b8ff;
   opacity: 1 !important;
+}
+.guessednotdone .finalguessesshow {
+  box-shadow: none;
+  opacity: 1 !important;
+}
+.guessednotdone .word.neutralword {
+  color: black;
 }
 .hidden {
   display: none;
@@ -922,35 +929,39 @@ span.timeshow {
   background-color: #35e2d2;
 }
 .guesser1show {
-  box-shadow: #35e2d2 0 0 2px 4px inset;
+  box-shadow: #35e2d2 0 0 2px 4px inset !important;
 }
 .guesser2 {
   background-color: lightgreen;
 }
 .guesser2show {
-  box-shadow: lightgreen 0 0 2px 4px inset;
+  box-shadow: lightgreen 0 0 2px 4px inset !important;
 }
 .guesser3 {
   background-color: aqua;
 }
 .guesser3show {
-  box-shadow: aqua 0 0 2px 4px inset;
+  box-shadow: aqua 0 0 2px 4px inset !important;
 }
 .guesser4 {
   background-color: goldenrod;
 }
 .guesser4show {
-  box-shadow: goldenrod 0 0 2px 4px inset;
+  box-shadow: goldenrod 0 0 2px 4px inset !important;
 }
 .guesser5 {
   background-color: deepskyblue;
 }
 .guesser5show {
-  box-shadow: deepskyblue 0 0 2px 4px inset;
+  box-shadow: deepskyblue 0 0 2px 4px inset !important;
 }
 .guesser6 {
   background-color: #c7b6e8;
 }
 .guesser6show {
-  box-shadow: #c7b6e8 0 0 2px 4px inset;
+  box-shadow: #c7b6e8 0 0 2px 4px inset !important;
+}
+.allguesserinfo .guessednotdone {
+  opacity: 1 !important;
+  box-shadow: none;
 }
