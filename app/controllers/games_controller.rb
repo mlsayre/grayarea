@@ -146,25 +146,35 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-  	@allwords = File.new("config/wordlist").readlines.sample(15)
-  	@allwords.each do |w|
-    	w.gsub!("\n", "").upcase!
-		end
-		@correctwords = @allwords.sample(7)
-		@loseword = @correctwords[0]
-		@correctwords.slice!(0)
+    @posgames = Game.where(:giver_id => current_user.id).where(:gamestatus => "give")
+    if @posgames.count > 0
+      @game = @posgames.first
 
-		@game = Game.new
-		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
-			:loseword => @loseword, :giver_id => current_user.id)
-
-		respond_to do |format|
-      if @game.save
+      respond_to do |format|
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+      end
+    else
+    	@allwords = File.new("config/wordlist").readlines.sample(15)
+    	@allwords.each do |w|
+      	w.gsub!("\n", "").upcase!
+  		end
+  		@correctwords = @allwords.sample(7)
+  		@loseword = @correctwords[0]
+  		@correctwords.slice!(0)
+
+  		@game = Game.new
+  		@game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
+  			:loseword => @loseword, :giver_id => current_user.id)
+
+  		respond_to do |format|
+        if @game.save
+          format.html { redirect_to @game, notice: 'Game was successfully created.' }
+          format.json { render :show, status: :created, location: @game }
+        else
+          format.html { render :new }
+          format.json { render json: @game.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -291,8 +301,24 @@ class GamesController < ApplicationController
 			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num], 
       :hintword3 => params[:word3], :hintnum3 => params[:word3num])
     current_user.increment!(:lifetimegamesgiver, by = 1)
+    if current_user.giverdeletegamesleft > 0
+      current_user.decrement!(:giverdeletegamesleft, by = 1)
+    end
 
 		render body: nil
+  end
+
+  def givingdeletegame
+    @thisgame = Game.find(params[:game_id])
+    @thisgame.delete
+
+    current_user.update(:giverdeletegamesleft => 6)
+
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
+
+    flash[:notice] = 'Game was successfully deleted.'
   end
 
   def soundonoff

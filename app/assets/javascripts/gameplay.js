@@ -311,6 +311,39 @@ var ready = function() {
 		$(".pagecover").show();
 	}
 
+	$(".deletegame").click(function() {
+		$(".messagetitle").text("Delete game?")
+		$(".messageinfo").html("No good hints coming to mind? You may " +
+			"delete this game. Note you can only delete at most one out of every 7 games. Once you've created " +
+			"another 6 games, you'll be able to delete another unfinished game.");
+		$(".messageaction").html('<button class="button deleteunfinished">Delete the Game</button>' +
+			                       '<button class="button closemessagebox">Cancel</button>');
+		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		$(".deleteunfinished").click(function() {
+			givingdeletegame();
+			closemessagebox();
+		})
+		$(".closemessagebox").click(function() { closemessagebox(); });
+		$(".pagecover").click(function() { closemessagebox(); });
+		$(".messagebox").show();
+		$(".pagecover").show();
+	});
+
+	function givingdeletegame() {
+		$.ajax({
+      url: "/games/givingdeletegame",
+      type: "POST",
+      dataType:'json',
+      data: { 'game_id' : parseInt(gameid)}
+    })
+    .done(function() {
+    	location.href = '/main';
+    })
+    .fail(function() {
+    	connectionError();
+    })
+	}
+
 	function submithint1(hint, num) {
 		if (num === 1) {
 			var wordword = "word";

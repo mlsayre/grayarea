@@ -362,6 +362,33 @@ span.notifynumber {
 .button:hover {
   background-color: darkgreen;
 }
+button.deletegame, button.deletegameoff {
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    position: relative;
+}
+button.deletegame img, button.deletegameoff img {
+    width: 100%;
+}
+button.deletegameoff {
+    cursor: auto;
+    pointer-events: none;
+    background-color: rgba(0,100,0,.5);
+}
+button.deletegameoff img {
+    opacity: .5;
+}
+.deletenum {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  margin: 0 auto;
+  font-size: 30px;
+  color: floralwhite;
+  font-weight: bold;
+}
 .messagebox button.button {
   margin: 10px 4px 6px;
 }

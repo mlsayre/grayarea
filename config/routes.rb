@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post 'delgame'
       post 'addheart'
       post 'resetheartnotify'
+      post 'givingdeletegame'
     end
   end
 
