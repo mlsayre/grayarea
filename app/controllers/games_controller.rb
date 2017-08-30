@@ -157,7 +157,7 @@ class GamesController < ApplicationController
     else
     	@allwords = File.new("config/wordlist").readlines.sample(15)
     	@allwords.each do |w|
-      	w.include?("\n") ? w.gsub!("\n", "").upcase : w.upcase!
+      	w.include?("\n") ? w.gsub!("\n", "").upcase! : w.upcase!
   		end
   		@correctwords = @allwords.sample(7)
   		@loseword = @correctwords[0]
