@@ -7,33 +7,34 @@
 </div>
 
 <div class="mainmenubuttons">
-  Start New<br>
   <%= form_for(@game) do |f| %>
 
     <div class="actions">
       <% if current_user.lifetimegamesguesser > 2 %>
-        <%= f.button "Be the Hint Giver", :class => "button mainplay" %>
+        <%= f.button "Play as Giver", :class => "button mainplay" %>
       <% else %>
-        <%= f.button "Be the Hint Giver", :class => "button mainplay disabled" %>
+        <%= f.button "Play as Giver", :class => "button mainplay disabled" %>
       <% end %>
     </div>
     <br>
 
   <% end %>
 
-  <button class="button startguess">Be a Guesser</button><br>
+  <button class="button startguess">Play as Guesser</button><br>
 
+  <%= link_to(image_tag("/assets/Help-128.png", :alt => "How to Play", :title => "How to Play"), howtoplay_pages_path, :class => "menunav") %>
+  <%= link_to(image_tag("/assets/Graph-03-128.png", :alt => "See rankings", :title => "See rankings"), rankings_pages_path, :class => "menunav") %>
+  <!-- <%= link_to(image_tag("/assets/Trophy-128.png", :alt => "Feats of Stretch", :title => "Feats of Stretch"), feats_pages_path, :class => "menunav") %> -->
+  <a class="menunav featsnav" href="/pages/feats" alt="Feats of Stretch" title="Feats of Stretch">
+    <img src="/assets/Trophy-128.png">
+    <% if current_user.heartnotify > 0 %>
+      <span class="heartsnotify"><img src="/assets/Heart-48.png">
+        <span class="notifynumber"><%= current_user.heartnotify %></span>
+      </span>
+    <% end %>
+  </a>
   <% if current_user.lifetimegamesguesser < 3 %>
     <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
-  <% end %>
-
-  <%= link_to "How to play", howtoplay_pages_path %>
-  <%= link_to "See rankings", rankings_pages_path %><br>
-  <%= link_to "Feats of Stretch", feats_pages_path, :class => "featslink" %>
-  <% if current_user.heartnotify > 0 %>
-    <span class="heartsnotify"><img src="/assets/Heart-48.png">
-      <span class="notifynumber"><%= current_user.heartnotify %></span>
-    </span>
   <% end %>
 </div>
 

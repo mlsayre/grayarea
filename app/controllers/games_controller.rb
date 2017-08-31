@@ -364,8 +364,6 @@ class GamesController < ApplicationController
         format.json { render json: {} , status: 200 }
       end
     end
-
-    current_user.update(:giverdeletegamesleft => 3)
   end
 
   def soundonoff
