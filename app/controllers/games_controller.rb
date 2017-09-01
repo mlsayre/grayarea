@@ -104,10 +104,14 @@ class GamesController < ApplicationController
 
     if params[:guessstatus] == "over,over"
       current_user.increment!(:lifetimegamesguesser, by = 1)
+      News.create!(:newstype => 1, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id, :points => params[:gamescore])
     end
 
     if params[:guessstatus] == "over,over" && current_user.id == @thisgame.guesser_id6
       @thisgame.update(:gamestatus => "done")
+      News.create!(:newstype => 2, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id, :points => params[:gamescore])
     end
     
     render body: nil
@@ -120,17 +124,26 @@ class GamesController < ApplicationController
 
     if current_user.id == @thisgame.guesser_id1
       @thisgame.update(:gsr1_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr1_score
     elsif current_user.id == @thisgame.guesser_id2
       @thisgame.update(:gsr2_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr2_score
     elsif current_user.id == @thisgame.guesser_id3
       @thisgame.update(:gsr3_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr3_score
     elsif current_user.id == @thisgame.guesser_id4
       @thisgame.update(:gsr4_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr4_score
     elsif current_user.id == @thisgame.guesser_id5
       @thisgame.update(:gsr5_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr5_score
     elsif current_user.id == @thisgame.guesser_id6
       @thisgame.update(:gsr6_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr6_score
     end
+
+    News.create!(:newstype => 3, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id, :points => heartscore)
 
     respond_to do |format|
       format.json  { render json: {} , status: 200 }

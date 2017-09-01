@@ -33,6 +33,16 @@
       </span>
     <% end %>
   </a>
+  <a class="menunav feednav" href="/pages/feed" alt="See news feed" title="See news feed">
+    <img src="/assets/Newspaper-128.png">
+    <% feedunseen = News.where(:targetuser_id => current_user.id).where(:seen => 0) %>
+    <% if feedunseen.count > 0 %>
+      <span class="feednotify">
+        <span class="feednumber"><%= feedunseen.count %></span>
+      </span>
+    <% end %>
+  </a>
+
   <% if current_user.lifetimegamesguesser < 3 %>
     <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
   <% end %>
@@ -62,7 +72,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= link_to "About the Game (Aug 29, 2017)", about_pages_path, :style => "color: red;" %><br>
+<%= link_to "About the Game (Sep 1, 2017)", about_pages_path, :style => "color: red;" %><br>
 <%= link_to "Edit your information", edit_user_registration_path %><br>
 <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
 

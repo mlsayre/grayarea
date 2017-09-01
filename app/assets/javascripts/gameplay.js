@@ -674,9 +674,9 @@ var ready = function() {
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
-		  		if (playerscore < 50) {
-		  			$(".giveheart").remove();
-		  		}
+		  		// if (playerscore < 50) {
+		  		// 	$(".giveheart").remove();
+		  		// }
 		  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
 		  		for (var i = 0; i < twords.length; i++) {
 		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");

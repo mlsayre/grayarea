@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829204608) do
+ActiveRecord::Schema.define(version: 20170901193142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,37 @@ ActiveRecord::Schema.define(version: 20170829204608) do
     t.integer "gsr4_heart", default: 0
     t.integer "gsr5_heart", default: 0
     t.integer "gsr6_heart", default: 0
+    t.index ["gamestatus"], name: "index_games_on_gamestatus"
+    t.index ["giver_id"], name: "index_games_on_giver_id"
+    t.index ["gsr1_score"], name: "index_games_on_gsr1_score"
+    t.index ["gsr1_status"], name: "index_games_on_gsr1_status"
+    t.index ["gsr2_score"], name: "index_games_on_gsr2_score"
+    t.index ["gsr2_status"], name: "index_games_on_gsr2_status"
+    t.index ["gsr3_score"], name: "index_games_on_gsr3_score"
+    t.index ["gsr3_status"], name: "index_games_on_gsr3_status"
+    t.index ["gsr4_score"], name: "index_games_on_gsr4_score"
+    t.index ["gsr4_status"], name: "index_games_on_gsr4_status"
+    t.index ["gsr5_score"], name: "index_games_on_gsr5_score"
+    t.index ["gsr5_status"], name: "index_games_on_gsr5_status"
+    t.index ["gsr6_score"], name: "index_games_on_gsr6_score"
+    t.index ["gsr6_status"], name: "index_games_on_gsr6_status"
+    t.index ["guesser_id1"], name: "index_games_on_guesser_id1"
+    t.index ["guesser_id2"], name: "index_games_on_guesser_id2"
+    t.index ["guesser_id3"], name: "index_games_on_guesser_id3"
+    t.index ["guesser_id4"], name: "index_games_on_guesser_id4"
+    t.index ["guesser_id5"], name: "index_games_on_guesser_id5"
+    t.index ["guesser_id6"], name: "index_games_on_guesser_id6"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.integer "newstype", default: 0
+    t.integer "targetuser_id", default: 0
+    t.integer "giveruser_id", default: 0
+    t.integer "targetgame_id", default: 0
+    t.integer "seen", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "points", default: 0
   end
 
   create_table "users", force: :cascade do |t|
