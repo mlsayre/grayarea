@@ -138,6 +138,15 @@ var ready = function() {
 		}
 	}
 
+	(function() {
+		console.log("hello?")
+		$(".allwords li").each(function() {
+			if ($(this).find("span").text().length > 11) {
+				$(this).addClass("longword");
+			}
+		})
+	})();
+
 	var gameid = $(".gametop").data("gameid");
 	var hint1 = "";
 	var hint1num = 0;
