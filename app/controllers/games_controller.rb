@@ -102,17 +102,18 @@ class GamesController < ApplicationController
         :gsr6_h2words => params[:hint2words], :gsr6_h3words => params[:hint3words])
     end
 
-    if params[:guessstatus] == "over,over"
+    if params[:guessstatus] == "over,over" && current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gamestatus => "done")
+      current_user.increment!(:lifetimegamesguesser, by = 1)
+      News.create!(:newstype => 2, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id, :points => params[:gamescore])
+    elsif params[:guessstatus] == "over,over"
       current_user.increment!(:lifetimegamesguesser, by = 1)
       News.create!(:newstype => 1, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id, :points => params[:gamescore])
     end
 
-    if params[:guessstatus] == "over,over" && current_user.id == @thisgame.guesser_id6
-      @thisgame.update(:gamestatus => "done")
-      News.create!(:newstype => 2, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
-        :targetgame_id => @thisgame.id, :points => params[:gamescore])
-    end
+    
     
     render body: nil
   end

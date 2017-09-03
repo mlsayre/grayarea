@@ -141,7 +141,11 @@ var ready = function() {
 	(function() {
 		console.log("hello?")
 		$(".allwords li").each(function() {
-			if ($(this).find("span").text().length > 11) {
+			if ($(this).find("span").text().indexOf(" ") !== -1) {
+				$(this).addClass("spaceword");
+			} else if ($(this).find("span").text().length === 11) {
+				$(this).addClass("spaceword");
+			} else if ($(this).find("span").text().length > 11) {
 				$(this).addClass("longword");
 			}
 		})
@@ -583,6 +587,12 @@ var ready = function() {
 	  		currenthint = hintword2;
 	  		currenthintnum = hintnum2;
 	  	} else if (guessstatus.split(",")[0] === "hint3") {
+	  		currenthint = hintword3;
+	  		currenthintnum = hintnum3;
+	  	} else if (guessstatus == "bonus,hint2") {
+	  		currenthint = hintword2;
+	  		currenthintnum = hintnum2;
+	  	} else if (guessstatus == "bonus,hint3") {
 	  		currenthint = hintword3;
 	  		currenthintnum = hintnum3;
 	  	}
