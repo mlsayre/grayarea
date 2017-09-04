@@ -59,6 +59,11 @@ a.button {
   display: inline-block;
   margin: 0 4px;
 }
+.button.mainplay, .button.startguess {
+  border: 3px outset lightgrey;
+  border-radius: 12px;
+  text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
+}
 .mainmenubuttons button, .mainmenubuttons input {
   width: 140px;
 }
