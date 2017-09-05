@@ -427,49 +427,55 @@ class GamesController < ApplicationController
     @thisgame = Game.find(params[:game_id])
 
     if News.where(:targetuser_id => @thisgame.giver_id).where(:targetgame_id => @thisgame.id)
-      .where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:newstype => 4).where(:seen => 0).count == 0 && @thisgame.giver_id != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.giver_id).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id1 != 0 && News.where(:targetuser_id => @thisgame.guesser_id1)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id1 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id1, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id1).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id2 != 0 && News.where(:targetuser_id => @thisgame.guesser_id2)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id2 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id2, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id2).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id3 != 0 && News.where(:targetuser_id => @thisgame.guesser_id3)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id3 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id3, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id3).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id4 != 0 && News.where(:targetuser_id => @thisgame.guesser_id4)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id4 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id4, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id4).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id5 != 0 && News.where(:targetuser_id => @thisgame.guesser_id5)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id5 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id5, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id5).all
       usernews.order('created_at DESC').offset(20).destroy_all
     end
     if @thisgame.guesser_id6 != 0 && News.where(:targetuser_id => @thisgame.guesser_id6)
-      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0 && 
+      @thisgame.guesser_id6 != current_user.id
       News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id6, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id)
       usernews = News.where(:targetuser_id => @thisgame.guesser_id6).all
