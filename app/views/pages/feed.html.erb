@@ -16,6 +16,8 @@
     		  <%= User.find(item.giveruser_id).username %> was the sixth player to play <a class="newslink" href="/games/<%= item.targetgame_id %>">your game</a>, and they scored <%= item.points %> points. That game is now over!
     		<% elsif item.newstype == 3 %>
     			You received a <img class="newsheart" src="/assets/Heart-48.png"> from <%= User.find(item.giveruser_id).username %> for <a class="newslink" href="/games/<%= item.targetgame_id %>">this game</a> after they scored <%= item.points %> points.
+    			<% elsif item.newstype == 4 %>
+    			<%= User.find(item.giveruser_id).username %> has chatted in <a class="newslink" href="/games/<%= item.targetgame_id %>">a game</a> you are in.
     	  <% end %>
     	</span>
     </li>

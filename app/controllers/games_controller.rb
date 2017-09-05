@@ -107,10 +107,14 @@ class GamesController < ApplicationController
       current_user.increment!(:lifetimegamesguesser, by = 1)
       News.create!(:newstype => 2, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id, :points => params[:gamescore])
+      usernews = News.where(:targetuser_id => @thisgame.giver_id).all
+      usernews.order('created_at DESC').offset(20).destroy_all
     elsif params[:guessstatus] == "over,over"
       current_user.increment!(:lifetimegamesguesser, by = 1)
       News.create!(:newstype => 1, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id, :points => params[:gamescore])
+      usernews = News.where(:targetuser_id => @thisgame.giver_id).all
+      usernews.order('created_at DESC').offset(20).destroy_all
     end
 
     
@@ -145,6 +149,8 @@ class GamesController < ApplicationController
 
     News.create!(:newstype => 3, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
         :targetgame_id => @thisgame.id, :points => heartscore)
+    usernews = News.where(:targetuser_id => @thisgame.giver_id).all
+    usernews.order('created_at DESC').offset(20).destroy_all
 
     respond_to do |format|
       format.json  { render json: {} , status: 200 }
@@ -415,6 +421,59 @@ class GamesController < ApplicationController
     elsif current_user.id == @thegame.guesser_id6
       @thegame.increment!(:giver_chats, by = 1).increment!(:gsr1_chats, by = 1).increment!(:gsr2_chats, by = 1)
         .increment!(:gsr3_chats, by = 1).increment!(:gsr4_chats, by = 1).increment!(:gsr5_chats, by = 1)
+    end
+
+    # notify players of chat
+    @thisgame = Game.find(params[:game_id])
+
+    if News.where(:targetuser_id => @thisgame.giver_id).where(:targetgame_id => @thisgame.id)
+      .where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.giver_id).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id1 != 0 && News.where(:targetuser_id => @thisgame.guesser_id1)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id1, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id1).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id2 != 0 && News.where(:targetuser_id => @thisgame.guesser_id2)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id2, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id2).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id3 != 0 && News.where(:targetuser_id => @thisgame.guesser_id3)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id3, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id3).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id4 != 0 && News.where(:targetuser_id => @thisgame.guesser_id4)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id4, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id4).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id5 != 0 && News.where(:targetuser_id => @thisgame.guesser_id5)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id5, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id5).all
+      usernews.order('created_at DESC').offset(20).destroy_all
+    end
+    if @thisgame.guesser_id6 != 0 && News.where(:targetuser_id => @thisgame.guesser_id6)
+      .where(:targetgame_id => @thisgame.id).where(:newstype => 4).where(:seen => 0).count == 0
+      News.create!(:newstype => 4, :targetuser_id => @thisgame.guesser_id6, :giveruser_id => current_user.id,
+        :targetgame_id => @thisgame.id)
+      usernews = News.where(:targetuser_id => @thisgame.guesser_id6).all
+      usernews.order('created_at DESC').offset(20).destroy_all
     end
     
     render body: nil
