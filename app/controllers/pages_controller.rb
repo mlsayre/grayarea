@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
 	def rankings
-		Game.giverrankings(current_user.id, 1) != -1 ? @giveravg = Game.giverrankings(current_user.id, 1) : @giveravg = "na"
-		Game.guesserrankings(current_user.id, 1) != -1 ? @guesseravg= Game.guesserrankings(current_user.id, 1) : @guesseravg = "na"
-		Game.combinedrankings(current_user.id, 1) != -1 ? @combinedavg = Game.combinedrankings(current_user.id, 1) : @combinedavg = "na"
+		userstats = Game.combinedrankings(current_user.id,1,1,1)
+		userstats[0] != -1 ? @giveravg = userstats[0] : @giveravg = "na"
+		userstats[1] != -1 ? @guesseravg = userstats[1] : @guesseravg = "na"
+		userstats[2] != -1 ? @combinedavg = userstats[2] : @combinedavg = "na"
 
+		@alluserstats = Game.allcombinedrankings(5,5,5)
 	end
 
 	def allfeedseen

@@ -4,33 +4,33 @@
 	<div class="centered">Your Giver average: <%= @giveravg %></div>
 	<div class="centered">Your Guesser average: <%= @guesseravg %></div>
 	
-	<div class="centered" style="font-size:13px">(each out of 200 possible points)</div>
+	<!-- <div class="centered" style="font-size:13px">(each out of 200 possible points)</div> -->
 </div>
 
 <div class="lifetimerankings">
 	<div style="margin-bottom: 8px; text-align: center;">World Top 30 Players<br><span style="font-size: 80%; padding-top:15px;"><u>(Combined Average Score - min 5 games)</u></span></div>
 	<ul>
-	  <% User.all.sort {|a,b| Game.combinedrankings(b.id, 5) <=> Game.combinedrankings(a.id, 5)}.first(30).each do |user| %>
-	  	  <% if Game.combinedrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.combinedrankings(user.id, 5) %></span></li>
+	  <% User.all.sort {|a,b| @alluserstats[b.id][2] <=> @alluserstats[a.id][2]}.first(30).each do |user| %>
+	  	  <% if @alluserstats[user.id][2] != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][2] %></span></li>
 	    	<% end %>
 	  <% end %>
 	</ul>
   <br><br>
   <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Giver Average Score - min 5 games)</u></span>
   <ul>
-	  <% User.all.sort {|a,b| Game.giverrankings(b.id, 5) <=> Game.giverrankings(a.id, 5)}.first(30).each do |user| %>
-	  	  <% if Game.giverrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.giverrankings(user.id, 5) %></span></li>
+	  <% User.all.sort {|a,b| @alluserstats[b.id][0] <=> @alluserstats[a.id][0]}.first(30).each do |user| %>
+	  	  <% if @alluserstats[user.id][0] != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][0] %></span></li>
 	    	<% end %>
 	  <% end %>
 	</ul>
   <br><br>
   <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Guesser Average Score - min 5 games)</u></span>
   <ul>
-	  <% User.all.sort {|a,b| Game.guesserrankings(b.id, 5) <=> Game.guesserrankings(a.id, 5)}.first(30).each do |user| %>
-	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.guesserrankings(user.id, 5) %></span></li>
+	  <% User.all.sort {|a,b| @alluserstats[b.id][1] <=> @alluserstats[a.id][1]}.first(30).each do |user| %>
+	  	  <% if @alluserstats[user.id][1] != -1 %>
+	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][1] %></span></li>
 	    	<% end %>
 	  <% end %>
 	</ul>
@@ -52,34 +52,6 @@
 	    	<% end %>
 	  <% end %>
 	</ul>
-	
-	<!-- <br><br>
-  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Total)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| (b.lifetimegamesgiver + b.lifetimegamesguesser) <=> (a.lifetimegamesgiver + a.lifetimegamesguesser)}.first(30).each do |user| %>
-	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesgiver + user.lifetimegamesguesser) %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-	<br><br>
-  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Giver)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| (b.lifetimegamesgiver) <=> (a.lifetimegamesgiver)}.first(30).each do |user| %>
-	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesgiver) %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-	<br><br>
-  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Most Games Played - Guesser)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| (b.lifetimegamesguesser) <=> (a.lifetimegamesguesser)}.first(30).each do |user| %>
-	  	  <% if Game.guesserrankings(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= (user.lifetimegamesguesser) %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul> -->
 
 	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Cheat Score (your games receiving 3+ cheat reports))</u></span>
 	<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span><br><br>
