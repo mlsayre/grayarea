@@ -205,8 +205,21 @@ class GamesController < ApplicationController
   	@allthewords = @game.allwords
   	@badword = @game.loseword
   	@targetwords = @game.correctwords
-  	gon.badword = @badword
-  	gon.targetwords = @targetwords
+    badindex = @allthewords.index(@badword)
+    @badarray = [7,3,12,8,2,4,5,8,11,10,1,2,6,3,5,9,2]
+    @badarray.insert(8, badindex)
+    @targetarray = [4,8,9,11,6,5,10,7,12,6,2,1,9,5,8,3,11,4,10,6,1,7]
+    temptarg = []
+    @targetwords.each do |word|
+      ind = @allthewords.index(word)
+      temptarg.push(ind)
+    end
+    temptarg.each do |targ|
+      @targetarray.insert(12, targ)
+    end
+    gon.allwords = @allthewords
+  	gon.badword = @badarray
+  	gon.targetwords = @targetarray
   	gon.hintword1 = @game.hintword1
   	gon.hintword2 = @game.hintword2
     gon.hintword3 = @game.hintword3

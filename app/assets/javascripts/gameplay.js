@@ -566,8 +566,14 @@ var ready = function() {
 
   if ($(".allwords").hasClass("guesswordslist")) {
   	var GUESS = (function() {
-	  	var twords = gon.targetwords;
-	  	var bword = gon.badword;
+  		var awords = gon.allwords;
+	  	var twordstemp = gon.targetwords;
+	  	var twords = [];
+	  	for (var i = 12; i < 18; i++) {
+	  		twords.push(awords[twordstemp[i]])
+	  	}
+	  	var bwordtemp = gon.badword;
+	  	var bword = awords[bwordtemp[8]];
 	  	var hintword1 = gon.hintword1;
 	  	var hintword2 = gon.hintword2;
 	  	var hintword3 = gon.hintword3;
@@ -1007,8 +1013,14 @@ var ready = function() {
 	}
 
 	function seeguesses() {
-		var twords = gon.targetwords;
-  	var bword = gon.badword;
+		var awords = gon.allwords;
+  	var twordstemp = gon.targetwords;
+  	var twords = [];
+  	for (var i = 12; i < 18; i++) {
+  		twords.push(awords[twordstemp[i]])
+  	}
+  	var bwordtemp = gon.badword;
+  	var bword = awords[bwordtemp[8]];
   	var hintword1 = gon.hintword1;
   	var hintword2 = gon.hintword2;
   	var hintword3 = gon.hintword3;
@@ -1068,8 +1080,14 @@ var ready = function() {
 						console.log("loading seeguessesafter")
 						$(".guesswordslist").addClass("guessednotdone");
 						var gsrnum = gon.guessernum;
-						var twords = gon.targetwords;
-				  	var bword = gon.badword;
+						var awords = gon.allwords;
+				  	var twordstemp = gon.targetwords;
+				  	var twords = [];
+				  	for (var i = 12; i < 18; i++) {
+				  		twords.push(awords[twordstemp[i]])
+				  	}
+				  	var bwordtemp = gon.badword;
+				  	var bword = awords[bwordtemp[8]];
 				  	var hintword1 = gon.hintword1;
 				  	var hintword2 = gon.hintword2;
 				  	var hintword3 = gon.hintword3;
