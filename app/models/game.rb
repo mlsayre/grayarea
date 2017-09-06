@@ -1,52 +1,4 @@
 class Game < ApplicationRecord
-	# def gamerank(gameid, userid)
- #    @numberofscores = Gamedata.where(:game_id => gameid).all.count
- #    @playerrank = Gamedata.where(:game_id => gameid).order('score DESC, updated_at ASC').collect(&:user_id)
- #                          .index(userid) + 1
- #    "#{@playerrank.ordinalize} of #{@numberofscores}"
- #  end
-
-  # def self.giverrankings(userid, min)
-  # 	allusergivergames = Game.where(:giver_id => userid).all
-  # 	allscores1 = allusergivergames.where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
-  # 	allscores2 = allusergivergames.where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
-  # 	allscores3 = allusergivergames.where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
-  # 	allscores4 = allusergivergames.where(:gsr4_status => "over,over").collect(&:gsr4_score) || []
-  # 	allscores5 = allusergivergames.where(:gsr5_status => "over,over").collect(&:gsr5_score) || []
-  # 	allscores6 = allusergivergames.where(:gsr6_status => "over,over").collect(&:gsr6_score) || []
- 
-  # 	allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
-  # 	if allscores.length < min
-  # 		average = -1
-  # 	else
-		# 	average = (allscores.sum.to_f / allscores.length.to_f).round(2)
-		# end
-  # 	return average
-  # end
-
-  # def self.guesserrankings(userid, min)
-  # 	alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-  # 		userid, userid, userid, userid, userid, userid).all
-  # 	allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
-  # 	  .collect(&:gsr1_score)
-  # 	allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
-  # 	  .collect(&:gsr2_score)
-  # 	allscores3 = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid)
-  # 	  .collect(&:gsr3_score)  
-  # 	allscores4 = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid)
-  # 	  .collect(&:gsr4_score)
-  # 	allscores5 = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid)
-  # 	  .collect(&:gsr5_score)
-  # 	allscores6 = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid)
-  # 	  .collect(&:gsr6_score)   
-  # 	allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
-  # 	if allscores.length < min
-  # 		average = -1
-  # 	else
-		# 	average = (allscores.sum.to_f / allscores.length.to_f).round(2)
-		# end
-  # 	return average
-  # end
 
   def self.combinedrankings(userid, givermin, guessermin, combinedmin)
   	alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
@@ -186,5 +138,14 @@ class Game < ApplicationRecord
     alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
       userid, userid, userid, userid, userid, userid).all
     return alluserguessergames.length
+  end
+
+  def self.averageheartspergame(userid, min)
+    if User.find(userid).lifetimegamesgiver < min
+      avg = -1
+    else
+      avg = (User.find(userid).lifetimehearts.to_f  / User.find(userid).lifetimegamesgiver.to_f).round(2)
+    end
+    return avg
   end
 end
