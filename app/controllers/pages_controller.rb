@@ -7,9 +7,9 @@ class PagesController < ApplicationController
 
 		@alluserstats = Game.allcombinedrankings(5,5,5)
 
-		@usersgivers = User.select {|user| Game.usersgiversgamecount(current_user.id, user.id) > 4 }
+		@usersgivers = Game.usersgiversstats(current_user.id)
 
-		@usersguessers = User.select {|user| Game.usersguessersgamecount(current_user.id, user.id) > 4 }
+		@usersguessers = Game.usersguessersstats(current_user.id)
 	end
 
 	def allfeedseen
