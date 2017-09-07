@@ -45,18 +45,18 @@
 	  <% end %>
 	</ul>
 	<br><br>
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top 3 Hint Givers - min 5 games)</u></span>
+	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top Hint Givers - min 5 games)</u></span>
   <ul>
-	  <% User.all.sort {|a,b| Game.usergiverrankings(current_user.id, b.id, 5) <=> Game.usergiverrankings(current_user.id, a.id, 5)}.first(3).each do |user| %>
+	  <% @usersgivers.sort {|a,b| Game.usergiverrankings(current_user.id, b.id, 5) <=> Game.usergiverrankings(current_user.id, a.id, 5)}.first(30).each do |user| %>
 	  	  <% if Game.usergiverrankings(current_user.id, user.id, 5) != -1 %>
 	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.usergiverrankings(current_user.id, user.id, 5) %></span></li>
 	    	<% end %>
 	  <% end %>
 	</ul>
 	<br><br>
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top 3 Guessers - min 5 games)</u></span>
+	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top Guessers - min 5 games)</u></span>
   <ul>
-	  <% User.all.sort {|a,b| Game.userguesserrankings(current_user.id, b.id, 5) <=> Game.userguesserrankings(current_user.id, a.id, 5)}.first(3).each do |user| %>
+	  <% @usersguessers.sort {|a,b| Game.userguesserrankings(current_user.id, b.id, 5) <=> Game.userguesserrankings(current_user.id, a.id, 5)}.first(30).each do |user| %>
 	  	  <% if Game.userguesserrankings(current_user.id, user.id, 5) != -1 %>
 	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.userguesserrankings(current_user.id, user.id, 5) %></span></li>
 	    	<% end %>

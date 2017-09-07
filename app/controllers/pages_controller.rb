@@ -6,6 +6,10 @@ class PagesController < ApplicationController
 		userstats[2] != -1 ? @combinedavg = userstats[2] : @combinedavg = "na"
 
 		@alluserstats = Game.allcombinedrankings(5,5,5)
+
+		@usersgivers = User.select {|user| Game.usersgiversgamecount(current_user.id, user.id) > 4 }
+
+		@usersguessers = User.select {|user| Game.usersguessersgamecount(current_user.id, user.id) > 4 }
 	end
 
 	def allfeedseen
