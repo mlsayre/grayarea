@@ -61,15 +61,15 @@ class Game < ApplicationRecord
 
   def self.usersguessersgamecount(userid, guesserid)
     allusergivergames = Game.where(:giver_id => userid).all
-    allscores1 = allusergivergames.where(:guesser_id1 => guesserid).where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
-    allscores2 = allusergivergames.where(:guesser_id2 => guesserid).where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
-    allscores3 = allusergivergames.where(:guesser_id3 => guesserid).where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
-    allscores4 = allusergivergames.where(:guesser_id4 => guesserid).where(:gsr4_status => "over,over").collect(&:gsr4_score) || []
-    allscores5 = allusergivergames.where(:guesser_id5 => guesserid).where(:gsr5_status => "over,over").collect(&:gsr5_score) || []
-    allscores6 = allusergivergames.where(:guesser_id6 => guesserid).where(:gsr6_status => "over,over").collect(&:gsr6_score) || []
+    allscores1 = allusergivergames.where(:guesser_id1 => guesserid).where(:gsr1_status => "over,over").count
+    allscores2 = allusergivergames.where(:guesser_id2 => guesserid).where(:gsr2_status => "over,over").count
+    allscores3 = allusergivergames.where(:guesser_id3 => guesserid).where(:gsr3_status => "over,over").count
+    allscores4 = allusergivergames.where(:guesser_id4 => guesserid).where(:gsr4_status => "over,over").count
+    allscores5 = allusergivergames.where(:guesser_id5 => guesserid).where(:gsr5_status => "over,over").count
+    allscores6 = allusergivergames.where(:guesser_id6 => guesserid).where(:gsr6_status => "over,over").count
  
     allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
-    return allscores.length
+    return allscores
   end
 
   def self.userguesserrankings(userid, guesserid, min)
@@ -93,20 +93,14 @@ class Game < ApplicationRecord
   def self.usersgiversgamecount(userid, giverid)
     alluserguessergames = Game.where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
       userid, userid, userid, userid, userid, userid).all
-    allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
-      .collect(&:gsr1_score)
-    allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
-      .collect(&:gsr2_score)
-    allscores3 = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid)
-      .collect(&:gsr3_score)  
-    allscores4 = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid)
-      .collect(&:gsr4_score)
-    allscores5 = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid)
-      .collect(&:gsr5_score)
-    allscores6 = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid)
-      .collect(&:gsr6_score)   
+    allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid).count
+    allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid).count
+    allscores3 = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid).count
+    allscores4 = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid).count
+    allscores5 = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid).count
+    allscores6 = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid).count  
     allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
-    return allscores.length
+    return allscores
   end
 
   def self.usergiverrankings(userid, giverid, min)
