@@ -31,10 +31,12 @@ $(".rtalltime").click(function() {
 	$(".rankalltimecontent").removeClass("rankhidden");
 })
 $(window).on('turbolinks:load', function() {
-	var wrapper = $('.rankalltimecontent');
-	wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
-	   wrapper.children('.rankalltimecontent').unwrap();
-	   
-	});
+	setTimeout(function() {
+		var wrapper = $('.rankalltimecontent');
+		wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
+		   wrapper.children('.rankalltimecontent').unwrap();
+
+		});
+	}, 250)
 })
 </script>
