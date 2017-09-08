@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get 'about' => 'pages#about'
       get 'feats' => 'pages#feats'
       get 'feed' => 'pages#feed'
+      get 'alltimeranks' => 'pages#alltimeranks'
       post 'allfeedseen'
     end
   end

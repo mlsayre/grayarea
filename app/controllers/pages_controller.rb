@@ -1,15 +1,29 @@
 class PagesController < ApplicationController
 	def rankings
-		userstats = Game.combinedrankings(current_user.id,1,1,1)
+		#just weekly
+		userstats = Game.combinedrankings(current_user.id,1,1,1,true)
+		userstats[0] != -1 ? @giveravgweek = userstats[0] : @giveravgweek = "na"
+		userstats[1] != -1 ? @guesseravgweek = userstats[1] : @guesseravgweek = "na"
+		userstats[2] != -1 ? @combinedavgweek = userstats[2] : @combinedavgweek = "na"
+
+		@alluserstatsweek = Game.allcombinedrankings(5,5,5,true)
+
+		@usersgiversweek = Game.usersgiversstats(current_user.id,true)
+
+		@usersguessersweek = Game.usersguessersstats(current_user.id,true)
+	end
+
+	def alltimeranks
+		userstats = Game.combinedrankings(current_user.id,1,1,1,false)
 		userstats[0] != -1 ? @giveravg = userstats[0] : @giveravg = "na"
 		userstats[1] != -1 ? @guesseravg = userstats[1] : @guesseravg = "na"
 		userstats[2] != -1 ? @combinedavg = userstats[2] : @combinedavg = "na"
 
-		@alluserstats = Game.allcombinedrankings(5,5,5)
+		@alluserstats = Game.allcombinedrankings(5,5,5,false)
 
-		@usersgivers = Game.usersgiversstats(current_user.id)
+		@usersgivers = Game.usersgiversstats(current_user.id,false)
 
-		@usersguessers = Game.usersguessersstats(current_user.id)
+		@usersguessers = Game.usersguessersstats(current_user.id,false)
 	end
 
 	def allfeedseen

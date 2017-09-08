@@ -1,8 +1,14 @@
 class Game < ApplicationRecord
 
-  def self.combinedrankings(userid, givermin, guessermin, combinedmin)
-  	alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-  		userid, userid, userid, userid, userid, userid).all
+  def self.combinedrankings(userid, givermin, guessermin, combinedmin, era)
+    if era == true
+      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
+        .where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+        userid, userid, userid, userid, userid, userid).all
+    else
+  	  alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+  		  userid, userid, userid, userid, userid, userid).all
+    end
   	allscores1a = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
   	  .collect(&:gsr1_score)
   	allscores2a = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
@@ -16,7 +22,11 @@ class Game < ApplicationRecord
   	allscores6a = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid)
   	  .collect(&:gsr6_score)     
 
-  	allusergivergames = Game.where(:giver_id => userid).all
+    if era == true
+  	  allusergivergames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid).all
+    else
+      allusergivergames = Game.where(:giver_id => userid).all
+    end
   	allscores1b = allusergivergames.where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
   	allscores2b = allusergivergames.where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
   	allscores3b = allusergivergames.where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
@@ -50,26 +60,44 @@ class Game < ApplicationRecord
   	return [averagegiver, averageguesser, average]
   end
 
-  def self.allcombinedrankings(givermin,guessermin,combinedmin)
+  def self.allcombinedrankings(givermin,guessermin,combinedmin,era)
     alluserstats = {}
-    User.all.each do |user|
-      userstats = Game.combinedrankings(user.id,5,5,5)
-      alluserstats[user.id] = userstats
+    if era == true
+      User.all.each do |user|
+        userstats = Game.combinedrankings(user.id,5,5,5,true)
+        alluserstats[user.id] = userstats
+      end
+    else
+      User.all.each do |user|
+        userstats = Game.combinedrankings(user.id,5,5,5,false)
+        alluserstats[user.id] = userstats
+      end
     end
     return alluserstats
   end
 
-  def self.usersguessersstats(playerid)
+  def self.usersguessersstats(playerid,era)
     userguessstats = {}
-    User.all.each do |user|
-      userstats = Game.userguesserrankings(playerid, user.id, 5)
-      userguessstats[user.id] = userstats
+    if era == true
+      User.all.each do |user|
+        userstats = Game.userguesserrankings(playerid, user.id, 5, true)
+        userguessstats[user.id] = userstats
+      end
+    else
+      User.all.each do |user|
+        userstats = Game.userguesserrankings(playerid, user.id, 5,false)
+        userguessstats[user.id] = userstats
+      end
     end
     return userguessstats
   end
 
-  def self.userguesserrankings(userid, guesserid, min)
-    allusergivergames = Game.where(:giver_id => userid).all
+  def self.userguesserrankings(userid, guesserid, min, era)
+    if era == true
+      allusergivergames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid).all
+    else
+      allusergivergames = Game.where(:giver_id => userid).all
+    end
     allscores1 = allusergivergames.where(:guesser_id1 => guesserid).where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
     allscores2 = allusergivergames.where(:guesser_id2 => guesserid).where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
     allscores3 = allusergivergames.where(:guesser_id3 => guesserid).where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
@@ -86,18 +114,31 @@ class Game < ApplicationRecord
     return average
   end
 
-  def self.usersgiversstats(playerid)
+  def self.usersgiversstats(playerid,era)
     userguessstats = {}
-    User.all.each do |user|
-      userstats = Game.usergiverrankings(playerid, user.id, 5)
-      userguessstats[user.id] = userstats
+    if era == true
+      User.all.each do |user|
+        userstats = Game.usergiverrankings(playerid, user.id, 5, true)
+        userguessstats[user.id] = userstats
+      end
+    else
+      User.all.each do |user|
+        userstats = Game.usergiverrankings(playerid, user.id, 5, false)
+        userguessstats[user.id] = userstats
+      end
     end
     return userguessstats
   end
 
-  def self.usergiverrankings(userid, giverid, min)
-    alluserguessergames = Game.where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-      userid, userid, userid, userid, userid, userid).all
+  def self.usergiverrankings(userid, giverid, min, era)
+    if era == true
+      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
+        .where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+        userid, userid, userid, userid, userid, userid).all
+    else
+      alluserguessergames = Game.where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+        userid, userid, userid, userid, userid, userid).all
+    end
     allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
       .collect(&:gsr1_score)
     allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
@@ -147,22 +188,47 @@ class Game < ApplicationRecord
     return chats
   end
 
-  def self.playedgamesgiver(userid)
-    allusergivergames = Game.where(:giver_id => userid).all
+  def self.playedgamesgiver(userid, era)
+    if era == true
+      allusergivergames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid).all
+    else
+      allusergivergames = Game.where(:giver_id => userid).all
+    end
     return allusergivergames.length
   end
 
-  def self.playedgamesguesser(userid)
-    alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-      userid, userid, userid, userid, userid, userid).all
+  def self.playedgamesguesser(userid, era)
+    if era == true
+      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
+        .where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+        userid, userid, userid, userid, userid, userid).all
+    else
+      alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+        userid, userid, userid, userid, userid, userid).all
+    end
     return alluserguessergames.length
   end
 
-  def self.averageheartspergame(userid, min)
-    if User.find(userid).lifetimegamesgiver < min
-      avg = -1
+  def self.averageheartspergame(userid, min, era)
+    if era == true
+      availgames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid)
+      totalhearts = 0
+      availgames.each do |game|
+        gmhearts = game.gsr1_heart + game.gsr2_heart + game.gsr3_heart + game.gsr4_heart + 
+          game.gsr5_heart + game.gsr6_heart
+        totalhearts = totalhearts + gmhearts
+      end
+      if availgames.count < min 
+        avg = -1
+      else
+        avg = (totalhearts.to_f / availgames.count.to_f).round(2)
+      end
     else
-      avg = (User.find(userid).lifetimehearts.to_f  / User.find(userid).lifetimegamesgiver.to_f).round(2)
+      if User.find(userid).lifetimegamesgiver < min
+        avg = -1
+      else
+        avg = (User.find(userid).lifetimehearts.to_f  / User.find(userid).lifetimegamesgiver.to_f).round(2)
+      end
     end
     return avg
   end

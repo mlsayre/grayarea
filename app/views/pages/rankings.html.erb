@@ -1,77 +1,39 @@
 <div class="gametop">Rankings</div>
-<div class="lifetimerankings">
-	<div class="centered" style="font-size: 18px; color: darkgreen; margin-bottom: 4px;">Your Combined average: <%= @combinedavg %></div>
-	<div class="centered">Your Giver average: <%= @giveravg %></div>
-	<div class="centered">Your Guesser average: <%= @guesseravg %></div>
-	
-	<!-- <div class="centered" style="font-size:13px">(each out of 200 possible points)</div> -->
+
+<div class="rankbuttons">
+	<button class="button ranktime rtweekly rankselected">Weekly</button>
+	<button class="button ranktime rtalltime">All-time</button>
 </div>
 
-<div class="lifetimerankings">
-	<div style="margin-bottom: 8px; text-align: center;">World Top 30 Players<br><span style="font-size: 80%; padding-top:15px;"><u>(Combined Average Score - min 5 games)</u></span></div>
-	<ul>
-	  <% User.all.sort {|a,b| @alluserstats[b.id][2] <=> @alluserstats[a.id][2]}.first(30).each do |user| %>
-	  	  <% if @alluserstats[user.id][2] != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][2] %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-  <br><br>
+<div class="rankweeklycontent">
+	<%= render "weeklyranks" %>
+</div>
 
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Average <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games)</u></span>
-	<ul>
-	  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5) <=> Game.averageheartspergame(a.id, 5)}.first(30).each do |user| %>
-	  	  <% if Game.averageheartspergame(user.id, 5) != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5) %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-  <br><br>
-  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Giver Average Score - min 5 games)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| @alluserstats[b.id][0] <=> @alluserstats[a.id][0]}.first(30).each do |user| %>
-	  	  <% if @alluserstats[user.id][0] != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][0] %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-  <br><br>
-  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Guesser Average Score - min 5 games)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| @alluserstats[b.id][1] <=> @alluserstats[a.id][1]}.first(30).each do |user| %>
-	  	  <% if @alluserstats[user.id][1] != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][1] %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-	<br><br>
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top Hint Givers - min 5 games)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| @usersgivers[b.id] <=> @usersgivers[a.id]}.first(30).each do |user| %>
-	  	  <% if @usersgivers[user.id] != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @usersgivers[user.id] %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-	<br><br>
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Top Guessers - min 5 games)</u></span>
-  <ul>
-	  <% User.all.sort {|a,b| @usersguessers[b.id] <=> @usersguessers[a.id]}.first(30).each do |user| %>
-	  	  <% if @usersguessers[user.id] != -1 %>
-	    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @usersguessers[user.id] %></span></li>
-	    	<% end %>
-	  <% end %>
-	</ul>
-
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Your Cheat Score (your games receiving 3+ cheat reports))</u></span>
-	<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span><br><br>
-
-	<span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Games You've Reported)</u></span>
-	<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span><br><br>
-
-
+<div class="rankalltimecontent rankhidden">
+	
 </div>
 
 <div class="centered">
 	<button class="button returntomain">Return to Main</button>
 </div>
+
+<script>
+$(".rtweekly").click(function() {
+	$(".ranktime").removeClass("rankselected");
+	$(this).addClass("rankselected");
+	$(".rankweeklycontent").removeClass("rankhidden");
+	$(".rankalltimecontent").addClass("rankhidden");
+})
+$(".rtalltime").click(function() {
+	$(".ranktime").removeClass("rankselected");
+	$(this).addClass("rankselected");
+	$(".rankweeklycontent").addClass("rankhidden");
+	$(".rankalltimecontent").removeClass("rankhidden");
+})
+$(window).on('turbolinks:load', function() {
+	var wrapper = $('.rankalltimecontent');
+	wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
+	   wrapper.children('.rankalltimecontent').unwrap();
+	});
+})
+</script>

@@ -1077,7 +1077,6 @@ var ready = function() {
 
 	GuessFuncDuring = {
 					  seeguessesafter: function() {
-						console.log("loading seeguessesafter")
 						$(".guesswordslist").addClass("guessednotdone");
 						var gsrnum = gon.guessernum;
 						var awords = gon.allwords;

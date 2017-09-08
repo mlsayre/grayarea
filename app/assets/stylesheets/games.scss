@@ -807,15 +807,29 @@ img.anim_neutral.animating {
   border: 2px solid rosybrown;
 }
 .lifetimerankings {
-    max-width: 480px;
-    margin: 6px auto;
-    border: 1px solid grey;
-    padding: 8px;
-    border-radius: 6px;
+  max-width: 480px;
+  margin: 6px auto;
+  border: 1px solid grey;
+  padding: 8px;
+  border-radius: 6px;
 }
 .lifetimerankings ul {
   padding: 0;
   list-style-position: inside;
+}
+.button.rankselected {
+  box-shadow: black 0 0 7px 2px;
+}
+.rankbuttons {
+  text-align: center;
+}
+button.button.ranktime {
+  width: 80px;
+  margin: 0 4px;
+  padding: 4px 0;
+}
+.rankhidden {
+  display: none;
 }
 .centered {
   text-align: center;
