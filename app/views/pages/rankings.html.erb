@@ -34,6 +34,7 @@ $(window).on('turbolinks:load', function() {
 	var wrapper = $('.rankalltimecontent');
 	wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
 	   wrapper.children('.rankalltimecontent').unwrap();
+	   
 	});
 })
 </script>
