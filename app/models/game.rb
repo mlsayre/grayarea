@@ -232,4 +232,201 @@ class Game < ApplicationRecord
     end
     return avg
   end
+
+  def self.checkspecialfeats(userid, giverid, type)
+    curruser = User.find(userid)
+    giveuser = User.find(giverid)
+    featindexesguesser = {"allsix1" => 1, "allsix5" => 5, "allsix20" => 9, "allsix50" => 12, "allsix100" => 15,
+                          "scorehundred1" => 3, "scorehundred5" => 7, "scorehundred20" => 10, "scorehundred50" => 13, 
+                          "scorehundred100" => 16, "scoretwohundred" => 18}
+    featindexesgiver = {"allsix1" => 1, "allsix5" => 6, "allsix20" => 11, "allsix50" => 15, "allsix100" => 19,
+                        "scorehundred1" => 3, "scorehundred5" => 8, "scorehundred20" => 12, "scorehundred50" => 16, 
+                        "scorehundred100" => 20, "scoretwohundred" => 23, "nospoil5" => 4, "nospoil10" => 9, "nospoil20" => 13,
+                        "nospoil30" => 17, "nospoil50" => 22}
+    featpointsguesser = {"allsix1" => 20, "allsix5" => 30, "allsix20" => 40, "allsix50" => 60, "allsix100" => 100,
+                          "scorehundred1" => 20, "scorehundred5" => 30, "scorehundred20" => 40, "scorehundred50" => 60, 
+                          "scorehundred100" => 100, "scoretwohundred" => 300}
+    featpointsgiver = {"allsix1" => 20, "allsix5" => 40, "allsix20" => 50, "allsix50" => 80, "allsix100" => 120,
+                        "scorehundred1" => 20, "scorehundred5" => 40, "scorehundred20" => 50, "scorehundred50" => 80, 
+                        "scorehundred100" => 120, "scoretwohundred" => 300, "nospoil5" => 20, "nospoil10" => 50, 
+                        "nospoil20" => 70, "nospoil30" => 100, "nospoil50" => 250}
+
+    if type == "twohundred"
+      newarr = curruser.statguesserstatus
+      newarr[featindexesguesser["scoretwohundred"]] = curruser.statguesserscoretwohundred * 300
+      curruser.update(:statguesserstatus => newarr)
+      newarr = curruser.statguessernotify
+      newarr[featindexesguesser["scoretwohundred"]] = 1
+      curruser.update(:statguessernotify => newarr)
+      #now do for giver
+      newarr = giveuser.statgiverstatus
+      newarr[featindexesgiver["scoretwohundred"]] = giveuser.statgiverscoretwohundred * 300
+      giveuser.update(:statgiverstatus => newarr)
+      newarr = giveuser.statgivernotify
+      newarr[featindexesgiver["scoretwohundred"]] = 1
+      giveuser.update(:statgivernotify => newarr)
+    elsif type == "hundred"
+      if curruser.statguesserstatus[featindexesguesser["scorehundred100"]] == 0 && curruser.statguesserscorehundred > 99
+        Game.statarrayupdateguesser(featindexesguesser["scorehundred100"], featpointsguesser["scorehundred100"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["scorehundred50"]] == 0 && curruser.statguesserscorehundred > 49
+        Game.statarrayupdateguesser(featindexesguesser["scorehundred50"], featpointsguesser["scorehundred50"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["scorehundred20"]] == 0 && curruser.statguesserscorehundred > 19
+        Game.statarrayupdateguesser(featindexesguesser["scorehundred20"], featpointsguesser["scorehundred20"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["scorehundred5"]] == 0 && curruser.statguesserscorehundred > 4
+        Game.statarrayupdateguesser(featindexesguesser["scorehundred5"], featpointsguesser["scorehundred5"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["scorehundred1"]] == 0 && curruser.statguesserscorehundred > 0
+        Game.statarrayupdateguesser(featindexesguesser["scorehundred1"], featpointsguesser["scorehundred1"], curruser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["scorehundred100"]] == 0 && giveuser.statgiverscorehundred > 99
+        Game.statarrayupdategiver(featindexesgiver["scorehundred100"], featpointsgiver["scorehundred100"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["scorehundred50"]] == 0 && giveuser.statgiverscorehundred > 49
+        Game.statarrayupdategiver(featindexesgiver["scorehundred50"], featpointsgiver["scorehundred50"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["scorehundred20"]] == 0 && giveuser.statgiverscorehundred > 19
+        Game.statarrayupdategiver(featindexesgiver["scorehundred20"], featpointsgiver["scorehundred20"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["scorehundred5"]] == 0 && giveuser.statgiverscorehundred > 4
+        Game.statarrayupdategiver(featindexesgiver["scorehundred5"], featpointsgiver["scorehundred5"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["scorehundred1"]] == 0 && giveuser.statgiverscorehundred > 0
+        Game.statarrayupdategiver(featindexesgiver["scorehundred1"], featpointsgiver["scorehundred1"], giveuser)
+      end
+    elsif type == "spoilstreak"
+      if giveuser.statgiverstatus[featindexesgiver["nospoil50"]] == 0 && giveuser.statgivernospoilers > 49
+        Game.statarrayupdategiver(featindexesgiver["nospoil50"], featpointsgiver["nospoil50"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["nospoil30"]] == 0 && giveuser.statgivernospoilers > 29
+        Game.statarrayupdategiver(featindexesgiver["nospoil30"], featpointsgiver["nospoil30"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["nospoil20"]] == 0 && giveuser.statgivernospoilers > 19
+        Game.statarrayupdategiver(featindexesgiver["nospoil20"], featpointsgiver["nospoil20"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["nospoil10"]] == 0 && giveuser.statgivernospoilers > 9
+        Game.statarrayupdategiver(featindexesgiver["nospoil10"], featpointsgiver["nospoil10"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["nospoil5"]] == 0 && giveuser.statgivernospoilers > 4
+        Game.statarrayupdategiver(featindexesgiver["nospoil5"], featpointsgiver["nospoil5"], giveuser)
+      end
+    elsif type =="allsix"
+      if curruser.statguesserstatus[featindexesguesser["allsix100"]] == 0 && curruser.statguesserallsix > 99
+        Game.statarrayupdateguesser(featindexesguesser["allsix100"], featpointsguesser["allsix100"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["allsix50"]] == 0 && curruser.statguesserallsix > 49
+        Game.statarrayupdateguesser(featindexesguesser["allsix50"], featpointsguesser["allsix50"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["allsix20"]] == 0 && curruser.statguesserallsix > 19
+        Game.statarrayupdateguesser(featindexesguesser["allsix20"], featpointsguesser["allsix20"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["allsix5"]] == 0 && curruser.statguesserallsix > 4
+        Game.statarrayupdateguesser(featindexesguesser["allsix5"], featpointsguesser["allsix5"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["allsix1"]] == 0 && curruser.statguesserallsix > 0
+        Game.statarrayupdateguesser(featindexesguesser["allsix1"], featpointsguesser["allsix1"], curruser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["allsix100"]] == 0 && giveuser.statgiverallsix > 99
+        Game.statarrayupdategiver(featindexesgiver["allsix100"], featpointsgiver["allsix100"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["allsix50"]] == 0 && giveuser.statgiverallsix > 49
+        Game.statarrayupdategiver(featindexesgiver["allsix50"], featpointsgiver["allsix50"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["allsix20"]] == 0 && giveuser.statgiverallsix > 19
+        Game.statarrayupdategiver(featindexesgiver["allsix20"], featpointsgiver["allsix20"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["allsix5"]] == 0 && giveuser.statgiverallsix > 4
+        Game.statarrayupdategiver(featindexesgiver["allsix5"], featpointsgiver["allsix5"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["allsix1"]] == 0 && giveuser.statgiverallsix > 0
+        Game.statarrayupdategiver(featindexesgiver["allsix1"], featpointsgiver["allsix1"], giveuser)
+      end
+    end
+  end
+
+  def self.checkfeats(userid, giverid, who)
+    curruser = User.find(userid)
+    giveuser = User.find(giverid)
+    featindexesguesser = {"guessin3" => 0, "guessin6" => 2, "guessin20" => 4, "guessin50" => 6, "guessin100" => 8, 
+                          "guessin150" => 11, "guessin250" => 14, "guessin500" => 17}
+    featindexesgiver = {"givein1" => 0, "givein5" => 2, "givein20" => 5, "givein50" => 7, "givein100" => 10, 
+                        "givein150" => 14, "givein250" => 18, "givein500" => 21}
+    featpointsguesser = {"guessin3" => 10, "guessin6" => 20, "guessin20" => 30, "guessin50" => 30, "guessin100" => 40, 
+                         "guessin150" => 60, "guessin250" => 70, "guessin500" => 150}
+    featpointsgiver = {"givein1" => 10, "givein5" => 20, "givein20" => 30, "givein50" => 40, "givein100" => 50, 
+                       "givein150" => 70, "givein250" => 100, "givein500" => 200}
+
+    if who == "guesser"
+      if curruser.statguesserstatus[featindexesguesser["guessin500"]] == 0 && curruser.lifetimegamesguesser > 499
+        statarrayupdateguesser(featindexesguesser["guessin500"], featpointsguesser["guessin500"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin250"]] == 0 && curruser.lifetimegamesguesser > 249
+        statarrayupdateguesser(featindexesguesser["guessin250"], featpointsguesser["guessin250"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin150"]] == 0 && curruser.lifetimegamesguesser > 149
+        statarrayupdateguesser(featindexesguesser["guessin150"], featpointsguesser["guessin150"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin100"]] == 0 && curruser.lifetimegamesguesser > 99
+        statarrayupdateguesser(featindexesguesser["guessin100"], featpointsguesser["guessin100"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin50"]] == 0 && curruser.lifetimegamesguesser > 49
+        statarrayupdateguesser(featindexesguesser["guessin50"], featpointsguesser["guessin50"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin20"]] == 0 && curruser.lifetimegamesguesser > 19
+        statarrayupdateguesser(featindexesguesser["guessin20"], featpointsguesser["guessin20"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin6"]] == 0 && curruser.lifetimegamesguesser > 5
+        statarrayupdateguesser(featindexesguesser["guessin6"], featpointsguesser["guessin6"], curruser)
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin3"]] == 0 && curruser.lifetimegamesguesser > 2
+        statarrayupdateguesser(featindexesguesser["guessin3"], featpointsguesser["guessin3"], curruser)
+      end
+    end
+    if who == "giver"
+      if giveuser.statguesserstatus[featindexesgiver["givein500"]] == 0 && giveuser.lifetimegamesgiver > 499
+        Game.statarrayupdategiver(featindexesgiver["givein500"], featpointsgiver["givein500"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein250"]] == 0 && giveuser.lifetimegamesgiver > 249
+        Game.statarrayupdategiver(featindexesgiver["givein250"], featpointsgiver["givein250"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein150"]] == 0 && giveuser.lifetimegamesgiver > 149
+        Game.statarrayupdategiver(featindexesgiver["givein150"], featpointsgiver["givein150"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein100"]] == 0 && giveuser.lifetimegamesgiver > 99
+        Game.statarrayupdategiver(featindexesgiver["givein100"], featpointsgiver["givein100"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein50"]] == 0 && giveuser.lifetimegamesgiver > 49
+        Game.statarrayupdategiver(featindexesgiver["givein50"], featpointsgiver["givein50"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein20"]] == 0 && giveuser.lifetimegamesgiver > 19
+        Game.statarrayupdategiver(featindexesgiver["givein20"], featpointsgiver["givein20"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein5"]] == 0 && giveuser.lifetimegamesgiver > 4
+        Game.statarrayupdategiver(featindexesgiver["givein5"], featpointsgiver["givein5"], giveuser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein1"]] == 0 && giveuser.lifetimegamesgiver > 0
+        Game.statarrayupdategiver(featindexesgiver["givein1"], featpointsgiver["givein1"], giveuser)
+      end
+    end
+  end
+
+  def self.statarrayupdateguesser(guessind, guesspts, curruser)
+    newarr = curruser.statguesserstatus
+    newarr[guessind] = guesspts
+    curruser.update(:statguesserstatus => newarr)
+    newarr = curruser.statguessernotify
+    newarr[guessind] = 1
+    curruser.update(:statguessernotify => newarr)
+  end
+
+  def self.statarrayupdategiver(giveind, givepts, giveuser)
+    newarr = giveuser.statgiverstatus
+    newarr[giveind] = givepts
+    giveuser.update(:statgiverstatus => newarr)
+    newarr = giveuser.statgivernotify
+    newarr[giveind] = 1
+    giveuser.update(:statgivernotify => newarr)
+  end
 end

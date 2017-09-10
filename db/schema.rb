@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901193142) do
+ActiveRecord::Schema.define(version: 20170909234849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,17 @@ ActiveRecord::Schema.define(version: 20170901193142) do
     t.integer "giverdeletegamesleft", default: 0
     t.integer "lifetimecheatgames", default: 0
     t.integer "lifetimecheatreports", default: 0
+    t.integer "statgiverallsix", default: 0
+    t.integer "statgiverscorehundred", default: 0
+    t.integer "statgivernospoilers", default: 0
+    t.integer "statgiverscoretwohundred", default: 0
+    t.integer "statguesserallsix", default: 0
+    t.integer "statguesserscorehundred", default: 0
+    t.integer "statguesserscoretwohundred", default: 0
+    t.integer "statgiverstatus", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
+    t.integer "statguesserstatus", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
+    t.integer "statgivernotify", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
+    t.integer "statguessernotify", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
