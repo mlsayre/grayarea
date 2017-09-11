@@ -123,41 +123,37 @@ class GamesController < ApplicationController
     if params[:guessstatus] == "over,over"
       if params[:gamescore].to_i == 200
         User.find(current_user.id).increment!(:statguesserscoretwohundred, by = 1)
-        newarr = User.find(current_user.id).statguesserstatus
-        newarr[18] = User.find(current_user.id).statguesserscoretwohundred * 200
-        User.find(current_user.id).update(:statguesserstatus => newarr)
-        newarr = User.find(current_user.id).statguessernotify
-        newarr[18] = 1
-        User.find(current_user.id).update(:statguessernotify => newarr)
-        #now do for giver
         User.find(@thisgame.giver_id).increment!(:statgiverscoretwohundred, by = 1)
-        newarr = User.find(@thisgame.giver_id).statgiverstatus
-        newarr[23] = User.find(@thisgame.giver_id).statgiverscoretwohundred * 200
-        User.find(@thisgame.giver_id).update(:statgiverstatus => newarr)
-        newarr = User.find(@thisgame.giver_id).statgivernotify
-        newarr[23] = 1
-        User.find(@thisgame.giver_id).update(:statgivernotify => newarr)
         type = "twohundred"
+        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
+        Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       end
       if params[:gamescore].to_i > 99
         User.find(current_user.id).increment!(:statguesserscorehundred, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverscorehundred, by = 1)
         type = "hundred"
+        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
+        Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       end
       if params[:gamespoiled] == 0
         User.find(@thisgame.giver_id).increment!(:statgivernospoilers, by = 1)
         type = "spoilstreak"
+        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
+        Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       elsif params[:gamespoiled] == 1
         User.find(@thisgame.giver_id).update(:statgivernospoilers => 0)
         type = "spoilstreak"
+        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
+        Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       end
       if params[:hint1words].length + params[:hint2words].length + params[:hint3words].length == 6
         User.find(current_user.id).increment!(:statguesserallsix, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverallsix, by = 1)
         type = "allsix"
+        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
+        Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       end
-      Game.checkspecialfeats(current_user.id, @thisgame.giver_id, type)
-      Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
+      
     end
     
     render body: nil
