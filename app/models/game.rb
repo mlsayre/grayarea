@@ -341,38 +341,52 @@ class Game < ApplicationRecord
     if who == "guesser"
       if curruser.statguesserstatus[featindexesguesser["guessin500"]] == 0 && curruser.lifetimegamesguesser > 499
         Game.statarrayupdateguesser(featindexesguesser["guessin500"], featpointsguesser["guessin500"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin250"]] == 0 && curruser.lifetimegamesguesser > 249
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin250"]] == 0 && curruser.lifetimegamesguesser > 249
         Game.statarrayupdateguesser(featindexesguesser["guessin250"], featpointsguesser["guessin250"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin150"]] == 0 && curruser.lifetimegamesguesser > 149
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin150"]] == 0 && curruser.lifetimegamesguesser > 149
         Game.statarrayupdateguesser(featindexesguesser["guessin150"], featpointsguesser["guessin150"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin100"]] == 0 && curruser.lifetimegamesguesser > 99
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin100"]] == 0 && curruser.lifetimegamesguesser > 99
         Game.statarrayupdateguesser(featindexesguesser["guessin100"], featpointsguesser["guessin100"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin50"]] == 0 && curruser.lifetimegamesguesser > 49
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin50"]] == 0 && curruser.lifetimegamesguesser > 49
         Game.statarrayupdateguesser(featindexesguesser["guessin50"], featpointsguesser["guessin50"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin20"]] == 0 && curruser.lifetimegamesguesser > 19
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin20"]] == 0 && curruser.lifetimegamesguesser > 19
         Game.statarrayupdateguesser(featindexesguesser["guessin20"], featpointsguesser["guessin20"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin6"]] == 0 && curruser.lifetimegamesguesser > 5
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin6"]] == 0 && curruser.lifetimegamesguesser > 5
         Game.statarrayupdateguesser(featindexesguesser["guessin6"], featpointsguesser["guessin6"], curruser)
-      elsif curruser.statguesserstatus[featindexesguesser["guessin3"]] == 0 && curruser.lifetimegamesguesser > 2
+      end
+      if curruser.statguesserstatus[featindexesguesser["guessin3"]] == 0 && curruser.lifetimegamesguesser > 2
         Game.statarrayupdateguesser(featindexesguesser["guessin3"], featpointsguesser["guessin3"], curruser)
       end
     end
     if who == "giver"
       if giveuser.statguesserstatus[featindexesgiver["givein500"]] == 0 && giveuser.lifetimegamesgiver > 499
         Game.statarrayupdategiver(featindexesgiver["givein500"], featpointsgiver["givein500"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein250"]] == 0 && giveuser.lifetimegamesgiver > 249
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein250"]] == 0 && giveuser.lifetimegamesgiver > 249
         Game.statarrayupdategiver(featindexesgiver["givein250"], featpointsgiver["givein250"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein150"]] == 0 && giveuser.lifetimegamesgiver > 149
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein150"]] == 0 && giveuser.lifetimegamesgiver > 149
         Game.statarrayupdategiver(featindexesgiver["givein150"], featpointsgiver["givein150"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein100"]] == 0 && giveuser.lifetimegamesgiver > 99
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein100"]] == 0 && giveuser.lifetimegamesgiver > 99
         Game.statarrayupdategiver(featindexesgiver["givein100"], featpointsgiver["givein100"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein50"]] == 0 && giveuser.lifetimegamesgiver > 49
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein50"]] == 0 && giveuser.lifetimegamesgiver > 49
         Game.statarrayupdategiver(featindexesgiver["givein50"], featpointsgiver["givein50"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein20"]] == 0 && giveuser.lifetimegamesgiver > 19
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein20"]] == 0 && giveuser.lifetimegamesgiver > 19
         Game.statarrayupdategiver(featindexesgiver["givein20"], featpointsgiver["givein20"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein5"]] == 0 && giveuser.lifetimegamesgiver > 4
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein5"]] == 0 && giveuser.lifetimegamesgiver > 4
         Game.statarrayupdategiver(featindexesgiver["givein5"], featpointsgiver["givein5"], giveuser)
-      elsif giveuser.statgiverstatus[featindexesgiver["givein1"]] == 0 && giveuser.lifetimegamesgiver > 0
+      end
+      if giveuser.statgiverstatus[featindexesgiver["givein1"]] == 0 && giveuser.lifetimegamesgiver > 0
         Game.statarrayupdategiver(featindexesgiver["givein1"], featpointsgiver["givein1"], giveuser)
       end
     end
