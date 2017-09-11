@@ -35,4 +35,18 @@ class PagesController < ApplicationController
       format.json  { render json: {} , status: 200 }
     end
 	end
+
+	def feats
+		gon.giverstatus = current_user.statgiverstatus
+		gon.guesserstatus = current_user.statguesserstatus
+		gon.givernotify = current_user.statgivernotify
+		gon.guessernotify = current_user.statguessernotify
+	end
+
+	def resetstatnotify
+		current_user.update(:statgivernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+			:statguessernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+		render body: nil
+	end
 end

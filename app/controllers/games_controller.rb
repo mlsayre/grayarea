@@ -4,6 +4,8 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
 
+    @featcount = current_user.statgivernotify.sum + current_user.statguessernotify.sum 
+
     @gameguesser = Game.where.not(:giver_id => "").first || 1
 
     @gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all

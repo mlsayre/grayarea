@@ -1,8 +1,494 @@
 <div class="gametop"><%= current_user.username %>'s Feats of Stretch</div>
-
-<div class="lifetimerankings howtoplay">
-  Hearts received: <%= current_user.lifetimehearts %><br><br>
-
-  Hearts received per game created: <%= current_user.lifetimegamesgiver == 0 ? "0" : (current_user.lifetimehearts.to_f  / current_user.lifetimegamesgiver.to_f).round(2)  %><br><br>
-  <%= link_to "Back", :back, :class => "howtoback" %>
+<div class="centered">Your Feat Score: <%= current_user.statgiverstatus.sum + current_user.statguesserstatus.sum %>
+	<img class="featpagetrophy" src="/assets/Trophy-32.png">
 </div>
+
+<div class="lifetimerankings howtoplay giverfeats">
+  <div class="gametop">Giver Feats</div>
+
+  <div class="feattrophy givefeat0 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make Your First Game</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+10</span>
+	</div>
+
+	<div class="feattrophy givefeat1 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Got All Six</div>
+	  <span class="featimgtext">1x</span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy givefeat2 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 6 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy givefeat3 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 100+</div>
+	  <span class="featimgtext">1x</span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy givefeat4 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">No-Spoiler Streak</div>
+	  <span class="featimgtext">5</span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy givefeat5 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 20 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+30</span>
+	</div>
+
+	<div class="feattrophy givefeat6 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Got All Six</div>
+	  <span class="featimgtext">5x</span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy givefeat7 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 50 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy givefeat8 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 100+</div>
+	  <span class="featimgtext">5x</span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy givefeat9 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">No-Spoiler Streak</div>
+	  <span class="featimgtext">10</span>
+	  <span class="featpnttext">+50</span>
+	</div>
+
+	<div class="feattrophy givefeat10 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 100 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+50</span>
+	</div>
+
+	<div class="feattrophy givefeat11 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Got All Six</div>
+	  <span class="featimgtext">20x</span>
+	  <span class="featpnttext">+50</span>
+	</div>
+
+	<div class="feattrophy givefeat12 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 100+</div>
+	  <span class="featimgtext">20x</span>
+	  <span class="featpnttext">+50</span>
+	</div>
+
+	<div class="feattrophy givefeat13 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">No-Spoiler Streak</div>
+	  <span class="featimgtext">20</span>
+	  <span class="featpnttext">+70</span>
+	</div>
+
+	<div class="feattrophy givefeat14 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 100 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+70</span>
+	</div>
+
+	<div class="feattrophy givefeat15 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Got All Six</div>
+	  <span class="featimgtext">50x</span>
+	  <span class="featpnttext">+80</span>
+	</div>
+
+	<div class="feattrophy givefeat16 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 100+</div>
+	  <span class="featimgtext">50x</span>
+	  <span class="featpnttext">+80</span>
+	</div>
+
+	<div class="feattrophy givefeat17 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">No-Spoiler Streak</div>
+	  <span class="featimgtext">30</span>
+	  <span class="featpnttext">+100</span>
+	</div>
+
+	<div class="feattrophy givefeat18 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 250 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+100</span>
+	</div>
+
+	<div class="feattrophy givefeat19 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Got All Six</div>
+	  <span class="featimgtext">100x</span>
+	  <span class="featpnttext">+120</span>
+	</div>
+
+	<div class="feattrophy givefeat20 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 100+</div>
+	  <span class="featimgtext">100x</span>
+	  <span class="featpnttext">+120</span>
+	</div>
+
+	<div class="feattrophy givefea21 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Make 500 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+200</span>
+	</div>
+
+	<div class="feattrophy givefeat22 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">No-Spoiler Streak</div>
+	  <span class="featimgtext">50</span>
+	  <span class="featpnttext">+250</span>
+	</div>
+
+	<div class="feattrophy givefeat23 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">They Scored 200!</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+300</span>
+	</div>
+
+</div>
+
+<div class="lifetimerankings howtoplay guesserfeats">
+  <div class="gametop">Guesser Feats</div>
+
+  <div class="feattrophy guessfeat0 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 3 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+10</span>
+	</div>
+
+	<div class="feattrophy guessfeat1 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Got All Six</div>
+	  <span class="featimgtext">1x</span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy guessfeat2 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 6 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy guessfeat3 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 100+</div>
+	  <span class="featimgtext">1x</span>
+	  <span class="featpnttext">+20</span>
+	</div>
+
+	<div class="feattrophy guessfeat4 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 20 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+30</span>
+	</div>
+
+	<div class="feattrophy guessfeat5 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Got All Six</div>
+	  <span class="featimgtext">5x</span>
+	  <span class="featpnttext">+30</span>
+	</div>
+
+	<div class="feattrophy guessfeat6 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 50 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+30</span>
+	</div>
+
+	<div class="feattrophy guessfeat7 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 100+</div>
+	  <span class="featimgtext">5x</span>
+	  <span class="featpnttext">+30</span>
+	</div>
+
+	<div class="feattrophy guessfeat8 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 100 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy guessfeat9 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Got All Six</div>
+	  <span class="featimgtext">20x</span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy guessfeat10 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 100+</div>
+	  <span class="featimgtext">20x</span>
+	  <span class="featpnttext">+40</span>
+	</div>
+
+	<div class="feattrophy guessfeat11 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 150 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+60</span>
+	</div>
+
+	<div class="feattrophy guessfeat12 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Got All Six</div>
+	  <span class="featimgtext">50x</span>
+	  <span class="featpnttext">+60</span>
+	</div>
+
+	<div class="feattrophy guessfeat13 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 100+</div>
+	  <span class="featimgtext">50x</span>
+	  <span class="featpnttext">+60</span>
+	</div>
+
+	<div class="feattrophy guessfeat14 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 250 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+70</span>
+	</div>
+
+	<div class="feattrophy guessfeat15 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Got All Six</div>
+	  <span class="featimgtext">100x</span>
+	  <span class="featpnttext">+100</span>
+	</div>
+
+	<div class="feattrophy guessfeat16 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 100+</div>
+	  <span class="featimgtext">100x</span>
+	  <span class="featpnttext">+100</span>
+	</div>
+
+	<div class="feattrophy guessfeat17 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">Guess in 500 Games</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+150</span>
+	</div>
+
+	<div class="feattrophy guessfeat18 hidefeat">
+	  <div class="featshow">
+	  	<img src="/assets/Trophy-Feat-128.png">
+	  </div>
+	  <div class="feathide"><img src="/assets/Help-Feat-128.png"></div>
+	  <div class="featdesctext">You Scored 200!</div>
+	  <span class="featimgtext"></span>
+	  <span class="featpnttext">+300</span>
+	</div>
+
+</div>
+
+<div class="lifetimerankings howtoplay guesserfeats">
+	<div class="gametop">Your Feat Stats</div>
+		You've created <%= current_user.lifetimegamesgiver %> game(s)<br>
+		You've guessed in <%= current_user.lifetimegamesguesser %> game(s)<br><br>
+    Guesser picked all 6 of your words: <%= current_user.statgiverallsix %> time(s)<br>
+    Guesser scored at least 100 points in your games: <%= current_user.statgiverscorehundred %> time(s)<br>
+    Your current no-spoiler streak as giver: <%= current_user.statgivernospoilers %><br>
+    Guesser scored 200 points in your games: <%= current_user.statgiverscoretwohundred %> time(s)<br><br>
+    You guessed all 6 words: <%= current_user.statguesserallsix %> time(s)<br>
+    You scored at least 100 points while guesser: <%= current_user.statguesserscorehundred %> time(s)<br>
+    You scored 200 points as guesser: <%= current_user.statguesserscoretwohundred %> time(s)
+</div>
+<%= link_to "Back", :back, :class => "howtoback" %>
+
+<script>
+$(window).on('turbolinks:load', function() {
+	var giverstatus = gon.giverstatus;
+	var guesserstatus = gon.guesserstatus;
+	var givernotify = gon.givernotify;
+	var guessernotify = gon.guessernotify;
+
+	for (var i = 0; i < giverstatus.length; i++) {
+		if (giverstatus[i] !== 0) {
+			$(".givefeat" + i).removeClass("hidefeat").addClass("showfeat");
+		}
+	}
+	for (var i = 0; i < guesserstatus.length; i++) {
+		if (guesserstatus[i] !== 0) {
+			$(".guessfeat" + i).removeClass("hidefeat").addClass("showfeat");
+		}
+	}
+	for (var i = 0; i < givernotify.length; i++) {
+		if (givernotify[i] !== 0) {
+			$(".givefeat" + i).addClass("newfeat");
+		}
+	}
+	for (var i = 0; i < guessernotify.length; i++) {
+		if (guessernotify[i] !== 0) {
+			$(".guessfeat" + i).addClass("newfeat");
+		}
+	}
+	setTimeout(function() {
+	  $.ajax({
+      url: "/pages/resetstatnotify",
+      type: "POST"
+    })
+	}, 500)
+});
+</script>

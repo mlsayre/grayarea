@@ -317,8 +317,8 @@ span.heartsnotify {
   width: 26px;
   display: inline-block;
   vertical-align: top;
-  bottom: 24px;
-  right: -4px;
+  top: -5px;
+  right: -5px;
 }
 .heartsnotify img {
   width: 26px;
@@ -1080,4 +1080,88 @@ img.newsheart {
 li.newsitem.newsseen1 {
   opacity: .4;
   font-size: 12px;
+}
+.hidefeat .featshow {
+  display: none;
+}
+.showfeat .feathide {
+  display: none;
+}
+.giverfeats, .guesserfeats {
+  text-align: center;
+}
+.giverfeats .gametop {
+  margin: 0 0 10px
+}
+img.featpagetrophy {
+  height: 13px;
+  position: relative;
+  left: -2px;
+}
+.feattrophy {
+  display: inline-block;
+  width: 66px;
+  margin: 4px 2px;
+  vertical-align: top;
+  background-color: whitesmoke;
+  padding: 8px;
+  position: relative;
+}
+.feattrophy img {
+  width: 100%;
+}
+.featdesctext {
+  font-size: 12px;
+}
+span.featpnttext {
+  position: absolute;
+  top: -1px;
+  right: 0px;
+  color: black;
+  padding: 2px;
+  height: 22px;
+  font-size: 11px;
+}
+.showfeat .featpnttext {
+  color: blue;
+}
+.feattrophy.showfeat {
+  background-color: #d3fffb;
+}
+.feattrophy.hidefeat {
+  opacity: .72;
+}
+span.featimgtext {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  text-shadow: black 1px 1px 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+}
+.hidefeat span.featimgtext {
+  opacity: .75;
+}
+@media (max-width: 360px) {
+  .feattrophy {
+    width: 54px;
+  }
+  span.featimgtext {
+    top: 30px;
+    font-size: 18px;
+  }
+}
+@media (max-width: 320px) {
+  .feattrophy {
+    width: 48px;
+  }
+  span.featimgtext {
+    top: 24px;
+    font-size: 18px;
+  }
+}
+.newfeat {
+  box-shadow: red 0px 0px 4px 1px;
 }

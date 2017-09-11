@@ -27,14 +27,19 @@
   <!-- <%= link_to(image_tag("/assets/Trophy-48.png", :alt => "Feats of Stretch", :title => "Feats of Stretch"), feats_pages_path, :class => "menunav") %> -->
   <a class="menunav featsnav" href="/pages/feats" alt="Feats of Stretch" title="Feats of Stretch">
     <img src="/assets/Trophy-48.png">
-    <% if current_user.heartnotify > 0 %>
-      <span class="heartsnotify"><img src="/assets/Heart-48.png">
-        <span class="notifynumber"><%= current_user.heartnotify %></span>
+    <% if @featcount > 0 %>
+      <span class="feednotify">
+        <span class="feednumber"><%= @featcount %></span>
       </span>
     <% end %>
   </a>
   <a class="menunav feednav" href="/pages/feed" alt="See news feed" title="See news feed">
     <img src="/assets/Newspaper-48.png">
+    <% if current_user.heartnotify > 0 %>
+      <span class="heartsnotify"><img src="/assets/Heart-48.png">
+        <span class="notifynumber"><%= current_user.heartnotify %></span>
+      </span>
+    <% end %>
     <% feedunseen = News.where(:targetuser_id => current_user.id).where(:seen => 0) %>
     <% if feedunseen.count > 0 %>
       <span class="feednotify">
@@ -72,12 +77,12 @@
 
 <p id="notice"><%= notice %></p>
 
-<%= link_to "About the Game (Sep 8, 2017)", about_pages_path, :style => "color: red;" %><br>
+<%= link_to "About the Game (Sep 11, 2017)", about_pages_path, :style => "color: red;" %><br>
 <%= link_to "Edit your information", edit_user_registration_path %><br>
 <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
 
 <script>
-$(".featsnav").click(function() {
+$(".feednav").click(function() {
   $.ajax({
       url: "/games/resetheartnotify",
       type: "POST"
