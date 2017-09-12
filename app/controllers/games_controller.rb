@@ -4,63 +4,69 @@ class GamesController < ApplicationController
   def new
     @game = Game.new
 
-    @featcount = current_user.statgivernotify.sum + current_user.statguessernotify.sum 
+    if user_signed_in?
+      @featcount = current_user.statgivernotify.sum + current_user.statguessernotify.sum 
 
-    @gameguesser = Game.where.not(:giver_id => "").first || 1
+      @gameguesser = Game.where.not(:giver_id => "").first || 1
 
-    @gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all
-    @gamesguesser = Game.where(:guesser_id1 => current_user.id)
-      .or(Game.where(:guesser_id2 => current_user.id))
-      .or(Game.where(:guesser_id3 => current_user.id))
-      .or(Game.where(:guesser_id4 => current_user.id))
-      .or(Game.where(:guesser_id5 => current_user.id))
-      .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
+      @gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all
+      @gamesguesser = Game.where(:guesser_id1 => current_user.id)
+        .or(Game.where(:guesser_id2 => current_user.id))
+        .or(Game.where(:guesser_id3 => current_user.id))
+        .or(Game.where(:guesser_id4 => current_user.id))
+        .or(Game.where(:guesser_id5 => current_user.id))
+        .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
 
-    @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(8)
-    @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(8)
-    # if current_user
-    #   @playergames = Gamedata.where(:user_id => current_user.id).order('game_id DESC').all
-    #   @playergameslist = @playergames.page(params[:page]).per(8)
-
-    # end
+      @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(8)
+      @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(8)
+    end
   end
 
   def startguesser
-  	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
-  		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
-      :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess")
+    if user_signed_in? == false
+      @game = Game.where(:gamestatus => "done").all.sample(1)
 
-  	if @availgames.length > 0
+      respond_to do |format|
+        format.html { redirect_to @game, notice: 'Have fun guessing!' }
+        format.json { render :show, status: :created, location: @game }
+      end
+    else
+    	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
+    		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
+        :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess")
 
-	  	@game = @availgames.order("RANDOM()").first
+    	if @availgames.length > 0
 
-	  	if @game.guesser_id1 == 0
-	  		@game.update(:guesser_id1 => current_user.id)
-	  	elsif @game.guesser_id2 == 0
-	  		@game.update(:guesser_id2 => current_user.id)
-	  	elsif @game.guesser_id3 == 0
-	  		@game.update(:guesser_id3 => current_user.id)
-      elsif @game.guesser_id4 == 0
-        @game.update(:guesser_id4 => current_user.id)
-      elsif @game.guesser_id5 == 0
-        @game.update(:guesser_id5 => current_user.id)
-      elsif @game.guesser_id6 == 0
-        @game.update(:guesser_id6 => current_user.id)
-	  	end
+  	  	@game = @availgames.order("RANDOM()").first
 
-	    respond_to do |format|
-	      format.html { redirect_to @game, notice: '' }
-	      format.json { render :show, status: :created, location: @game }
-	    end
+  	  	if @game.guesser_id1 == 0
+  	  		@game.update(:guesser_id1 => current_user.id)
+  	  	elsif @game.guesser_id2 == 0
+  	  		@game.update(:guesser_id2 => current_user.id)
+  	  	elsif @game.guesser_id3 == 0
+  	  		@game.update(:guesser_id3 => current_user.id)
+        elsif @game.guesser_id4 == 0
+          @game.update(:guesser_id4 => current_user.id)
+        elsif @game.guesser_id5 == 0
+          @game.update(:guesser_id5 => current_user.id)
+        elsif @game.guesser_id6 == 0
+          @game.update(:guesser_id6 => current_user.id)
+  	  	end
 
-	  else
-	  	@game = Game.new
+  	    respond_to do |format|
+  	      format.html { redirect_to @game, notice: '' }
+  	      format.json { render :show, status: :created, location: @game }
+  	    end
 
-	  	respond_to do |format|
-	      format.html { redirect_to main_path, notice: 'No games available to play. Maybe start a game or two while you wait!' }
-	      format.json { render :show}
-	    end
-	    flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
+  	  else
+  	  	@game = Game.new
+
+  	  	respond_to do |format|
+  	      format.html { redirect_to main_path, notice: 'No games available to play. Maybe start a game or two while you wait!' }
+  	      format.json { render :show}
+  	    end
+  	    flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
+      end
 	  end
 
   end
@@ -229,139 +235,195 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
-  	@allthewords = @game.allwords
-  	@badword = @game.loseword
-  	@targetwords = @game.correctwords
-    badindex = @allthewords.index(@badword)
-    @badarray = [7,3,12,8,2,4,5,8,11,10,1,2,6,3,5,9,2]
-    @badarray.insert(8, badindex)
-    @targetarray = [4,8,9,11,6,5,10,7,12,6,2,1,9,5,8,3,11,4,10,6,1,7]
-    temptarg = []
-    @targetwords.each do |word|
-      ind = @allthewords.index(word)
-      temptarg.push(ind)
-    end
-    temptarg.each do |targ|
-      @targetarray.insert(12, targ)
-    end
-    gon.allwords = @allthewords
-  	gon.badword = @badarray
-  	gon.targetwords = @targetarray
-  	gon.hintword1 = @game.hintword1
-  	gon.hintword2 = @game.hintword2
-    gon.hintword3 = @game.hintword3
-  	gon.hintnum1 = @game.hintnum1
-  	gon.hintnum2 = @game.hintnum2
-    gon.hintnum3 = @game.hintnum3
-    gon.sound = current_user.sound
-    @chatshow = false
+    if user_signed_in? == false
+      gon.signedin = false
+      @allthewords = @game.allwords
+      @badword = @game.loseword
+      @targetwords = @game.correctwords
+      badindex = @allthewords.index(@badword)
+      @badarray = [7,3,12,8,2,4,5,8,11,10,1,2,6,3,5,9,2]
+      @badarray.insert(8, badindex)
+      @targetarray = [4,8,9,11,6,5,10,7,12,6,2,1,9,5,8,3,11,4,10,6,1,7]
+      temptarg = []
+      @targetwords.each do |word|
+        ind = @allthewords.index(word)
+        temptarg.push(ind)
+      end
+      temptarg.each do |targ|
+        @targetarray.insert(12, targ)
+      end
+      gon.allwords = @allthewords
+      gon.badword = @badarray
+      gon.targetwords = @targetarray
+      gon.hintword1 = @game.hintword1
+      gon.hintword2 = @game.hintword2
+      gon.hintword3 = @game.hintword3
+      gon.hintnum1 = @game.hintnum1
+      gon.hintnum2 = @game.hintnum2
+      gon.hintnum3 = @game.hintnum3
+      gon.sound = 0
+      @chatshow = false
 
-    # underway vars
-    gon.g1words = @game.gsr1_words
-    gon.g2words = @game.gsr2_words
-    gon.g3words = @game.gsr3_words
-    gon.g4words = @game.gsr4_words
-    gon.g5words = @game.gsr5_words
-    gon.g6words = @game.gsr6_words
+      # underway vars
+      gon.g1words = @game.gsr1_words
+      gon.g2words = @game.gsr2_words
+      gon.g3words = @game.gsr3_words
+      gon.g4words = @game.gsr4_words
+      gon.g5words = @game.gsr5_words
+      gon.g6words = @game.gsr6_words
 
-    @cheatnum = @game.gsr1_cheat + @game.gsr2_cheat + @game.gsr3_cheat + @game.gsr4_cheat + @game.gsr5_cheat + 
-                @game.gsr6_cheat
-    gon.currentcheatnum = @cheatnum
+      @cheatnum = @game.gsr1_cheat + @game.gsr2_cheat + @game.gsr3_cheat + @game.gsr4_cheat + @game.gsr5_cheat + 
+                  @game.gsr6_cheat
+      gon.currentcheatnum = @cheatnum
 
-  	if current_user.id == @game.guesser_id1
-  		gon.guessedwords = @game.gsr1_words
-      gon.wordsh1 = @game.gsr1_h1words
-      gon.wordsh2 = @game.gsr1_h2words
-      gon.wordsh3 = @game.gsr1_h3words
-  		gon.guessstatus = @game.gsr1_status
-      @gsrstatus = @game.gsr1_status
-      gon.spoiler = @game.gsr1_spoiler
+      gon.guessedwords = []
+      gon.wordsh1 = []
+      gon.wordsh2 = []
+      gon.wordsh3 = []
+      gon.guessstatus = "hint1,word1"
+      @gsrstatus = "hint1,word1"
+      gon.spoiler = 0
       gon.guessernum = "1"
-      gon.playerscore = @game.gsr1_score
-      gon.heartstatus = @game.gsr1_heart
-      @cheatstatus = @game.gsr1_cheat
-      if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
+      gon.playerscore = 0
+      gon.heartstatus = 0
+      @cheatstatus = 0
+      @chatshow = false
+    else
+      gon.signedin = true
+    	@allthewords = @game.allwords
+    	@badword = @game.loseword
+    	@targetwords = @game.correctwords
+      badindex = @allthewords.index(@badword)
+      @badarray = [7,3,12,8,2,4,5,8,11,10,1,2,6,3,5,9,2]
+      @badarray.insert(8, badindex)
+      @targetarray = [4,8,9,11,6,5,10,7,12,6,2,1,9,5,8,3,11,4,10,6,1,7]
+      temptarg = []
+      @targetwords.each do |word|
+        ind = @allthewords.index(word)
+        temptarg.push(ind)
       end
-  	elsif current_user.id == @game.guesser_id2
-  		gon.guessedwords = @game.gsr2_words
-      gon.wordsh1 = @game.gsr2_h1words
-      gon.wordsh2 = @game.gsr2_h2words
-      gon.wordsh3 = @game.gsr2_h3words
-  		gon.guessstatus = @game.gsr2_status
-      @gsrstatus = @game.gsr2_status
-      gon.spoiler = @game.gsr2_spoiler
-      gon.guessernum = "2"
-      gon.playerscore = @game.gsr2_score
-      gon.heartstatus = @game.gsr2_heart
-      @cheatstatus = @game.gsr2_cheat
-      if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
+      temptarg.each do |targ|
+        @targetarray.insert(12, targ)
       end
-  	elsif current_user.id == @game.guesser_id3
-  		gon.guessedwords = @game.gsr3_words
-      gon.wordsh1 = @game.gsr3_h1words
-      gon.wordsh2 = @game.gsr3_h2words
-      gon.wordsh3 = @game.gsr3_h3words
-  		gon.guessstatus = @game.gsr3_status
-      @gsrstatus = @game.gsr3_status
-      gon.spoiler = @game.gsr3_spoiler
-      gon.guessernum = "3"
-      gon.playerscore = @game.gsr3_score
-      gon.heartstatus = @game.gsr3_heart
-      @cheatstatus = @game.gsr3_cheat
-      if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
-      end
-    elsif current_user.id == @game.guesser_id4
-      gon.guessedwords = @game.gsr4_words
-      gon.wordsh1 = @game.gsr4_h1words
-      gon.wordsh2 = @game.gsr4_h2words
-      gon.wordsh3 = @game.gsr4_h3words
-      gon.guessstatus = @game.gsr4_status
-      @gsrstatus = @game.gsr4_status
-      gon.spoiler = @game.gsr4_spoiler
-      gon.guessernum = "4"
-      gon.playerscore = @game.gsr4_score
-      gon.heartstatus = @game.gsr4_heart
-      @cheatstatus = @game.gsr4_cheat
-      if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
-      end
-    elsif current_user.id == @game.guesser_id5
-      gon.guessedwords = @game.gsr5_words
-      gon.wordsh1 = @game.gsr5_h1words
-      gon.wordsh2 = @game.gsr5_h2words
-      gon.wordsh3 = @game.gsr5_h3words
-      gon.guessstatus = @game.gsr5_status
-      @gsrstatus = @game.gsr5_status
-      gon.spoiler = @game.gsr5_spoiler
-      gon.guessernum = "5"
-      gon.playerscore = @game.gsr5_score
-      gon.heartstatus = @game.gsr5_heart
-      @cheatstatus = @game.gsr5_cheat
-      if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true
-      end
-    elsif current_user.id == @game.guesser_id6
-      gon.guessedwords = @game.gsr6_words
-      gon.wordsh1 = @game.gsr6_h1words
-      gon.wordsh2 = @game.gsr6_h2words
-      gon.wordsh3 = @game.gsr6_h3words
-      gon.guessstatus = @game.gsr6_status
-      @gsrstatus = @game.gsr6_status
-      gon.spoiler = @game.gsr6_spoiler
-      gon.guessernum = "6"
-      gon.playerscore = @game.gsr6_score
-      gon.heartstatus = @game.gsr6_heart
-      @cheatstatus = @game.gsr6_cheat
-      if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
-        @chatshow = true  
-      end
-  	end
+      gon.allwords = @allthewords
+    	gon.badword = @badarray
+    	gon.targetwords = @targetarray
+    	gon.hintword1 = @game.hintword1
+    	gon.hintword2 = @game.hintword2
+      gon.hintword3 = @game.hintword3
+    	gon.hintnum1 = @game.hintnum1
+    	gon.hintnum2 = @game.hintnum2
+      gon.hintnum3 = @game.hintnum3
+      gon.sound = current_user.sound
+      @chatshow = false
 
-    if current_user.id == @game.giver_id && @game.gamestatus != "give"
-      @chatshow = true
+      # underway vars
+      gon.g1words = @game.gsr1_words
+      gon.g2words = @game.gsr2_words
+      gon.g3words = @game.gsr3_words
+      gon.g4words = @game.gsr4_words
+      gon.g5words = @game.gsr5_words
+      gon.g6words = @game.gsr6_words
+
+      @cheatnum = @game.gsr1_cheat + @game.gsr2_cheat + @game.gsr3_cheat + @game.gsr4_cheat + @game.gsr5_cheat + 
+                  @game.gsr6_cheat
+      gon.currentcheatnum = @cheatnum
+
+    	if current_user.id == @game.guesser_id1
+    		gon.guessedwords = @game.gsr1_words
+        gon.wordsh1 = @game.gsr1_h1words
+        gon.wordsh2 = @game.gsr1_h2words
+        gon.wordsh3 = @game.gsr1_h3words
+    		gon.guessstatus = @game.gsr1_status
+        @gsrstatus = @game.gsr1_status
+        gon.spoiler = @game.gsr1_spoiler
+        gon.guessernum = "1"
+        gon.playerscore = @game.gsr1_score
+        gon.heartstatus = @game.gsr1_heart
+        @cheatstatus = @game.gsr1_cheat
+        if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true
+        end
+    	elsif current_user.id == @game.guesser_id2
+    		gon.guessedwords = @game.gsr2_words
+        gon.wordsh1 = @game.gsr2_h1words
+        gon.wordsh2 = @game.gsr2_h2words
+        gon.wordsh3 = @game.gsr2_h3words
+    		gon.guessstatus = @game.gsr2_status
+        @gsrstatus = @game.gsr2_status
+        gon.spoiler = @game.gsr2_spoiler
+        gon.guessernum = "2"
+        gon.playerscore = @game.gsr2_score
+        gon.heartstatus = @game.gsr2_heart
+        @cheatstatus = @game.gsr2_cheat
+        if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true
+        end
+    	elsif current_user.id == @game.guesser_id3
+    		gon.guessedwords = @game.gsr3_words
+        gon.wordsh1 = @game.gsr3_h1words
+        gon.wordsh2 = @game.gsr3_h2words
+        gon.wordsh3 = @game.gsr3_h3words
+    		gon.guessstatus = @game.gsr3_status
+        @gsrstatus = @game.gsr3_status
+        gon.spoiler = @game.gsr3_spoiler
+        gon.guessernum = "3"
+        gon.playerscore = @game.gsr3_score
+        gon.heartstatus = @game.gsr3_heart
+        @cheatstatus = @game.gsr3_cheat
+        if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true
+        end
+      elsif current_user.id == @game.guesser_id4
+        gon.guessedwords = @game.gsr4_words
+        gon.wordsh1 = @game.gsr4_h1words
+        gon.wordsh2 = @game.gsr4_h2words
+        gon.wordsh3 = @game.gsr4_h3words
+        gon.guessstatus = @game.gsr4_status
+        @gsrstatus = @game.gsr4_status
+        gon.spoiler = @game.gsr4_spoiler
+        gon.guessernum = "4"
+        gon.playerscore = @game.gsr4_score
+        gon.heartstatus = @game.gsr4_heart
+        @cheatstatus = @game.gsr4_cheat
+        if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true
+        end
+      elsif current_user.id == @game.guesser_id5
+        gon.guessedwords = @game.gsr5_words
+        gon.wordsh1 = @game.gsr5_h1words
+        gon.wordsh2 = @game.gsr5_h2words
+        gon.wordsh3 = @game.gsr5_h3words
+        gon.guessstatus = @game.gsr5_status
+        @gsrstatus = @game.gsr5_status
+        gon.spoiler = @game.gsr5_spoiler
+        gon.guessernum = "5"
+        gon.playerscore = @game.gsr5_score
+        gon.heartstatus = @game.gsr5_heart
+        @cheatstatus = @game.gsr5_cheat
+        if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true
+        end
+      elsif current_user.id == @game.guesser_id6
+        gon.guessedwords = @game.gsr6_words
+        gon.wordsh1 = @game.gsr6_h1words
+        gon.wordsh2 = @game.gsr6_h2words
+        gon.wordsh3 = @game.gsr6_h3words
+        gon.guessstatus = @game.gsr6_status
+        @gsrstatus = @game.gsr6_status
+        gon.spoiler = @game.gsr6_spoiler
+        gon.guessernum = "6"
+        gon.playerscore = @game.gsr6_score
+        gon.heartstatus = @game.gsr6_heart
+        @cheatstatus = @game.gsr6_cheat
+        if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
+          @chatshow = true  
+        end
+    	end
+
+      if current_user.id == @game.giver_id && @game.gamestatus != "give"
+        @chatshow = true
+      end
     end
   end
 
@@ -547,6 +609,7 @@ class GamesController < ApplicationController
 
     render body: nil
   end
+
 
   def delgame
     @todelete = Game.find(params[:game_id])

@@ -1,18 +1,22 @@
-<% if (@game.giver_id != nil && @game.giver_id != current_user.id) && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
-	<%= render "sorry" %>
+<% if user_signed_in? == false %>
+	 <%= render "guestplay" %>
 <% else %>
-	<% if @game.gamestatus == "give" && @game.giver_id == current_user.id%>
-	  <%= render "give" %>
-	<% elsif @game.gamestatus == "give" && @game.giver_id != current_user.id%>
-	  <%= render "underway" %>
-	<% elsif @game.gamestatus == "guess" && @game.giver_id == current_user.id%>
-	  <%= render "underwayforgiver" %>
-	<% elsif @game.gamestatus == "guess" && (current_user.id == @game.guesser_id1 || current_user.id == @game.guesser_id2 || current_user.id == @game.guesser_id3 || current_user.id == @game.guesser_id4 || current_user.id == @game.guesser_id5 || current_user.id == @game.guesser_id6) %>
-	  <%= render "guess" %>
-	<% elsif @game.gamestatus == "guess" && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
-	  <%= render "sorry" %>
+	<% if (@game.giver_id != nil && @game.giver_id != current_user.id) && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
+		<%= render "sorry" %>
 	<% else %>
-	  <%= render "done" %>
+		<% if @game.gamestatus == "give" && @game.giver_id == current_user.id%>
+		  <%= render "give" %>
+		<% elsif @game.gamestatus == "give" && @game.giver_id != current_user.id%>
+		  <%= render "underway" %>
+		<% elsif @game.gamestatus == "guess" && @game.giver_id == current_user.id%>
+		  <%= render "underwayforgiver" %>
+		<% elsif @game.gamestatus == "guess" && (current_user.id == @game.guesser_id1 || current_user.id == @game.guesser_id2 || current_user.id == @game.guesser_id3 || current_user.id == @game.guesser_id4 || current_user.id == @game.guesser_id5 || current_user.id == @game.guesser_id6) %>
+		  <%= render "guess" %>
+		<% elsif @game.gamestatus == "guess" && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
+		  <%= render "sorry" %>
+		<% else %>
+		  <%= render "done" %>
+		<% end %>
 	<% end %>
 <% end %>
 

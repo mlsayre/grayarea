@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post 'resetheartnotify'
       post 'givingdeletegame'
       post 'guessingreportgame'
+      post 'playasguest'
     end
   end
 

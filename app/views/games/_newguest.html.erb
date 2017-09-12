@@ -1,19 +1,20 @@
-<div id="landing-topbar"></div>
-<div class="landingtitle">
-  <span>Word Stretch</span>
-  <div class="subtitle">Stretch your mind as you stretch your words!</div>
-
-  <div id="landing-signin">
-    <br>
-    <%= link_to "Sign in", new_user_session_path %>
-    or
-    <%= link_to "Sign up", new_user_registration_path %><br>
-    or<br>
-    <%= link_to "Play as a guest", main_path %><br><br>
-  </div>
+<div class="menulinks">
+  Welcome, Guest!
 </div>
 
-<div id="signin-with">Or sign in with:<br>
+<div class="mainmenubuttons">
+  <button class="button dummyplay disabled">Play as Giver</button>
+  <button class="button startguess playasguest">Play as Guesser</button><br><br>
+
+
+
+  <span class="guessermsg">(Sign up and play 3 games to activate Giver button)</span>
+   <%= link_to "How to Play", howtoplay_pages_path %><br><br>
+
+  Feel free to play as many games as you want as a word guesser! Sign up to enable stat-tracking, to join the rankings, and also to be able to give clues to other players.<br><br>
+  <%= link_to "Sign up", new_user_registration_path %><br>
+    <br>
+    <div id="signin-with">Or sign in with:<br>
   <div class="login-logos" id="signin-twitter">
     <%= link_to(image_tag("Twitter-login.png", size: "48", alt: "Twitter login"),
         omniauth_authorize_path(:user, :twitter)) %><br>
@@ -32,14 +33,10 @@
     <%= link_to "Google", omniauth_authorize_path(:user, :google_oauth2) %>
   </div>
 </div>
+</div>
 
-<div id="landing-bottombar"></div>
 
-<script>
-$(document).on('turbolinks:load', function() {
-  $(".landingtitle span").addClass("stretched");
-  setInterval(function() {
-    $(".landingtitle span").toggleClass("stretched");
-  }, 5000)
-});
-</script>
+
+
+<%= link_to "About the Game", about_pages_path, :style => "color: red;" %><br>
+

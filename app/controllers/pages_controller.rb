@@ -49,4 +49,5 @@ class PagesController < ApplicationController
 
 		render body: nil
 	end
+
 end

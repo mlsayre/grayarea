@@ -27,6 +27,17 @@
 		  <% end %>
 		</ul>
 	  <br><br>
+
+	  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> )</u></span>
+		<ul>
+		  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(30).each do |user| %>
+		  	  <% if user.statgiverstatus.sum + user.statguesserstatus.sum != 0 %>
+		    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= user.statgiverstatus.sum + user.statguesserstatus.sum %></span></li>
+		    	<% end %>
+		  <% end %>
+		</ul>
+	  <br><br>
+
 	  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Giver Average Score - min 5 games)</u></span>
 	  <ul>
 		  <% User.all.sort {|a,b| @alluserstats[b.id][0] <=> @alluserstats[a.id][0]}.first(30).each do |user| %>

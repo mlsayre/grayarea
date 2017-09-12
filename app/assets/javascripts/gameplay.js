@@ -719,12 +719,14 @@ var ready = function() {
 				  	if (gamespoiled === 0 && endgametime !== 0) {
 				  		gameovergoodsfx.play();
 				  	}
-				  	$(".finalpoints" + guessernum).text(playerscore + "pts");
+				  	if (gon.signedin === true) {
+				  		$(".finalpoints" + guessernum).text(playerscore + "pts");
+				  	}
 				  	$(".allguesserinfo").addClass("underwayforgiver");
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
-		  	if (firstload !== "true") {
+		  	if (firstload !== "true" && gon.signedin === true) {
 			  	$.ajax({
 		        url: "/games/updategame",
 		        type: "POST",

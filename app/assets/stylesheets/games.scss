@@ -59,7 +59,7 @@ a.button {
   display: inline-block;
   margin: 0 4px;
 }
-.button.mainplay, .button.startguess {
+.button.mainplay, .button.startguess, .button.dummyplay {
   border: 2px outset lightsteelblue;
   border-radius: 12px;
   text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
@@ -1075,7 +1075,7 @@ span.newsdate {
 img.newsheart {
     height: 16px;
     position: relative;
-    top: 1px;
+    top: 2px;
 }
 li.newsitem.newsseen1 {
   opacity: .4;
