@@ -139,6 +139,10 @@ class GamesController < ApplicationController
       end
       if params[:gamespoiled].to_i == 0
         User.find(@thisgame.giver_id).increment!(:statgivernospoilers, by = 1)
+        newstreak = User.find(@thisgame.giver_id).statgivernospoilers
+        if newstreak > User.find(@thisgame.giver_id).statalltimegiverstreak
+          User.find(@thisgame.giver_id).update(:statalltimegiverstreak => newstreak)
+        end
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
       elsif params[:gamespoiled].to_i == 1
         User.find(@thisgame.giver_id).update(:statgivernospoilers => 0)

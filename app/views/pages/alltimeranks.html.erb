@@ -36,6 +36,16 @@
 		    	<% end %>
 		  <% end %>
 		</ul>
+		<br><br>
+
+	  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Longest All-time Giver Non-Spoiler Streak)</u></span>
+		<ul>
+		  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(30).each do |user| %>
+		  	  <% if user.statalltimegiverstreak != 0 %>
+		    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= user.statalltimegiverstreak %></span></li>
+		    	<% end %>
+		  <% end %>
+		</ul>
 	  <br><br>
 
 	  <span style="font-size: 80%; padding-top:15px; text-align: center; display: block;"><u>(Giver Average Score - min 5 games)</u></span>

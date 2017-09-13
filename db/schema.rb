@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909234849) do
+ActiveRecord::Schema.define(version: 20170913050149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,12 @@ ActiveRecord::Schema.define(version: 20170909234849) do
     t.integer "gsr4_heart", default: 0
     t.integer "gsr5_heart", default: 0
     t.integer "gsr6_heart", default: 0
+    t.datetime "endtime_gsr1", default: "2017-09-06 05:23:13"
+    t.datetime "endtime_gsr2", default: "2017-09-06 05:23:13"
+    t.datetime "endtime_gsr3", default: "2017-09-06 05:23:13"
+    t.datetime "endtime_gsr4", default: "2017-09-06 05:23:13"
+    t.datetime "endtime_gsr5", default: "2017-09-06 05:23:13"
+    t.datetime "endtime_gsr6", default: "2017-09-06 05:23:13"
     t.index ["gamestatus"], name: "index_games_on_gamestatus"
     t.index ["giver_id"], name: "index_games_on_giver_id"
     t.index ["gsr1_score"], name: "index_games_on_gsr1_score"
@@ -178,6 +184,7 @@ ActiveRecord::Schema.define(version: 20170909234849) do
     t.integer "statguesserstatus", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.integer "statgivernotify", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.integer "statguessernotify", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
+    t.integer "statalltimegiverstreak", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

@@ -1,38 +1,33 @@
 class Game < ApplicationRecord
 
   def self.combinedrankings(userid, givermin, guessermin, combinedmin, era)
+    alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+      userid, userid, userid, userid, userid, userid).all
     if era == true
-      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
-        .where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-        userid, userid, userid, userid, userid, userid).all
+      timeback = 1.week.ago
     else
-  	  alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-  		  userid, userid, userid, userid, userid, userid).all
+  	  timeback = 5.years.ago
     end
-  	allscores1a = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
+  	allscores1a = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid).where("endtime_gsr1 > ?", timeback)
   	  .collect(&:gsr1_score)
-  	allscores2a = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
+  	allscores2a = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid).where("endtime_gsr2 > ?", timeback)
   	  .collect(&:gsr2_score)
-  	allscores3a = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid)
+  	allscores3a = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid).where("endtime_gsr3 > ?", timeback)
   	  .collect(&:gsr3_score)  
-  	allscores4a = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid)
+  	allscores4a = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid).where("endtime_gsr4 > ?", timeback)
   	  .collect(&:gsr4_score)
-  	allscores5a = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid)
+  	allscores5a = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid).where("endtime_gsr5 > ?", timeback)
   	  .collect(&:gsr5_score)
-  	allscores6a = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid)
+  	allscores6a = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid).where("endtime_gsr6 > ?", timeback)
   	  .collect(&:gsr6_score)     
 
-    if era == true
-  	  allusergivergames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid).all
-    else
-      allusergivergames = Game.where(:giver_id => userid).all
-    end
-  	allscores1b = allusergivergames.where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
-  	allscores2b = allusergivergames.where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
-  	allscores3b = allusergivergames.where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
-  	allscores4b = allusergivergames.where(:gsr4_status => "over,over").collect(&:gsr4_score) || []
-  	allscores5b = allusergivergames.where(:gsr5_status => "over,over").collect(&:gsr5_score) || []
-  	allscores6b = allusergivergames.where(:gsr6_status => "over,over").collect(&:gsr6_score) || []
+    allusergivergames = Game.where(:giver_id => userid).all
+  	allscores1b = allusergivergames.where(:gsr1_status => "over,over").where("endtime_gsr1 > ?", timeback).collect(&:gsr1_score) || []
+  	allscores2b = allusergivergames.where(:gsr2_status => "over,over").where("endtime_gsr2 > ?", timeback).collect(&:gsr2_score) || []
+  	allscores3b = allusergivergames.where(:gsr3_status => "over,over").where("endtime_gsr3 > ?", timeback).collect(&:gsr3_score) || []
+  	allscores4b = allusergivergames.where(:gsr4_status => "over,over").where("endtime_gsr4 > ?", timeback).collect(&:gsr4_score) || []
+  	allscores5b = allusergivergames.where(:gsr5_status => "over,over").where("endtime_gsr5 > ?", timeback).collect(&:gsr5_score) || []
+  	allscores6b = allusergivergames.where(:gsr6_status => "over,over").where("endtime_gsr6 > ?", timeback).collect(&:gsr6_score) || []
 
     # giver average
     allscoresgiver = allscores1b + allscores2b + allscores3b + allscores4b + allscores5b + allscores6b
@@ -93,17 +88,24 @@ class Game < ApplicationRecord
   end
 
   def self.userguesserrankings(userid, guesserid, min, era)
+    allusergivergames = Game.where(:giver_id => userid).all
     if era == true
-      allusergivergames = Game.where("created_at > ?", 1.week.ago).where(:giver_id => userid).all
+      timeback = 1.week.ago
     else
-      allusergivergames = Game.where(:giver_id => userid).all
+      timeback = 5.years.ago
     end
-    allscores1 = allusergivergames.where(:guesser_id1 => guesserid).where(:gsr1_status => "over,over").collect(&:gsr1_score) || []
-    allscores2 = allusergivergames.where(:guesser_id2 => guesserid).where(:gsr2_status => "over,over").collect(&:gsr2_score) || []
-    allscores3 = allusergivergames.where(:guesser_id3 => guesserid).where(:gsr3_status => "over,over").collect(&:gsr3_score) || []
-    allscores4 = allusergivergames.where(:guesser_id4 => guesserid).where(:gsr4_status => "over,over").collect(&:gsr4_score) || []
-    allscores5 = allusergivergames.where(:guesser_id5 => guesserid).where(:gsr5_status => "over,over").collect(&:gsr5_score) || []
-    allscores6 = allusergivergames.where(:guesser_id6 => guesserid).where(:gsr6_status => "over,over").collect(&:gsr6_score) || []
+    allscores1 = allusergivergames.where(:guesser_id1 => guesserid).where(:gsr1_status => "over,over").where("endtime_gsr1 > ?", timeback)
+                   .collect(&:gsr1_score) || []
+    allscores2 = allusergivergames.where(:guesser_id2 => guesserid).where(:gsr2_status => "over,over").where("endtime_gsr2 > ?", timeback)
+                   .collect(&:gsr2_score) || []
+    allscores3 = allusergivergames.where(:guesser_id3 => guesserid).where(:gsr3_status => "over,over").where("endtime_gsr3 > ?", timeback)
+                   .collect(&:gsr3_score) || []
+    allscores4 = allusergivergames.where(:guesser_id4 => guesserid).where(:gsr4_status => "over,over").where("endtime_gsr4 > ?", timeback)
+                   .collect(&:gsr4_score) || []
+    allscores5 = allusergivergames.where(:guesser_id5 => guesserid).where(:gsr5_status => "over,over").where("endtime_gsr5 > ?", timeback)
+                   .collect(&:gsr5_score) || []
+    allscores6 = allusergivergames.where(:guesser_id6 => guesserid).where(:gsr6_status => "over,over").where("endtime_gsr6 > ?", timeback)
+                   .collect(&:gsr6_score) || []
  
     allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
     if allscores.length < min
@@ -131,25 +133,24 @@ class Game < ApplicationRecord
   end
 
   def self.usergiverrankings(userid, giverid, min, era)
+    alluserguessergames = Game.where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
+      userid, userid, userid, userid, userid, userid).all
     if era == true
-      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
-        .where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-        userid, userid, userid, userid, userid, userid).all
+      timeback = 1.week.ago
     else
-      alluserguessergames = Game.where(:giver_id => giverid).where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-        userid, userid, userid, userid, userid, userid).all
+      timeback = 5.years.ago
     end
-    allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid)
+    allscores1 = alluserguessergames.where(:gsr1_status => "over,over").where(:guesser_id1 => userid).where("endtime_gsr1 > ?", timeback)
       .collect(&:gsr1_score)
-    allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid)
+    allscores2 = alluserguessergames.where(:gsr2_status => "over,over").where(:guesser_id2 => userid).where("endtime_gsr2 > ?", timeback)
       .collect(&:gsr2_score)
-    allscores3 = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid)
+    allscores3 = alluserguessergames.where(:gsr3_status => "over,over").where(:guesser_id3 => userid).where("endtime_gsr3 > ?", timeback)
       .collect(&:gsr3_score)  
-    allscores4 = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid)
+    allscores4 = alluserguessergames.where(:gsr4_status => "over,over").where(:guesser_id4 => userid).where("endtime_gsr4 > ?", timeback)
       .collect(&:gsr4_score)
-    allscores5 = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid)
+    allscores5 = alluserguessergames.where(:gsr5_status => "over,over").where(:guesser_id5 => userid).where("endtime_gsr5 > ?", timeback)
       .collect(&:gsr5_score)
-    allscores6 = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid)
+    allscores6 = alluserguessergames.where(:gsr6_status => "over,over").where(:guesser_id6 => userid).where("endtime_gsr6 > ?", timeback)
       .collect(&:gsr6_score)   
     allscores = allscores1 + allscores2 + allscores3 + allscores4 + allscores5 + allscores6
     if allscores.length < min
@@ -199,13 +200,12 @@ class Game < ApplicationRecord
 
   def self.playedgamesguesser(userid, era)
     if era == true
-      alluserguessergames = Game.where("created_at > ?", 1.week.ago)
-        .where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-        userid, userid, userid, userid, userid, userid).all
+      timeback = 1.week.ago
     else
-      alluserguessergames = Game.where("guesser_id1 = ? OR guesser_id2 = ? OR guesser_id3 = ? OR guesser_id4 = ? OR guesser_id5 = ? OR guesser_id6 = ?", 
-        userid, userid, userid, userid, userid, userid).all
+      timeback = 5.years.ago
     end
+    alluserguessergames = Game.where("(guesser_id1 = ? AND endtime_gsr1 > ?) OR (guesser_id2 = ? AND endtime_gsr2 > ?) OR (guesser_id3 = ? AND endtime_gsr3 > ?) OR (guesser_id4 = ? AND endtime_gsr4 > ?) OR (guesser_id5 = ? AND endtime_gsr5 > ?) OR (guesser_id6 = ? AND endtime_gsr6 > ?)", 
+        userid, timeback, userid, timeback, userid, timeback, userid, timeback, userid, timeback, userid, timeback).all
     return alluserguessergames.length
   end
 
