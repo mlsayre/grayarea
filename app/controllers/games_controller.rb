@@ -154,6 +154,20 @@ class GamesController < ApplicationController
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "allsix")
       end
       Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
+      
+      if current_user.id == @thisgame.guesser_id1
+        @thisgame.update(:endtime_gsr1 => Time.current)
+      elsif current_user.id == @thisgame.guesser_id2
+        @thisgame.update(:endtime_gsr2 => Time.current)
+      elsif current_user.id == @thisgame.guesser_id3
+        @thisgame.update(:endtime_gsr3 => Time.current)
+      elsif current_user.id == @thisgame.guesser_id4
+        @thisgame.update(:endtime_gsr4 => Time.current)
+      elsif current_user.id == @thisgame.guesser_id5
+        @thisgame.update(:endtime_gsr5 => Time.current)
+      elsif current_user.id == @thisgame.guesser_id6
+        @thisgame.update(:endtime_gsr6 => Time.current)
+      end
     end
     
     render body: nil
