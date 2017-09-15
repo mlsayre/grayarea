@@ -152,6 +152,11 @@ class GamesController < ApplicationController
         User.find(current_user.id).increment!(:statguesserallsix, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverallsix, by = 1)
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "allsix")
+        if params[:guessedwords].length == 6
+          User.find(current_user.id).increment!(:statguesserperfect, by = 1)
+          User.find(@thisgame.giver_id).increment!(:statgiverperfect, by = 1)
+          Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "perfect")
+        end
       end
       Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       

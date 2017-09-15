@@ -238,18 +238,22 @@ class Game < ApplicationRecord
     giveuser = User.find(giverid)
     featindexesguesser = {"allsix1" => 1, "allsix5" => 5, "allsix20" => 9, "allsix50" => 12, "allsix100" => 15,
                           "scorehundred1" => 3, "scorehundred5" => 7, "scorehundred20" => 10, "scorehundred50" => 13, 
-                          "scorehundred100" => 16, "scoretwohundred" => 18}
+                          "scorehundred100" => 16, "scoretwohundred" => 18, "perfect1" => 19, "perfect3" => 20, 
+                          "perfect12" => 21, "perfect30" => 22, "perfect60" => 23}
     featindexesgiver = {"allsix1" => 1, "allsix5" => 6, "allsix20" => 11, "allsix50" => 15, "allsix100" => 19,
                         "scorehundred1" => 3, "scorehundred5" => 8, "scorehundred20" => 12, "scorehundred50" => 16, 
                         "scorehundred100" => 20, "scoretwohundred" => 23, "nospoil5" => 4, "nospoil10" => 9, "nospoil20" => 13,
-                        "nospoil30" => 17, "nospoil50" => 22}
+                        "nospoil30" => 17, "nospoil50" => 22, "perfect1" => 24, "perfect3" => 25, "perfect12" => 26, 
+                        "perfect30" => 27, "perfect60" => 28}
     featpointsguesser = {"allsix1" => 20, "allsix5" => 30, "allsix20" => 40, "allsix50" => 60, "allsix100" => 100,
                           "scorehundred1" => 20, "scorehundred5" => 30, "scorehundred20" => 40, "scorehundred50" => 60, 
-                          "scorehundred100" => 100, "scoretwohundred" => 300}
+                          "scorehundred100" => 100, "scoretwohundred" => 300, "perfect1" => 20, "perfect3" => 30, 
+                          "perfect12" => 40, "perfect30" => 60, "perfect60" => 100}
     featpointsgiver = {"allsix1" => 20, "allsix5" => 40, "allsix20" => 50, "allsix50" => 80, "allsix100" => 120,
                         "scorehundred1" => 20, "scorehundred5" => 40, "scorehundred20" => 50, "scorehundred50" => 80, 
                         "scorehundred100" => 120, "scoretwohundred" => 300, "nospoil5" => 20, "nospoil10" => 50, 
-                        "nospoil20" => 70, "nospoil30" => 100, "nospoil50" => 250}
+                        "nospoil20" => 70, "nospoil30" => 100, "nospoil50" => 250, "perfect1" => 20, "perfect3" => 40, 
+                        "perfect12" => 50, "perfect30" => 80, "perfect60" => 120}
 
     if type == "twohundred"
       newarr = curruser.statguesserstatus
@@ -322,6 +326,29 @@ class Game < ApplicationRecord
         Game.statarrayupdategiver(featindexesgiver["allsix5"], featpointsgiver["allsix5"], giveuser)
       elsif giveuser.statgiverstatus[featindexesgiver["allsix1"]] == 0 && giveuser.statgiverallsix > 0
         Game.statarrayupdategiver(featindexesgiver["allsix1"], featpointsgiver["allsix1"], giveuser)
+      end
+    elsif type == "perfect"
+      if curruser.statguesserstatus[featindexesguesser["perfect60"]] == 0 && curruser.statguesserperfect > 59
+        Game.statarrayupdateguesser(featindexesguesser["perfect60"], featpointsguesser["perfect60"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["perfect30"]] == 0 && curruser.statguesserperfect > 29
+        Game.statarrayupdateguesser(featindexesguesser["perfect30"], featpointsguesser["perfect30"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["perfect12"]] == 0 && curruser.statguesserperfect > 11
+        Game.statarrayupdateguesser(featindexesguesser["perfect12"], featpointsguesser["perfect12"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["perfect3"]] == 0 && curruser.statguesserperfect > 2
+        Game.statarrayupdateguesser(featindexesguesser["perfect3"], featpointsguesser["perfect3"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["perfect1"]] == 0 && curruser.statguesserperfect > 0
+        Game.statarrayupdateguesser(featindexesguesser["perfect1"], featpointsguesser["perfect1"], curruser)
+      end
+      if giveuser.statgiverstatus[featindexesgiver["perfect60"]] == 0 && giveuser.statgiverperfect > 59
+        Game.statarrayupdategiver(featindexesgiver["perfect60"], featpointsgiver["perfect60"], giveuser)
+      elsif giveuser.statgiverstatus[featindexesgiver["perfect30"]] == 0 && giveuser.statgiverperfect > 29
+        Game.statarrayupdategiver(featindexesgiver["perfect30"], featpointsgiver["perfect30"], giveuser)
+      elsif giveuser.statgiverstatus[featindexesgiver["perfect12"]] == 0 && giveuser.statgiverperfect > 11
+        Game.statarrayupdategiver(featindexesgiver["perfect12"], featpointsgiver["perfect12"], giveuser)
+      elsif giveuser.statgiverstatus[featindexesgiver["perfect3"]] == 0 && giveuser.statgiverperfect > 2
+        Game.statarrayupdategiver(featindexesgiver["perfect3"], featpointsgiver["perfect3"], giveuser)
+      elsif giveuser.statgiverstatus[featindexesgiver["perfect1"]] == 0 && giveuser.statgiverperfect > 0
+        Game.statarrayupdategiver(featindexesgiver["perfect1"], featpointsgiver["perfect1"], giveuser)
       end
     end
   end
