@@ -549,11 +549,13 @@
 		You've guessed in <%= current_user.lifetimegamesguesser %> game(s)<br><br>
     Guesser picked all 6 of your words: <%= current_user.statgiverallsix %> time(s)<br>
     Guesser scored at least 100 points in your games: <%= current_user.statgiverscorehundred %> time(s)<br>
+    Guesser had perfect game (all 6, no misses) in your games: <%= current_user.statgiverperfect %> time(s)<br>
     Your current no-spoiler streak as giver: <%= current_user.statgivernospoilers %><br>
     Your all-time no-spoiler streak as giver: <%= current_user.statalltimegiverstreak %><br>
     Guesser scored 200 points in your games: <%= current_user.statgiverscoretwohundred %> time(s)<br><br>
     You guessed all 6 words: <%= current_user.statguesserallsix %> time(s)<br>
     You scored at least 100 points while guesser: <%= current_user.statguesserscorehundred %> time(s)<br>
+    You had perfect game while guesser: <%= current_user.statguesserperfect %> time(s)<br>
     You scored 200 points as guesser: <%= current_user.statguesserscoretwohundred %> time(s)
 </div>
 <%= link_to "Back", :back, :class => "howtoback" %>
