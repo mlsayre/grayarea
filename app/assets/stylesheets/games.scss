@@ -1232,12 +1232,14 @@ span.featimgtext {
     padding: 0 3px;
     font-size: 15px;
 }
-.statcontainer li:first-child {
-    background-color: #86ff86;
-}
 .statcontainer li:nth-of-type(odd) {
     background-color: #8acff7;
 }
 .statcontainer li:nth-of-type(even) {
     background-color: powderblue;
+}
+.statcontainer li:first-child {
+  background-color: #86ff86;
+  font-size: 16px;
+  text-shadow: orange 0px 0px 1px;
 }
