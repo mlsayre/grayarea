@@ -1232,6 +1232,9 @@ span.featimgtext {
     padding: 0 3px;
     font-size: 15px;
 }
+.statcontainer li:first-child {
+    background-color: #86ff86;
+}
 .statcontainer li:nth-of-type(odd) {
     background-color: #8acff7;
 }
