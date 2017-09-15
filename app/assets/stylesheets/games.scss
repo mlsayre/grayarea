@@ -864,6 +864,7 @@ img.anim_neutral.animating {
 .lifetimerankings ul {
   padding: 0;
   list-style-position: inside;
+  margin-top: 1px;
 }
 .button.rankselected {
   box-shadow: black 0 0 7px 2px;
@@ -1212,4 +1213,28 @@ span.featimgtext {
 }
 .newfeat {
   box-shadow: red 0px 0px 4px 1px;
+}
+.rankingstabletitle {
+  margin-bottom: 8px; 
+  text-align: center;
+}
+.statcontainer {
+    width: 80%;
+    margin: 0 auto 31px;
+}
+.statcat {
+  font-size: 80%; 
+  padding-top: 5px;
+  text-align: center; 
+  display: block;
+}
+.statcontainer li {
+    padding: 0 3px;
+    font-size: 15px;
+}
+.statcontainer li:nth-of-type(odd) {
+    background-color: #8acff7;
+}
+.statcontainer li:nth-of-type(even) {
+    background-color: powderblue;
 }
