@@ -48,6 +48,14 @@ var ready = function() {
 		$(".menubox").hide();
 	});
 
+	$(".opensettings").click(function(e) {
+		e.preventDefault();
+		$(".settingsbox").addClass("boxin");
+	});
+	$(".settingsclosebutton").click(function() {
+		$(".settingsbox").removeClass("boxin");
+	})
+
 	var sound = gon.sound;
 	soundOnOff(sound);
 

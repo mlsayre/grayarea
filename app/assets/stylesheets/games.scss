@@ -53,19 +53,21 @@ a.button {
   border: 1px solid darkgrey;
   border-radius: 12px;
   padding: 8px 0;
-  max-width: 480px;
+  max-width: 260px;
+  background-color: snow;
 }
 .mainmenubuttons a {
   display: inline-block;
   margin: 0 4px;
 }
 .button.mainplay, .button.startguess, .button.dummyplay {
-  border: 2px outset lightsteelblue;
+  border: 1px solid lightsteelblue;
   border-radius: 12px;
   text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
 }
 .mainmenubuttons button, .mainmenubuttons input {
-  width: 140px;
+  width: 100px;
+  margin: 14px 8px;
 }
 a.menunav {
   width: 48px;
@@ -75,6 +77,52 @@ a.menunav img {
 }
 a.menunav.featsnav {
   position: relative;
+}
+.buttonarea {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 74px;
+    background-color: darkblue;
+    box-shadow: black 0px -1px 3px;
+}
+.buttonarea a {
+    display: inline-block;
+    width: 48px;
+    margin: 11px 8px;
+}
+.settingsbox {
+  text-align: center;
+  width: 280px;
+  background-color: lightcyan;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 4px;
+  border: 1px solid darkblue;
+  transition: 500ms all;
+  transform: translateY(150%);
+  bottom:0;
+}
+.settingsbox.boxout {
+  
+}
+.settingsbox.boxin {
+  transform: translateY(-7%);
+}
+.settingsclosebutton {
+    position: absolute;
+    top: -20px;
+    right: -1px;
+    background-color: rgba(100, 200, 100, 0.6);
+    padding: 0px 24px 1px;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    font-size: 14px;
+    cursor: pointer;
 }
 .howtoplay {
   font-size: 15px;
