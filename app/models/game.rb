@@ -423,17 +423,17 @@ class Game < ApplicationRecord
     newarr = curruser.statguesserstatus
     newarr[guessind] = guesspts
     curruser.update(:statguesserstatus => newarr)
-    newarr = curruser.statguessernotify
-    newarr[guessind] = 1
-    curruser.update(:statguessernotify => newarr)
+    notarr = curruser.statguessernotify
+    notarr[guessind] = 1
+    curruser.update(:statguessernotify => notarr)
   end
 
   def self.statarrayupdategiver(giveind, givepts, giveuser)
     newarr = giveuser.statgiverstatus
     newarr[giveind] = givepts
     giveuser.update(:statgiverstatus => newarr)
-    newarr = giveuser.statgivernotify
-    newarr[giveind] = 1
-    giveuser.update(:statgivernotify => newarr)
+    notarr = giveuser.statgivernotify
+    notarr[giveind] = 1
+    giveuser.update(:statgivernotify => notarr)
   end
 end
