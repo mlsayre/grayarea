@@ -147,9 +147,11 @@ var ready = function() {
 	}
 
 	(function() {
-		console.log("hello?")
 		$(".allwords li").each(function() {
-			if ($(this).find("span").text().indexOf(" ") !== -1) {
+			if ($(this).find("span").text().indexOf("-") !== -1) {
+				thetext = $(this).find("span").text().replace("-", "-<br>");
+				$(this).find("span").html(thetext)
+			} else if ($(this).find("span").text().indexOf(" ") !== -1) {
 				$(this).addClass("spaceword");
 			} else if ($(this).find("span").text().length === 11) {
 				$(this).addClass("spaceword");
