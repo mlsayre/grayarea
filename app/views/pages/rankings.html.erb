@@ -31,10 +31,23 @@ $(".rtalltime").click(function() {
 	$(".rankalltimecontent").removeClass("rankhidden");
 })
 $(window).on('turbolinks:load', function() {
+	var curusername = "<%= current_user.username %>";
+	$(".statcontainer li").each(function() {
+  	if ($(this).data("uname") === curusername) {
+  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+  	}
+  })
 	setTimeout(function() {
 		var wrapper = $('.rankalltimecontent');
 		wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
 		   wrapper.children('.rankalltimecontent').unwrap();
+		   var curusername = "<%= current_user.username %>";
+			  $(".statcontainer li").each(function() {
+			  	console.log("checking " + curusername)
+			  	if ($(this).data("uname") === curusername) {
+			  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+			  	}
+			  })
 
 		});
 	}, 250)

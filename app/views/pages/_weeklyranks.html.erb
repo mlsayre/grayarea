@@ -15,7 +15,7 @@
 				<ul>
 				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][2] <=> @alluserstatsweek[a.id][2]}.first(30).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][2] != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][2] %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][2] %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -26,7 +26,7 @@
 				<ul>
 				  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, true) <=> Game.averageheartspergame(a.id, 5, true)}.first(30).each do |user| %>
 				  	  <% if Game.averageheartspergame(user.id, 5, true) != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, true) %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, true) %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -37,7 +37,7 @@
 			  <ul>
 				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][0] <=> @alluserstatsweek[a.id][0]}.first(30).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][0] != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][0] %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][0] %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -48,7 +48,7 @@
 			  <ul>
 				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][1] <=> @alluserstatsweek[a.id][1]}.first(30).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][1] != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][1] %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][1] %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -59,7 +59,7 @@
 			  <ul>
 				  <% User.all.sort {|a,b| @usersgiversweek[b.id] <=> @usersgiversweek[a.id]}.first(30).each do |user| %>
 				  	  <% if @usersgiversweek[user.id] != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @usersgiversweek[user.id] %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersgiversweek[user.id] %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -70,7 +70,7 @@
 			  <ul>
 				  <% User.all.sort {|a,b| @usersguessersweek[b.id] <=> @usersguessersweek[a.id]}.first(30).each do |user| %>
 				  	  <% if @usersguessersweek[user.id] != -1 %>
-				    		<li style="list-style-type: decimal;"><%= user.username %> <span style="float:right"><%= @usersguessersweek[user.id] %></span></li>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersguessersweek[user.id] %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
