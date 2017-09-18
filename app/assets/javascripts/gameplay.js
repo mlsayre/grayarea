@@ -751,7 +751,7 @@ var ready = function() {
 		                'hint2words' : correctwordshint2,
 		                'hint3words' : correctwordshint3 }
 		      })
-		        .always(function() {
+		        .done(function() {
 		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
 		        	if ($(".chatcontent").length === 0) {
 		        		showChat();
@@ -764,6 +764,9 @@ var ready = function() {
 								   GuessFuncDuring.seeguessesafter();
 								});
 		        	}
+		        })
+		        .fail(function() {
+		        	connectionError();
 		        })
 		     }
 		  }

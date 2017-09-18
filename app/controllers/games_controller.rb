@@ -175,7 +175,10 @@ class GamesController < ApplicationController
       end
     end
     
-    render body: nil
+    #render body: nil
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
   end
 
   def addheart
