@@ -712,6 +712,7 @@ var ready = function() {
 		  		// if (playerscore < 50) {
 		  		// 	$(".giveheart").remove();
 		  		// }
+		  		$(".skip1").remove();
 		  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
 		  		for (var i = 0; i < twords.length; i++) {
 		  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");
@@ -858,8 +859,8 @@ var ready = function() {
 							keepitup[Math.floor(Math.random() * keepitup.length)]);
 						shownotification();
 					} 
-					$("div.anim_correct").text("+" + scoretoadd);
-					$("div.anim_correct.inarow").text(inarowmsg);
+					$('[data-guessword="' + chosen + '"]').find("div.anim_correct").text("+" + scoretoadd);
+					$('[data-guessword="' + chosen + '"]').find("div.anim_correct.inarow").text(inarowmsg);
 					$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
 					setTimeout(function() {
 						$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
