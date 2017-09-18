@@ -259,16 +259,16 @@ class Game < ApplicationRecord
       newarr = curruser.statguesserstatus
       newarr[featindexesguesser["scoretwohundred"]] = curruser.statguesserscoretwohundred * 300
       curruser.update(:statguesserstatus => newarr)
-      newarr = curruser.statguessernotify
-      newarr[featindexesguesser["scoretwohundred"]] = 1
-      curruser.update(:statguessernotify => newarr)
+      notarr = curruser.statguessernotify
+      notarr[featindexesguesser["scoretwohundred"]] = 1
+      curruser.update(:statguessernotify => notarr)
       #now do for giver
-      newarr = giveuser.statgiverstatus
-      newarr[featindexesgiver["scoretwohundred"]] = giveuser.statgiverscoretwohundred * 300
-      giveuser.update(:statgiverstatus => newarr)
-      newarr = giveuser.statgivernotify
-      newarr[featindexesgiver["scoretwohundred"]] = 1
-      giveuser.update(:statgivernotify => newarr)
+      newarr2 = giveuser.statgiverstatus
+      newarr2[featindexesgiver["scoretwohundred"]] = giveuser.statgiverscoretwohundred * 300
+      giveuser.update(:statgiverstatus => newarr2)
+      notarr2 = giveuser.statgivernotify
+      notarr2[featindexesgiver["scoretwohundred"]] = 1
+      giveuser.update(:statgivernotify => notarr2)
     elsif type == "hundred"
       if curruser.statguesserstatus[featindexesguesser["scorehundred100"]] == 0 && curruser.statguesserscorehundred > 99
         Game.statarrayupdateguesser(featindexesguesser["scorehundred100"], featpointsguesser["scorehundred100"], curruser)
