@@ -429,11 +429,11 @@ class Game < ApplicationRecord
   end
 
   def self.statarrayupdategiver(giveind, givepts, giveuser)
-    newarr = giveuser.statgiverstatus
-    newarr[giveind] = givepts
-    giveuser.update(:statgiverstatus => newarr)
-    notarr = giveuser.statgivernotify
-    notarr[giveind] = 1
-    giveuser.update(:statgivernotify => notarr)
+    newarr2 = giveuser.statgiverstatus
+    newarr2[giveind] = givepts
+    giveuser.update(:statgiverstatus => newarr2)
+    notarr2 = giveuser.statgivernotify
+    notarr2[giveind] = 1
+    giveuser.update(:statgivernotify => notarr2)
   end
 end
