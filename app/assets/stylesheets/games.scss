@@ -432,7 +432,7 @@ span.notifynumber {
 .hidden {
   display: none;
 }
-.button {
+.button, .deviseform input[type="submit"] {
   cursor: pointer;
   padding: 8px 6px;
   background-color: #008604;
@@ -1243,4 +1243,23 @@ span.featimgtext {
   background-color: #86ff86;
   font-size: 16px;
   text-shadow: orange 0px 0px 1px;
+}
+.deviseform {
+  text-align: center;
+  padding: 30px 12px;
+  background: linear-gradient(#b4ffb4, transparent);
+}
+.deviseform input {
+  margin-bottom: 16px;
+}
+.deviseform input {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+.deviseform input[type="submit"] {
+  margin: 10px auto 36px;
+  padding: 8px 16px;
+}
+.deviseform input[autocomplete], .deviseform input[autofocus] {
+    border-radius: 4px;
 }
