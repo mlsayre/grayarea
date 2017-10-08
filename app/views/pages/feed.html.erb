@@ -1,6 +1,6 @@
 <% @usernews = News.where(:targetuser_id => current_user.id).order('created_at DESC').all %>
 
-<div class="gametop">Stretch Feed</div>
+<div class="gametop"><span class="gtoneline">Stretch Feed</span></div>
 
 <div class="lifetimerankings howtoplay">
 	<% if @usernews.where(:seen => 0).count == 0 %>

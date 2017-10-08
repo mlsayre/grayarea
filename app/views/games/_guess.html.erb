@@ -31,7 +31,7 @@
 			<span class="hintlabel gameover">Game Over</span>
 			<div class="gameoverinfo">
 				<span class="hintnumheading">
-					<span class="giveheart">Great job by hint giver? Click here. <img src="/assets/Heart-48.png"></img>
+					<span class="giveheart">Great hints? Give <img src="/assets/Heart-48.png"></img>
 					</span>
 					<span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
 					</span>
@@ -152,21 +152,13 @@
 				</span>
 				Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) 
 			</div>
-			<button class="button returntomain">Return to Main</button>
 			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
 	</div>
 </div>
 
+<p id="notice"><%= notice %></p>
 <div class="gamebottom"></div>
-
-<span class="cheatstatus">
-	<% if @cheatstatus == 0 %>
-	  <button class="button thumbdown"><img src="/assets/Thumbs-Down.png"></button>
-	<% else %>
-	  <div class="gamereported">Game reported.(<span class="cheatnum"><%= @cheatnum %></span>)</div>
-	<% end %>
-</span>
 
 <div class="messagebox">
 	<div class="messagetitle"></div>

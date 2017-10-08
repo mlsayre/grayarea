@@ -789,6 +789,12 @@ var ready = function() {
 				})
 	  	})
 
+	  	$(document).on("click", ".gametop, .hintheading", function() {
+	  		$(".clickagain").removeClass("wordsubmitanim");
+	  		$(".reallysubmit").removeClass("reallysubmit");
+	  		$(".word").removeClass("unselected");
+	  	})
+
 	  	function guessoutcome(chosen) {
 	  		$(".guessword").show();
 	  		var scoretoadd = 0;
@@ -822,6 +828,7 @@ var ready = function() {
 	  				$(".gamenotify").html("You got all six words! Very difficult to do... Well done!");
 	  				resultscheersfx.play();
 						shownotification();
+						scoretoadd+= 25;
 						guessstatus = "over,over";
 					} else if (currenthint === hintword1 && correctwordshint1.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
@@ -979,6 +986,7 @@ var ready = function() {
 	  	}
 
 	  	$(".thumbdown").click(function() {
+	  		$(".menubox").hide();
 	  		$(".messagetitle").text("Report game?")
 				$(".messageinfo").html("If this game uses hints you consider to be cheating or offensive, " +
 					"feel free to report it. If half of the players in the game (3) report the game, it will be deleted. " +

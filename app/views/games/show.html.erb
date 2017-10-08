@@ -24,10 +24,19 @@
 	<div class="menutitle">Menu</div>
 	<%= link_to "How to Play", howtoplay_pages_path, :class => "button" %><br>
 	<button class="button soundon"></button><br>
-	<button class="button returntomain">Return to Main</button>
+	<% if @game.gamestatus == "guess" %>
+		<span class="cheatstatus">
+			<% if @cheatstatus == 0 %>
+			  <button class="button thumbdown"><img src="/assets/Thumbs-Down.png"></button>
+			<% else %>
+			  <div class="gamereported">Game reported.(<span class="cheatnum"><%= @cheatnum %></span>)</div>
+			<% end %>
+		</span>
+	<% end %>
 	<button class="button menuclose">Close</button>
 	<div class="menusubtext">Click Close or click anywhere outside box to close</div>
 </div>
+<button class="button returntomain"><img src="/assets/Home-48.png"></button>
 
 <span class="chatarea">
 	<% if @chatshow == true %>

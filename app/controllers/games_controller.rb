@@ -513,6 +513,7 @@ class GamesController < ApplicationController
       respond_to do |format|
         format.json { render json: {} , status: 200 }
       end
+      flash[:notice] = 'Cheat report received.'
     end
   end
 

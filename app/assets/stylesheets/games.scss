@@ -5,7 +5,14 @@
 body {
 	/*font-family: 'Montserrat', sans-serif;*/
   font-family: 'Noto Sans', sans-serif;
-  background-color: #f8fff8;
+  /*background-color: #f8fff8;*/
+  background-color: #f0f0f1;
+}
+.button {
+  background-color: #00a1fe !important;
+}
+.button:hover {
+  background-color: #0088d6 !important;
 }
 .landingtitle {
   margin: 0 auto;
@@ -54,7 +61,7 @@ a.button {
   border-radius: 12px;
   padding: 8px 0;
   max-width: 260px;
-  background-color: snow;
+  background-color: ghostwhite;
 }
 .mainmenubuttons a {
   display: inline-block;
@@ -148,6 +155,7 @@ span.feednotify {
   border-radius: 12px;
   padding: 8px 0;
   max-width: 480px;
+  background-color: ghostwhite;
 }
 .maingamelist li {
   list-style: none;
@@ -160,9 +168,28 @@ span.feednotify {
   text-align: center;
 }
 .gametop {
+  position: relative;
   font-size: 20px;
   text-align: center;
-  margin: 12px 0 10px;
+  padding: 4px 0 2px;
+  background-color: black;
+  color: #ffffff;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin: -8px -8px 2px;
+  height: 54px;
+  box-shadow: darkgreen 0px 1px 3px;
+}
+.gametop span.gtoneline {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 15px;
+}
+.gametop.gtmain {
+  min-height: 32px;
+  height: auto;
 }
 .allwords {
 	text-align: center;
@@ -349,7 +376,7 @@ span.giveheart:hover {
   background-color: pink;
 }
 .giveheart img, .giveheartsuccess img {
-  width: 20px;
+  width: 18px;
   position: relative;
   top: 3px;
 }
@@ -476,9 +503,8 @@ button.deletegameoff img {
   font-weight: bold;
 }
 button.button.thumbdown {
-  position: absolute;
   right: 4px;
-  width: 36px;
+  width: 38px;
   padding: 3px 4px;
 }
 button.button.thumbdown img {
@@ -486,7 +512,6 @@ button.button.thumbdown img {
   vertical-align: middle;
 }
 .gamereported {
-  position: absolute;
   right: 4px;
 }
 .messagebox button.button {
@@ -603,27 +628,51 @@ li.neutralword {
     font-size: 11px;
   }
 }
-button.button.skip1, button.button.returntomain {
+button.button.skip1 {
   display: inline-block;
 }
+.returntomain img {
+    width: 100%;
+    display: block;
+    position: relative;
+    bottom: 1px;
+}
+button.button.returntomain {
+  display: inline-block;
+  height: 41px;
+  width: 41px;
+  padding: 3px;
+  opacity: .7;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 button.menu {
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-    width: 38px;
-    display: inline-block;
-    vertical-align: middle;
-    transition: 200ms all;
-    border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: middle;
+  transition: 200ms all;
+  border-radius: 5px;
+  position: absolute;
+  top: 9px;
+  left: 6px;
+  background-color: #00a1fe;
+  width: 48px;
+  height: 41px;
 }
 button.menu:hover {
-    background-color: lightgrey;
+  background-color: #0088d6 !important;
 }
 .menu img {
-    width: 100%;
-    position: relative;
-    top: 4px;
-    cursor: pointer;
+  width: 82%;
+  position: relative;
+  top: 0px;
+  cursor: pointer;
+}
+span.cheatstatus {
+  display: inline-block;
 }
 
 
@@ -861,6 +910,7 @@ img.anim_neutral.animating {
   border: 1px solid grey;
   padding: 8px;
   border-radius: 6px;
+  background-color: #f8fff8;
 }
 .lifetimerankings ul {
   padding: 0;
@@ -872,6 +922,7 @@ img.anim_neutral.animating {
 }
 .rankbuttons {
   text-align: center;
+  margin-top: 6px;
 }
 button.button.ranktime {
   width: 80px;
@@ -885,12 +936,12 @@ button.button.ranktime {
   text-align: center;
 }
 .chatopenbutton {
-  position: fixed;
-  top: 5px;
+  position: absolute;
+  top: 9px;
   right: 8px;
   width: 44px;
   cursor: pointer;
-  background-color: rgb(215,255,255);
+  background-color: #00a1fe;
   border-radius: 8px;
   padding: 2px;
 }
@@ -1065,7 +1116,7 @@ span.timeshow {
 .gd.button {
   position: fixed;
   bottom: 0;
-  left: 0;
+  right: 0;
   font-size: 12px;
 }
 .guesser1 {
@@ -1140,8 +1191,12 @@ li.newsitem.newsseen1 {
 .giverfeats, .guesserfeats {
   text-align: center;
 }
-.giverfeats .gametop {
-  margin: 0 0 10px
+.giverfeats, .guesserfeats {
+  background-color: #f8fff8;
+}
+.featheading {
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 img.featpagetrophy {
   height: 13px;

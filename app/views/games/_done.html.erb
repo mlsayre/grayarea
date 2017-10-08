@@ -1,5 +1,5 @@
 <div class="gametop" data-gameid="<%= @game.id %>">
-	Game Complete!<br>
+	<span class="gtoneline">Game Complete!</span>
 </div>
 
 <div class="allwords">
@@ -55,6 +55,6 @@
 
 <div class="hintarea guess">
   Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) and <%= @game.hintword2 %>(<%= @game.hintnum2 %>) and <%= @game.hintword3 %>(<%= @game.hintnum3 %>)<br>
-	<button class="button returntomain">Return to Main</button>
+	<button class="button returntomain"><img src="/assets/Home-48.png"></button>
 
 </div>

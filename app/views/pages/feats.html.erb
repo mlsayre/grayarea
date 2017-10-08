@@ -1,10 +1,10 @@
-<div class="gametop"><%= current_user.username %>'s Feats of Stretch</div>
-<div class="centered">Your Feat Score: <%= current_user.statgiverstatus.sum + current_user.statguesserstatus.sum %>
+<div class="gametop"><span class="gtoneline"><%= current_user.username %>'s Feats of Stretch</span></div>
+<div class="featheading centered">Your Feat Score: <%= current_user.statgiverstatus.sum + current_user.statguesserstatus.sum %>
 	<img class="featpagetrophy" src="/assets/Trophy-32.png">
 </div>
 
 <div class="lifetimerankings howtoplay giverfeats">
-  <div class="gametop">Giver Feats</div>
+  <div class="featheading">Giver Feats</div>
 
   <div class="feattrophy givefeat0 hidefeat">
 	  <div class="featshow">
@@ -299,7 +299,7 @@
 </div>
 
 <div class="lifetimerankings howtoplay guesserfeats">
-  <div class="gametop">Guesser Feats</div>
+  <div class="featheading">Guesser Feats</div>
 
   <div class="feattrophy guessfeat0 hidefeat">
 	  <div class="featshow">
@@ -544,7 +544,7 @@
 </div>
 
 <div class="lifetimerankings howtoplay guesserfeats">
-	<div class="gametop">Your Feat Stats</div>
+	<div class="featheading">Your Feat Stats</div>
 		You've created <%= current_user.lifetimegamesgiver %> game(s)<br>
 		You've guessed in <%= current_user.lifetimegamesguesser %> game(s)<br><br>
     Guesser picked all 6 of your words: <%= current_user.statgiverallsix %> time(s)<br>
@@ -558,7 +558,7 @@
     You had perfect game while guesser: <%= current_user.statguesserperfect %> time(s)<br>
     You scored 200 points as guesser: <%= current_user.statguesserscoretwohundred %> time(s)
 </div>
-<%= link_to "Back", :back, :class => "howtoback" %>
+<button class="button returntomain"><img src="/assets/Home-48.png"></button>
 
 <script>
 $(window).on('turbolinks:load', function() {

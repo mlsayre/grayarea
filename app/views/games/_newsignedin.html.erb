@@ -1,4 +1,4 @@
-<div class="menulinks">
+<div class="gametop gtmain">
   Welcome, <%= current_user.username %>!
 </div>
 
@@ -79,7 +79,7 @@
 
 <div class="settingsbox boxout">
   <%= link_to "How to play", howtoplay_pages_path %><br>
-  <%= link_to "About the Game (Sep 15, 2017)", about_pages_path, :style => "color: red;" %><br>
+  <%= link_to "About the Game (Oct 7, 2017)", about_pages_path, :style => "color: red;" %><br>
   <%= link_to "Edit your information", edit_user_registration_path %><br>
   <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
   <div class="settingsclosebutton">Close Settings</div>
