@@ -1,5 +1,5 @@
-<div class="gametop" data-gameid="<%= @game.id %>"><span class="gtoneline">Playing 
-	<%= User.find(@game.giver_id).username%>'s Game</span>
+<div class="gametop" data-gameid="<%= @game.id %>">Playing 
+	<%= User.find(@game.giver_id).username%>'s Game<br>
 	<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
 </div>
 
