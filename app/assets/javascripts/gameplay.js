@@ -790,6 +790,9 @@ var ready = function() {
 	  	})
 
 	  	$(document).on("click", ".gametop, .hintheading", function() {
+	  		$(".word").addClass("firstclick");
+	  		$(".clickagain").removeClass("wordsubmitanim")
+	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
 	  		$(".clickagain").removeClass("wordsubmitanim");
 	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		$(".word").removeClass("unselected");
