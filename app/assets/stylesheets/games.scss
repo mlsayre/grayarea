@@ -656,11 +656,11 @@ button.menu {
   transition: 200ms all;
   border-radius: 5px;
   position: absolute;
-  top: 9px;
+  top: 11px;
   left: 6px;
   background-color: #00a1fe;
-  width: 48px;
-  height: 41px;
+  width: 44px;
+  height: 36px;
 }
 button.menu:hover {
   background-color: #0088d6 !important;
@@ -937,9 +937,10 @@ button.button.ranktime {
 }
 .chatopenbutton {
   position: absolute;
-  top: 9px;
+  top: 11px;
   right: 8px;
-  width: 44px;
+  width: 40px;
+  height: 32px;
   cursor: pointer;
   background-color: #00a1fe;
   border-radius: 8px;
