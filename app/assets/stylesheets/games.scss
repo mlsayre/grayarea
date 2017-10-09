@@ -63,6 +63,17 @@ a.button {
   max-width: 260px;
   background-color: ghostwhite;
 }
+.mainmenubuttons.guestplaying {
+  padding: 8px 4px;
+  max-width: 96%;
+}
+.guestplaying .guessermsg {
+  margin: 80px auto 0;
+}
+.guestplaying button {
+  position: relative;
+  top: 48px;
+}
 .mainmenubuttons a {
   display: inline-block;
   margin: 0 4px;

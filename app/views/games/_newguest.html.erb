@@ -2,14 +2,14 @@
   Welcome, Guest!
 </div>
 
-<div class="mainmenubuttons">
+<div class="mainmenubuttons guestplaying">
   <button class="button dummyplay disabled">Play as Giver</button>
   <button class="button startguess playasguest">Play as Guesser</button><br><br>
 
 
 
   <span class="guessermsg">(Sign up and play 3 games to activate Giver button)</span>
-   <%= link_to "How to Play", howtoplay_pages_path %><br><br>
+   <%= link_to "How to Play", howtoplay_pages_path, :class => "button", :style => "margin-top: 6px;" %><br><br>
 
   Feel free to play as many games as you want as a word guesser! Sign up to enable stat-tracking, to join the rankings, and also to be able to give clues to other players.<br><br>
   <%= link_to "Sign up", new_user_registration_path %><br>
@@ -36,7 +36,4 @@
 </div>
 
 
-
-
-<%= link_to "About the Game", about_pages_path, :style => "color: red;" %><br>
 
