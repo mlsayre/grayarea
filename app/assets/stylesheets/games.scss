@@ -169,23 +169,24 @@ span.feednotify {
 }
 .gametop {
   position: relative;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
-  padding: 4px 0 2px;
-  background-color: black;
+  padding: 2px 0 2px;
+  background-color: darkblue;
   color: #ffffff;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  margin: -8px -8px 2px;
-  height: 54px;
-  box-shadow: darkgreen 0px 1px 3px;
+  margin: -8px -8px 4px;
+  height: 46px;
+  box-shadow: black 0px 1px 3px;
+  text-shadow: black 2px 2px 2px;
 }
 .gametop span.gtoneline {
   position: absolute;
   margin: 0 auto;
   left: 0;
   right: 0;
-  top: 15px;
+  top: 12px;
 }
 .gametop.gtmain {
   min-height: 32px;
@@ -594,8 +595,9 @@ li.neutralword {
   font-size: 14px;
 }
 .scoreSection {
-    font-size: 14px;
-    margin: 4px 0;
+  font-size: 14px;
+  margin: 2px 0;
+  text-shadow: none;
 }
 .button.yesnobtn {
   display: inline-block;
@@ -645,6 +647,8 @@ button.button.returntomain {
   opacity: .7;
   position: fixed;
   bottom: 0;
+  left: 0;
+  margin: 0;
 }
 button.menu {
   padding: 0;
@@ -654,11 +658,11 @@ button.menu {
   transition: 200ms all;
   border-radius: 5px;
   position: absolute;
-  top: 11px;
+  top: 10px;
   left: 6px;
   background-color: #00a1fe;
-  width: 44px;
-  height: 36px;
+  width: 36px;
+  height: 30px;
 }
 button.menu:hover {
   background-color: #0088d6 !important;
@@ -935,10 +939,10 @@ button.button.ranktime {
 }
 .chatopenbutton {
   position: absolute;
-  top: 11px;
+  top: 10px;
   right: 8px;
-  width: 40px;
-  height: 32px;
+  width: 34px;
+  height: 26px;
   cursor: pointer;
   background-color: #00a1fe;
   border-radius: 8px;

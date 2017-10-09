@@ -503,17 +503,18 @@ class GamesController < ApplicationController
     current_user.increment!(:lifetimecheatreports, by = 1)
 
     if @cheatnum > 2
+      flash[:notice] = 'Third cheat report received. Game deleted.'
       respond_to do |format|
         format.json { render json: {} , status: 666 }
       end
       User.find(@thisgame.giver_id).increment!(:lifetimecheatgames, by = 1)
       @thisgame.delete
-      flash[:notice] = 'Third cheat report received. Game deleted.'
+      
     else
+      flash[:notice] = 'Cheat report received.'
       respond_to do |format|
         format.json { render json: {} , status: 200 }
       end
-      flash[:notice] = 'Cheat report received.'
     end
   end
 
