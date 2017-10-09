@@ -337,8 +337,8 @@ var ready = function() {
 	$(".deletegame").click(function() {
 		$(".messagetitle").text("Delete game?")
 		$(".messageinfo").html("No good hints coming to mind? You may " +
-			"delete this game. Note you can only delete at most one out of every 4 games. Once you've created " +
-			"another 3 games, you'll be able to delete another unfinished game.");
+			"delete this game. Note you can only delete at most one out of every 3 games. Once you've created " +
+			"another 2 games, you'll be able to delete another unfinished game.");
 		$(".messageaction").html('<button class="button deleteunfinished">Delete the Game</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
@@ -625,7 +625,8 @@ var ready = function() {
 	  	var notifytimeout;
 	  	var heartstatus = gon.heartstatus;
 			if (heartstatus === 1) {
-				$(".giveheart").remove();
+				$(".giveheart").hide();
+				$(".removeheart").show();
 			}
 
 			$(".giveheart").click(function() {
@@ -638,7 +639,9 @@ var ready = function() {
 	      })
 	        .done(function() {
 	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-	        	$(".giveheart").remove();
+	        	$(".giveheart").hide();
+	        	$(".removeheart").show();
+	        	$(".removeheartsuccess").css("display", "none");
 	        	$(".giveheartsuccess").css("display", "block");
 	        	var wrapper = $('.allguesserinfo');
 						wrapper.load(pathname + " .allguesserinfo", function() {
@@ -647,6 +650,34 @@ var ready = function() {
 						});
 	        	setTimeout(function() {
 	        		$(".giveheartsuccess").fadeOut();
+	        	}, 3500);
+	        })
+	        .fail(function() {
+	        	connectionError();
+	        })
+			})
+
+			$(".removeheart").click(function() {
+				$.ajax({
+	        url: "/games/removeheart",
+	        type: "POST",
+	        dataType:'json',
+	        data: { 'game_id' : parseInt(gameid),
+	                'heartgiven' : 0 }
+	      })
+	        .done(function() {
+	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+	        	$(".giveheart").show();
+	        	$(".removeheart").hide()
+	        	$(".giveheartsuccess").css("display", "none");
+	        	$(".removeheartsuccess").css("display", "block");
+	        	var wrapper = $('.allguesserinfo');
+						wrapper.load(pathname + " .allguesserinfo", function() {
+						   wrapper.children('.allguesserinfo').unwrap();
+						   GuessFuncDuring.seeguessesafter();
+						});
+	        	setTimeout(function() {
+	        		$(".removeheartsuccess").fadeOut();
 	        	}, 3500);
 	        })
 	        .fail(function() {
@@ -959,19 +990,34 @@ var ready = function() {
 	  	}
 
 	  	$(".skip1").click(function() {
-	  		$(".guessword").show();
-	  		if (currenthint === hintword1) {
-	  			currenthint = hintword2;
-  				currenthintnum = hintnum2;
-  				guessstatus = "hint2,word1";
-	  		} else if (currenthint === hintword2) {
-	  			currenthint = hintword3;
-  				currenthintnum = hintnum3;
-  				guessstatus = "hint3,word1";
-	  		} else {
-	  			guessstatus = "over,over";
+	  		$(".messagetitle").text("Skip hint?")
+				$(".messageinfo").html("Do you really want to skip this hint?");
+				$(".messageaction").html('<button class="button reallyskip">Skip</button>' +
+					                       '<button class="button closemessagebox">Cancel</button>');
+				$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+				$(".reallyskip").click(function() {
+					forrealskip();
+					closemessagebox();
+				})
+				$(".closemessagebox").click(function() { closemessagebox(); return false; });
+				$(".pagecover").click(function() { closemessagebox(); return false; });
+				$(".messagebox").show();
+				$(".pagecover").show();
+	  		function forrealskip() {
+	  			$(".guessword").show();
+		  		if (currenthint === hintword1) {
+		  			currenthint = hintword2;
+	  				currenthintnum = hintnum2;
+	  				guessstatus = "hint2,word1";
+		  		} else if (currenthint === hintword2) {
+		  			currenthint = hintword3;
+	  				currenthintnum = hintnum3;
+	  				guessstatus = "hint3,word1";
+		  		} else {
+		  			guessstatus = "over,over";
+		  		}
+		  		boardupdate(0, "false", 0);
 	  		}
-	  		boardupdate(0, "false", 0);
 	  	});
 
 	  	function shownotification(trigger) {

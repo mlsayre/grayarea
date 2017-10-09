@@ -216,6 +216,45 @@ class GamesController < ApplicationController
     end
   end
 
+  def removeheart
+    @thisgame = Game.find(params[:game_id])
+    @gamegiver = User.find(@thisgame.giver_id)
+    if @gamegiver.lifetimehearts > 0
+      @gamegiver.decrement!(:lifetimehearts, by = 1)
+    end
+    if @gamegiver.heartnotify > 0
+      @gamegiver.decrement!(:heartnotify, by = 1)
+    end
+    
+
+    if current_user.id == @thisgame.guesser_id1
+      @thisgame.update(:gsr1_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr1_score
+    elsif current_user.id == @thisgame.guesser_id2
+      @thisgame.update(:gsr2_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr2_score
+    elsif current_user.id == @thisgame.guesser_id3
+      @thisgame.update(:gsr3_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr3_score
+    elsif current_user.id == @thisgame.guesser_id4
+      @thisgame.update(:gsr4_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr4_score
+    elsif current_user.id == @thisgame.guesser_id5
+      @thisgame.update(:gsr5_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr5_score
+    elsif current_user.id == @thisgame.guesser_id6
+      @thisgame.update(:gsr6_heart => params[:heartgiven])
+      heartscore = @thisgame.gsr6_score
+    end
+
+    News.where(:newstype => 3).where(:targetuser_id => @thisgame.giver_id).where(:giveruser_id => current_user.id)
+        .where(:targetgame_id => @thisgame.id).where(:points => heartscore).delete_all
+
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
+  end
+
   def resetheartnotify
     current_user.update(:heartnotify => 0)
 
@@ -472,7 +511,7 @@ class GamesController < ApplicationController
     @thisgame = Game.find(params[:game_id])
     @thisgame.delete
 
-    current_user.update(:giverdeletegamesleft => 3)
+    current_user.update(:giverdeletegamesleft => 2)
 
     respond_to do |format|
       format.json  { render json: {} , status: 200 }

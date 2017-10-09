@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post 'resetchatnotify'
       post 'delgame'
       post 'addheart'
+      post 'removeheart'
       post 'resetheartnotify'
       post 'givingdeletegame'
       post 'guessingreportgame'

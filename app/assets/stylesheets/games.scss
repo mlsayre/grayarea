@@ -360,7 +360,7 @@ span.guessermsg {
   height: 37px;
   position: relative;
 }
-span.giveheart {
+span.giveheart, span.removeheart {
   position: relative;
   bottom: 4px;
   font-style: italic;
@@ -374,16 +374,26 @@ span.giveheart {
   line-height: 1.2;
   cursor: pointer;
 }
-span.giveheart:hover {
+span.giveheart:hover, span.removeheart:hover {
   background-color: pink;
 }
-.giveheart img, .giveheartsuccess img {
+.giveheart img, .giveheartsuccess img, .removeheart img, .removeheartsuccess img {
   width: 18px;
   position: relative;
   top: 3px;
 }
-.giveheartsuccess {
+.giveheartsuccess, .removeheartsuccess {
   display: none;
+}
+span.removeheart {
+  display: none;
+  width: 100px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+span.removeheart img {
+  width: 12px;
+  top: 1px;
 }
 span.heartshow img {
   width: 18px;
@@ -642,14 +652,19 @@ button.button.skip1 {
 }
 button.button.returntomain {
   display: inline-block;
-  height: 41px;
-  width: 41px;
+  height: 38px;
+  width: 38px;
   padding: 3px;
-  opacity: .7;
+  opacity: .65;
   position: fixed;
   bottom: 0;
   left: 0;
   margin: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  border-left: 0;
+  border-bottom: 0;
 }
 button.menu {
   padding: 0;

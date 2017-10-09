@@ -150,7 +150,10 @@
 					</script>
 					<% end %>
 				</span>
-				Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) 
+				Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) <br>
+				<span class="removeheart">Remove your <img src="/assets/Heart-48.png"></img></span>
+				<span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
+				</span>
 			</div>
 			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
