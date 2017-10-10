@@ -10,9 +10,11 @@ body {
 }
 .button {
   background-color: #00a1fe !important;
+  background: linear-gradient(#00a1fe 30%, #007bd4) !important;
 }
 .button:hover {
   background-color: #0088d6 !important;
+  background: linear-gradient(#1facfd 30%, #0069b5) !important;
 }
 .landingtitle {
   margin: 0 auto;
@@ -104,6 +106,7 @@ a.menunav.featsnav {
     right: 0;
     height: 74px;
     background-color: darkblue;
+    background: linear-gradient(darkblue, #00619a);
     box-shadow: black 0px -1px 3px;
 }
 .buttonarea a {
@@ -184,6 +187,7 @@ span.feednotify {
   text-align: center;
   padding: 2px 0 2px;
   background-color: darkblue;
+  background: linear-gradient(#0083d0, darkblue);
   color: #ffffff;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -311,6 +315,7 @@ span.feednotify {
 .allwords li.targetword {
   border: 1px solid darkgreen;
   background-color: green;
+  background: linear-gradient(#019c01 30%,#006300);
   color: white;
 }
 .allwords li.badword {
@@ -677,6 +682,14 @@ button.button.returntomain {
   border-left: 0;
   border-bottom: 0;
 }
+button.button.returntomain.maininline {
+  position: relative;
+  border-radius: 4px !important;
+  opacity: 1;
+  height: 36px;
+  top: 2px;
+  border: 1px solid darkgreen;
+}
 button.menu {
   padding: 0;
   margin: 0;
@@ -690,6 +703,7 @@ button.menu {
   background-color: #00a1fe;
   width: 36px;
   height: 30px;
+  box-shadow: 0px 3px 10px -4px #f3f3f3 inset;
 }
 button.menu:hover {
   background-color: #0088d6 !important;
@@ -701,7 +715,7 @@ button.menu:hover {
   cursor: pointer;
 }
 span.cheatstatus {
-  display: inline-block;
+  display: block;
 }
 
 
@@ -974,6 +988,11 @@ button.button.ranktime {
   background-color: #00a1fe;
   border-radius: 8px;
   padding: 2px;
+  box-shadow: 0px 3px 10px -4px #f3f3f3 inset;
+  transition: 200ms all;
+}
+.chatopenbutton:hover {
+  background-color: #0088d6 !important;
 }
 .chatopenbutton img {
   width: 100%;
