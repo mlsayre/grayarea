@@ -30,6 +30,119 @@ $(".rtalltime").click(function() {
 	$(".rankweeklycontent").addClass("rankhidden");
 	$(".rankalltimecontent").removeClass("rankhidden");
 })
+
+$(".weeklystats .next").click(function() {
+	if ($(".showstat").next(".weeklystats .statcontainer").length === 0) {
+		$(".weeklystats .showstat").addClass("statleaving");
+		$(".weeklystats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+			$(".weeklystats .statcontainer").first().addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	} else {
+		$(".weeklystats .showstat").addClass("statleaving");
+		$(".weeklystats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+			  .next(".statcontainer").addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	}
+})
+
+$(".weeklystats .prev").click(function() {
+	if ($(".showstat").prev(".weeklystats .statcontainer").length === 0) {
+		$(".weeklystats .showstat").addClass("statleaving");
+		$(".weeklystats .statcontainer").last().find("ul, .statcat").addClass("slidetoright");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+			$(".weeklystats .statcontainer").last().addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	} else {
+		$(".weeklystats .showstat").addClass("statleaving");
+		$(".weeklystats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+			  .prev(".statcontainer").addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	}
+})
+
+$(document).on("click", ".alltimestats .next", function() {
+	if ($(".showstat").next(".alltimestats .statcontainer").length === 0) {
+		$(".alltimestats .showstat").addClass("statleaving");
+		$(".alltimestats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+			$(".alltimestats .statcontainer").first().addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	} else {
+		$(".alltimestats .showstat").addClass("statleaving");
+		$(".alltimestats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+			  .next(".statcontainer").addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	}
+})
+
+$(document).on("click", ".alltimestats .prev", function() {
+	if ($(".showstat").prev(".alltimestats .statcontainer").length === 0) {
+		$(".alltimestats .showstat").addClass("statleaving");
+		$(".alltimestats .statcontainer").last().find("ul, .statcat").addClass("slidetoright");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+			$(".alltimestats .statcontainer").last().addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	} else {
+		$(".alltimestats .showstat").addClass("statleaving");
+		$(".alltimestats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		setTimeout(function() {
+			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+			  .prev(".statcontainer").addClass("showstat");
+			setTimeout(function() {
+				$(".slidetoright").removeClass("slidetoright");
+				$(".slidetoleft").removeClass("slidetoleft");
+			},120)
+		}, 120)
+	}
+})
+
 $(window).on('turbolinks:load', function() {
 	var curusername = "<%= current_user.username %>";
 	$(".statcontainer li").each(function() {

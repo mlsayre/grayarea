@@ -954,11 +954,42 @@ img.anim_neutral.animating {
   padding: 8px;
   border-radius: 6px;
   background-color: #f8fff8;
+  position: relative;
+  height: 70vh;
 }
 .lifetimerankings ul {
   padding: 0;
   list-style-position: inside;
   margin-top: 1px;
+}
+.button.rankingnav {
+    height: 32px;
+    padding: 0;
+    width: 32px;
+    position: absolute;
+    margin: 0;
+    transition: 250ms all;
+}
+.rankingnav img {
+    width: 80%;
+    margin: 3px;
+}
+.button.rankingnav.prev {
+    top: 50%;
+    left: 12px;
+}
+.button.rankingnav.next {
+    top: 50%;
+    right: 12px;
+}
+.statcontainer.showstat {
+  display: block;
+}
+.slidetoleft {
+  transform: translateX(-101%);
+}
+.slidetoright {
+  transform: translateX(101%);
 }
 .button.rankselected {
   box-shadow: black 0 0 7px 2px;
@@ -1324,14 +1355,27 @@ span.featimgtext {
   text-align: center;
 }
 .statcontainer {
-    width: 80%;
+    width: 73%;
     margin: 0 auto 31px;
+    display: none;
+    position: relative;
+    overflow: hidden;
+}
+.statcontainer ul {
+    border: 1px black solid;
+    padding: 3px;
+    background: linear-gradient(darkblue, lightblue);
+    border-radius: 4px;
+    transition: 120ms all;
+    position: relative;
 }
 .statcat {
   font-size: 80%; 
   padding-top: 5px;
   text-align: center; 
   display: block;
+  position: relative;
+  transition: 120ms all;
 }
 .statcontainer li {
     padding: 0 3px;

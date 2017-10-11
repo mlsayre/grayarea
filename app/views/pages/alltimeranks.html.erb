@@ -1,19 +1,26 @@
 <div class="rankalltimecontent rankhidden">
-<div class="lifetimerankings">
+<!-- <div class="lifetimerankings">
 		<div class="centered" style="font-size: 18px; color: darkgreen; margin-bottom: 4px;">Your Combined average: <%= @combinedavg %></div>
 		<div class="centered">Your Giver average: <%= @giveravg %></div>
 		<div class="centered">Your Guesser average: <%= @guesseravg %></div>
 		
-		<!-- <div class="centered" style="font-size:13px">(each out of 200 possible points)</div> -->
-	</div>
+	</div> -->
 
-	<div class="lifetimerankings">
-		<div class="rankingstabletitle">World Top 30 Players</div>
+	<div class="lifetimerankings alltimestats">
+		<div class="button rankingnav prev">
+			<img src="/assets/Left-01-48.png">
+		</div>
+		<div class="button rankingnav next">
+			<img src="/assets/Right-01-48.png">
+		</div>
 
-		<div class="statcontainer">
-			<span class="statcat"><u>Combined Average Score - min 5 games</u></span>
+
+		<div class="rankingstabletitle">All-time Top 15</div>
+
+		<div class="statcontainer atcombined showstat">
+			<span class="statcat"><u>Combined Avg Score - min 5 games</u></span>
 			<ul>
-			  <% User.all.sort {|a,b| @alluserstats[b.id][2] <=> @alluserstats[a.id][2]}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| @alluserstats[b.id][2] <=> @alluserstats[a.id][2]}.first(15).each do |user| %>
 			  	  <% if @alluserstats[user.id][2] != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][2] %></span></li>
 			    	<% end %>
@@ -21,10 +28,10 @@
 			</ul>
 	  </div>
 
-	  <div class="statcontainer">
-			<span class="statcat"><u>Average <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
+	  <div class="statcontainer athearts">
+			<span class="statcat"><u>Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
 			<ul>
-			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, false) <=> Game.averageheartspergame(a.id, 5, false)}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, false) <=> Game.averageheartspergame(a.id, 5, false)}.first(15).each do |user| %>
 			  	  <% if Game.averageheartspergame(user.id, 5, false) != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, false) %></span></li>
 			    	<% end %>
@@ -32,10 +39,10 @@
 			</ul>
 	  </div>
 
-	  <div class="statcontainer">
+	  <div class="statcontainer atfeat">
 		  <span class="statcat"><u>Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </u></span>
 			<ul>
-			  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(15).each do |user| %>
 			  	  <% if user.statgiverstatus.sum + user.statguesserstatus.sum != 0 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgiverstatus.sum + user.statguesserstatus.sum %></span></li>
 			    	<% end %>
@@ -43,10 +50,10 @@
 			</ul>
 		</div>
 
-		<div class="statcontainer">
+		<div class="statcontainer atnonspoiler">
 		  <span class="statcat"><u>Longest All-time Giver Non-Spoiler Streak</u></span>
 			<ul>
-			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(15).each do |user| %>
 			  	  <% if user.statalltimegiverstreak != 0 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimegiverstreak %></span></li>
 			    	<% end %>
@@ -54,10 +61,10 @@
 			</ul>
 	  </div>
 
-	  <div class="statcontainer">
-		  <span class="statcat"><u>Giver Average Score - min 5 games</u></span>
+	  <div class="statcontainer atgiver">
+		  <span class="statcat"><u>Giver Avg Score - min 5 games</u></span>
 		  <ul>
-			  <% User.all.sort {|a,b| @alluserstats[b.id][0] <=> @alluserstats[a.id][0]}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| @alluserstats[b.id][0] <=> @alluserstats[a.id][0]}.first(15).each do |user| %>
 			  	  <% if @alluserstats[user.id][0] != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][0] %></span></li>
 			    	<% end %>
@@ -65,10 +72,10 @@
 			</ul>
 	  </div>
 
-	  <div class="statcontainer">
-		  <span class="statcat"><u>Guesser Average Score - min 5 games</u></span>
+	  <div class="statcontainer atguesser">
+		  <span class="statcat"><u>Guesser Avg Score - min 5 games</u></span>
 		  <ul>
-			  <% User.all.sort {|a,b| @alluserstats[b.id][1] <=> @alluserstats[a.id][1]}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| @alluserstats[b.id][1] <=> @alluserstats[a.id][1]}.first(15).each do |user| %>
 			  	  <% if @alluserstats[user.id][1] != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstats[user.id][1] %></span></li>
 			    	<% end %>
@@ -76,10 +83,10 @@
 			</ul>
 		</div>
 
-		<div class="statcontainer">
+		<div class="statcontainer attopgivers">
 			<span class="statcat"><u>Your Top Hint Givers - min 5 games</u></span>
 		  <ul>
-			  <% User.all.sort {|a,b| @usersgivers[b.id] <=> @usersgivers[a.id]}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| @usersgivers[b.id] <=> @usersgivers[a.id]}.first(15).each do |user| %>
 			  	  <% if @usersgivers[user.id] != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersgivers[user.id] %></span></li>
 			    	<% end %>
@@ -87,10 +94,10 @@
 			</ul>
 		</div>
 
-		<div class="statcontainer">
+		<div class="statcontainer attopguessers">
 			<span class="statcat"><u>Your Top Guessers - min 5 games</u></span>
 		  <ul>
-			  <% User.all.sort {|a,b| @usersguessers[b.id] <=> @usersguessers[a.id]}.first(30).each do |user| %>
+			  <% User.all.sort {|a,b| @usersguessers[b.id] <=> @usersguessers[a.id]}.first(15).each do |user| %>
 			  	  <% if @usersguessers[user.id] != -1 %>
 			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersguessers[user.id] %></span></li>
 			    	<% end %>
@@ -98,11 +105,11 @@
 			</ul>
 		</div>
 
-		<span class="statcat"><u>Your Cheat Score (your games receiving 3+ cheat reports)</u></span>
+		<!-- <span class="statcat"><u>Your Cheat Score (your games receiving 3+ cheat reports)</u></span>
 		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span>
 
 		<span class="statcat"><u>Games You've Reported</u></span>
-		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span><br><br>
+		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span><br><br> -->
 
 	</div>
 

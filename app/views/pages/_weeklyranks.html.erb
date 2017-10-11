@@ -1,19 +1,24 @@
-<div class="lifetimerankings">
+	<!-- <div class="lifetimerankings">
 		<div class="centered" style="font-size: 18px; color: darkgreen; margin-bottom: 4px;">Your Combined average: <%= @combinedavgweek %></div>
 		<div class="centered">Your Giver average: <%= @giveravgweek %></div>
 		<div class="centered">Your Guesser average: <%= @guesseravgweek %></div>
 		
-		<!-- <div class="centered" style="font-size:13px">(each out of 200 possible points)</div> -->
-	</div>
+	</div> -->
 
-	<div class="lifetimerankings">
+	<div class="lifetimerankings weeklystats">
+		<div class="button rankingnav prev">
+			<img src="/assets/Left-01-48.png">
+		</div>
+		<div class="button rankingnav next">
+			<img src="/assets/Right-01-48.png">
+		</div>
 
-		<div class="rankingstabletitle">World Top 30 Players</div>
+		<div class="rankingstabletitle">Weekly Top 15</div>
 			
-			<div class="statcontainer">
-				<span class="statcat"><u>Combined Average Score - min 5 games</u></span>
+			<div class="statcontainer wkcombined showstat">
+				<span class="statcat"><u>Combined Avg Score - min 5 games</u></span>
 				<ul>
-				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][2] <=> @alluserstatsweek[a.id][2]}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][2] <=> @alluserstatsweek[a.id][2]}.first(15).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][2] != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][2] %></span></li>
 				    	<% end %>
@@ -21,10 +26,10 @@
 				</ul>
 	  	</div>
 
-	  	<div class="statcontainer">
-				<span class="statcat"><u>Average <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
+	  	<div class="statcontainer wkhearts">
+				<span class="statcat"><u>Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
 				<ul>
-				  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, true) <=> Game.averageheartspergame(a.id, 5, true)}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, true) <=> Game.averageheartspergame(a.id, 5, true)}.first(15).each do |user| %>
 				  	  <% if Game.averageheartspergame(user.id, 5, true) != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, true) %></span></li>
 				    	<% end %>
@@ -32,10 +37,21 @@
 				</ul>
 	  	</div>
 
-	  	<div class="statcontainer">
-			  <span class="statcat"><u>Giver Average Score - min 5 games</u></span>
+	  	<div class="statcontainer wknonspoiler">
+			  <span class="statcat"><u>Current Giver Non-Spoiler Streak</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.statgivernospoilers <=> a.statgivernospoilers }.first(15).each do |user| %>
+				  	  <% if user.statgivernospoilers != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgivernospoilers %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
+
+	  	<div class="statcontainer wkgiver">
+			  <span class="statcat"><u>Giver Avg Score - min 5 games</u></span>
 			  <ul>
-				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][0] <=> @alluserstatsweek[a.id][0]}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][0] <=> @alluserstatsweek[a.id][0]}.first(15).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][0] != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][0] %></span></li>
 				    	<% end %>
@@ -43,10 +59,10 @@
 				</ul>
 			</div>
 
-			<div class="statcontainer">
-			  <span class="statcat"><u>Guesser Average Score - min 5 games</u></span>
+			<div class="statcontainer wkguesser">
+			  <span class="statcat"><u>Guesser Avg Score - min 5 games</u></span>
 			  <ul>
-				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][1] <=> @alluserstatsweek[a.id][1]}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][1] <=> @alluserstatsweek[a.id][1]}.first(15).each do |user| %>
 				  	  <% if @alluserstatsweek[user.id][1] != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][1] %></span></li>
 				    	<% end %>
@@ -54,10 +70,10 @@
 				</ul>
 			</div>
 
-			<div class="statcontainer">
+			<div class="statcontainer wktopgivers">
 				<span class="statcat"><u>Your Top Hint Givers - min 5 games</u></span>
 			  <ul>
-				  <% User.all.sort {|a,b| @usersgiversweek[b.id] <=> @usersgiversweek[a.id]}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| @usersgiversweek[b.id] <=> @usersgiversweek[a.id]}.first(15).each do |user| %>
 				  	  <% if @usersgiversweek[user.id] != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersgiversweek[user.id] %></span></li>
 				    	<% end %>
@@ -65,10 +81,10 @@
 				</ul>
 			</div>
 
-			<div class="statcontainer">
+			<div class="statcontainer wktopguessers">
 				<span class="statcat"><u>Your Top Guessers - min 5 games</u></span>
 			  <ul>
-				  <% User.all.sort {|a,b| @usersguessersweek[b.id] <=> @usersguessersweek[a.id]}.first(30).each do |user| %>
+				  <% User.all.sort {|a,b| @usersguessersweek[b.id] <=> @usersguessersweek[a.id]}.first(15).each do |user| %>
 				  	  <% if @usersguessersweek[user.id] != -1 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @usersguessersweek[user.id] %></span></li>
 				    	<% end %>
