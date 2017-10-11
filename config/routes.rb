@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'feats' => 'pages#feats'
       get 'feed' => 'pages#feed'
       get 'alltimeranks' => 'pages#alltimeranks'
+      get 'weeklyranks' => 'pages#weeklyranks'
       post 'allfeedseen'
       post 'resetstatnotify'
     end

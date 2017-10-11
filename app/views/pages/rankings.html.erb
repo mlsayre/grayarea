@@ -1,17 +1,11 @@
 <div class="gametop"><span class="gtoneline">Rankings</span></div>
 
-<div class="rankbuttons">
-	<button class="button ranktime rtweekly rankselected">Weekly</button>
-	<button class="button ranktime rtalltime">All-time</button>
-	<button class="button ranktime rtyou">You</button>
-</div>
-
 <div class="rankweeklycontent">
 	<%= render "weeklyranks" %>
 </div>
 
 <div class="rankalltimecontent rankhidden">
-	
+	<%= render "alltimeranks" %>
 </div>
 
 <div class="rankyou rankhidden">
@@ -27,6 +21,12 @@
 
 <div class="centered">
 	<button class="button returntomain"><img src="/assets/Home-48.png"></button>
+</div>
+
+<div class="rankbuttons">
+	<button class="button ranktime rtweekly rankselected">Weekly</button>
+	<button class="button ranktime rtalltime">All-time</button>
+	<button class="button ranktime rtyou">You</button>
 </div>
 
 <script>
@@ -83,8 +83,8 @@ $(".weeklystats .next").click(function() {
 $(".weeklystats .prev").click(function() {
 	if ($(".showstat").prev(".weeklystats .statcontainer").length === 0) {
 		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .statcontainer").last().find("ul, .statcat").addClass("slidetoright");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		$(".weeklystats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 			$(".weeklystats .statcontainer").last().addClass("showstat");
@@ -95,8 +95,8 @@ $(".weeklystats .prev").click(function() {
 		}, 120)
 	} else {
 		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoright");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+		$(".weeklystats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
+		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 			  .prev(".statcontainer").addClass("showstat");
@@ -139,8 +139,8 @@ $(document).on("click", ".alltimestats .next", function() {
 $(document).on("click", ".alltimestats .prev", function() {
 	if ($(".showstat").prev(".alltimestats .statcontainer").length === 0) {
 		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .statcontainer").last().find("ul, .statcat").addClass("slidetoright");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		$(".alltimestats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
 		setTimeout(function() {
 			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 			$(".alltimestats .statcontainer").last().addClass("showstat");
@@ -151,8 +151,8 @@ $(document).on("click", ".alltimestats .prev", function() {
 		}, 120)
 	} else {
 		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoright");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+		$(".alltimestats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
+		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
 		setTimeout(function() {
 			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 			  .prev(".statcontainer").addClass("showstat");
@@ -171,19 +171,54 @@ $(window).on('turbolinks:load', function() {
   		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
   	}
   })
-	setTimeout(function() {
-		var wrapper = $('.rankalltimecontent');
-		wrapper.load("/pages/alltimeranks" + " .rankalltimecontent", function() {
-		   wrapper.children('.rankalltimecontent').unwrap();
-		   var curusername = "<%= current_user.username %>";
-			  $(".statcontainer li").each(function() {
-			  	console.log("checking " + curusername)
-			  	if ($(this).data("uname") === curusername) {
-			  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
-			  	}
-			  })
 
-		});
-	}, 250)
+  alltimeload(["atcombined", "atgiver", "atguesser"], 250);
+  weeklyload(["wkhearts", "wknonspoiler"], 250);
+  weeklyload(["wktopgivers", "wktopguessers"], 500);
+  alltimeload(["athearts", "atfeat", "atnonspoiler"], 750);
+  alltimeload(["attopgivers", "attopguessers"], 600);
+	
+
+	function alltimeload(containers, time) {
+		for (var i = 0; i < containers.length; i++) {
+			(function() {
+				var container = containers[i];
+				setTimeout(function() {
+					var wrapper = $("." + container);
+					wrapper.load("/pages/alltimeranks" + " ." + container, function() {
+					   wrapper.children("." + container).unwrap();
+					   var curusername = "<%= current_user.username %>";
+						  $("." + container + " li").each(function() {
+						  	if ($(this).data("uname") === curusername) {
+						  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+						  	}
+						  })
+
+					});
+				}, time)
+			})();
+		}
+	}
+
+	function weeklyload(containers, time) {
+		for (var i = 0; i < containers.length; i++) {
+			(function() {
+				var container = containers[i];
+				setTimeout(function() {
+					var wrapper = $("." + container);
+					wrapper.load("/pages/weeklyranks" + " ." + container, function() {
+					   wrapper.children("." + container).unwrap();
+					   var curusername = "<%= current_user.username %>";
+						  $("." + container + " li").each(function() {
+						  	if ($(this).data("uname") === curusername) {
+						  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+						  	}
+						  })
+
+					});
+				}, time)
+			})();
+		}
+	}
 })
 </script>

@@ -1002,6 +1002,15 @@ img.anim_neutral.animating {
   left: 0;
   right: 0;
 }
+.statcontainer ul.spinloading {
+  background: none;
+}
+img.spinning {
+  text-align: center;
+  margin: 20px auto;
+  width: 40px;
+  display: block;
+}
 button.button.ranktime {
   width: 80px;
   margin: 0 -2px;
