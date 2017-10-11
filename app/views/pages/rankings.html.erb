@@ -3,6 +3,7 @@
 <div class="rankbuttons">
 	<button class="button ranktime rtweekly rankselected">Weekly</button>
 	<button class="button ranktime rtalltime">All-time</button>
+	<button class="button ranktime rtyou">You</button>
 </div>
 
 <div class="rankweeklycontent">
@@ -11,6 +12,17 @@
 
 <div class="rankalltimecontent rankhidden">
 	
+</div>
+
+<div class="rankyou rankhidden">
+	<div class="lifetimerankings">
+		<div class="rankingstabletitle">Your Stats</div>
+		<span class="statcat"><u>Your Cheat Score (your games receiving 3+ cheat reports)</u></span>
+		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span>
+
+		<span class="statcat"><u>Games You've Reported</u></span>
+		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span>
+	</div>
 </div>
 
 <div class="centered">
@@ -23,12 +35,21 @@ $(".rtweekly").click(function() {
 	$(this).addClass("rankselected");
 	$(".rankweeklycontent").removeClass("rankhidden");
 	$(".rankalltimecontent").addClass("rankhidden");
+	$(".rankyou").addClass("rankhidden");
 })
 $(".rtalltime").click(function() {
 	$(".ranktime").removeClass("rankselected");
 	$(this).addClass("rankselected");
 	$(".rankweeklycontent").addClass("rankhidden");
 	$(".rankalltimecontent").removeClass("rankhidden");
+	$(".rankyou").addClass("rankhidden");
+})
+$(".rtyou").click(function() {
+	$(".ranktime").removeClass("rankselected");
+	$(this).addClass("rankselected");
+	$(".rankweeklycontent").addClass("rankhidden");
+	$(".rankalltimecontent").addClass("rankhidden");
+	$(".rankyou").removeClass("rankhidden");
 })
 
 $(".weeklystats .next").click(function() {

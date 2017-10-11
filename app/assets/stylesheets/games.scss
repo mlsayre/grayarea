@@ -992,16 +992,26 @@ img.anim_neutral.animating {
   transform: translateX(101%);
 }
 .button.rankselected {
-  box-shadow: black 0 0 7px 2px;
+  /*box-shadow: black 0 0 7px 2px;*/
+  height: 52px !important;
 }
 .rankbuttons {
   text-align: center;
-  margin-top: 6px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 button.button.ranktime {
   width: 80px;
-  margin: 0 4px;
-  padding: 4px 0;
+  margin: 0 -2px;
+  height: 44px;
+  border-bottom: none;
+  vertical-align: bottom;
+  transition: 300ms all;
+  outline: 0 !important;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .rankhidden {
   display: none;
