@@ -1005,6 +1005,18 @@ img.anim_neutral.animating {
   left: 0;
   right: 0;
 }
+.rankyou table {
+  font-size: 14px;
+  width: 95%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 0 auto 8px;
+  background: linear-gradient(transparent, lightblue);
+}
+.rankyou table td {
+  border: 1px solid grey;
+  padding: 2px 4px;
+}
 .statcontainer ul.spinloading {
   background: none;
 }
