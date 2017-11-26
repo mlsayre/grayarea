@@ -12,8 +12,9 @@
    <%= link_to "How to Play", howtoplay_pages_path, :class => "button", :style => "margin-top: 6px;" %><br><br>
 
   Feel free to play as many games as you want as a word guesser! Sign up to enable stat-tracking, to join the rankings, and also to be able to give clues to other players.<br><br>
-  <%= link_to "Sign up", new_user_registration_path %><br>
-    <br>
+  <%= link_to "Sign up", new_user_registration_path %><br><br>
+  <%= link_to "Sign in", new_user_session_path %>
+    <br><br>
     <div id="signin-with">Or sign in with:<br>
   <div class="login-logos" id="signin-twitter">
     <%= link_to(image_tag("Twitter-login.png", size: "48", alt: "Twitter login"),
