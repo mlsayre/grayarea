@@ -127,7 +127,7 @@ class GamesController < ApplicationController
 
     #stats
     if params[:guessstatus] == "over,over"
-      if params[:gamescore].to_i == 200
+      if params[:gamescore].to_i >= 200
         User.find(current_user.id).increment!(:statguesserscoretwohundred, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverscoretwohundred, by = 1)
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "twohundred")
@@ -138,6 +138,11 @@ class GamesController < ApplicationController
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "hundred")
       end
       if params[:gamespoiled].to_i == 0
+        User.find(current_user.id).increment!(:statguessernospoilers, by = 1)
+        newgstreak = User.find(current_user.id).statguessernospoilers
+        if newgstreak > User.find(current_user.id).statalltimeguesserstreak
+          User.find(current_user.id).update(:statalltimeguesserstreak => newgstreak)
+        end
         User.find(@thisgame.giver_id).increment!(:statgivernospoilers, by = 1)
         newstreak = User.find(@thisgame.giver_id).statgivernospoilers
         if newstreak > User.find(@thisgame.giver_id).statalltimegiverstreak
@@ -145,6 +150,7 @@ class GamesController < ApplicationController
         end
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
       elsif params[:gamespoiled].to_i == 1
+        User.find(current_user.id).update(:statguessernospoilers => 0)
         User.find(@thisgame.giver_id).update(:statgivernospoilers => 0)
         Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
       end

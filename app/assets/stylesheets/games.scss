@@ -8,6 +8,18 @@ body {
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
 }
+@media (min-width: 600px) {
+  html {
+    background: linear-gradient(skyblue, lightgrey);
+    height: 100%;
+  }
+  body {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+}
 .button {
   background-color: #00a1fe !important;
   background: linear-gradient(#00a1fe 30%, #007bd4) !important;
@@ -672,7 +684,7 @@ button.button.returntomain {
   width: 38px;
   padding: 3px;
   opacity: .65;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   margin: 0;
@@ -1085,6 +1097,7 @@ button.button.ranktime {
   max-width: 660px;
   background-color: rgba(235,265,255,.9);
   border-radius: 14px;
+  z-index: 234;
 }
 .chatenter {
   outline: none;

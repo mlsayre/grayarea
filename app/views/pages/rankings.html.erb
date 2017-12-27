@@ -39,7 +39,7 @@
 		    <td><%= current_user.statalltimegiverstreak %></td>
 		  </tr>
 		  <tr>
-		    <td>They scored 200 points</td>
+		    <td>They scored 200+ points</td>
 		    <td><%= current_user.statgiverscoretwohundred %></td>
 		  </tr>
 		</table>
@@ -59,7 +59,15 @@
 		    <td><%= current_user.statguesserperfect %></td>
 		  </tr>
 		  <tr>
-		    <td>You scored 200 points</td>
+		    <td>Your current no-spoiler streak</td>
+		    <td><%= current_user.statguessernospoilers %></td>
+		  </tr>
+		  <tr>
+		    <td>Your all-time no-spoiler streak</td>
+		    <td><%= current_user.statalltimeguesserstreak %></td>
+		  </tr>
+		  <tr>
+		    <td>You scored 200+ points</td>
 		    <td><%= current_user.statguesserscoretwohundred %></td>
 		  </tr>
 		</table>

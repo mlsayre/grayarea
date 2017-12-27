@@ -61,6 +61,17 @@
 			</ul>
 	  </div>
 
+	  <div class="statcontainer atgsnonspoiler">
+		  <span class="statcat"><u>Longest All-time Guesser Non-Spoiler Streak</u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
+			  	  <% if user.statalltimeguesserstreak != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimeguesserstreak %></span></li>
+			    	<% end %>
+			  <% end %>
+			</ul>
+	  </div>
+
 	  <div class="statcontainer atgiver">
 		  <span class="statcat"><u>Giver Avg Score - min 5 games</u></span>
 		  <ul>

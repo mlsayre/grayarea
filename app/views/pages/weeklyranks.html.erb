@@ -50,6 +50,17 @@
 				</ul>
 		  </div>
 
+		  <div class="statcontainer wkgsnonspoiler">
+			  <span class="statcat"><u>Current Guesser Non-Spoiler Streak</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.statguessernospoilers <=> a.statguessernospoilers }.first(15).each do |user| %>
+				  	  <% if user.statguessernospoilers != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statguessernospoilers %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
+
 	  	<div class="statcontainer wkgiver">
 			  <span class="statcat"><u>Giver Avg Score - min 5 games</u></span>
 			  <ul>

@@ -239,7 +239,8 @@ class Game < ApplicationRecord
     featindexesguesser = {"allsix1" => 1, "allsix5" => 5, "allsix20" => 9, "allsix50" => 12, "allsix100" => 15,
                           "scorehundred1" => 3, "scorehundred5" => 7, "scorehundred20" => 10, "scorehundred50" => 13, 
                           "scorehundred100" => 16, "scoretwohundred" => 18, "perfect1" => 19, "perfect3" => 20, 
-                          "perfect12" => 21, "perfect30" => 22, "perfect60" => 23}
+                          "perfect12" => 21, "perfect30" => 22, "perfect60" => 23, "nospoil6" => 24, "nospoil12" => 25, 
+                          "nospoil25" => 26, "nospoil40" => 27, "nospoil60" => 28}
     featindexesgiver = {"allsix1" => 1, "allsix5" => 6, "allsix20" => 11, "allsix50" => 15, "allsix100" => 19,
                         "scorehundred1" => 3, "scorehundred5" => 8, "scorehundred20" => 12, "scorehundred50" => 16, 
                         "scorehundred100" => 20, "scoretwohundred" => 23, "nospoil5" => 4, "nospoil10" => 9, "nospoil20" => 13,
@@ -248,7 +249,8 @@ class Game < ApplicationRecord
     featpointsguesser = {"allsix1" => 20, "allsix5" => 30, "allsix20" => 40, "allsix50" => 60, "allsix100" => 100,
                           "scorehundred1" => 20, "scorehundred5" => 30, "scorehundred20" => 40, "scorehundred50" => 60, 
                           "scorehundred100" => 100, "scoretwohundred" => 300, "perfect1" => 20, "perfect3" => 30, 
-                          "perfect12" => 40, "perfect30" => 60, "perfect60" => 100}
+                          "perfect12" => 40, "perfect30" => 60, "perfect60" => 100, "nospoil6" => 20, "nospoil12" => 50, 
+                          "nospoil25" => 70, "nospoil40" => 100, "nospoil60" => 250}
     featpointsgiver = {"allsix1" => 20, "allsix5" => 40, "allsix20" => 50, "allsix50" => 80, "allsix100" => 120,
                         "scorehundred1" => 20, "scorehundred5" => 40, "scorehundred20" => 50, "scorehundred50" => 80, 
                         "scorehundred100" => 120, "scoretwohundred" => 300, "nospoil5" => 20, "nospoil10" => 50, 
@@ -293,6 +295,17 @@ class Game < ApplicationRecord
         Game.statarrayupdategiver(featindexesgiver["scorehundred1"], featpointsgiver["scorehundred1"], giveuser)
       end
     elsif type == "spoilstreak"
+      if curruser.statguesserstatus[featindexesguesser["nospoil60"]] == 0 && curruser.statguessernospoilers > 59
+        Game.statarrayupdateguesser(featindexesguesser["nospoil60"], featpointsguesser["nospoil60"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["nospoil40"]] == 0 && curruser.statguessernospoilers > 39
+        Game.statarrayupdateguesser(featindexesguesser["nospoil40"], featpointsguesser["nospoil40"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["nospoil25"]] == 0 && curruser.statguessernospoilers > 24
+        Game.statarrayupdateguesser(featindexesguesser["nospoil25"], featpointsguesser["nospoil25"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["nospoil12"]] == 0 && curruser.statguessernospoilers > 11
+        Game.statarrayupdateguesser(featindexesguesser["nospoil12"], featpointsguesser["nospoil12"], curruser)
+      elsif curruser.statguesserstatus[featindexesguesser["nospoil6"]] == 0 && curruser.statguessernospoilers > 5
+        Game.statarrayupdateguesser(featindexesguesser["nospoil6"], featpointsguesser["nospoil6"], curruser)
+      end
       if giveuser.statgiverstatus[featindexesgiver["nospoil50"]] == 0 && giveuser.statgivernospoilers > 49
         Game.statarrayupdategiver(featindexesgiver["nospoil50"], featpointsgiver["nospoil50"], giveuser)
       elsif giveuser.statgiverstatus[featindexesgiver["nospoil30"]] == 0 && giveuser.statgivernospoilers > 29
