@@ -19,6 +19,9 @@ body {
     margin-right: auto;
     position: relative;
   }
+  button.button.returntomain {
+    position: absolute;
+  }
 }
 .button {
   background-color: #00a1fe !important;
@@ -684,7 +687,7 @@ button.button.returntomain {
   width: 38px;
   padding: 3px;
   opacity: .65;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   margin: 0;
