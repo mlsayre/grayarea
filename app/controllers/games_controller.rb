@@ -31,12 +31,21 @@ class GamesController < ApplicationController
         format.json { render :show, status: :created, location: @game }
       end
     else
+      @playinggames = Game.where("(guesser_id1 = ? AND gsr1_status <> ?) OR (guesser_id2 = ? AND gsr2_status <> ?) OR (guesser_id3 = ? AND gsr3_status <> ?) OR (guesser_id4 = ? AND gsr4_status <> ?) OR (guesser_id5 = ? AND gsr5_status <> ?) OR (guesser_id6 = ? AND gsr6_status <> ?)", 
+        current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over").where.not(:giver_id => current_user.id)
+
     	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
     		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
         :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess")
 
-    	if @availgames.length > 0
+      if @playinggames.length > 0
+        @game = @playinggames.first
+        respond_to do |format|
+          format.html { redirect_to @game, notice: '' }
+          format.json { render :show, status: :created, location: @game }
+        end
 
+    	elsif @availgames.length > 0
   	  	@game = @availgames.order("RANDOM()").first
 
   	  	if @game.guesser_id1 == 0
