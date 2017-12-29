@@ -619,6 +619,7 @@ form#new_game {
   display: block;
   max-width: 380px;
   margin: 0 auto;
+  position: relative;
 }
 .guessedword {
   cursor: auto;
@@ -1460,4 +1461,26 @@ span.featimgtext {
 }
 .deviseform input[autocomplete], .deviseform input[autofocus] {
     border-radius: 4px;
+}
+.streakinfo {
+    font-size: 12px;
+    position: absolute;
+    color:darkgreen;
+    background-color: #fffaff;
+}
+.streakinfo.guesserstreak {
+    bottom: 100%;
+    left: 18px;
+    padding: 0 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-top: darkgreen 1px outset;
+}
+.streakinfo.giverstreak {
+    top: 108%;
+    right: 18px;
+    padding: 0 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom: darkgreen 1px inset;
 }

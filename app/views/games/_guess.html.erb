@@ -18,6 +18,10 @@
 		<div class="hints hint1">
 			<div class="hintlabel guessword">
 				<span class="guessinfo">
+					<span class="streakinfo guesserstreak">Your Guesser Streak: 
+						<%= current_user.statguessernospoilers %></span>
+					<span class="streakinfo giverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
+						<%= User.find(@game.giver_id).statgivernospoilers %></span>
 					<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
 				</span>
 			</div>
