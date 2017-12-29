@@ -1463,14 +1463,14 @@ span.featimgtext {
     border-radius: 4px;
 }
 .streakinfo {
-    font-size: 12px;
+    font-size: 11px;
     position: absolute;
     color:darkgreen;
     background-color: #fffaff;
 }
 .streakinfo.guesserstreak {
-    bottom: 100%;
-    left: 18px;
+    bottom: 108%;
+    left: 20px;
     padding: 0 12px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -1478,7 +1478,7 @@ span.featimgtext {
 }
 .streakinfo.giverstreak {
     top: 108%;
-    right: 18px;
+    right: 20px;
     padding: 0 12px;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
