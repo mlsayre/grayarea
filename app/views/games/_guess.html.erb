@@ -18,15 +18,22 @@
 		<div class="hints hint1">
 			<div class="hintlabel guessword">
 				<span class="guessinfo">
-					<span class="streakinfo guesserstreak">Your Guesser Streak: 
+					<!-- <span class="streakinfo guesserstreak">Your Guesser Streak: 
 						<%= current_user.statguessernospoilers %></span>
 					<span class="streakinfo giverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
-						<%= User.find(@game.giver_id).statgivernospoilers %></span>
+						<%= User.find(@game.giver_id).statgivernospoilers %></span> -->
 					<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
 				</span>
 			</div>
 			<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
 				to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
+			</div>
+			<div class="streakwarn">
+				<span class="bonusstreakheadline">Current non-spoiler streaks at risk:</span>
+				<span class="bonusstreak bonusguesserstreak">Your Guesser Streak: 
+						<%= current_user.statguessernospoilers %></span>
+				<span class="bonusstreak bonusgiverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
+						<%= User.find(@game.giver_id).statgivernospoilers %></span>
 			</div>
 			<button class="button skip1">Too risky? Go to next hint...</button>
 			<button class="menu"><img src="/assets/menu.png"></button>

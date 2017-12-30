@@ -29,6 +29,7 @@
   Your Games<br>
   <div class="guessergames">
     <span class="gamelisttitle">Giver:</span>
+    <span class="mainstreakinfo">Your current giving non-spoiler streak: <b><%= current_user.statgivernospoilers %></b></span>
     <span id="gamesgiverlist">
       <%= render 'giverlist' %>
     </span>
@@ -38,6 +39,7 @@
   </div>
   <div class="guessergames">
     <span class="gamelisttitle">Guesser:</span>
+    <span class="mainstreakinfo">Your current guessing non-spoiler streak: <b><%= current_user.statguessernospoilers %></b></span>
     <span id="gamesguesserlist">
       <%= render 'guesserlist' %>
     </span>

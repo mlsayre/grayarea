@@ -724,12 +724,14 @@ var ready = function() {
 		  		$(".skip1").text("Too risky? End game now.");
 		  		$(".hintheadline").text("Your final hint is...")
 		  	}
+		  	$(".streakwarn").hide();
 
 		  	if (guessstatus === "bonus,hint2") {
 		  		$(".hintheadline").text("Bonus! Go for one more?")
 		  		$(".guessword").hide();
 		  		$(".guessnum").text("This first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ").");
+		  		$(".streakwarn").show();
 		  	}
 
 		  	if (guessstatus === "bonus,hint3") {
@@ -737,6 +739,7 @@ var ready = function() {
 		  		$(".guessword").hide();
 		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
+		  		$(".streakwarn").show();
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
@@ -752,6 +755,7 @@ var ready = function() {
 		  		if (gamespoiled === 1) {
 			  		playerscore = 0;
 			  	}
+			  	$(".streakwarn").hide();
 			  	setTimeout(function() {
 			  		$(".hintheading").remove();
 			  		$(".submitted").removeClass("hidden");
@@ -822,6 +826,7 @@ var ready = function() {
 
 	  	$(document).on("click", ".gametop, .hintheading", function() {
 	  		$(".word").addClass("firstclick");
+	  		$(".firstclick").off("click");
 	  		$(".clickagain").removeClass("wordsubmitanim")
 	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
 	  		$(".clickagain").removeClass("wordsubmitanim");

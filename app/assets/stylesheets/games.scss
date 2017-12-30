@@ -1484,3 +1484,38 @@ span.featimgtext {
     border-bottom-right-radius: 12px;
     border-bottom: darkgreen 1px inset;
 }
+.mainstreakinfo {
+    display: block;
+    font-size: 12px;
+    padding: 0 6px 4px;
+    color: saddlebrown;
+    font-style: italic;
+}
+.mainstreakinfo b {
+    font-size: 14px;
+    line-height: 16px;
+    color: black;
+    background-color: lightblue;
+    padding: 0 8px;
+    border-radius: 50%;
+    font-weight: 400;
+    font-style: normal;
+}
+.streakwarn {
+  display:none;
+  width: 90%;
+  background-color: lightgrey;
+  border-top: darkgrey 2px solid;
+  border-bottom: grey 2px solid;
+  padding: 4px;
+  margin: 0 auto;
+  font-size: 14px;
+  border-radius: 6px;
+}
+.bonusstreakheadline {
+    display: block;
+    color: red;
+}
+.bonusstreak {
+    display: block;
+}
