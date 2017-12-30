@@ -32,7 +32,7 @@ class GamesController < ApplicationController
       end
     else
       @playinggames = Game.where("(guesser_id1 = ? AND gsr1_status <> ?) OR (guesser_id2 = ? AND gsr2_status <> ?) OR (guesser_id3 = ? AND gsr3_status <> ?) OR (guesser_id4 = ? AND gsr4_status <> ?) OR (guesser_id5 = ? AND gsr5_status <> ?) OR (guesser_id6 = ? AND gsr6_status <> ?)", 
-        current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over").where.not(:giver_id => current_user.id).where.not(:gamestatus => "done")
+        current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over").where.not(:giver_id => current_user.id, :gamestatus => "done")
 
     	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
     		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
@@ -119,7 +119,9 @@ class GamesController < ApplicationController
         :gsr6_h2words => params[:hint2words], :gsr6_h3words => params[:hint3words])
     end
 
-    if params[:guessstatus] == "over,over" && current_user.id == @thisgame.guesser_id6
+    if params[:guessstatus] == "over,over" && @thisgame.gsr1_status == "over,over" && @thisgame.gsr2_status == "over,over" && 
+       @thisgame.gsr3_status == "over,over" && @thisgame.gsr4_status == "over,over" && 
+       @thisgame.gsr5_status == "over,over" && @thisgame.gsr6_status == "over,over"
       @thisgame.update(:gamestatus => "done")
       current_user.increment!(:lifetimegamesguesser, by = 1)
       News.create!(:newstype => 2, :targetuser_id => @thisgame.giver_id, :giveruser_id => current_user.id,
