@@ -828,9 +828,9 @@ var ready = function() {
 
 	  	$(document).on("click", ".gametop, .hintheading", function() {
 	  		$(".word").addClass("firstclick");
-	  		$(".firstclick").off("click");
-	  		$(".clickagain").removeClass("wordsubmitanim")
-	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
+	  		//$(document).off("click", ".firstclick");
+	  		//$(".clickagain").removeClass("wordsubmitanim");
+	  		//$(".reallysubmit").removeClass("reallysubmit");
 	  		$(".clickagain").removeClass("wordsubmitanim");
 	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		$(".word").removeClass("unselected");
