@@ -824,15 +824,15 @@ var ready = function() {
 				})
 	  	})
 
-	  	$(document).on("click", ".gametop, .hintheading", function() {
-	  		$(".word").addClass("firstclick");
-	  		$(".firstclick").off("click");
-	  		$(".clickagain").removeClass("wordsubmitanim")
-	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
-	  		$(".clickagain").removeClass("wordsubmitanim");
-	  		$(".reallysubmit").removeClass("reallysubmit");
-	  		$(".word").removeClass("unselected");
-	  	})
+	  	// $(document).on("click", ".gametop, .hintheading", function() {
+	  	// 	$(".word").addClass("firstclick");
+	  	// 	$(".firstclick").off("click");
+	  	// 	$(".clickagain").removeClass("wordsubmitanim")
+	  	// 	$(".reallysubmit").off("click").removeClass("reallysubmit");
+	  	// 	$(".clickagain").removeClass("wordsubmitanim");
+	  	// 	$(".reallysubmit").removeClass("reallysubmit");
+	  	// 	$(".word").removeClass("unselected");
+	  	// })
 
 	  	function guessoutcome(chosen) {
 	  		$(".guessword").show();
