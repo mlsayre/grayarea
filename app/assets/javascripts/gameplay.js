@@ -807,7 +807,7 @@ var ready = function() {
 		  }
 
 	  	$(document).on("click", ".firstclick", function() {
-	  		var selected = $(this).find("span").text();
+	  		var selected = $(this).data("guessword");
 	  		clearTimeout(notifytimeout);
 	  		$(".word").removeClass("unselected");
 	  		$(".word").addClass("firstclick");
@@ -818,7 +818,7 @@ var ready = function() {
 	  		$(".firstclick").addClass("unselected");
 	  	})
 	  	$(document).on("click", ".reallysubmit", function() {
-	  		var selected = $(this).find("span").text();
+	  		var selected = $(this).data("guessword");
 				guessoutcome(selected);
 				$(".clickagain").removeClass("wordsubmitanim");
   			$(".reallysubmit").removeClass("reallysubmit");
