@@ -816,23 +816,24 @@ var ready = function() {
 	  		$(this).find(".clickagain").addClass("wordsubmitanim");
 	  		$(this).addClass("reallysubmit").removeClass("firstclick");
 	  		$(".firstclick").addClass("unselected");
-				$(".reallysubmit").on("click", function() {
-					guessoutcome(selected);
-					$(".clickagain").removeClass("wordsubmitanim");
-	  			$(".reallysubmit").removeClass("reallysubmit");
-	  			$(".word").removeClass("unselected");
-				})
 	  	})
+	  	$(document).on("click", ".reallysubmit", function() {
+	  		var selected = $(this).find("span").text();
+				guessoutcome(selected);
+				$(".clickagain").removeClass("wordsubmitanim");
+  			$(".reallysubmit").removeClass("reallysubmit");
+  			$(".word").removeClass("unselected");
+			})
 
-	  	// $(document).on("click", ".gametop, .hintheading", function() {
-	  	// 	$(".word").addClass("firstclick");
-	  	// 	$(".firstclick").off("click");
-	  	// 	$(".clickagain").removeClass("wordsubmitanim")
-	  	// 	$(".reallysubmit").off("click").removeClass("reallysubmit");
-	  	// 	$(".clickagain").removeClass("wordsubmitanim");
-	  	// 	$(".reallysubmit").removeClass("reallysubmit");
-	  	// 	$(".word").removeClass("unselected");
-	  	// })
+	  	$(document).on("click", ".gametop, .hintheading", function() {
+	  		$(".word").addClass("firstclick");
+	  		$(".firstclick").off("click");
+	  		$(".clickagain").removeClass("wordsubmitanim")
+	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
+	  		$(".clickagain").removeClass("wordsubmitanim");
+	  		$(".reallysubmit").removeClass("reallysubmit");
+	  		$(".word").removeClass("unselected");
+	  	})
 
 	  	function guessoutcome(chosen) {
 	  		$(".guessword").show();
