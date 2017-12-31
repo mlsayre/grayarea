@@ -461,9 +461,10 @@ span.notifynumber {
   top: 1px;
 }
 .unselected {
-  filter: brightness(0.7);
-  opacity: .6;
-  transform: scale(0.94);
+  /*filter: brightness(0.7);*/
+  /*opacity: .6;*/
+  opacity: .4;
+  /*transform: scale(0.94);*/
 }
 .wordnumarea {
   margin-top: 20px;
