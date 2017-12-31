@@ -811,8 +811,9 @@ var ready = function() {
 	  		clearTimeout(notifytimeout);
 	  		$(".word").removeClass("unselected");
 	  		$(".word").addClass("firstclick");
-	  		$(".clickagain").removeClass("wordsubmitanim")
-	  		$(".reallysubmit").off("click").removeClass("reallysubmit");
+	  		$(".clickagain").removeClass("wordsubmitanim");
+	  		//$(document).off("click", ".reallysubmit");
+	  		$(".reallysubmit").removeClass("reallysubmit");
 	  		$(this).find(".clickagain").addClass("wordsubmitanim");
 	  		$(this).addClass("reallysubmit").removeClass("firstclick");
 	  		$(".firstclick").addClass("unselected");
