@@ -7,7 +7,7 @@ body {
   font-family: 'Noto Sans', sans-serif;
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
-  margin: 0 !important;
+  margin: 0 auto !important;
 }
 @media (min-width: 500px) {
   html {
@@ -1522,14 +1522,15 @@ img.tgc-header {
 }
 .buttonarea {
   text-align: center;
-  margin-top: 25%;
+  position: absolute;
+  bottom: 14%;
 }
 @media (max-width: 499px) {
-  .titlegamecopy {
-    margin: 16% auto 0;
+  .titlewelcome {
+    font-size: 18px;
   }
-  .buttonarea {
-    margin-top: 15%;
+  .titlegamecopy {
+    margin: 13% auto 0;
   }
 }
 .buttonarea a {
