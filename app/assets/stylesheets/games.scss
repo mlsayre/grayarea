@@ -2,9 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@font-face {
+  font-family: 'Aller';
+  src: url('https://s3-us-west-2.amazonaws.com/wordstretch/fonts/Aller_Rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AllerBold';
+  src: url('https://s3-us-west-2.amazonaws.com/wordstretch/fonts/Aller_Bd.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 body {
 	/*font-family: 'Montserrat', sans-serif;*/
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Aller', sans-serif;
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
   margin: 0 auto !important;
@@ -1487,6 +1500,9 @@ span.featimgtext {
   height: 100vh;
   background-repeat: no-repeat;
 }
+.titlesignedin .pagecover {
+  opacity: .5;
+}
 .titlewelcome {
   color: white;
   font-size: 26px;
@@ -1523,7 +1539,7 @@ img.tgc-header {
 .buttonarea {
   text-align: center;
   position: absolute;
-  bottom: 14%;
+  bottom: 11%;
 }
 @media (max-width: 499px) {
   .titlewelcome {
@@ -1557,7 +1573,7 @@ img.tgc-header {
   z-index: 5;
   left: 0;
   right: 0;
-  top: 60%;
+  top: 42%;
 }
 .mainmenubuttons.guestplaying {
   padding: 8px 4px;
@@ -1580,16 +1596,16 @@ a.bigplaybutton {
   width: 100%;
 }
 .mainplay, .startguess {
-  background: url(btn_play.png) !important;
+  /*background: url(btn_play.png) !important;
   background-size: 100% !important;
   border: none !important;
   padding-bottom: 40% !important;
-  background-repeat: no-repeat !important;
+  background-repeat: no-repeat !important;*/
 }
 .mainplay:hover, .startguess:hover {
-  background: url(btn_play.png) !important;
+  /*background: url(btn_play.png) !important;
   background-size: 100% !important;
-  background-repeat: no-repeat !important;
+  background-repeat: no-repeat !important;*/
 }
 .button.mainplay, .button.startguess, .button.dummyplay {
   text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
