@@ -8,16 +8,18 @@ body {
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   html {
-    background: linear-gradient(skyblue, lightgrey);
-    height: 100%;
+    /*background: linear-gradient(skyblue, lightgrey);
+    height: 100%;*/
   }
   body {
-    max-width: 600px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   button.button.returntomain {
     position: absolute;
@@ -71,19 +73,6 @@ a.button {
   margin: 4px 0 0;
   font-size: 20px;
 }
-.mainmenubuttons {
-  text-align: center;
-  margin: 12px auto;
-  border: 1px solid darkgrey;
-  border-radius: 12px;
-  padding: 8px 0;
-  max-width: 260px;
-  background-color: ghostwhite;
-}
-.mainmenubuttons.guestplaying {
-  padding: 8px 4px;
-  max-width: 96%;
-}
 .guestplaying .guessermsg {
   margin: 80px auto 0;
 }
@@ -95,39 +84,9 @@ a.button {
   display: inline-block;
   margin: 0 4px;
 }
-.button.mainplay, .button.startguess, .button.dummyplay {
-  border: 1px solid lightsteelblue;
-  border-radius: 12px;
-  text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
-}
 .mainmenubuttons button, .mainmenubuttons input {
   width: 100px;
   margin: 14px 8px;
-}
-a.menunav {
-  width: 48px;
-}
-a.menunav img {
-  width: 100%;
-}
-a.menunav.featsnav {
-  position: relative;
-}
-.buttonarea {
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 74px;
-    background-color: darkblue;
-    background: linear-gradient(darkblue, #00619a);
-    box-shadow: black 0px -1px 3px;
-}
-.buttonarea a {
-    display: inline-block;
-    width: 48px;
-    margin: 11px 8px;
 }
 .settingsbox {
   text-align: center;
@@ -172,8 +131,8 @@ span.feednotify {
   height: 22px;
   display: inline-block;
   vertical-align: top;
-  bottom: 0px;
-  right: -4px;
+  bottom: 20px;
+  right: 0px;
   background-color: red;
   border-radius: 100%;
 }
@@ -1520,3 +1479,119 @@ span.featimgtext {
 .bonusstreak {
     display: block;
 }
+/* themes and new design */
+
+.titlesignedin {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  height: 100vh;
+  background-repeat: no-repeat;
+}
+.titlewelcome {
+  color: white;
+  font-size: 26px;
+  text-align: center;
+  padding-top: 2%;
+  width: 56%;
+  margin: 0 auto;
+  position: relative;
+}
+.titleavatar {
+  position: absolute;
+  width: 30%;
+  background: linear-gradient(lightgreen, darkgreen);
+  padding-bottom: 30%;
+  border-radius: 50%;
+  top: 40%;
+  left: 100%;
+}
+.titlegamecopy {
+  width: 86%;
+  margin: 26.5% auto 0;
+}
+.titlegamecopy img {
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  right: 0;
+  left: 0;
+  display: block;
+}
+img.tgc-header {
+  width: 70%;
+}
+.buttonarea {
+  text-align: center;
+  margin-top: 25%;
+}
+@media (max-width: 499px) {
+  .titlegamecopy {
+    margin: 16% auto 0;
+  }
+  .buttonarea {
+    margin-top: 15%;
+  }
+}
+.buttonarea a {
+    display: block;
+    width: 48px;
+    margin: 11px auto;
+}
+.buttons-left, .buttons-middle, .buttons-right {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30%;
+  text-align: center;
+}
+.mainmenubuttons {
+  text-align: center;
+  margin: 12px auto;
+  border: 1px solid darkgrey;
+  border-radius: 12px;
+  padding: 8px 0;
+  max-width: 260px;
+  background-color: ghostwhite;
+  display: none;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: 60%;
+}
+.mainmenubuttons.guestplaying {
+  padding: 8px 4px;
+  max-width: 96%;
+}
+a.menunav {
+  width: 64%;
+  max-width: 96px;
+}
+a.menunav img {
+  width: 100%;
+}
+a.menunav.featsnav {
+  position: relative;
+}
+a.bigplaybutton {
+  width: 80%;
+}
+.bigplaybutton img {
+  width: 100%;
+}
+.mainplay, .startguess {
+  background: url(btn_play.png) !important;
+  background-size: 100% !important;
+  border: none !important;
+  padding-bottom: 40% !important;
+  background-repeat: no-repeat !important;
+}
+.mainplay:hover, .startguess:hover {
+  background: url(btn_play.png) !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
+}
+.button.mainplay, .button.startguess, .button.dummyplay {
+  text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
+}
+/* underwater */

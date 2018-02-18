@@ -21,6 +21,12 @@ var ready = function() {
     })
   })
 
+  $(".bigplaybutton").click(function(e) {
+  	e.preventDefault();
+  	$(".pagecover").show();
+  	$(".mainmenubuttons").show();
+  })
+
   $(".gd").click(function() {
   	$.ajax({
       url: "/games/delgame",
@@ -46,6 +52,7 @@ var ready = function() {
 	$(".pagecover").on("click", function() {
 		$(".pagecover").hide();
 		$(".menubox").hide();
+		$(".mainmenubuttons").hide();
 	});
 
 	$(".opensettings").click(function(e) {

@@ -1,0 +1,97 @@
+<div class="gametop gtmain">
+  Welcome, <%= current_user.username %>!
+</div>
+
+<div class="mainmenubuttons">
+  <%= form_for(@game) do |f| %>
+
+    <div class="actions">
+      <% if current_user.lifetimegamesguesser > 2 %>
+        <%= f.button "Give", :class => "button mainplay" %>
+      <% else %>
+        <%= f.button "Give", :class => "button mainplay disabled" %>
+      <% end %>
+    </div>
+    <br>
+
+  <% end %>
+
+  <button class="button startguess">Guess</button><br>
+
+  
+
+  <% if current_user.lifetimegamesguesser < 3 %>
+    <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
+  <% end %>
+</div>
+
+<div class="maingamelist">
+  Your Games<br>
+  <div class="guessergames">
+    <span class="gamelisttitle">Giver:</span>
+    <span class="mainstreakinfo">Your current giving non-spoiler streak: <b><%= current_user.statgivernospoilers %></b></span>
+    <span id="gamesgiverlist">
+      <%= render 'giverlist' %>
+    </span>
+    <div id="paginator" style="margin-top: 10px; text-align: center;">
+      <%= paginate @gamesgiverlist, remote: true, :param_name => 'page' %>
+    </div>
+  </div>
+  <div class="guessergames">
+    <span class="gamelisttitle">Guesser:</span>
+    <span class="mainstreakinfo">Your current guessing non-spoiler streak: <b><%= current_user.statguessernospoilers %></b></span>
+    <span id="gamesguesserlist">
+      <%= render 'guesserlist' %>
+    </span>
+    <div id="paginator2" style="margin-top: 10px; text-align: center;">
+      <%= paginate @gamesguesserlist, remote: true, :param_name => 'page_2' %>
+    </div>
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<div class="buttonarea">
+<%= link_to(image_tag("/assets/Settings-02-48.png", :alt => "How to Play", :title => "How to Play"), howtoplay_pages_path, :class => "menunav opensettings") %>
+  <%= link_to(image_tag("/assets/Graph-03-48.png", :alt => "See rankings", :title => "See rankings"), rankings_pages_path, :class => "menunav") %>
+  <!-- <%= link_to(image_tag("/assets/Trophy-48.png", :alt => "Feats of Stretch", :title => "Feats of Stretch"), feats_pages_path, :class => "menunav") %> -->
+  <a class="menunav featsnav" href="/pages/feats" alt="Feats of Stretch" title="Feats of Stretch">
+    <img src="/assets/Trophy-48.png">
+    <% if @featcount > 0 %>
+      <span class="feednotify">
+        <span class="feednumber"><%= @featcount %></span>
+      </span>
+    <% end %>
+  </a>
+  <a class="menunav feednav" href="/pages/feed" alt="See news feed" title="See news feed">
+    <img src="/assets/Newspaper-48.png">
+    <% if current_user.heartnotify > 0 %>
+      <span class="heartsnotify"><img src="/assets/Heart-48.png">
+        <span class="notifynumber"><%= current_user.heartnotify %></span>
+      </span>
+    <% end %>
+    <% feedunseen = News.where(:targetuser_id => current_user.id).where(:seen => 0) %>
+    <% if feedunseen.count > 0 %>
+      <span class="feednotify">
+        <span class="feednumber"><%= feedunseen.count %></span>
+      </span>
+    <% end %>
+  </a>
+</div>
+
+<div class="settingsbox boxout">
+  <%= link_to "How to play", howtoplay_pages_path %><br>
+  <%= link_to "About the Game (Dec 27, 2017)", about_pages_path, :style => "color: red;" %><br>
+  <%= link_to "Edit your information", edit_user_registration_path %><br>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <div class="settingsclosebutton">Close Settings</div>
+</div>
+
+<script>
+$(".feednav").click(function() {
+  $.ajax({
+      url: "/games/resetheartnotify",
+      type: "POST"
+    })
+})
+</script>
