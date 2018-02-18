@@ -1504,6 +1504,7 @@ span.featimgtext {
   opacity: .5;
 }
 .titlewelcome {
+  font-family: "AllerBold";
   color: white;
   font-size: 26px;
   text-align: center;
@@ -1574,6 +1575,9 @@ img.tgc-header {
   left: 0;
   right: 0;
   top: 42%;
+  color: white;
+  background: url(bg_title_tablet.png);
+  background-position-y: 53%;
 }
 .mainmenubuttons.guestplaying {
   padding: 8px 4px;
