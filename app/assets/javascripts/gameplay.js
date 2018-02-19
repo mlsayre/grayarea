@@ -647,7 +647,6 @@ var ready = function() {
 	        .done(function() {
 	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
 	        	$(".giveheart").hide();
-	        	$(".removeheart").show();
 	        	$(".removeheartsuccess").css("display", "none");
 	        	$(".giveheartsuccess").css("display", "block");
 	        	var wrapper = $('.allguesserinfo');
@@ -656,7 +655,9 @@ var ready = function() {
 						   GuessFuncDuring.seeguessesafter();
 						});
 	        	setTimeout(function() {
-	        		$(".giveheartsuccess").fadeOut();
+	        		$(".giveheartsuccess").fadeOut( function() {
+	        			$(".removeheart").show();
+	        		});
 	        	}, 3500);
 	        })
 	        .fail(function() {
@@ -674,7 +675,6 @@ var ready = function() {
 	      })
 	        .done(function() {
 	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-	        	$(".giveheart").show();
 	        	$(".removeheart").hide()
 	        	$(".giveheartsuccess").css("display", "none");
 	        	$(".removeheartsuccess").css("display", "block");
@@ -684,7 +684,9 @@ var ready = function() {
 						   GuessFuncDuring.seeguessesafter();
 						});
 	        	setTimeout(function() {
-	        		$(".removeheartsuccess").fadeOut();
+	        		$(".removeheartsuccess").fadeOut(function() {
+	        			$(".giveheart").show();
+	        		});
 	        	}, 3500);
 	        })
 	        .fail(function() {
@@ -725,24 +727,24 @@ var ready = function() {
 		  	if (currenthintnum === 1) {var thewordword = "word";} else {var thewordword = "words";}
 		  	$(".thewordword").text(thewordword);
 		  	if (currenthint === hintword2) {
-		  		$(".skip1").text("Too risky? See final hint.");
-		  		$(".hintheadline").text("Your second hint is...")
+		  		$(".skip1").text("See final hint!");
+		  		$(".hintheadline").text("Second hint")
 		  	} else if (currenthint === hintword3) {
-		  		$(".skip1").text("Too risky? End game now.");
-		  		$(".hintheadline").text("Your final hint is...")
+		  		$(".skip1").text("End game now!");
+		  		$(".hintheadline").text("Final hint")
 		  	}
 		  	$(".streakwarn").hide();
 
 		  	if (guessstatus === "bonus,hint2") {
-		  		$(".hintheadline").text("Bonus! Go for one more?")
+		  		$(".hintheadline").text("Bonus! Try one more?")
 		  		$(".guessword").hide();
-		  		$(".guessnum").text("This first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  		$(".guessnum").text("The first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ").");
 		  		$(".streakwarn").show();
 		  	}
 
 		  	if (guessstatus === "bonus,hint3") {
-		  		$(".hintheadline").text("Bonus! Go for one more?")
+		  		$(".hintheadline").text("Bonus! Try one more?")
 		  		$(".guessword").hide();
 		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
@@ -753,6 +755,13 @@ var ready = function() {
 		  		// if (playerscore < 50) {
 		  		// 	$(".giveheart").remove();
 		  		// }
+		  		$(".bighint").html("");
+		  		var sstext = $(".scoreSection").html();
+		  		$(".bighint").html(sstext);
+		  		$(".scoreSection").remove();
+		  		$(".hintheadline").remove();
+		  		$(".hintlabel").remove();
+		  		$(".giveravatar").remove();
 		  		$(".skip1").remove();
 		  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
 		  		for (var i = 0; i < twords.length; i++) {

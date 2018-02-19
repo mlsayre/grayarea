@@ -1,73 +1,52 @@
-<section class="playboard-signedin theme-underwater">
-	<div class="gametop" data-gameid="<%= @game.id %>">Playing 
-		<%= User.find(@game.giver_id).username %>'s Game<br>
-	</div>
+<div class="gametop" data-gameid="<%= @game.id %>">Playing 
+	<%= User.find(@game.giver_id).username%>'s Game<br>
+	<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
+</div>
 
-	<div class="hintnumarea">
-		<span class="hintheadline">First hint</span>
-		<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
-		<span class="giveravatar"></span>
-	</div>
+<div class="allwords guesswordslist">
+	<span id="allwordslist">
+    <%= render 'allwordsguess' %>
+  </span>
+</div>
 
-	<div class="bighint">
-		<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
-	</div>
-
-	<div class="allwords guesswordslist">
-		<span id="allwordslist">
-	    <%= render 'allwordsguess' %>
-	  </span>
-	</div>
-
-	<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
-		to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
-	</div>
-
-	<div class="hintarea guess">
-		<div class="hintheading">
-			<div class="notifyarea">
-				<span class="gamenotify">You are so cool, seriously.</span>
+<div class="hintarea guess">
+	<div class="hintheading">
+		<div class="notifyarea">
+			<span class="hintheadline">Your first hint is...</span>
+			<span class="gamenotify">You are so cool, seriously.</span>
+		</div>
+		<div class="hints hint1">
+			<div class="hintlabel guessword">
+				<span class="guessinfo">
+					<!-- <span class="streakinfo guesserstreak">Your Guesser Streak: 
+						<%= current_user.statguessernospoilers %></span>
+					<span class="streakinfo giverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
+						<%= User.find(@game.giver_id).statgivernospoilers %></span> -->
+					<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
+				</span>
 			</div>
-			<div class="hints hint1">
-				<div class="hintlabel guessword">
-					<!-- <span class="guessinfo"> -->
-						<!-- <span class="streakinfo guesserstreak">Your Guesser Streak: 
-							<%= current_user.statguessernospoilers %></span>
-						<span class="streakinfo giverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
-							<%= User.find(@game.giver_id).statgivernospoilers %></span> -->
-						
-					<!-- </span> -->
-				</div>
-				
-				<div class="streakwarn">
-					<!-- <span class="bonusstreakheadline">Current non-spoiler streaks at risk:</span> -->
-					<span class="bonusstreak bonusguesserstreak">Your Streak: <%= current_user.statguessernospoilers %></span>
-					<span class="bonusstreak bonusgiverstreak"><%= User.find(@game.giver_id).username%>'s Streak: 
-							<%= User.find(@game.giver_id).statgivernospoilers %></span>
-				</div>
-				<div class="guessbottomarea">
-					<span class="guesseravatar"></span>
-					<span class="guessername"><%= current_user.username %></span>
-					<div class="guesserskiparea">
-						<div class="riskytext">Too risky?</div>
-						<button class="button skip1">Go to next hint!</button>
-					</div>
-				</div>
-				<button class="menu"><img src="/assets/btn_menu.png"></button>
+			<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
+				to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
 			</div>
+			<div class="streakwarn">
+				<span class="bonusstreakheadline">Current non-spoiler streaks at risk:</span>
+				<span class="bonusstreak bonusguesserstreak">Your Guesser Streak: 
+						<%= current_user.statguessernospoilers %></span>
+				<span class="bonusstreak bonusgiverstreak"><%= User.find(@game.giver_id).username%>'s Giver Streak: 
+						<%= User.find(@game.giver_id).statgivernospoilers %></span>
+			</div>
+			<button class="button skip1">Too risky? Go to next hint...</button>
+			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
 		<div class="hints submitted hidden">
 			<span class="hintlabel gameover">Game Over</span>
 			<div class="gameoverinfo">
 				<span class="hintnumheading">
-					<span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
-				</span>
 					<span class="giveheart">Great hints? Give <img src="/assets/Heart-48.png"></img>
 					</span>
 					<span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
 					</span>
-					<span class="removeheart">Remove your <img src="/assets/Heart-48.png"></img></span>
-					<!-- Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points -->
+					Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points
 				</span><br>
 				<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;"><u>Scores So Far (click to see guesses)...</u><br>
 					<% if @gsrstatus == "over,over" %>
@@ -135,6 +114,7 @@
 				  	var pl5words = <%= raw @game.gsr5_words %>;
 				  	var pl6words = <%= raw @game.gsr6_words %>;
 
+				  	console.log(pl3words)
 				  	// $(".word").each(function() {
 				  	// 	var word = $(this).attr("data-guessword");
 				  	// 	if (twords.indexOf(word) !== -1) {
@@ -180,26 +160,28 @@
 					GuessFunc.seeguessesafter();
 					</script>
 					<% end %>
-					<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span> <br>
 				</span>
-				
+				Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) <br>
+				<span class="removeheart">Remove your <img src="/assets/Heart-48.png"></img></span>
+				<span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
+				</span>
 			</div>
-			<button class="menu"><img src="/assets/btn_menu.png"></button>
+			<button class="menu"><img src="/assets/menu.png"></button>
 		</div>
 	</div>
+</div>
 
-	<div class="gamebottom"></div>
+<div class="gamebottom"></div>
 
-	<div class="messagebox">
-		<div class="messagetitle"></div>
-		<div class="messageinfo"></div>
-		<div class="messageaction"></div>
-		<div class="messagesubtext"></div>
-	</div>
+<div class="messagebox">
+	<div class="messagetitle"></div>
+	<div class="messageinfo"></div>
+	<div class="messageaction"></div>
+	<div class="messagesubtext"></div>
+</div>
 
-	<div class="pagecover"></div>
-	<% if current_user.username == "Matt" %>
-	  <div class="gd button">Delete game</div>
-	<% end %>
-	<p id="notice"><%= notice %></p>
-</section>
+<div class="pagecover"></div>
+<% if current_user.username == "Matt" %>
+  <div class="gd button">Delete game</div>
+<% end %>
+<p id="notice"><%= notice %></p>

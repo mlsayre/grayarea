@@ -36,6 +36,9 @@ body {
   button.button.returntomain {
     position: absolute;
   }
+  .gametop {
+    font-size: 22px !important;
+  }
 }
 .button {
   background-color: #00a1fe !important;
@@ -169,18 +172,11 @@ span.feednotify {
 }
 .gametop {
   position: relative;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
-  padding: 2px 0 2px;
-  background-color: darkblue;
-  background: linear-gradient(#0083d0, darkblue);
   color: #ffffff;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  margin: -8px -8px 4px;
-  height: 46px;
-  box-shadow: black 0px 1px 3px;
-  text-shadow: black 2px 2px 2px;
+  font-family: 'AllerBold';
+  padding-top: 1.5%;
 }
 .gametop span.gtoneline {
   position: absolute;
@@ -221,10 +217,34 @@ span.feednotify {
   transition: 250ms all, 100ms transform;
   /*transform: scale(1);*/
 }
+.playboard-signedin .allwords li {
+  height: auto;
+  display: inline-block;
+  width: 29%;
+  padding: 32px 4px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  margin: 4.5px 3px;
+  transition: 250ms all, 100ms transform;
+  /* transform: scale(1); */
+  background: url(btn_field_white);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border: none;
+}
+.playboard-signedin .word span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 45%;
+    transform: translateY(-50%);
+    line-height: 1.15;
+}
 @media (max-width: 480px) {
   .allwords li {
     display: inline-block;
-    width: 101px;
+    width: 29%;
     height: 36px;
     border: 1px solid lightgrey;
     padding: 2px;
@@ -236,6 +256,23 @@ span.feednotify {
     background-color: #e6efff;
     font-size: 15px;
   }
+  .playboard-signedin .allwords li {
+    height: auto;
+    display: inline-block;
+    width: 29%;
+    height: 3vw;
+    padding: 6.5vw 1vw;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin: 2vw .5vw 0vw;
+    transition: 250ms all, 100ms transform;
+    /* transform: scale(1); */
+    background: url(btn_field_white);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: none;
+}
   .allwords li.longword {
     font-size: 12px;
   }
@@ -304,6 +341,14 @@ span.feednotify {
   background: linear-gradient(#019c01 30%,#006300);
   color: white;
 }
+.playboard-signedin .allwords li.targetword {
+    border: none;
+    background-color: transparent;
+    background: url(btn_field_green);
+    color: white;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
 .allwords li.badword {
 	border: 1px solid black;
   background-color: #773333;
@@ -313,6 +358,9 @@ span.feednotify {
   background-position: 2% 10%;
   color: #ffc04d;
   font-weight: bold;
+}
+.allwords li.badword {
+  background-position: 6% 12%;
 }
 .word span {
   position: absolute;
@@ -363,21 +411,31 @@ span.guessermsg {
   position: relative;
 }
 span.giveheart, span.removeheart {
-  position: relative;
-  bottom: 4px;
-  font-style: italic;
-  background-color: lightpink;
-  padding: 2px 4px;
-  transition: 200ms all;
-  border-radius: 4px;
-  display: block;
-  width: 190px;
-  margin: 0 auto;
-  line-height: 1.2;
-  cursor: pointer;
+    position: relative;
+    bottom: 4px;
+    font-style: italic;
+    background-color: transparent;
+    padding: 10px 2px 20px;
+    transition: 200ms all;
+    border-radius: 4px;
+    display: block;
+    width: 190px;
+    margin: 0 auto;
+    line-height: 1.2;
+    cursor: pointer;
+    background: url(btn_greenEmpty_long.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+span.removeheart {
+    display: none;
+    width: 200px;
+    margin-top: 4px;
+    font-size: 12px;
+    padding: 8px 16px 20px;
 }
 span.giveheart:hover, span.removeheart:hover {
-  background-color: pink;
+  /*background-color: pink;*/
 }
 .giveheart img, .giveheartsuccess img, .removeheart img, .removeheartsuccess img {
   width: 18px;
@@ -386,6 +444,7 @@ span.giveheart:hover, span.removeheart:hover {
 }
 .giveheartsuccess, .removeheartsuccess {
   display: none;
+  color: white;
 }
 span.removeheart {
   display: none;
@@ -425,11 +484,10 @@ span.notifynumber {
   top: 2px;
 }
 .hintheadline {
-	position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  top: 1px;
+	margin: 3% auto 0;
+  display: block;
+  text-align: center;
+  color: white;
 }
 .unselected {
   /*filter: brightness(0.7);*/
@@ -579,6 +637,11 @@ form#new_game {
   background-color: white;
   transition: 200ms all;
 }
+.playboard-signedin .guesswordslist li:not(.guessedword):hover {
+  background-color: rgba(255,255,255,.3);
+  border-radius: 12px;
+  transition: 200ms all;
+}
 .hintlabel.guessword, {
   margin: 16px 0;
 }
@@ -603,16 +666,11 @@ li.neutralword {
   color: lightgrey;
   background-color: #f9f9f9;
 }
-.hintlabel.guessnum, {
-  margin: 10px 0;
-}
-.guessnum span {
-  font-size: 14px;
-}
 .scoreSection {
   font-size: 14px;
-  margin: 2px 0;
   text-shadow: none;
+  color: white;
+  text-align: center;
 }
 .button.yesnobtn {
   display: inline-block;
@@ -631,13 +689,13 @@ li.neutralword {
   transition: 300ms all;
   border-radius: 4px;
   opacity: 0;
-  padding: 4px;
-  font-size: 13px;
+  padding: 2px;
+  font-size: 11px;
 }
 .wordsubmitanim {
   opacity: 1;
   background-color: #ffce75;
-  transform: translateY(-110%);
+  transform: translateY(-180%);
 }
 @media (max-width: 768px) {
   .clickagain {
@@ -685,20 +743,18 @@ button.menu {
   border: 0;
   vertical-align: middle;
   transition: 200ms all;
-  border-radius: 5px;
   position: absolute;
   top: 10px;
-  left: 6px;
-  background-color: #00a1fe;
-  width: 36px;
-  height: 30px;
-  box-shadow: 0px 3px 10px -4px #f3f3f3 inset;
+  left: 8px;
+  background-color: transparent;
+  width: 40px;
+  height: 40px;
 }
 button.menu:hover {
-  background-color: #0088d6 !important;
+  /*background-color: #0088d6 !important;*/
 }
 .menu img {
-  width: 82%;
+  width: 100%;
   position: relative;
   top: 0px;
   cursor: pointer;
@@ -1032,20 +1088,21 @@ button.button.ranktime {
   text-align: center;
 }
 .chatopenbutton {
-  position: absolute;
-  top: 10px;
-  right: 8px;
-  width: 34px;
-  height: 26px;
-  cursor: pointer;
-  background-color: #00a1fe;
-  border-radius: 8px;
-  padding: 2px;
-  box-shadow: 0px 3px 10px -4px #f3f3f3 inset;
-  transition: 200ms all;
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+    transition: 200ms all;
+    background: none;
+    border-radius: 0;
 }
 .chatopenbutton:hover {
-  background-color: #0088d6 !important;
+  /*background-color: #0088d6 !important;*/
 }
 .chatopenbutton img {
   width: 100%;
@@ -1063,7 +1120,7 @@ button.button.ranktime {
 .chatbox {
   display: none;
   position: fixed;
-  top: 60px;
+  top: 40px;
   border: 1px solid black;
   height: calc(99% - 60px);
   width: 97%;
@@ -1474,8 +1531,7 @@ span.featimgtext {
     font-style: normal;
 }
 .streakwarn {
-  display:none;
-  width: 90%;
+  width: 50%;
   background-color: lightgrey;
   border-top: darkgrey 2px solid;
   border-bottom: grey 2px solid;
@@ -1483,6 +1539,10 @@ span.featimgtext {
   margin: 0 auto;
   font-size: 14px;
   border-radius: 6px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 25vw;
 }
 .bonusstreakheadline {
     display: block;
@@ -1614,4 +1674,154 @@ a.bigplaybutton {
 .button.mainplay, .button.startguess, .button.dummyplay {
   text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
 }
+.hintnumarea {
+  position: relative;
+  width: 50%;
+  margin: 3% auto 0;
+}
+.giveravatar {
+  position: absolute;
+  width: 33%;
+  background: #00adff;
+  padding-bottom: 33%;
+  border-radius: 50%;
+  top: 42%;
+  left: 98%;
+}
+.allwords.guesswordslist {
+    position: absolute;
+    top: 37vw;
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    right: 0;
+    left: 0;
+}
+.bighint {
+    color: white;
+    font-family: "AllerBold";
+    text-align: center;
+    position: absolute;
+    margin: 0 auto;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 28.5vw;
+    font-size: 22px;
+}
+.hintlabel.guessnum {
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block;
+    text-align: center;
+    width: 80%;
+    color: white;
+    top: 129.5vw;
+    line-height: 1.1;
+    font-size: 14px;
+}
+.guessbottomarea {
+    position: absolute;
+    width: 100%;
+    top: 141vw;
+    color: white;
+    padding-bottom: 28%;
+    overflow: hidden;
+}
+.guesseravatar {
+    position: absolute;
+    width: 26%;
+    background: linear-gradient(lightgreen, darkgreen);
+    padding-bottom: 26%;
+    border-radius: 50%;
+    top: 4%;
+    left: -2%;
+}
+.guessername {
+    position: absolute;
+    left: 24%;
+    bottom: 0;
+    font-family: "AllerBold";
+    font-size: 22px;
+}
+.guesserskiparea {
+    position: absolute;
+    right: 5%;
+}
+.guesserskiparea button.button.skip1 {
+    margin: 0;
+    background: url(btn_greenEmpty_long) !important;
+    background-size: 100% !important;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 1;
+}
+.riskytext {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+span.hintnumheading.allguesserinfo.playerplayed {
+    position: absolute;
+    top: 128vw;
+    left: 0;
+    right: 0;
+}
+span.hintnumheading.allguesserinfo.playerplayed u {
+  color: white;
+}
+.summaryhints {
+  color: white;
+}
+span.giveheart {
+    margin-top: 30px;
+}
+span.removeheart {
+    top: 20px;
+}
+@media (min-width: 500px) {
+  .bighint {
+    top: 147px;
+    font-size: 24px;
+  }
+  .allwords.guesswordslist {
+    top: 190px;
+  }
+  .hintlabel.guessnum {
+    top: 650px;
+    line-height: 1.2;
+    font-size: 16px;
+  }
+  .guessbottomarea {
+    top: 710px;
+  }
+  span.hintnumheading.allguesserinfo.playerplayed {
+    top: 640px;
+  }
+  .streakwarn {
+    top: 140px;
+  }
+}
+@media (min-width: 400px) and (max-width: 499px) {
+  .bighint {
+    top: 29vw;
+    font-size: 24px;
+  }
+  .hintlabel.guessnum {
+    top: 129.4vw;
+    line-height: 1.2;
+    font-size: 15px;
+  }
+}
 /* underwater */
+.playboard-signedin.theme-underwater {
+  background: url(bg_underthesea.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  max-height: 888.8889px;
+  width: 100%;
+  height: 177.7778vw;
+}

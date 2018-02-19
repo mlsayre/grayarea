@@ -37,12 +37,12 @@
 	<button class="button menuclose">Close</button>
 	<div class="menusubtext">Click Close or click anywhere outside box to close</div>
 </div>
-<button class="button returntomain"><img src="/assets/Home-48.png"></button>
+<!-- <button class="button returntomain"><img src="/assets/Home-48.png"></button> -->
 
 <span class="chatarea">
 	<% if @chatshow == true %>
 		<div class="chatopenbutton">
-			<img src="/assets/chat.png">
+			<img src="/assets/btn_chat.png">
 			<span class="unreadchats"><%= Game.getchatnumber(current_user.id, @game.id) %></span>
 		</div>
 		<div class="chatbox" data-chatopen="closed">
