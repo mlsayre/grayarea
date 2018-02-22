@@ -1,7 +1,26 @@
 <section class="titlesignedin">
   <div class="titlewelcome">
     Welcome back, <%= current_user.username %>!
-    <span class="titleavatar"></span>
+    <span class="titleavatar">
+      <div class="avatarpart avatar_bg">
+        <img src=<%= @avguesserbgurl %>>
+      </div>
+      <div class="avatarpart avatar_head">
+        <img src=<%= @avguesserheadurl %>>
+      </div>
+      <div class="avatarpart avatar_mouth">
+        <img src=<%= @avguessermouthurl %>>
+      </div>
+      <div class="avatarpart avatar_eyes">
+        <img src=<%= @avguessereyesurl %>>
+      </div>
+      <div class="avatarpart avatar_deco">
+        <img src=<%= @avguesserdecourl %>>
+      </div>
+      <div class="avatarpart avatar_hair">
+        <img src=<%= @avguesserhairurl %>>
+      </div>
+    </span>
   </div>
 
   <div class="titlegamecopy">
