@@ -507,6 +507,32 @@ class GamesController < ApplicationController
         @chatshow = true
       end
     end
+
+    avgiverbgnum = User.find(@game.giver_id).avatar_content_type.split("-")[0].split(":")[1]
+    @avgiverbgurl = User.avatarpartsurl("bg", avgiverbgnum.to_i)
+    avgiverheadnum = User.find(@game.giver_id).avatar_content_type.split("-")[1].split(":")[1]
+    @avgiverheadurl = User.avatarpartsurl("head", avgiverheadnum.to_i)
+    avgivermouthnum = User.find(@game.giver_id).avatar_content_type.split("-")[2].split(":")[1]
+    @avgivermouthurl = User.avatarpartsurl("mouth", avgivermouthnum.to_i)
+    avgivereyesnum = User.find(@game.giver_id).avatar_content_type.split("-")[3].split(":")[1]
+    @avgivereyesurl = User.avatarpartsurl("eyes", avgivereyesnum.to_i)
+    avgiverdeconum = User.find(@game.giver_id).avatar_content_type.split("-")[4].split(":")[1]
+    @avgiverdecourl = User.avatarpartsurl("deco", avgiverdeconum.to_i)
+    avgiverhairnum = User.find(@game.giver_id).avatar_content_type.split("-")[5].split(":")[1]
+    @avgiverhairurl = User.avatarpartsurl("hair", avgiverhairnum.to_i)
+
+    avguesserbgnum = current_user.avatar_content_type.split("-")[0].split(":")[1]
+    @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
+    avguesserheadnum = current_user.avatar_content_type.split("-")[1].split(":")[1]
+    @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
+    avguessermouthnum = current_user.avatar_content_type.split("-")[2].split(":")[1]
+    @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
+    avguessereyesnum = current_user.avatar_content_type.split("-")[3].split(":")[1]
+    @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
+    avguesserdeconum = current_user.avatar_content_type.split("-")[4].split(":")[1]
+    @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
+    avguesserhairnum = current_user.avatar_content_type.split("-")[5].split(":")[1]
+    @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
   end
 
   def submithints

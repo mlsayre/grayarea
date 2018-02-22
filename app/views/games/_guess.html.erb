@@ -6,7 +6,26 @@
 	<div class="hintnumarea">
 		<span class="hintheadline">First hint</span>
 		<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
-		<span class="giveravatar"></span>
+		<span class="giveravatar">
+			<div class="avatarpart avatar_bg">
+				<img src=<%= @avgiverbgurl %>>
+			</div>
+			<div class="avatarpart avatar_head">
+				<img src=<%= @avgiverheadurl %>>
+			</div>
+			<div class="avatarpart avatar_mouth">
+				<img src=<%= @avgivermouthurl %>>
+			</div>
+			<div class="avatarpart avatar_eyes">
+				<img src=<%= @avgivereyesurl %>>
+			</div>
+			<div class="avatarpart avatar_deco">
+				<img src=<%= @avgiverdecourl %>>
+			</div>
+			<div class="avatarpart avatar_hair">
+				<img src=<%= @avgiverhairurl %>>
+			</div>
+		</span>
 	</div>
 
 	<div class="bighint">
@@ -46,7 +65,26 @@
 							<%= User.find(@game.giver_id).statgivernospoilers %></span>
 				</div>
 				<div class="guessbottomarea">
-					<span class="guesseravatar"></span>
+					<span class="guesseravatar">
+						<div class="avatarpart avatar_bg">
+							<img src=<%= @avguesserbgurl %>>
+						</div>
+						<div class="avatarpart avatar_head">
+							<img src=<%= @avguesserheadurl %>>
+						</div>
+						<div class="avatarpart avatar_mouth">
+							<img src=<%= @avguessermouthurl %>>
+						</div>
+						<div class="avatarpart avatar_eyes">
+							<img src=<%= @avguessereyesurl %>>
+						</div>
+						<div class="avatarpart avatar_deco">
+							<img src=<%= @avguesserdecourl %>>
+						</div>
+						<div class="avatarpart avatar_hair">
+							<img src=<%= @avguesserhairurl %>>
+						</div>
+					</span>
 					<span class="guessername"><%= current_user.username %></span>
 					<div class="guesserskiparea">
 						<div class="riskytext">Too risky?</div>

@@ -1682,11 +1682,17 @@ a.bigplaybutton {
 .giveravatar {
   position: absolute;
   width: 33%;
-  background: #00adff;
-  padding-bottom: 33%;
   border-radius: 50%;
   top: 42%;
   left: 98%;
+}
+.avatarpart img {
+  width: 100%;
+}
+.avatarpart {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 .allwords.guesswordslist {
     position: absolute;
@@ -1733,7 +1739,6 @@ a.bigplaybutton {
 .guesseravatar {
     position: absolute;
     width: 26%;
-    background: linear-gradient(lightgreen, darkgreen);
     padding-bottom: 26%;
     border-radius: 50%;
     top: 4%;

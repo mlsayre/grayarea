@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227214946) do
+ActiveRecord::Schema.define(version: 20180221235533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20171227214946) do
     t.string "uid"
     t.string "theme", default: "theme-default"
     t.string "avatar_file_name"
-    t.string "avatar_content_type"
+    t.string "avatar_content_type", default: "bg:004-head:002-mouth:003-eyes:002-deco:000-hair:002"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer "lifetimegamesgiver", default: 0

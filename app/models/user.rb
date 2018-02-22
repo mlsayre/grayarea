@@ -72,6 +72,43 @@ class User < ApplicationRecord
     end
   end
 
+  def self.avatarpartsurl(part, number)
+    thenum = "%03d" % number
+    if part == "bg"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/bg/obj_avatarBG_" + thenum + ".png"
+    elsif part == "head"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/head/obj_avatarHead_" + thenum + ".png"
+    elsif part == "mouth"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/mouth/obj_avatarMouth_" + thenum + ".png"
+    elsif part == "eyes"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/eyes/obj_avatarEyes_" + thenum + ".png"
+    elsif part == "deco"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/deco/obj_deco_" + thenum + ".png"
+    elsif part == "hair"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/hair/obj_hair_" + thenum + ".png"
+    end
+  end
+
+  def self.avatarpartspoints(part, number)
+    if part == "bg"
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0,
+                      10 => 0, 11 => 0, 12 => 0, 13 => 0, 14 => 0, 15 => 0, 16 => 0, 17 => 0, 18 => 0,
+                      19 => 0, 20 => 0, 21 => 400, 22 => 400, 23 => 400, 24 => 400, 25 => 800, 26 => 800, 
+                      27 => 800, 28 => 800, 29 => 800, 30 => 800, 31 => 800, 32 => 800, 33 => 800, 
+                      34 => 800, 35 => 1200, 36 => 1200}
+    elsif part == "head"
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 400, 7 => 400, 8 => 600, 9 => 800, 10 => 1200}
+    elsif part == "mouth"
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 400, 8 => 500, 9 => 600, 10 => 600}
+    elsif part == "eyes"
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 200, 7 => 400, 8 => 500, 9 => 700, 10 => 800}
+    elsif part == "deco"
+      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 300, 4 => 500, 5 => 750, 6 => 900, 7 => 1000, 8 => 1200, 9 => 1500}
+    elsif part == "hair"
+      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 300, 7 => 400, 8 => 500, 9 => 500, 10 => 600}
+    end
+  end
+
   def password_required?
     super && provider.blank?
   end
