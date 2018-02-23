@@ -1257,7 +1257,7 @@ var ready = function() {
 		var avatarpointshave = $(".avatar-customize").attr("data-featscore");
 		$(".compitem").each(function() {
 			var pointsneeded = $(this).attr("data-pointsneeded");
-			if (pointsneeded > avatarpointshave) {
+			if (parseInt(pointsneeded) > parseInt(avatarpointshave)) {
 				$(this).addClass("avlocked");
 			}
 		})
