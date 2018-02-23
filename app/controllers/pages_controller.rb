@@ -57,6 +57,22 @@ class PagesController < ApplicationController
 		gon.guessernotify = current_user.statguessernotify
 	end
 
+	def avatar_customize
+		@playerfeatscore = current_user.statguesserstatus.sum + current_user.statgiverstatus.sum
+		avguesserbgnum = current_user.avatar_content_type.split("-")[0].split(":")[1]
+    @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
+    avguesserheadnum = current_user.avatar_content_type.split("-")[1].split(":")[1]
+    @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
+    avguessermouthnum = current_user.avatar_content_type.split("-")[2].split(":")[1]
+    @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
+    avguessereyesnum = current_user.avatar_content_type.split("-")[3].split(":")[1]
+    @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
+    avguesserdeconum = current_user.avatar_content_type.split("-")[4].split(":")[1]
+    @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
+    avguesserhairnum = current_user.avatar_content_type.split("-")[5].split(":")[1]
+    @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
+	end
+
 	def resetstatnotify
 		current_user.update(:statgivernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
 			:statguessernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

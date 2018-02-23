@@ -1601,6 +1601,95 @@ img.tgc-header {
   position: absolute;
   top: 94vw;
 }
+.titleavatar {
+  cursor: pointer;
+}
+.avatar-customize {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  height: 100vh;
+  background-repeat: no-repeat;
+}
+.avatarcustomshow {
+    width: 60%;
+    position: relative;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    background: rgba(22, 35, 22, 0.45);
+    padding-bottom: 60%;
+    border-radius: 5px;
+    border: 10px solid darkgreen;
+}
+.partbuttons {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+.partbuttons a {
+    background: url(btn_greenEmpty_long.png);
+    display: inline-block;
+    width: 150px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 8px 0 16px;
+}
+.avlowerbuttons {
+    text-align: center;
+    position: relative;
+}
+.avlowerbuttons a {
+    background: url(btn_greenEmpty_long.png);
+    display: block;
+    width: 120px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding: 5px 0 13px;
+    margin: 0 auto;
+}
+.avlowerbuttons img {
+    width: 100%;
+}
+a.avbutton-left {
+  width: 40px;
+  height: 40px;
+  background: #32cb32;
+  padding: 2px;
+  border: 1px solid forestgreen;
+  position: absolute;
+  top: -100%;
+  left: 3%;
+  border-radius: 8px;
+}
+a.avbutton-right {
+  width: 40px;
+  height: 40px;
+  background: #32cb32;
+  padding: 2px;
+  border: 1px solid forestgreen;
+  position: absolute;
+  top: -100%;
+  right: 3%;
+  border-radius: 8px;
+}
+a.avbutton-home {
+  width: 34px;
+  height: 34px;
+  background: #32cb32;
+  padding: 2px;
+  border: 1px solid forestgreen;
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+}
 @media (max-width: 499px) {
   .titlewelcome {
     font-size: 18px;

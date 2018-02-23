@@ -1238,6 +1238,10 @@ var ready = function() {
 				  }
 					//GuessFunc.seeguessesafter();
 	
+	// avatar customization
+	$(document).on("click", ".titleavatar", function() {
+		$(".avatarlink")[0].click();
+	})
 }
 
 //$(document).ready(ready);
