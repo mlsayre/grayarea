@@ -20,18 +20,37 @@ class GamesController < ApplicationController
       @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(6)
       @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(6)
 
-      avguesserbgnum = current_user.avatar_content_type.split("-")[0].split(":")[1]
+      avguesserbgnum = ''
+      avguesserheadnum = ''
+      avguessermouthnum = ''
+      avguessereyesnum = ''
+      avguesserhairnum = ''
+      avguesserdeconum = ''
+      avguesserarray = current_user.avatar_content_type.split("-")
+      avguesserarray.each do |str|
+        puts str
+        if str.include?("bg")
+          avguesserbgnum = str.split(":")[1]
+        elsif str.include?("head")
+          avguesserheadnum = str.split(":")[1]
+        elsif str.include?("mouth")
+          avguessermouthnum = str.split(":")[1]
+        elsif str.include?("eyes")
+          avguessereyesnum = str.split(":")[1]
+        elsif str.include?("hair")
+          avguesserhairnum = str.split(":")[1]
+        elsif str.include?("deco")
+          avguesserdeconum = str.split(":")[1]
+        end
+      end
+
       @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
-      avguesserheadnum = current_user.avatar_content_type.split("-")[1].split(":")[1]
       @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
-      avguessermouthnum = current_user.avatar_content_type.split("-")[2].split(":")[1]
       @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
-      avguessereyesnum = current_user.avatar_content_type.split("-")[3].split(":")[1]
       @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
-      avguesserhairnum = current_user.avatar_content_type.split("-")[4].split(":")[1]
       @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
-      avguesserdeconum = current_user.avatar_content_type.split("-")[5].split(":")[1]
       @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
+
     end
   end
 
@@ -521,30 +540,63 @@ class GamesController < ApplicationController
       end
     end
 
-    avgiverbgnum = User.find(@game.giver_id).avatar_content_type.split("-")[0].split(":")[1]
+    avgiverbgnum = ''
+    avgiverheadnum = ''
+    avgivermouthnum = ''
+    avgivereyesnum = ''
+    avgiverhairnum = ''
+    avgiverdeconum = ''
+    avguesserbgnum = ''
+    avguesserheadnum = ''
+    avguessermouthnum = ''
+    avguessereyesnum = ''
+    avguesserhairnum = ''
+    avguesserdeconum = ''
+    avgiverarray = User.find(@game.giver_id).avatar_content_type.split("-")
+    avgiverarray.each do |str|
+      if str.include?("bg")
+        avgiverbgnum = str.split(":")[1]
+      elsif str.include?("head")
+        avgiverheadnum = str.split(":")[1]
+      elsif str.include?("mouth")
+        avgivermouthnum = str.split(":")[1]
+      elsif str.include?("eyes")
+        avgivereyesnum = str.split(":")[1]
+      elsif str.include?("hair")
+        avgiverhairnum = str.split(":")[1]
+      elsif str.include?("deco")
+        avgiverdeconum = str.split(":")[1]
+      end
+    end
+    avguesserarray = current_user.avatar_content_type.split("-")
+    avguesserarray.each do |str|
+      if str.include?("bg")
+        avguesserbgnum = str.split(":")[1]
+      elsif str.include?("head")
+        avguesserheadnum = str.split(":")[1]
+      elsif str.include?("mouth")
+        avguessermouthnum = str.split(":")[1]
+      elsif str.include?("eyes")
+        avguessereyesnum = str.split(":")[1]
+      elsif str.include?("hair")
+        avguesserhairnum = str.split(":")[1]
+      elsif str.include?("deco")
+        avguesserdeconum = str.split(":")[1]
+      end
+    end
+    
     @avgiverbgurl = User.avatarpartsurl("bg", avgiverbgnum.to_i)
-    avgiverheadnum = User.find(@game.giver_id).avatar_content_type.split("-")[1].split(":")[1]
     @avgiverheadurl = User.avatarpartsurl("head", avgiverheadnum.to_i)
-    avgivermouthnum = User.find(@game.giver_id).avatar_content_type.split("-")[2].split(":")[1]
     @avgivermouthurl = User.avatarpartsurl("mouth", avgivermouthnum.to_i)
-    avgivereyesnum = User.find(@game.giver_id).avatar_content_type.split("-")[3].split(":")[1]
     @avgivereyesurl = User.avatarpartsurl("eyes", avgivereyesnum.to_i)
-    avgiverhairnum = User.find(@game.giver_id).avatar_content_type.split("-")[4].split(":")[1]
     @avgiverhairurl = User.avatarpartsurl("hair", avgiverhairnum.to_i)
-    avgiverdeconum = User.find(@game.giver_id).avatar_content_type.split("-")[5].split(":")[1]
     @avgiverdecourl = User.avatarpartsurl("deco", avgiverdeconum.to_i)
 
-    avguesserbgnum = current_user.avatar_content_type.split("-")[0].split(":")[1]
     @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
-    avguesserheadnum = current_user.avatar_content_type.split("-")[1].split(":")[1]
     @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
-    avguessermouthnum = current_user.avatar_content_type.split("-")[2].split(":")[1]
     @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
-    avguessereyesnum = current_user.avatar_content_type.split("-")[3].split(":")[1]
     @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
-    avguesserhairnum = current_user.avatar_content_type.split("-")[4].split(":")[1]
     @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
-    avguesserdeconum = current_user.avatar_content_type.split("-")[5].split(":")[1]
     @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
   end
 
