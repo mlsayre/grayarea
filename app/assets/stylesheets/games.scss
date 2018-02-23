@@ -532,6 +532,9 @@ span.notifynumber {
 .hidden {
   display: none;
 }
+.avlowerbuttons a.hidden {
+  display: none;
+}
 .button, .deviseform input[type="submit"] {
   cursor: pointer;
   padding: 8px 6px;
@@ -1622,6 +1625,12 @@ img.tgc-header {
     border-radius: 5px;
     border: 10px solid darkgreen;
 }
+.avatarpart img {
+  display: none;
+}
+.avatarpart .avactive {
+  display: block;
+}
 .partbuttons {
     text-align: center;
     margin-top: 5%;
@@ -1637,6 +1646,11 @@ img.tgc-header {
     background-size: 100%;
     background-repeat: no-repeat;
     padding: 8px 0 16px;
+}
+.partbuttons a.avpartactive {
+    font-weight: 700;
+    transform: scale(1.09);
+    transition: 200ms all;
 }
 .avlowerbuttons {
     text-align: center;

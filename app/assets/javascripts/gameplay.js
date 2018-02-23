@@ -1242,6 +1242,47 @@ var ready = function() {
 	$(document).on("click", ".titleavatar", function() {
 		$(".avatarlink")[0].click();
 	})
+	var loaditems = $(".avatar-customize").data("usercomponents").split("-");
+
+	for (var i = 0; i < loaditems.length; i++) {
+		$("[data-avatarcomponent='" + loaditems[i] + "']").addClass("avactive");
+	}
+	$(".avactive").each(function() {
+		var activecomp = $(this).attr("data-avatarcomponent");
+		$(this).closest(".avatarpart").attr("data-activepart", activecomp);
+	})
+
+	var currentpart = "";
+	$(".partbuttons a").click(function(e) {
+		e.preventDefault();
+		$(".partbuttons a").removeClass("avpartactive");
+		$(this).addClass("avpartactive");
+		$(".avbutton-left").removeClass("hidden");
+		$(".avbutton-right").removeClass("hidden");
+		currentpart = $(this).attr("class").split("-")[1].replace(" avpartactive", "");
+	})
+
+	$(".avbutton-left").click(function(e) {
+		e.preventDefault();
+		var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
+		$(".avatar_" + currentpart + " img").removeClass("avactive");
+		if ($("[data-avatarcomponent='" + comp + "']").prev("img").length > 0) {
+			$("[data-avatarcomponent='" + comp + "']").prev("img").addClass("avactive");
+		} else {
+			$(".avatar_" + currentpart + " img").last().addClass("avactive");
+		}
+	})
+	$(".avbutton-right").click(function(e) {
+		e.preventDefault();
+		var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
+		$(".avatar_" + currentpart + " img").removeClass("avactive");
+		if ($("[data-avatarcomponent='" + comp + "']").next("img").length > 0) {
+			$("[data-avatarcomponent='" + comp + "']").next("img").addClass("avactive");
+		} else {
+			$(".avatar_" + currentpart + " img").first().addClass("avactive");
+		}
+	})
+	
 }
 
 //$(document).ready(ready);

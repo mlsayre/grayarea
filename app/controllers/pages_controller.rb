@@ -58,6 +58,12 @@ class PagesController < ApplicationController
 	end
 
 	def avatar_customize
+		@bgcount = User.avatarpartspoints("bg", 1, "true")
+		@headcount = User.avatarpartspoints("head", 1, "true")
+		@mouthcount = User.avatarpartspoints("mouth", 1, "true")
+		@eyescount = User.avatarpartspoints("eyes", 1, "true")
+		@decocount = User.avatarpartspoints("deco", 1, "true")
+		@haircount = User.avatarpartspoints("hair", 1, "true")
 		@playerfeatscore = current_user.statguesserstatus.sum + current_user.statgiverstatus.sum
 		avguesserbgnum = current_user.avatar_content_type.split("-")[0].split(":")[1]
     @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)

@@ -89,23 +89,53 @@ class User < ApplicationRecord
     end
   end
 
-  def self.avatarpartspoints(part, number)
+  def self.avatarpartspoints(part, number, count)
     if part == "bg"
       pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0,
                       10 => 0, 11 => 0, 12 => 0, 13 => 0, 14 => 0, 15 => 0, 16 => 0, 17 => 0, 18 => 0,
                       19 => 0, 20 => 0, 21 => 400, 22 => 400, 23 => 400, 24 => 400, 25 => 800, 26 => 800, 
                       27 => 800, 28 => 800, 29 => 800, 30 => 800, 31 => 800, 32 => 800, 33 => 800, 
                       34 => 800, 35 => 1200, 36 => 1200}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     elsif part == "head"
       pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 400, 7 => 400, 8 => 600, 9 => 800, 10 => 1200}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     elsif part == "mouth"
       pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 400, 8 => 500, 9 => 600, 10 => 600}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     elsif part == "eyes"
       pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 200, 7 => 400, 8 => 500, 9 => 700, 10 => 800}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     elsif part == "deco"
       pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 300, 4 => 500, 5 => 750, 6 => 900, 7 => 1000, 8 => 1200, 9 => 1500}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     elsif part == "hair"
       pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 300, 7 => 400, 8 => 500, 9 => 500, 10 => 600}
+      if count == "true"
+        return pointsneeded.count
+      else
+        return pointsneeded[number]
+      end
     end
   end
 

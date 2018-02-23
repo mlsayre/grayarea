@@ -1,4 +1,4 @@
-<section class="avatar-customize" data-featscore=<%= @playerfeatscore %>>
+<section class="avatar-customize" data-featscore=<%= @playerfeatscore %> data-usercomponents=<%= current_user.avatar_content_type %>>
 	<div class="gametop">
 		Customize Your Avatar
 	</div>
@@ -14,28 +14,53 @@
 
 	<div class="avatarcustomshow">
 		<div class="avatarpart avatar_bg">
-			<img src=<%= @avguesserbgurl %>>
+			<% (1..@bgcount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("bg", i, "false") %>
+			  <% theurl = User.avatarpartsurl("bg", i) %>
+			  <img data-avatarcomponent=<%= "bg:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 		<div class="avatarpart avatar_head">
-			<img src=<%= @avguesserheadurl %>>
+			<% (1..@headcount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("head", i, "false") %>
+			  <% theurl = User.avatarpartsurl("head", i) %>
+			  <img data-avatarcomponent=<%= "head:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 		<div class="avatarpart avatar_mouth">
-			<img src=<%= @avguessermouthurl %>>
+			<% (1..@mouthcount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("mouth", i, "false") %>
+			  <% theurl = User.avatarpartsurl("mouth", i) %>
+			  <img data-avatarcomponent=<%= "mouth:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 		<div class="avatarpart avatar_eyes">
-			<img src=<%= @avguessereyesurl %>>
+			<% (1..@eyescount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("eyes", i, "false") %>
+			  <% theurl = User.avatarpartsurl("eyes", i) %>
+			  <img data-avatarcomponent=<%= "eyes:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 		<div class="avatarpart avatar_deco">
-			<img src=<%= @avguesserdecourl %>>
+			<% (0..@decocount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("deco", i, "false") %>
+			  <% theurl = User.avatarpartsurl("deco", i) %>
+			  <img data-avatarcomponent=<%= "deco:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 		<div class="avatarpart avatar_hair">
-			<img src=<%= @avguesserhairurl %>>
+			<% (0..@haircount).each do |i| %>
+			  <% thescore = User.avatarpartspoints("hair", i, "false") %>
+			  <% theurl = User.avatarpartsurl("hair", i) %>
+			  <img data-avatarcomponent=<%= "hair:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
 		</div>
 	</div>
 
 	<div class="avlowerbuttons">
-		<a class="avbutton-left" href="#"><img src="/assets/Left-01-48.png"></a>
-		<a class="avbutton-right" href="#"><img src="/assets/Right-01-48.png"></a>
+		<a class="avbutton-left hidden" href="#"><img src="/assets/Left-01-48.png"></a>
+		<a class="avbutton-right hidden" href="#"><img src="/assets/Right-01-48.png"></a>
+		(save and random not working yet...)
 		<a class="avbutton-save" href="#">Save</a>
 		<a class="avbutton-random" href="#">Random</a>
 		<a class="avbutton-home" href="#"><img src="/assets/Home-48.png"></a>
