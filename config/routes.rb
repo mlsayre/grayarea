@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       get 'avatarcustomize' => 'pages#avatar_customize'
       post 'allfeedseen'
       post 'resetstatnotify'
+      post 'updateavatar'
     end
   end
 

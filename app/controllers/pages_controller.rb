@@ -79,6 +79,14 @@ class PagesController < ApplicationController
     @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
 	end
 
+	def updateavatar
+		current_user.update(:avatar_content_type => params[:avstring])
+
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
+	end
+
 	def resetstatnotify
 		current_user.update(:statgivernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
 			:statguessernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

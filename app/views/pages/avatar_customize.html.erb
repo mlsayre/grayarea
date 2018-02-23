@@ -8,8 +8,8 @@
 		<a class="avbutton-head" href="#">Head</a>
 		<a class="avbutton-mouth" href="#">Mouth</a>
 		<a class="avbutton-eyes" href="#">Eyes</a>
-		<a class="avbutton-deco" href="#">Decoration</a>
 		<a class="avbutton-hair" href="#">Hair</a>
+		<a class="avbutton-deco" href="#">Decoration</a>
 	</div>
 
 	<div class="avatarcustomshow">
@@ -17,53 +17,57 @@
 			<% (1..@bgcount).each do |i| %>
 			  <% thescore = User.avatarpartspoints("bg", i, "false") %>
 			  <% theurl = User.avatarpartsurl("bg", i) %>
-			  <img data-avatarcomponent=<%= "bg:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			  <img class="compitem" data-compindex=<%= (i.to_s) + "/" + @bgcount.to_s %> data-avatarcomponent=<%= "bg:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
 			<% end %>
 		</div>
 		<div class="avatarpart avatar_head">
 			<% (1..@headcount).each do |i| %>
 			  <% thescore = User.avatarpartspoints("head", i, "false") %>
 			  <% theurl = User.avatarpartsurl("head", i) %>
-			  <img data-avatarcomponent=<%= "head:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			  <img class="compitem" data-compindex=<%= (i.to_s) + "/" + @headcount.to_s %> data-avatarcomponent=<%= "head:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
 			<% end %>
 		</div>
 		<div class="avatarpart avatar_mouth">
 			<% (1..@mouthcount).each do |i| %>
 			  <% thescore = User.avatarpartspoints("mouth", i, "false") %>
 			  <% theurl = User.avatarpartsurl("mouth", i) %>
-			  <img data-avatarcomponent=<%= "mouth:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			  <img class="compitem" data-compindex=<%= (i.to_s) + "/" + @mouthcount.to_s %> data-avatarcomponent=<%= "mouth:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
 			<% end %>
 		</div>
 		<div class="avatarpart avatar_eyes">
 			<% (1..@eyescount).each do |i| %>
 			  <% thescore = User.avatarpartspoints("eyes", i, "false") %>
 			  <% theurl = User.avatarpartsurl("eyes", i) %>
-			  <img data-avatarcomponent=<%= "eyes:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
-			<% end %>
-		</div>
-		<div class="avatarpart avatar_deco">
-			<% (0..@decocount).each do |i| %>
-			  <% thescore = User.avatarpartspoints("deco", i, "false") %>
-			  <% theurl = User.avatarpartsurl("deco", i) %>
-			  <img data-avatarcomponent=<%= "deco:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			  <img class="compitem" data-compindex=<%= (i.to_s) + "/" + @eyescount.to_s %> data-avatarcomponent=<%= "eyes:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
 			<% end %>
 		</div>
 		<div class="avatarpart avatar_hair">
-			<% (0..@haircount).each do |i| %>
+			<% (0..(@haircount - 1)).each do |i| %>
 			  <% thescore = User.avatarpartspoints("hair", i, "false") %>
 			  <% theurl = User.avatarpartsurl("hair", i) %>
-			  <img data-avatarcomponent=<%= "hair:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			  <img class="compitem" data-compindex=<%= (i + 1).to_s + "/" + (@haircount).to_s %> data-avatarcomponent=<%= "hair:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
 			<% end %>
+		</div>
+		<div class="avatarpart avatar_deco">
+			<% (0..(@decocount - 1)).each do |i| %>
+			  <% thescore = User.avatarpartspoints("deco", i, "false") %>
+			  <% theurl = User.avatarpartsurl("deco", i) %>
+			  <img class="compitem" data-compindex=<%= (i + 1).to_s + "/" + (@decocount).to_s %> data-avatarcomponent=<%= "deco:" + "%03d" % i %> data-pointsneeded=<%= thescore %> src=<%= theurl %>>
+			<% end %>
+		</div>
+		<div class="compindexshow"></div>
+		<div class="partlockedshow hidden">
+			<img src="/assets/Lock-48.png">
+			<span></span>
 		</div>
 	</div>
 
 	<div class="avlowerbuttons">
 		<a class="avbutton-left hidden" href="#"><img src="/assets/Left-01-48.png"></a>
 		<a class="avbutton-right hidden" href="#"><img src="/assets/Right-01-48.png"></a>
-		(save and random not working yet...)
 		<a class="avbutton-save" href="#">Save</a>
-		<a class="avbutton-random" href="#">Random</a>
-		<a class="avbutton-home" href="#"><img src="/assets/Home-48.png"></a>
+		<a class="avbutton-random" href="#">All Random!</a>
+		<a class="avbutton-home" href="/main"><img src="/assets/Home-48.png"></a>
 	</div>
 	
 </section>

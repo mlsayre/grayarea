@@ -1242,46 +1242,130 @@ var ready = function() {
 	$(document).on("click", ".titleavatar", function() {
 		$(".avatarlink")[0].click();
 	})
-	var loaditems = $(".avatar-customize").data("usercomponents").split("-");
 
-	for (var i = 0; i < loaditems.length; i++) {
-		$("[data-avatarcomponent='" + loaditems[i] + "']").addClass("avactive");
+	if ($(".avatar-customize").length > 0) {
+		var loaditems = $(".avatar-customize").data("usercomponents").split("-");
+
+		for (var i = 0; i < loaditems.length; i++) {
+			$("[data-avatarcomponent='" + loaditems[i] + "']").addClass("avactive");
+		}
+		$(".avactive").each(function() {
+			var activecomp = $(this).attr("data-avatarcomponent");
+			$(this).closest(".avatarpart").attr("data-activepart", activecomp);
+		})
+
+		var avatarpointshave = $(".avatar-customize").attr("data-featscore");
+		$(".compitem").each(function() {
+			var pointsneeded = $(this).attr("data-pointsneeded");
+			if (pointsneeded > avatarpointshave) {
+				$(this).addClass("avlocked");
+			}
+		})
+
+		var currentpart = "";
+		var currentcompindex = "";
+		$(".partbuttons a").click(function(e) {
+			e.preventDefault();
+			if ($(".avatar_" + currentpart + " .avactive").hasClass("avlocked")) {
+				$(".avatar_" + currentpart + " .avactive").removeClass("avactive");
+				var originalpart = $(".avatar_" + currentpart).attr("data-activepart");
+				$("[data-avatarcomponent='" + originalpart + "']").addClass("avactive");
+			}
+			$(".partbuttons a").removeClass("avpartactive");
+			$(this).addClass("avpartactive");
+			$(".avbutton-left").removeClass("hidden");
+			$(".avbutton-right").removeClass("hidden");
+			currentpart = $(this).attr("class").split("-")[1].replace(" avpartactive", "");
+			currentcompindex = $(".avatar_" + currentpart + " .avactive").attr("data-compindex");
+			$(".compindexshow").text(currentcompindex);
+			$(".partlockedshow").addClass("hidden");
+			$(".avbutton-save").removeClass("disabled");
+		})
+
+		$(".avbutton-left").click(function(e) {
+			e.preventDefault();
+			var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
+			$(".avatar_" + currentpart + " .compitem").removeClass("avactive");
+			if ($("[data-avatarcomponent='" + comp + "']").prev(".compitem").length > 0) {
+				$("[data-avatarcomponent='" + comp + "']").prev(".compitem").addClass("avactive");
+			} else {
+				$(".avatar_" + currentpart + " .compitem").last().addClass("avactive");
+			}
+			currentcompindex = $(".avatar_" + currentpart + " .avactive").attr("data-compindex");
+			$(".compindexshow").text(currentcompindex);
+			if ($(".avatar_" + currentpart + " .avactive").hasClass("avlocked")) {
+				var theneeded = $(".avatar_" + currentpart + " .avactive").attr("data-pointsneeded");
+				$(".partlockedshow").removeClass("hidden");
+				$(".partlockedshow span").html(theneeded + " Feat Score<br><span class='youhavetext'>(You have " + avatarpointshave
+					+ ")</span>")
+				$(".avbutton-save").addClass("disabled");
+			} else {
+				$(".partlockedshow").addClass("hidden");
+				$(".avbutton-save").removeClass("disabled");
+			}
+		})
+		$(".avbutton-right").click(function(e) {
+			e.preventDefault();
+			var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
+			$(".avatar_" + currentpart + " .compitem").removeClass("avactive");
+			if ($("[data-avatarcomponent='" + comp + "']").next(".compitem").length > 0) {
+				$("[data-avatarcomponent='" + comp + "']").next(".compitem").addClass("avactive");
+			} else {
+				$(".avatar_" + currentpart + " .compitem").first().addClass("avactive");
+			}
+			currentcompindex = $(".avatar_" + currentpart + " .avactive").attr("data-compindex");
+			$(".compindexshow").text(currentcompindex);
+			if ($(".avatar_" + currentpart + " .avactive").hasClass("avlocked")) {
+				var theneeded = $(".avatar_" + currentpart + " .avactive").attr("data-pointsneeded");
+				$(".partlockedshow").removeClass("hidden");
+				$(".partlockedshow span").html(theneeded + " Feat Score<br><span class='youhavetext'>(You have " + avatarpointshave
+					+ ")</span>")
+				$(".avbutton-save").addClass("disabled");
+			} else {
+				$(".partlockedshow").addClass("hidden");
+				$(".avbutton-save").removeClass("disabled");
+			}
+		})
+
+		$(".avbutton-save").click(function(e) {
+			e.preventDefault();
+			var newpartarray = []
+			$(".avatarpart").each(function() {
+				var newactive = $(this).find(".compitem.avactive").attr("data-avatarcomponent");
+				newpartarray.push(newactive);
+			})
+			var newpartstring = newpartarray.join("-");
+			$(".avatar-customize").attr("data-usercomponents", newpartstring);
+			$.ajax({
+	      url: "/pages/updateavatar",
+	      type: "POST",
+	      dataType:'json',
+	      data: { 'avstring' : newpartstring}
+	    })
+	    .done(function() {
+	    	$(".compindexshow").text("Saved!");;
+	    })
+	    .fail(function() {
+	    	connectionError();
+	    })
+		})
+
+		$(".avbutton-random").click(function(e) {
+			e.preventDefault();
+			$(".partlockedshow").addClass("hidden");
+			$(".compindexshow").text("");
+			$(".compitem").removeClass("avactive")
+			$(".avatarpart").each(function() {
+				var possnum = $(this).find(".compitem").not(".avlocked").length;
+				var possran = Math.floor(Math.random() * possnum);
+				$(this).find(".compitem").not(".avlocked").eq(possran).addClass("avactive");
+				var newactive = $(this).find(".compitem").not(".avlocked").eq(possran).attr("data-avatarcomponent");
+				$(this).attr("data-activepart", newactive);
+			})
+			$(".avbutton-save").removeClass("disabled");
+		})
+
 	}
-	$(".avactive").each(function() {
-		var activecomp = $(this).attr("data-avatarcomponent");
-		$(this).closest(".avatarpart").attr("data-activepart", activecomp);
-	})
-
-	var currentpart = "";
-	$(".partbuttons a").click(function(e) {
-		e.preventDefault();
-		$(".partbuttons a").removeClass("avpartactive");
-		$(this).addClass("avpartactive");
-		$(".avbutton-left").removeClass("hidden");
-		$(".avbutton-right").removeClass("hidden");
-		currentpart = $(this).attr("class").split("-")[1].replace(" avpartactive", "");
-	})
-
-	$(".avbutton-left").click(function(e) {
-		e.preventDefault();
-		var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
-		$(".avatar_" + currentpart + " img").removeClass("avactive");
-		if ($("[data-avatarcomponent='" + comp + "']").prev("img").length > 0) {
-			$("[data-avatarcomponent='" + comp + "']").prev("img").addClass("avactive");
-		} else {
-			$(".avatar_" + currentpart + " img").last().addClass("avactive");
-		}
-	})
-	$(".avbutton-right").click(function(e) {
-		e.preventDefault();
-		var comp = $(".avatar_" + currentpart + " .avactive").attr("data-avatarcomponent");
-		$(".avatar_" + currentpart + " img").removeClass("avactive");
-		if ($("[data-avatarcomponent='" + comp + "']").next("img").length > 0) {
-			$("[data-avatarcomponent='" + comp + "']").next("img").addClass("avactive");
-		} else {
-			$(".avatar_" + currentpart + " img").first().addClass("avactive");
-		}
-	})
 	
 }
 
