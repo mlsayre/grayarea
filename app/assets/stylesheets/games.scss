@@ -1615,15 +1615,15 @@ img.tgc-header {
   background-repeat: no-repeat;
 }
 .avatarcustomshow {
-    width: 60%;
-    position: relative;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
-    background: rgba(22, 35, 22, 0.45);
-    padding-bottom: 60%;
-    border-radius: 5px;
-    border: 10px solid darkgreen;
+  width: 60%;
+  position: relative;
+  right: 0;
+  left: 0;
+  margin: 4% auto;
+  background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/obj_avatarBG.png);
+  padding-bottom: 60%;
+  background-size: 100%;
+  border-radius: 5px;
 }
 .avatar-customize .avatarpart img {
   display: none;
@@ -1632,66 +1632,119 @@ img.tgc-header {
   display: block;
 }
 .partbuttons {
-    text-align: center;
-    margin-top: 5%;
-    margin-bottom: 1%;
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 1%;
+  width: 90%;
+  margin: 0 auto;
 }
 .partbuttons a {
-    background: url(btn_greenEmpty_long.png);
-    display: inline-block;
-    width: 150px;
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    padding: 8px 0 16px;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: 0;
+  transition: 200ms all;
+  margin: 0 6px;
 }
 .partbuttons a.avpartactive {
-    font-weight: 700;
     transform: scale(1.09);
     transition: 200ms all;
+}
+a.avbutton-bg {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarBG.png);
+    background-size: 100%;
+}
+a.avbutton-bg.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarBG_s.png);
+    background-size: 100%;
+}
+a.avbutton-head {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarHead.png);
+    background-size: 100%;
+}
+a.avbutton-head.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarHead_s.png);
+    background-size: 100%;
+}
+a.avbutton-mouth {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarMouth.png);
+    background-size: 100%;
+}
+a.avbutton-mouth.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarMouth_s.png);
+    background-size: 100%;
+}
+a.avbutton-eyes {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarEye.png);
+    background-size: 100%;
+}
+a.avbutton-eyes.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarEye_s.png);
+    background-size: 100%;
+}
+a.avbutton-hair {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarHair.png);
+    background-size: 100%;
+}
+a.avbutton-hair.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarHair_s.png);
+    background-size: 100%;
+}
+a.avbutton-deco {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarDeco.png);
+    background-size: 100%;
+}
+a.avbutton-deco.avpartactive {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarDeco_s.png);
+    background-size: 100%;
 }
 .avlowerbuttons {
     text-align: center;
     position: relative;
 }
 .avlowerbuttons a {
-    background: url(btn_greenEmpty_long.png);
-    display: block;
-    width: 120px;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
     text-decoration: none;
     color: white;
     text-align: center;
     background-size: 100%;
     background-repeat: no-repeat;
-    padding: 5px 0 13px;
-    margin: 0 auto;
+    padding: 0;
+    margin: 0 6px;
 }
 .avlowerbuttons img {
     width: 100%;
 }
+a.avbutton-random {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarRandom.png);
+    background-size: 100%;
+}
+a.avbutton-save {
+    background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarSave.png);
+    background-size: 100%;
+}
 a.avbutton-left {
-  width: 40px;
-  height: 40px;
-  background: #32cb32;
-  padding: 2px;
-  border: 1px solid forestgreen;
+  background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_back.png);
+    background-size: 100%;
+  width: 60px;
+  height: 60px;
   position: absolute;
-  top: -100%;
-  left: 3%;
-  border-radius: 8px;
+  bottom: 0;
+  right: 100%;
 }
 a.avbutton-right {
-  width: 40px;
-  height: 40px;
-  background: #32cb32;
-  padding: 2px;
-  border: 1px solid forestgreen;
+  background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_next.png);
+  background-size: 100%;
+  width: 60px;
+  height: 60px;
   position: absolute;
-  top: -100%;
-  right: 3%;
-  border-radius: 8px;
+  bottom: 0;
+  left: 100%;
 }
 a.avbutton-home {
   width: 34px;
