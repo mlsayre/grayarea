@@ -83,9 +83,9 @@ class User < ApplicationRecord
     elsif part == "eyes"
       url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/eyes/obj_avatarEyes_" + thenum + ".png"
     elsif part == "deco"
-      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/deco/obj_deco_" + thenum + ".png"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/deco/obj_avatarDeco_" + thenum + ".png"
     elsif part == "hair"
-      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/hair/obj_hair_" + thenum + ".png"
+      url = "https://s3-us-west-2.amazonaws.com/wordstretch/avatars/hair/obj_avatarHair_" + thenum + ".png"
     end
   end
 
@@ -102,35 +102,45 @@ class User < ApplicationRecord
         return pointsneeded[number]
       end
     elsif part == "head"
-      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 400, 7 => 400, 8 => 600, 9 => 800, 10 => 1200}
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 400, 7 => 400, 8 => 600, 9 => 800, 10 => 1200,
+                      11 => 400, 12 => 400, 13 => 400, 14 => 400, 15 => 600, 16 => 600, 17 => 800, 18 => 800, 19 => 1200, 
+                      20 => 1200}
       if count == "true"
         return pointsneeded.count
       else
         return pointsneeded[number]
       end
     elsif part == "mouth"
-      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 400, 8 => 500, 9 => 600, 10 => 600}
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0,
+                      11 => 0, 12 => 0, 13 => 400, 14 => 400, 15 => 500, 16 => 500, 17 => 600, 18 => 600, 19 => 600, 
+                      20 => 600}
       if count == "true"
         return pointsneeded.count
       else
         return pointsneeded[number]
       end
     elsif part == "eyes"
-      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 200, 7 => 400, 8 => 500, 9 => 700, 10 => 800}
+      pointsneeded = {1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0,
+                      11 => 200, 12 => 200, 13 => 400, 14 => 400, 15 => 500, 16 => 500, 17 => 700, 18 => 700, 19 => 800, 
+                      20 => 800}
       if count == "true"
         return pointsneeded.count
       else
         return pointsneeded[number]
       end
     elsif part == "deco"
-      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 300, 4 => 500, 5 => 750, 6 => 900, 7 => 1000, 8 => 1200, 9 => 1500}
+      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 300, 4 => 500, 5 => 750, 6 => 300, 7 => 300, 8 => 500, 9 => 500,
+                      10 => 750, 11 => 750, 12 => 900, 13 => 900, 14 => 1000, 15 => 1000, 16 => 1200, 17 => 1200, 
+                      18 => 1500, 19 => 1500}
       if count == "true"
         return pointsneeded.count
       else
         return pointsneeded[number]
       end
     elsif part == "hair"
-      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 300, 7 => 400, 8 => 500, 9 => 500, 10 => 600}
+      pointsneeded = {0 => 0, 1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0, 8 => 0, 9 => 0, 10 => 0,
+                      11 => 0, 12 => 0, 13 => 300, 14 => 300, 15 => 400, 16 => 400, 17 => 500, 18 => 500, 19 => 600, 
+                      20 => 600}
       if count == "true"
         return pointsneeded.count
       else
