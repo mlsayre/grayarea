@@ -598,11 +598,13 @@ var ready = function() {
 	  	var hintnum2 = gon.hintnum2;
 	  	var hintnum3 = gon.hintnum3;
 	  	var guessernum = gon.guessernum;
+	  	var guessedwords = [];
+	  	var guessstatus = "hint1,word1";
 
 	  	//beginning state
-	  	var guessedwords = gon.guessedwords;
+	  	guessedwords = gon.guessedwords;
 	  	if (guessedwords === null) {guessedwords = [];}
-	  	var guessstatus = gon.guessstatus
+	  	guessstatus = gon.guessstatus
 	  	var gamespoiled = gon.spoiler;
 	  	var currenthint = hintword1;
 	  	var currenthintnum = hintnum1;
