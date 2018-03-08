@@ -1035,10 +1035,12 @@ var ready = function() {
 	  		function forrealskip() {
 	  			$(".guessword").show();
 		  		if (currenthint === hintword1) {
+		  			roundannounce(".raSkiphint", 5);
 		  			currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
 		  		} else if (currenthint === hintword2) {
+		  			roundannounce(".raSkiphint", 5);
 		  			currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
@@ -1064,7 +1066,8 @@ var ready = function() {
 	  	}
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
 
-	  	function roundannounce(container) {
+	  	function roundannounce(container, delay) {
+	  		if (!delay) { delay = 1000 }
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {
 						$(container).find(".ra_anim1").removeClass("raa1_initial");
@@ -1078,7 +1081,7 @@ var ready = function() {
 							$(container).find(".ra_anim2").addClass("raa2_final");
 						}, 2720)
 					});
-	  		}, 1000)
+	  		}, delay)
 				$(container).removeClass("hidden");
 				ratimeout = setTimeout(function() {
 	  			$(".roundannounce").fadeOut(75, function() {
@@ -1087,7 +1090,7 @@ var ready = function() {
 	  				$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
 	  			});
 					$(".roundannounce div").addClass("hidden");
-	  		}, 4000)
+	  		}, delay + 3000)
 	  	}
 
 	  	$(".roundannounce").click(function() {
