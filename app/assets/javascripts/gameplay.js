@@ -892,30 +892,31 @@ var ready = function() {
 					} else if (currenthint === hintword1 && correctwordshint1.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
 						shownotification();
+						roundannounce(".raRound1toRound2");
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
 	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification("bonus");
+						roundannounce(".raBonusstart");
 	  				guessstatus = "bonus,hint2";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
 						shownotification();
+						roundannounce(".raRound2toRound3");
 	  				currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
 	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
 						shownotification("bonus");
-	  				guessstatus = "bonus,hint3";
-	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
-	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
-						shownotification("bonus");
+						roundannounce(".raBonusstart");
 	  				guessstatus = "bonus,hint3";
 	  			} else if (guessstatus === "bonus,hint2") {
 						$(".gamenotify").html("You picked up a bonus word. On to the third hint...");
 						shownotification();
+						roundannounce(".raBonustoRound3");
 						currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
@@ -970,6 +971,7 @@ var ready = function() {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
 	  					"Moving on to the second hint...");
 						shownotification();
+						roundannounce(".raRound1toRound2");
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
@@ -982,6 +984,7 @@ var ready = function() {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
 	  					"Moving on to the final hint...");
 						shownotification();
+						roundannounce(".raBonustoRound3");
 						currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 						guessstatus = "hint3,word1";
@@ -989,6 +992,7 @@ var ready = function() {
 	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
 	  					"Moving on to the final hint...");
 						shownotification();
+						roundannounce(".raRound2toRound3");
 						currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 						guessstatus = "hint3,word1";
@@ -1058,6 +1062,47 @@ var ready = function() {
 					}
 	  		}, 4000)
 	  	}
+	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
+
+	  	function roundannounce(container) {
+	  		raanimall = setTimeout(function() {
+	  			$(".roundannounce").fadeIn(75, function() {
+						$(container).find(".ra_anim1").removeClass("raa1_initial");
+						raanim1 = setTimeout(function() {
+							$(container).find(".ra_anim1").addClass("raa1_final");
+						}, 1000)
+						raanim2 = setTimeout(function() {
+							$(container).find(".ra_anim2").removeClass("raa2_initial");
+						}, 1050)
+						raanim3 = setTimeout(function() {
+							$(container).find(".ra_anim2").addClass("raa2_final");
+						}, 2720)
+					});
+	  		}, 1000)
+				$(container).removeClass("hidden");
+				ratimeout = setTimeout(function() {
+	  			$(".roundannounce").fadeOut(75, function() {
+	  				$(".roundannounce div").addClass("hidden");
+	  				$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
+	  				$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
+	  			});
+					$(".roundannounce div").addClass("hidden");
+	  		}, 4000)
+	  	}
+
+	  	$(".roundannounce").click(function() {
+	  		clearTimeout(ratimeout);
+	  		clearTimeout(raanimall);
+	  		clearTimeout(raanim1);
+	  		clearTimeout(raanim2);
+	  		clearTimeout(raanim3);
+	  		$(".roundannounce").fadeOut(125, function() {
+	  			$(".roundannounce div").addClass("hidden");
+	  			$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
+	  			$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
+	  		});
+	  	})
+
 
 	  	$(".thumbdown").click(function() {
 	  		$(".menubox").hide();

@@ -215,7 +215,7 @@
 				  	$(".guesser" + gsrnum).click();
 				  	}
 				  }
-					GuessFunc.seeguessesafter();
+					setTimeout(function() { GuessFunc.seeguessesafter(); }, 300);
 					</script>
 					<% end %>
 					<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span> <br>
@@ -236,6 +236,26 @@
 	</div>
 
 	<div class="pagecover"></div>
+
+	<div class="roundannounce hidden">
+		<div class="raRound1toRound2 hidden">
+			<span class="ra_anim1 raa1_initial">Round 1 Over...</span>
+			<span class="ra_anim2 raa2_initial">Starting Round 2!</span>
+		</div>
+		<div class="raRound2toRound3 hidden">
+			<span class="ra_anim1 raa1_initial">Round 2 Over...</span>
+			<span class="ra_anim2 raa2_initial">Starting Round 3!</span>
+		</div>
+		<div class="raBonustoRound3 hidden">
+			<span class="ra_anim1 raa1_initial">Bonus Round Over...</span>
+			<span class="ra_anim2 raa2_initial">Starting Round 3!</span>
+		</div>
+		<div class="raBonusstart hidden">
+			<span class="ra_anim1 raa1_initial">You got all the words for this round!</span>
+			<span class="ra_anim2 raa2_initial">Starting Bonus Round!</span>
+		</div>
+		<span class="raskip">(Click anywhere to skip)</span>
+	</div>
 	<% if current_user.username == "Matt" %>
 	  <div class="gd button">Delete game</div>
 	<% end %>
