@@ -1905,7 +1905,7 @@ a.bigplaybutton {
     right: 0;
     top: 28.5vw;
     font-size: 22px;
-    transition: transform 350ms, top 280ms ;
+    transition: transform 550ms, top 420ms ;
 }
 .hintlabel.guessnum {
     margin: 0 auto;
@@ -2047,7 +2047,7 @@ span.removeheart {
   text-align: center;
   top: 25%;
   text-shadow: cyan -1px 1px 6px;
-  transition: all 280ms;
+  transition: all 360ms;
 }
 .bighint.bh_initial {
   transform: scale(4) rotate(360deg);
