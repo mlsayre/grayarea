@@ -899,7 +899,7 @@ var ready = function() {
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
 	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
 						shownotification("bonus");
-						roundannounce(".raBonusstart");
+						roundannounce(".raBonusstart", 1000, "bonusstart");
 	  				guessstatus = "bonus,hint2";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
@@ -1062,10 +1062,12 @@ var ready = function() {
 	  	}
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
 
-	  	function roundannounce(container, delay) {
+	  	function roundannounce(container, delay, status) {
 	  		if (!delay) { delay = 1000 }
-	  		$(".bighint").css("visibility", "hidden");
-	  		$(".bighint").addClass("bh_initial");
+	  			$(".bighint").css("visibility", "hidden");
+	  		if (status !== "bonusstart") {
+	  			$(".bighint").addClass("bh_initial");
+	  		}
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {
 						$(container).find(".ra_anim1").removeClass("raa1_initial");
