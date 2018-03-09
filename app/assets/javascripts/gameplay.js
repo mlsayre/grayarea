@@ -1052,13 +1052,9 @@ var ready = function() {
 	  	});
 
 	  	function shownotification(trigger) {
-	  		$(".hintheadline").fadeOut(125, function() {
-					$(".gamenotify").fadeIn(125);
-				});
+	  		$(".gamenotify").show();
 				notifytimeout = setTimeout(function() {
-	  			$(".gamenotify").fadeOut(125, function() {
-						$(".hintheadline").fadeIn(125);
-					});
+	  			$(".gamenotify").hide();
 					if (trigger === "bonus") {
 						bonusstartsfx.play();
 					}
@@ -1093,18 +1089,18 @@ var ready = function() {
 	  		}, delay + 3000)
 	  	}
 
-	  	$(".roundannounce").click(function() {
-	  		clearTimeout(ratimeout);
-	  		clearTimeout(raanimall);
-	  		clearTimeout(raanim1);
-	  		clearTimeout(raanim2);
-	  		clearTimeout(raanim3);
-	  		$(".roundannounce").fadeOut(125, function() {
-	  			$(".roundannounce div").addClass("hidden");
-	  			$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
-	  			$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
-	  		});
-	  	})
+	  	// $(".roundannounce").click(function() {
+	  	// 	clearTimeout(ratimeout);
+	  	// 	clearTimeout(raanimall);
+	  	// 	clearTimeout(raanim1);
+	  	// 	clearTimeout(raanim2);
+	  	// 	clearTimeout(raanim3);
+	  	// 	$(".roundannounce").fadeOut(125, function() {
+	  	// 		$(".roundannounce div").addClass("hidden");
+	  	// 		$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
+	  	// 		$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
+	  	// 	});
+	  	// })
 
 
 	  	$(".thumbdown").click(function() {
