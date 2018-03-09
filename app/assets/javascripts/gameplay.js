@@ -159,7 +159,8 @@ var ready = function() {
 				thetext = $(this).find("span").text().replace("-", "-<br>");
 				$(this).find("span").html(thetext)
 			} else if ($(this).find("span").text().indexOf(" ") !== -1) {
-				$(this).addClass("spaceword");
+				thetext = $(this).find("span").text().replace(" ", "<br>");
+				$(this).find("span").html(thetext)
 			} else if ($(this).find("span").text().length === 11) {
 				$(this).addClass("spaceword");
 			} else if ($(this).find("span").text().length > 11) {
@@ -890,31 +891,36 @@ var ready = function() {
 						scoretoadd+= 25;
 						guessstatus = "over,over";
 					} else if (currenthint === hintword1 && correctwordshint1.length === currenthintnum) {
-	  				$(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
+	  				// $(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
+	  				$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raRound1toRound2");
 						currenthint = hintword2;
 	  				currenthintnum = hintnum2;
 	  				guessstatus = "hint2,word1";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
-	  				$(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
+	  				// $(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
+	  				$(".gamenotify").html("");
 						shownotification("bonus");
 						roundannounce(".raBonusstart", 1000, "bonusstart");
 	  				guessstatus = "bonus,hint2";
 	  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
-	  				$(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
+	  				// $(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
+	  				$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raRound2toRound3");
 	  				currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
 	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
-	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
+	  				// $(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
+	  				$(".gamenotify").html("");
 						shownotification("bonus");
 						roundannounce(".raBonusstart", 1000, "bonusstart");
 	  				guessstatus = "bonus,hint3";
 	  			} else if (guessstatus === "bonus,hint2") {
-						$(".gamenotify").html("You picked up a bonus word. On to the third hint...");
+						// $(".gamenotify").html("You picked up a bonus word. On to the third hint...");
+						$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raBonustoRound3");
 						currenthint = hintword3;
@@ -968,8 +974,9 @@ var ready = function() {
 	  		// neutral word
 	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
 	  			if (currenthint === hintword1) {
-	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"Moving on to the second hint...");
+	  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  				// 	"Moving on to the second hint...");
+						$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raRound1toRound2");
 						currenthint = hintword2;
@@ -981,16 +988,18 @@ var ready = function() {
 						shownotification();
 						guessstatus = "over,over";
 					} else if (guessstatus === "bonus,hint2") {
-	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"Moving on to the final hint...");
+	  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  				// 	"Moving on to the final hint...");
+						$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raBonustoRound3");
 						currenthint = hintword3;
 	  				currenthintnum = hintnum3;
 						guessstatus = "hint3,word1";
 					} else if (currenthint === hintword2) {
-	  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
-	  					"Moving on to the final hint...");
+	  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+	  				// 	"Moving on to the final hint...");
+						$(".gamenotify").html("");
 						shownotification();
 						roundannounce(".raRound2toRound3");
 						currenthint = hintword3;
@@ -1063,6 +1072,7 @@ var ready = function() {
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
 
 	  	function roundannounce(container, delay, status) {
+	  		$(".hintlabel").css("opacity", "0");
 	  		if (!delay) { delay = 1000 }
 	  			$(".bighint").css("visibility", "hidden");
 	  		if (status !== "bonusstart") {
@@ -1073,7 +1083,7 @@ var ready = function() {
 						$(container).find(".ra_anim1").removeClass("raa1_initial");
 						raanim1 = setTimeout(function() {
 							$(container).find(".ra_anim1").addClass("raa1_final");
-						}, 1200)
+						}, 1500)
 						// raanim3 = setTimeout(function() {
 						// 	$(container).find(".ra_anim2").addClass("raa2_final");
 						// }, 2720)
@@ -1083,12 +1093,13 @@ var ready = function() {
 				ratimeout = setTimeout(function() {
 	  			$(".roundannounce").fadeOut(75, function() {
 	  				$(".bighint").css("visibility", "visible").removeClass("bh_initial");
+	  				$(".hintlabel").css("opacity", "1");
 	  				$(".roundannounce div").addClass("hidden");
 	  				$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
 	  				$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
 	  			});
 					$(".roundannounce div").addClass("hidden");
-	  		}, delay + 1500)
+	  		}, delay + 1800)
 	  	}
 
 	  	// $(".roundannounce").click(function() {
