@@ -1064,29 +1064,29 @@ var ready = function() {
 
 	  	function roundannounce(container, delay) {
 	  		if (!delay) { delay = 1000 }
+	  		$(".bighint").css("visibility", "hidden");
+	  		$(".bighint").addClass("bh_initial");
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {
 						$(container).find(".ra_anim1").removeClass("raa1_initial");
 						raanim1 = setTimeout(function() {
 							$(container).find(".ra_anim1").addClass("raa1_final");
-						}, 1000)
-						raanim2 = setTimeout(function() {
-							$(container).find(".ra_anim2").removeClass("raa2_initial");
-						}, 1050)
-						raanim3 = setTimeout(function() {
-							$(container).find(".ra_anim2").addClass("raa2_final");
-						}, 2720)
+						}, 1200)
+						// raanim3 = setTimeout(function() {
+						// 	$(container).find(".ra_anim2").addClass("raa2_final");
+						// }, 2720)
 					});
 	  		}, delay)
 				$(container).removeClass("hidden");
 				ratimeout = setTimeout(function() {
 	  			$(".roundannounce").fadeOut(75, function() {
+	  				$(".bighint").css("visibility", "visible").removeClass("bh_initial");
 	  				$(".roundannounce div").addClass("hidden");
 	  				$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
 	  				$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
 	  			});
 					$(".roundannounce div").addClass("hidden");
-	  		}, delay + 3000)
+	  		}, delay + 1500)
 	  	}
 
 	  	// $(".roundannounce").click(function() {
