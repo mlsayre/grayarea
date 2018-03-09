@@ -911,7 +911,7 @@ var ready = function() {
 	  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
 	  				$(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
 						shownotification("bonus");
-						roundannounce(".raBonusstart");
+						roundannounce(".raBonusstart", 1000, "bonusstart");
 	  				guessstatus = "bonus,hint3";
 	  			} else if (guessstatus === "bonus,hint2") {
 						$(".gamenotify").html("You picked up a bonus word. On to the third hint...");
