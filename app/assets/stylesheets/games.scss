@@ -416,53 +416,45 @@ span.guessermsg {
   position: relative;
 }
 span.giveheart, span.removeheart {
-    position: relative;
-    bottom: 4px;
-    font-style: italic;
-    background-color: transparent;
-    padding: 10px 2px 20px;
-    transition: 200ms all;
-    border-radius: 4px;
-    display: block;
-    width: 190px;
-    margin: 0 auto;
-    line-height: 1.2;
-    cursor: pointer;
-    background: url(btn_greenEmpty_long.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+  position: absolute;
+  top: 19%;
+  left: 4%;
+  background-color: transparent;
+  padding: 1px 2px 4px;
+  transition: 200ms all;
+  border-radius: 0px;
+  display: inline-block;
+  width: 40px;
+  margin: 0 auto;
+  line-height: 1.2;
+  cursor: pointer;
+  background: url(btn_field_green.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 span.removeheart {
-    display: none;
-    width: 200px;
-    margin-top: 4px;
-    font-size: 12px;
-    padding: 8px 16px 20px;
+  display: none;
 }
 span.giveheart:hover, span.removeheart:hover {
   /*background-color: pink;*/
 }
 .giveheart img, .giveheartsuccess img, .removeheart img, .removeheartsuccess img {
-  width: 18px;
+  width: 16px;
   position: relative;
-  top: 3px;
+  top: 2px;
 }
 .giveheartsuccess, .removeheartsuccess {
   display: none;
-  color: white;
+  color: black;
+  position: absolute;
+  right: 4%;
+  font-style: italic;
 }
 span.removeheart {
   display: none;
-  width: 100px;
-  margin-top: 4px;
-  font-size: 12px;
-}
-span.removeheart img {
-  width: 12px;
-  top: 1px;
 }
 span.heartshow img {
-  width: 18px;
+  width: 15px;
   position: relative;
   top: 2px;
 }
@@ -1870,7 +1862,7 @@ a.bigplaybutton {
   background-size: 100% !important;
   background-repeat: no-repeat !important;*/
 }
-.button.mainplay, .button.startguess, .button.dummyplay {
+.button.mainplay, .button.startguess, .button.dummyplay, .button.contmainplay, .button.contstartguess {
   text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
 }
 .hintnumarea {
@@ -1975,17 +1967,22 @@ span.hintnumheading.allguesserinfo.playerplayed {
     left: 0;
     right: 0;
 }
-span.hintnumheading.allguesserinfo.playerplayed u {
-  color: white;
+.prevscoreblock {
+    background: rgba(250,250,250,.85);
+    padding: 8px 8px 12px;
+    border-radius: 15px;
+}
+.scoreblocktitle {
+  color: black;
+  font-size: 13px;
+  margin-bottom: 3px;
+  display: inline-block;
 }
 .summaryhints {
   color: white;
-}
-span.giveheart {
-    margin-top: 30px;
-}
-span.removeheart {
-    top: 20px;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
 }
 @media (min-width: 500px) {
   .buttonarea {
@@ -2076,6 +2073,36 @@ span.removeheart {
 .ra_anim2.raa2_final {
     left: -140%;
     transform: scale(.1);
+}
+.playedgameover {
+  display: none;
+  position: absolute;
+  text-align: center;
+  right: 0;
+  left: 0;
+  top: 6%;
+  color: white;
+}
+.pgotitle {
+    font-size: 18px;
+    font-weight: 700;
+}
+.playedgameover .buttons-middle {
+  width: auto;
+}
+.playedgameover .mainmenubuttons {
+  top: 20%;
+}
+.playedgameover button.bigplaybutton {
+    color: blue;
+    background: white !important;
+    width: 200px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    font-family: "Aller";
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
 }
 /* underwater */
 .playboard-signedin.theme-underwater {

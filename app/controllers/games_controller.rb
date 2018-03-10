@@ -59,8 +59,7 @@ class GamesController < ApplicationController
       @game = Game.where(:gamestatus => "done").all.sample(1)
 
       respond_to do |format|
-        format.html { redirect_to @game, notice: 'Have fun guessing!' }
-        format.json { render :show, status: :created, location: @game }
+        format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
       end
     else
       @playinggames = Game.where("(guesser_id1 = ? AND gsr1_status <> ?) OR (guesser_id2 = ? AND gsr2_status <> ?) OR (guesser_id3 = ? AND gsr3_status <> ?) OR (guesser_id4 = ? AND gsr4_status <> ?) OR (guesser_id5 = ? AND gsr5_status <> ?) OR (guesser_id6 = ? AND gsr6_status <> ?)", 
@@ -68,13 +67,12 @@ class GamesController < ApplicationController
 
     	@availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
     		:guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
-        :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess")
+        :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess", :guesser_id6 => 0)
 
       if @playinggames.length > 0
         @game = @playinggames.first
         respond_to do |format|
-          format.html { redirect_to @game, notice: '' }
-          format.json { render :show, status: :created, location: @game }
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
         end
 
     	elsif @availgames.length > 0
@@ -95,20 +93,72 @@ class GamesController < ApplicationController
   	  	end
 
   	    respond_to do |format|
-  	      format.html { redirect_to @game, notice: '' }
-  	      format.json { render :show, status: :created, location: @game }
+  	      format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
   	    end
 
   	  else
   	  	@game = Game.new
 
   	  	respond_to do |format|
-  	      format.html { redirect_to main_path, notice: 'No games available to play. Maybe start a game or two while you wait!' }
-  	      format.json { render :show}
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
   	    end
   	    flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
       end
 	  end
+
+  end
+
+  def startguessercont
+    if user_signed_in? == false
+      @game = Game.where(:gamestatus => "done").all.sample(1)
+
+      respond_to do |format|
+        format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
+      end
+    else
+      @playinggames = Game.where("(guesser_id1 = ? AND gsr1_status <> ?) OR (guesser_id2 = ? AND gsr2_status <> ?) OR (guesser_id3 = ? AND gsr3_status <> ?) OR (guesser_id4 = ? AND gsr4_status <> ?) OR (guesser_id5 = ? AND gsr5_status <> ?) OR (guesser_id6 = ? AND gsr6_status <> ?)", 
+        current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over", current_user.id, "over,over").where.not(:giver_id => current_user.id, :gamestatus => "done")
+
+      @availgames = Game.where.not(:giver_id => current_user.id, :guesser_id1 => current_user.id, 
+        :guesser_id2 => current_user.id, :guesser_id3 => current_user.id, :guesser_id4 => current_user.id, 
+        :guesser_id5 => current_user.id, :guesser_id6 => current_user.id).where(:gamestatus => "guess", :guesser_id6 => 0)
+
+      if @playinggames.length > 0
+        @game = @playinggames.first
+        respond_to do |format|
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
+        end
+
+      elsif @availgames.length > 0
+        @game = @availgames.order("RANDOM()").first
+
+        if @game.guesser_id1 == 0
+          @game.update(:guesser_id1 => current_user.id)
+        elsif @game.guesser_id2 == 0
+          @game.update(:guesser_id2 => current_user.id)
+        elsif @game.guesser_id3 == 0
+          @game.update(:guesser_id3 => current_user.id)
+        elsif @game.guesser_id4 == 0
+          @game.update(:guesser_id4 => current_user.id)
+        elsif @game.guesser_id5 == 0
+          @game.update(:guesser_id5 => current_user.id)
+        elsif @game.guesser_id6 == 0
+          @game.update(:guesser_id6 => current_user.id)
+        end
+
+        respond_to do |format|
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
+        end
+
+      else
+        @game = Game.new
+
+        respond_to do |format|
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
+        end
+        flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
+      end
+    end
 
   end
 
@@ -338,6 +388,38 @@ class GamesController < ApplicationController
         if @game.save
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
           format.json { render :show, status: :created, location: @game }
+        else
+          format.html { render :new }
+          format.json { render json: @game.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+  def startgivercont
+    @posgames = Game.where(:giver_id => current_user.id).where(:gamestatus => "give")
+    if @posgames.count > 0
+      @game = @posgames.first
+
+      respond_to do |format|
+        format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'Game was successfully created.' }
+      end
+    else
+      @allwords = File.new("config/wordlist").readlines.sample(15)
+      @allwords.each do |w|
+        w.include?("\n") ? w.gsub!("\n", "").upcase! : w.upcase!
+      end
+      @correctwords = @allwords.sample(7)
+      @loseword = @correctwords[0]
+      @correctwords.slice!(0)
+
+      @game = Game.new
+      @game.update(:allwords => @allwords, :gamestatus => "give", :correctwords => @correctwords, 
+        :loseword => @loseword, :giver_id => current_user.id)
+
+      respond_to do |format|
+        if @game.save
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'Game was successfully created.' }
         else
           format.html { render :new }
           format.json { render json: @game.errors, status: :unprocessable_entity }

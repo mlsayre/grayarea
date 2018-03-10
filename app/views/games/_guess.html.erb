@@ -98,58 +98,63 @@
 			<span class="hintlabel gameover">Game Over</span>
 			<div class="gameoverinfo">
 				<span class="hintnumheading">
-					<span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
-				</span>
-					<span class="giveheart">Great hints? Give <img src="/assets/Heart-48.png"></img>
-					</span>
-					<span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
-					</span>
-					<span class="removeheart">Remove your <img src="/assets/Heart-48.png"></img></span>
 					<!-- Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points -->
 				</span><br>
-				<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;"><u>Scores So Far (click to see guesses)...</u><br>
-					<% if @gsrstatus == "over,over" %>
-					<div class="guesserinfo guesser1" data-gsrwords="<%= @game.gsr1_words.join(",") %>">
-						<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
-						<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
-						<% if @game.gsr1_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
-					</div>
-					<div class="guesserinfo guesser2"  data-gsrwords="<%= @game.gsr2_words.join(",") %>">
-						<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
-						<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %>pts</span>
-						<% if @game.gsr2_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
-					</div>
-					<div class="guesserinfo guesser3" data-gsrwords="<%= @game.gsr3_words.join(",") %>">
-						<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
-						<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %>pts</span>
-						<% if @game.gsr3_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
-					</div>
-					<div class="guesserinfo guesser4"  data-gsrwords="<%= @game.gsr4_words.join(",") %>">
-						<span><%= @game.guesser_id4 != 0 ? User.find(@game.guesser_id4).username : "-" %></span>: 
-						<span class="finalpoints4"><%= @game.gsr4_score ? @game.gsr4_score : "-" %>pts</span>
-						<% if @game.gsr4_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
-					</div>
-					<div class="guesserinfo guesser5"  data-gsrwords="<%= @game.gsr5_words.join(",") %>">
-						<span><%= @game.guesser_id5 != 0 ? User.find(@game.guesser_id5).username  : "-" %></span>: 
-						<span class="finalpoints5"><%= @game.gsr5_score ? @game.gsr5_score : "-" %>pts</span>
-						<% if @game.gsr5_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
-					</div>
-					<div class="guesserinfo guesser6" data-gsrwords="<%= @game.gsr6_words.join(",") %>">
-						<span><%= @game.guesser_id6 != 0 ? User.find(@game.guesser_id6).username  : "-" %></span>: 
-						<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
-						<% if @game.gsr6_heart == 1 %>
-							<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-						<% end %>
+				<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;">
+					<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span>
+					<div class="prevscoreblock">
+						<!-- <span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
+						</span> -->
+						<span class="removeheartsuccess">Awww.</span>
+						<span class="giveheart"><img src="/assets/Heart-48.png"> +</img></span>
+						<div class="scoreblocktitle">Scores So Far (clickable)</div>
+						<!-- <span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
+						</span> -->
+						<span class="giveheartsuccess">Thanks!</span>
+						<span class="removeheart"><img src="/assets/Heart-48.png"></img> -</span><br>
+						<% if @gsrstatus == "over,over" %>
+						<div class="guesserinfo guesser1" data-gsrwords="<%= @game.gsr1_words.join(",") %>">
+							<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
+							<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
+							<% if @game.gsr1_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
+						<div class="guesserinfo guesser2"  data-gsrwords="<%= @game.gsr2_words.join(",") %>">
+							<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
+							<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %>pts</span>
+							<% if @game.gsr2_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
+						<div class="guesserinfo guesser3" data-gsrwords="<%= @game.gsr3_words.join(",") %>">
+							<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
+							<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %>pts</span>
+							<% if @game.gsr3_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
+						<div class="guesserinfo guesser4"  data-gsrwords="<%= @game.gsr4_words.join(",") %>">
+							<span><%= @game.guesser_id4 != 0 ? User.find(@game.guesser_id4).username : "-" %></span>: 
+							<span class="finalpoints4"><%= @game.gsr4_score ? @game.gsr4_score : "-" %>pts</span>
+							<% if @game.gsr4_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
+						<div class="guesserinfo guesser5"  data-gsrwords="<%= @game.gsr5_words.join(",") %>">
+							<span><%= @game.guesser_id5 != 0 ? User.find(@game.guesser_id5).username  : "-" %></span>: 
+							<span class="finalpoints5"><%= @game.gsr5_score ? @game.gsr5_score : "-" %>pts</span>
+							<% if @game.gsr5_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
+						<div class="guesserinfo guesser6" data-gsrwords="<%= @game.gsr6_words.join(",") %>">
+							<span><%= @game.guesser_id6 != 0 ? User.find(@game.guesser_id6).username  : "-" %></span>: 
+							<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
+							<% if @game.gsr6_heart == 1 %>
+								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+							<% end %>
+						</div>
 					</div>
 					<script>
 					GuessFunc = {
@@ -218,7 +223,6 @@
 					setTimeout(function() { GuessFunc.seeguessesafter(); }, 300);
 					</script>
 					<% end %>
-					<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span> <br>
 				</span>
 				
 			</div>
@@ -259,6 +263,31 @@
 			<!-- <span class="ra_anim2 raa2_initial">Good luck!</span> -->
 		</div>
 	</div>
+
+	<div class="playedgameover">
+		<div class="pgotitle">Game Over!</div>
+		<div class="buttons-middle">
+			<button class="button bigplaybutton">CONTINUE</button>
+      <div class="mainmenubuttons">
+
+        <div class="actions">
+          <% if current_user.lifetimegamesguesser > 2 %>
+            <button class="button contmainplay">Give</button>
+          <% else %>
+            <button class="button contmainplay disabled">Give</button>
+          <% end %>
+        </div>
+        <br>
+
+        <button class="button contstartguess">Guess</button><br>
+
+        <% if current_user.lifetimegamesguesser < 3 %>
+          <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
+        <% end %>
+      </div>
+    </div>
+	</div>
+
 	<% if current_user.username == "Matt" %>
 	  <div class="gd button">Delete game</div>
 	<% end %>

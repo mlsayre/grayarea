@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails-ujs
-//= require turbolinks
 //= require howler
 //= require local-time
 //= require_tree .

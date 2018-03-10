@@ -20,6 +20,18 @@ var ready = function() {
       type: "POST"
     })
   })
+  $(".contstartguess").click(function() {
+    $.ajax({
+      url: "/games/startguessercont",
+      type: "POST"
+    })
+  })
+  $(".contmainplay").click(function() {
+    $.ajax({
+      url: "/games/startgivercont",
+      type: "POST"
+    })
+  })
 
   $(".bigplaybutton").click(function(e) {
   	e.preventDefault();
@@ -636,10 +648,10 @@ var ready = function() {
 	  	var heartstatus = gon.heartstatus;
 			if (heartstatus === 1) {
 				$(".giveheart").hide();
-				$(".removeheart").show();
+				$(".removeheart").css("display", "inline-block");
 			}
 
-			$(".giveheart").click(function() {
+			$(document).on("click", ".giveheart", function() {
 				$.ajax({
 	        url: "/games/addheart",
 	        type: "POST",
@@ -648,27 +660,26 @@ var ready = function() {
 	                'heartgiven' : 1 }
 	      })
 	        .done(function() {
-	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-	        	$(".giveheart").hide();
-	        	$(".removeheartsuccess").css("display", "none");
-	        	$(".giveheartsuccess").css("display", "block");
 	        	var wrapper = $('.allguesserinfo');
 						wrapper.load(pathname + " .allguesserinfo", function() {
-						   wrapper.children('.allguesserinfo').unwrap();
-						   GuessFuncDuring.seeguessesafter();
+						  wrapper.children('.allguesserinfo').unwrap();
+						  GuessFuncDuring.seeguessesafter(); 
+						  $(".giveheart").hide();
+						  $(".removeheartsuccess").css("display", "none");
+	        		$(".giveheartsuccess").css("display", "inline-block");
+						  setTimeout(function() {
+		        		$(".giveheartsuccess").fadeOut( function() {
+		        			$(".removeheart").show();
+		        		});
+		        	}, 1500);
 						});
-	        	setTimeout(function() {
-	        		$(".giveheartsuccess").fadeOut( function() {
-	        			$(".removeheart").show();
-	        		});
-	        	}, 3500);
 	        })
 	        .fail(function() {
 	        	connectionError();
 	        })
 			})
 
-			$(".removeheart").click(function() {
+			$(document).on("click", ".removeheart", function() {
 				$.ajax({
 	        url: "/games/removeheart",
 	        type: "POST",
@@ -677,20 +688,20 @@ var ready = function() {
 	                'heartgiven' : 0 }
 	      })
 	        .done(function() {
-	        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
-	        	$(".removeheart").hide()
-	        	$(".giveheartsuccess").css("display", "none");
-	        	$(".removeheartsuccess").css("display", "block");
 	        	var wrapper = $('.allguesserinfo');
 						wrapper.load(pathname + " .allguesserinfo", function() {
-						   wrapper.children('.allguesserinfo').unwrap();
-						   GuessFuncDuring.seeguessesafter();
+						  wrapper.children('.allguesserinfo').unwrap();
+						  GuessFuncDuring.seeguessesafter();
+						  $(".giveheart").hide();
+						  $(".removeheart").hide();
+						  $(".giveheartsuccess").css("display", "none");
+	        		$(".removeheartsuccess").css("display", "inline-block");
+						  setTimeout(function() {
+		        		$(".removeheartsuccess").fadeOut(function() {
+		        			$(".giveheart").show();
+		        		});
+		        	}, 1500);
 						});
-	        	setTimeout(function() {
-	        		$(".removeheartsuccess").fadeOut(function() {
-	        			$(".giveheart").show();
-	        		});
-	        	}, 3500);
 	        })
 	        .fail(function() {
 	        	connectionError();
@@ -700,6 +711,7 @@ var ready = function() {
 
 	  	//board setup/update
 	  	function boardupdate(endgametime, firstload, scoreadd) {
+	  		$("body").css("pointer-events", "none");
 		  	if (guessedwords.length > 0) {
 		  		for (var i = 0; i < guessedwords.length; i++) {
 			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
@@ -788,6 +800,7 @@ var ready = function() {
 				  		$(".finalpoints" + guessernum).text(playerscore + "pts");
 				  	}
 				  	$(".allguesserinfo").addClass("underwayforgiver");
+				  	$(".playedgameover").show();
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
@@ -806,22 +819,27 @@ var ready = function() {
 		                'hint3words' : correctwordshint3 }
 		      })
 		        .done(function() {
-		        	//$(".allguesserinfo").load(location.href + " .allguesserinfo>*", "");
+		        	$("body").css("pointer-events", "all");
 		        	if ($(".chatcontent").length === 0) {
 		        		showChat();
 		        	}
 		        	if (guessstatus === "over,over") {
 		        		console.log("game is over, should load stuff")
 		        		var wrapper = $('.allguesserinfo');
-								wrapper.load(pathname + " .allguesserinfo", function() {
-								   wrapper.children('.allguesserinfo').unwrap();
-								   GuessFuncDuring.seeguessesafter();
-								});
+		        		setTimeout(function() {
+		        			wrapper.load(pathname + " .allguesserinfo", function() {
+									  wrapper.children('.allguesserinfo').unwrap();
+									  GuessFuncDuring.seeguessesafter();
+									});
+		        		}, 600)
 		        	}
 		        })
 		        .fail(function() {
 		        	connectionError();
+		        	$("body").css("pointer-events", "all");
 		        })
+		     } else {
+		     	$("body").css("pointer-events", "all");
 		     }
 		  }
 
@@ -1428,5 +1446,5 @@ var ready = function() {
 	
 }
 
-//$(document).ready(ready);
-$(document).on('turbolinks:load', ready);
+$(document).ready(ready);
+//$(document).on('turbolinks:load', ready);
