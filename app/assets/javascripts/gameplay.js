@@ -1093,7 +1093,9 @@ var ready = function() {
 	  		if (status !== "bonusstart") {
 	  			$(".bighint").addClass("bh_initial");
 	  		} else { // it's a bonus round
-					bonusstartsfx.play();
+	  		  setTimeout(function() {
+	  		  	bonusstartsfx.play();
+	  		  }, 360)
 	  		}
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {
