@@ -100,7 +100,7 @@ class GamesController < ApplicationController
   	  	@game = Game.new
 
   	  	respond_to do |format|
-          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
+          format.js { render :js => "window.location.href = '#{main_path}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
   	    end
   	    flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
       end
@@ -154,7 +154,7 @@ class GamesController < ApplicationController
         @game = Game.new
 
         respond_to do |format|
-          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
+          format.js { render :js => "window.location.href = '#{main_path}'", notice: 'No games available to play. Maybe start a game or two while you wait!' }
         end
         flash[:notice] = 'No games available to play. Maybe start a game or two while you wait?'
       end

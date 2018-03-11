@@ -1082,9 +1082,6 @@ var ready = function() {
 	  		$(".gamenotify").show();
 				notifytimeout = setTimeout(function() {
 	  			$(".gamenotify").hide();
-					if (trigger === "bonus") {
-						bonusstartsfx.play();
-					}
 	  		}, 4000)
 	  	}
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
@@ -1095,6 +1092,10 @@ var ready = function() {
 	  			$(".bighint").css("visibility", "hidden");
 	  		if (status !== "bonusstart") {
 	  			$(".bighint").addClass("bh_initial");
+	  		} else {
+	  			if (trigger === "bonus") {
+						bonusstartsfx.play();
+					}
 	  		}
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {
