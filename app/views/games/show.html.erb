@@ -15,7 +15,7 @@
 		<% elsif @game.gamestatus == "guess" && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
 		  <%= render "sorry" %>
 		<% else %>
-		  <%= render "done" %>
+		  <%= render "guess" %> <!-- was 'done' -->
 		<% end %>
 	<% end %>
 <% end %>
