@@ -19,7 +19,7 @@
       <%= numplayers %>/6 pl
       <span class='listnotify'> 
         <% if Game.getchatnumber(current_user.id, game.id) != "" %>
-          <img src="/assets/chat.png">
+          <!-- <img src="/assets/chat.png"> -->
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
