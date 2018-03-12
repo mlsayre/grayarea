@@ -1095,7 +1095,7 @@ var ready = function() {
 	  		} else { // it's a bonus round
 	  		  setTimeout(function() {
 	  		  	bonusstartsfx.play();
-	  		  }, delay + 435)
+	  		  }, delay + 360)
 	  		}
 	  		raanimall = setTimeout(function() {
 	  			$(".roundannounce").fadeIn(75, function() {

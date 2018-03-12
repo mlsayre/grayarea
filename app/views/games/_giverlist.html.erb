@@ -15,18 +15,21 @@
     <% numplayers = "6" %>
   <% end %>
   <li class="gamelist">
-    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %> 
-      (<%= numplayers %>/6)
+    <a href="<%= game_path(game.id) %>"><!-- <%= User.find(Game.find(game.id).giver_id).username %> -->
+      <%= numplayers %>/6 pl
       <span class='listnotify'> 
         <% if Game.getchatnumber(current_user.id, game.id) != "" %>
           <img src="/assets/chat.png">
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-    <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span></a>
+    <span class="timeshow"><%= local_time(game.created_at, "%b %d") %></span>
     <% heartnum = Game.find(game.id).gsr1_heart + Game.find(game.id).gsr2_heart + Game.find(game.id).gsr3_heart + 
       Game.find(game.id).gsr4_heart + Game.find(game.id).gsr5_heart + Game.find(game.id).gsr6_heart %>
-    <% if heartnum > 0 %>
+    <span class="timeshow heartsnum"><img src="/assets/Heart-48.png"> x <%= heartnum %></span>
+  </a>
+    
+    <!--<% if heartnum > 0 %>
       <div class="givelistheart glh1"><img src="/assets/Heart-48.png"></div>
     <% end %>
     <% if heartnum > 1 %>
@@ -43,7 +46,7 @@
     <% end %>
     <% if heartnum > 5 %>
       <div class="givelistheart glh6"><img src="/assets/Heart-48.png"></div>
-    <% end %>
+    <% end %> -->
     
   </li>
 <% end %>

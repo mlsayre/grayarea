@@ -13,14 +13,15 @@
     <% gscore = game.gsr6_score %>
   <% end %>
   <li class="gamelist">
-    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %><span style="font-size: 12px;">(<%= gscore %>p)</span>
+    <a href="<%= game_path(game.id) %>"><%= User.find(Game.find(game.id).giver_id).username %>
       <span class='listnotify'> 
         <% if Game.getchatnumber(current_user.id, game.id) != "" %>
           <img src="/assets/chat.png">
         <% end %>
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-      <span class="timeshow"><%= local_time(game.created_at, "%b %d,%Y %l:%M%P") %></span>
+      <span class="timeshow"><%= local_time(game.created_at, "%b %d") %></span>
+      <span class="timeshow" style="font-size: 12px;"><%= gscore %>pts</span>
     </a>
     <!--<span class="timeshow"><%= Game.find(game.id).created_at.localtime.strftime("%-m/%-d/%Y %l:%M%P") %></span></a> -->
     

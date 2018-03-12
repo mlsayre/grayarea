@@ -66,7 +66,12 @@ body {
   transition: all 5s;
   transform: scaleX(1);
 }
-.landingtitle span.stretched {
+.landingpage .tgc-main {
+  max-width: 72%;
+  transition: all 5s;
+  transform: scaleX(1);
+}
+.landingtitle span.stretched, .tgc-main.stretched {
   transform: scaleX(1.5) scaleY(.75);
 }
 .landingtitle .subtitle {
@@ -153,12 +158,11 @@ span.feednotify {
 }
 .maingamelist {
   text-align: center;
-  margin: 12px auto 30%;
-  border: 1px solid darkgrey;
+  margin: 9% auto 30%;
   border-radius: 12px;
   padding: 8px 0;
   max-width: 480px;
-  background-color: ghostwhite;
+  background: linear-gradient(white, transparent);
 }
 .maingamelist li {
   list-style: none;
@@ -1231,10 +1235,18 @@ span.listnotify {
   bottom: 0;
 }
 li.gamelist {
-    border: 1px solid lightgrey;
-    border-radius: 3px;
-    background-color: white;
+  border: 2px solid darkgrey;
+  border-radius: 9px;
+  background-color: white;
+  position: relative;
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 2px 0;
+}
+.heartsnum img {
+    width: 12px;
     position: relative;
+    top: 2px;
 }
 .givelistheart {
   width: 9px;
@@ -1555,7 +1567,13 @@ span.featimgtext {
     display: block;
 }
 /* themes and new design */
-
+.landingpage {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  height: 100vh;
+  background-repeat: no-repeat;
+}
 .titlesignedin {
   background: linear-gradient(#4c9d12, lightgrey);
   background-size: 100%;
@@ -1588,6 +1606,11 @@ span.featimgtext {
   width: 86%;
   margin: 26.5% auto 0;
 }
+.landingpage .titlegamecopy {
+  width: 86%;
+  margin: 0 auto;
+  padding-top: 12%;
+}
 .titlegamecopy img {
   max-width: 100%;
   margin: 0 auto;
@@ -1602,7 +1625,7 @@ img.tgc-header {
 .buttonarea {
   text-align: center;
   position: absolute;
-  top: 94vw;
+  top: 100vw;
 }
 .titleavatar {
   cursor: pointer;

@@ -23,10 +23,34 @@
     </span>
   </div>
 
-  <div class="titlegamecopy">
+  <!-- <div class="titlegamecopy">
     <img class="tgc-header" src="/assets/obj_title_header.png">
     <img class="tgc-main" src="/assets/obj_title.png">
     <img class="tgc-subline" src="/assets/obj_title_subline.png">
+  </div> -->
+
+  <div class="maingamelist">
+    Your Games<br>
+    <div class="guessergames">
+      <span class="gamelisttitle">Giver:</span>
+      <span class="mainstreakinfo">Non-spoiler streak: <b><%= current_user.statgivernospoilers %></b></span>
+      <span id="gamesgiverlist">
+        <%= render 'giverlist' %>
+      </span>
+      <div id="paginator" style="margin-top: 10px; text-align: center;">
+        <%= paginate @gamesgiverlist, remote: true, :param_name => 'page' %>
+      </div>
+    </div>
+    <div class="guessergames">
+      <span class="gamelisttitle">Guesser:</span>
+      <span class="mainstreakinfo">Non-spoiler streak: <b><%= current_user.statguessernospoilers %></b></span>
+      <span id="gamesguesserlist">
+        <%= render 'guesserlist' %>
+      </span>
+      <div id="paginator2" style="margin-top: 10px; text-align: center;">
+        <%= paginate @gamesguesserlist, remote: true, :param_name => 'page_2' %>
+      </div>
+    </div>
   </div>
 
   <p id="notice"><%= notice %></p>
