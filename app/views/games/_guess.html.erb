@@ -1,4 +1,4 @@
-<section class="playboard-signedin theme-underwater">
+<section class="playboard-signedin <%= current_user.theme %>">
 	<div class="gametop" data-gameid="<%= @game.id %>">Playing 
 		<%= User.find(@game.giver_id).username %>'s Game<br>
 	</div>

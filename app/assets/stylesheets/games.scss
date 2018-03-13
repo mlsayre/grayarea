@@ -1868,6 +1868,13 @@ a.menunav {
 a.menunav img {
   width: 100%;
 }
+a.menunav.opensettings {
+  width: 14%;
+  max-width: 96px;
+  position: absolute;
+  left: 18px;
+  top: 15px;
+}
 a.menunav.featsnav {
   position: relative;
 }
@@ -2131,12 +2138,112 @@ span.hintnumheading.allguesserinfo.playerplayed {
     border: none;
     border-radius: 8px;
 }
-/* underwater */
-.playboard-signedin.theme-underwater {
-  background: url(bg_underthesea.png);
+.settingspage {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  height: 100vh;
+  background-repeat: no-repeat;
+}
+.setmainhome {
+    width: 60px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+.setmainhome img {
+  width: 100%;
+}
+.settingspage .gametop {
+  position: relative;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'AllerBold';
+  padding-top: 1.5%;
+  margin-bottom: 8%;
+}
+.avatarsettingspage {
+  width: 60%;
+  display: block;
+  position: relative;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/obj_avatarBG.png);
+  padding-bottom: 60%;
+  background-size: 100%;
+  border-radius: 5px;
+}
+.avatarsettingspage .avatarpart {
+    width: 96%;
+    height: 96%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+}
+.settingspage .field {
+  position: relative;
+  width: 70%;
+  margin:0 auto;
+}
+.settingspage .field label {
+    position: absolute;
+    top: 21px;
+    display: block;
+    left: 5px;
+    font-size: 14px;
+    color: darkgrey;
+    font-weight: 700;
+}
+.settingspage input {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 9px;
+  padding: 14px 0 4px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.settingsrow {
+  text-align: center;
+}
+.setrowtop {
+  margin-top: 24px;
+}
+.settingsrow a {
+    display: inline-block;
+    width: 20%;
+    margin: 4px 12px;
+}
+.settingsrow img {
+    width: 100%;
+}
+
+section.playboard-signedin {
   background-size: 100%;
   background-repeat: no-repeat;
   max-height: 888.8889px;
   width: 100%;
   height: 177.7778vw;
+  overflow: hidden;
 }
+.playboard-signedin.theme-default {
+  background: url(bg_default.png);
+  background-size: 100%;
+}
+.playboard-signedin .theme-underwater {
+  background: url(bg_underthesea.png);
+  background-size: 100%;
+}
+.playboard-signedin .theme-pink {
+  background: url(bg_pink.png);
+  background-size: 100%;
+}
+

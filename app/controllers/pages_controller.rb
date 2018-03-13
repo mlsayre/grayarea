@@ -79,6 +79,37 @@ class PagesController < ApplicationController
     @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
 	end
 
+	def settings
+		avguesserbgnum = ''
+    avguesserheadnum = ''
+    avguessermouthnum = ''
+    avguessereyesnum = ''
+    avguesserhairnum = ''
+    avguesserdeconum = ''
+		avguesserarray = current_user.avatar_content_type.split("-")
+    avguesserarray.each do |str|
+      if str.include?("bg")
+        avguesserbgnum = str.split(":")[1]
+      elsif str.include?("head")
+        avguesserheadnum = str.split(":")[1]
+      elsif str.include?("mouth")
+        avguessermouthnum = str.split(":")[1]
+      elsif str.include?("eyes")
+        avguessereyesnum = str.split(":")[1]
+      elsif str.include?("hair")
+        avguesserhairnum = str.split(":")[1]
+      elsif str.include?("deco")
+        avguesserdeconum = str.split(":")[1]
+      end
+    end
+    @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
+    @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
+    @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
+    @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
+    @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
+    @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
+	end
+
 	def updateavatar
 		current_user.update(:avatar_content_type => params[:avstring])
 

@@ -67,13 +67,13 @@ var ready = function() {
 		$(".mainmenubuttons").hide();
 	});
 
-	$(".opensettings").click(function(e) {
-		e.preventDefault();
-		$(".settingsbox").addClass("boxin");
-	});
-	$(".settingsclosebutton").click(function() {
-		$(".settingsbox").removeClass("boxin");
-	})
+	// $(".opensettings").click(function(e) {
+	// 	e.preventDefault();
+	// 	$(".settingsbox").addClass("boxin");
+	// });
+	// $(".settingsclosebutton").click(function() {
+	// 	$(".settingsbox").removeClass("boxin");
+	// })
 
 	var sound = gon.sound;
 	soundOnOff(sound);

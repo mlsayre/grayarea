@@ -1,0 +1,49 @@
+<section class="settingspage settingsall">
+	<a class="setmainhome" href="/main"><img src="/assets/btn_confirm.png"></a>
+	<div class="gametop">Settings</div>
+	<span class="avatarsettingspage">
+    <div class="avatarpart avatar_bg">
+      <img src=<%= @avguesserbgurl %>>
+    </div>
+    <div class="avatarpart avatar_head">
+      <img src=<%= @avguesserheadurl %>>
+    </div>
+    <div class="avatarpart avatar_mouth">
+      <img src=<%= @avguessermouthurl %>>
+    </div>
+    <div class="avatarpart avatar_eyes">
+      <img src=<%= @avguessereyesurl %>>
+    </div>
+    <div class="avatarpart avatar_hair">
+      <img src=<%= @avguesserhairurl %>>
+    </div>
+    <div class="avatarpart avatar_deco">
+      <img src=<%= @avguesserdecourl %>>
+    </div>
+  </span>
+
+  <%= form_for :user do |f| %>
+	  <div class="field">
+	    <%= f.label :username %><br />
+	    <%= f.email_field :username, value: current_user.username, tabindex: "-1" %>
+	  </div>
+	  <div class="field">
+	  	<%= f.label :email %><br />
+	    <%= f.text_field :email, value: current_user.email, tabindex: "-1" %>
+	  </div>
+	<% end %>
+
+	<div class="settingsrow setrowtop">
+		<a class="setmain-goavatar" href="<%= avatarcustomize_pages_path %>"><img src="/assets/btn_editAvatar.png"></a>
+		<a class="setmain-goinfo" href="<%= edit_user_registration_path %>"><img src="/assets/btn_editInfo.png"></a>
+		<a class="setmain-gotheme" href="<%= changetheme_pages_path %>"><img src="/assets/btn_editBG.png"></a>
+	</div>
+
+	<div class="settingsrow">
+		<a class="setmain-gohowplay" href="<%= howtoplay_pages_path %>">
+			<img src="/assets/btn_help_large.png">
+		</a>
+		<%= link_to(image_tag("/assets/btn_logout.png"), destroy_user_session_path, :method => :delete, :class => "setmain-gologout") %>
+		<a class="setmain-gonotes" href="<%= about_pages_path %>"><img src="/assets/btn_info.png"></a>
+	</div>
+</section>

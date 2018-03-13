@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       get 'alltimeranks' => 'pages#alltimeranks'
       get 'weeklyranks' => 'pages#weeklyranks'
       get 'avatarcustomize' => 'pages#avatar_customize'
+      get 'settings' => 'pages#settings'
+      get 'changetheme' => 'pages#changetheme'
       post 'allfeedseen'
       post 'resetstatnotify'
       post 'updateavatar'

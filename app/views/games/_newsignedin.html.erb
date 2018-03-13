@@ -1,4 +1,5 @@
 <section class="titlesignedin">
+  <%= link_to(image_tag("/assets/btn_options.png", :alt => "How to Play", :title => "How to Play"), settings_pages_path, :class => "menunav opensettings") %>
   <div class="titlewelcome">
     Welcome back, <%= current_user.username %>!
     <span class="titleavatar">
@@ -57,9 +58,8 @@
 
   <div class="buttonarea">
     <div class="buttons-left">
-      <%= link_to(image_tag("/assets/btn_options.png", :alt => "How to Play", :title => "How to Play"), howtoplay_pages_path, :class => "menunav opensettings") %>
       <a class="menunav feednav" href="/pages/feed" alt="See news feed" title="See news feed">
-        <img src="/assets/btn_help.png">
+        <img src="/assets/btn_news.png">
         <% if current_user.heartnotify > 0 %>
           <span class="heartsnotify"><img src="/assets/Heart-48.png">
             <span class="notifynumber"><%= current_user.heartnotify %></span>
@@ -71,6 +71,9 @@
             <span class="feednumber"><%= feedunseen.count %></span>
           </span>
         <% end %>
+      </a>
+      <a class="menunav feednav" href="/pages/howtoplay" alt="how to play" title="See how to play">
+        <img src="/assets/btn_help.png">
       </a>
     </div>
     <div class="buttons-middle">
