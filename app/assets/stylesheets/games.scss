@@ -1939,6 +1939,7 @@ a.bigplaybutton {
     right: 0;
     top: 28.5vw;
     font-size: 22px;
+    visibility: visible;
     transition: transform 550ms, top 420ms ;
 }
 .hintlabel.guessnum {
@@ -2089,6 +2090,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   transition: all 360ms;
 }
 .bighint.bh_initial {
+  visibility: hidden;
   transform: scale(4) rotate(360deg);
   top: -20%;
 }
