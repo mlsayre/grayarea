@@ -2088,6 +2088,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   top: 25%;
   text-shadow: cyan -1px 1px 6px;
   transition: all 360ms;
+  visibility: visible;
 }
 .bighint.bh_initial {
   visibility: hidden;
@@ -2097,18 +2098,22 @@ span.hintnumheading.allguesserinfo.playerplayed {
 .ra_anim1.raa1_initial {
     left: -140%;
     transform: scale(.1);
+    visibility: hidden;
 }
 .ra_anim2.raa2_initial {
     right: -140%;
     transform: scale(.1);
+    visibility: hidden;
 }
 .ra_anim1.raa1_final {
     right: -140%;
     transform: scale(.1);
+    visibility: hidden;
 }
 .ra_anim2.raa2_final {
     left: -140%;
     transform: scale(.1);
+    visibility: hidden;
 }
 .playedgameover {
   display: none;
