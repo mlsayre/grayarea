@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post 'allfeedseen'
       post 'resetstatnotify'
       post 'updateavatar'
+      post 'updatetheme'
     end
   end
 

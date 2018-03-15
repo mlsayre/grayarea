@@ -118,6 +118,14 @@ class PagesController < ApplicationController
     end
 	end
 
+	def updatetheme
+		current_user.update(:theme => params[:newtheme])
+
+    respond_to do |format|
+      format.json  { render json: {} , status: 200 }
+    end
+	end
+
 	def resetstatnotify
 		current_user.update(:statgivernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
 			:statguessernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

@@ -1,1 +1,110 @@
-Change your theme, coming soon!
+<section class="settingspage settingstheme">
+	<a class="setmainhome" href="/main"><img src="/assets/Home-48.png"></a>
+	<div class="gametop">Settings<br>Game Background</div>
+	<a class="setsubset" href="/pages/settings"><img src="/assets/btn_options.png"></a>
+
+	<div class="bgexamples" data-currenttheme="<%= current_user.theme %>">
+		<ul>
+			<li data-bg="theme-default">
+				<img class="themeselectedcheck hidden" src="/assets/obj_tick.png">
+				<img class="sampletheme" src="/assets/bg_default.png">
+				<div class="bgsettitle">Default</div>
+			</li>
+			<li data-bg="theme-deepsea">
+				<img class="themeselectedcheck hidden" src="/assets/obj_tick.png">
+				<img class="sampletheme" src="/assets/bg_underthesea.png">
+				<div class="bgsettitle">Deep Sea</div>
+			</li>
+			<li data-bg="theme-bubblegum">
+				<img class="themeselectedcheck hidden" src="/assets/obj_tick.png">
+				<img class="sampletheme" src="/assets/bg_pink.png">
+				<div class="bgsettitle">Bubble Gum</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="settingsrow setrowtop">
+		<a class="settheme-left" href="#">
+			<img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_back.png">
+		</a>
+		<a class="settheme-select" href="#"><img src="/assets/btn_confirm.png"></a>
+		<a class="settheme-right" href="#">
+			<img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_next.png">
+		</a>
+	</div>
+</section>
+
+<script>
+$(document).ready(function() {
+	var themelength = $(".bgexamples li").length;
+	$(".bgexamples ul").css("width", (83 * themelength) + '%');
+	$(".bgexamples li").css("width", "calc(" + (83 / themelength) + "% - " + (themelength * 20) + "px)");
+	showactive();
+	checkselectbutton();
+	function showactive() {
+		$(".bgexamples li").removeClass("themeselected").removeClass("themeshown");
+		$(".themeselectedcheck").addClass("hidden")
+		var activetheme = $(".bgexamples").data("currenttheme");
+		$("[data-bg='" + activetheme + "']").addClass("themeselected").addClass("themeshown");
+		$("[data-bg='" + activetheme + "'] .themeselectedcheck").removeClass("hidden");
+		var gotoindex = $(".themeselected").index();
+		gotoposition(gotoindex);
+		checkselectbutton();
+	}
+	function gotoposition(position) {
+		$(".themeshown").removeClass("themeshown");
+		$(".bgexamples li").eq(position).addClass("themeshown");
+		var shownwidth = $(".themeshown").eq(0).width();
+		var unshownwidth = $(".bgexamples li").not(".themeshown").eq(0).width();
+		var movewidth = (unshownwidth/2) + (shownwidth/2) + 20;
+		var currentmove = parseInt($(".bgexamples ul").css("left"));
+		console.log(movewidth)
+		$(".bgexamples ul").css("left", (movewidth * position * -1) + "px");
+		checkselectbutton();
+	}
+	function checkselectbutton() {
+		if ($(".themeselected").hasClass("themeshown")) {
+			$(".settheme-select").addClass("disabled");
+		} else {
+			$(".settheme-select").removeClass("disabled");
+		}
+	}
+	$(".settheme-right").click(function(e) {
+		e.preventDefault();
+		var curindex = $(".themeshown").index();
+		var nextindex = curindex + 1;
+		if (nextindex === themelength) {
+			gotoposition(0);
+		} else {
+			gotoposition(nextindex);
+		}		
+	})
+	$(".settheme-left").click(function(e) {
+		e.preventDefault();
+		var curindex = $(".themeshown").index();
+		var nextindex = curindex -1;
+		if (nextindex < 0) {
+			gotoposition((themelength - 1));
+		} else {
+			gotoposition(nextindex);
+		}		
+	})
+	$(".settheme-select").click(function(e) {
+		e.preventDefault();
+		var newtheme = $(".themeshown").data("bg");
+		$(".bgexamples").data("currenttheme", newtheme);
+		$.ajax({
+      url: "/pages/updatetheme",
+      type: "POST",
+      dataType:'json',
+      data: { 'newtheme' : newtheme}
+    })
+    .done(function() {
+    	showactive();
+    })
+    .fail(function() {
+    	connectionError();
+    })
+	})
+})
+</script>

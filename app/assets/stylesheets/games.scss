@@ -2150,9 +2150,26 @@ span.hintnumheading.allguesserinfo.playerplayed {
     position: absolute;
     top: 12px;
     left: 12px;
+    z-index: 5;
 }
 .setmainhome img {
   width: 100%;
+}
+.setsubset {
+    width: 60px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5;
+}
+.setsubset img {
+  width: 100%;
+}
+.settingsrow a.settheme-left {
+    margin-right: 10%;
+}
+.settingsrow a.settheme-right {
+    margin-left: 10%;
 }
 .settingspage .gametop {
   position: relative;
@@ -2225,6 +2242,44 @@ span.hintnumheading.allguesserinfo.playerplayed {
 .settingsrow img {
     width: 100%;
 }
+.bgexamples {
+  width: 100%;
+  padding-top: 3%;
+  padding-bottom: 107%;
+  position: relative;
+  overflow-x: hidden;
+}
+.bgexamples ul {
+  list-style-type: none;
+  padding: 0 0 0 19%;
+  position: absolute;
+  margin: 0;
+  transition: 600ms all !important;
+}
+.bgexamples li {
+  position: relative;
+  display: inline-block;
+  margin: 0 10px;
+  transition: 500ms all;
+}
+.bgexamples li:not(.themeshown) {
+  transform: scale(.8);
+}
+.themeselectedcheck {
+  position: absolute;
+  top: -3%;
+  right: -8%;
+  width: 80px;
+}
+.sampletheme {
+  width: 100%;
+}
+.bgsettitle {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
 
 section.playboard-signedin {
   background-size: 100%;
@@ -2238,11 +2293,11 @@ section.playboard-signedin {
   background: url(bg_default.png);
   background-size: 100%;
 }
-.playboard-signedin .theme-underwater {
+.playboard-signedin.theme-deepsea {
   background: url(bg_underthesea.png);
   background-size: 100%;
 }
-.playboard-signedin .theme-pink {
+.playboard-signedin.theme-bubblegum {
   background: url(bg_pink.png);
   background-size: 100%;
 }
