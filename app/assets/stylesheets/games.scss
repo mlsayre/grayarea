@@ -2098,26 +2098,36 @@ span.hintnumheading.allguesserinfo.playerplayed {
   visibility: hidden;
   transform: scale(4) rotate(360deg);
   top: -20%;
+  -webkit-backface-visibility: hidden; 
+  -webkit-transform-style: preserve-3d;
 }
 .ra_anim1.raa1_initial {
     left: -140%;
     transform: scale(.1);
     visibility: hidden;
+    -webkit-backface-visibility: hidden; 
+    -webkit-transform-style: preserve-3d;
 }
 .ra_anim2.raa2_initial {
     right: -140%;
     transform: scale(.1);
     visibility: hidden;
+    -webkit-backface-visibility: hidden; 
+    -webkit-transform-style: preserve-3d;
 }
 .ra_anim1.raa1_final {
     right: -140%;
     transform: scale(.1);
     visibility: hidden;
+    -webkit-backface-visibility: hidden; 
+    -webkit-transform-style: preserve-3d;
 }
 .ra_anim2.raa2_final {
     left: -140%;
     transform: scale(.1);
     visibility: hidden;
+    -webkit-backface-visibility: hidden; 
+    -webkit-transform-style: preserve-3d;
 }
 .playedgameover {
   display: none;
