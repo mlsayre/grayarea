@@ -1941,7 +1941,6 @@ a.bigplaybutton {
     font-size: 22px;
     visibility: visible;
     transition: transform 550ms, top 420ms;
-    -webkit-backface-visibility: hidden; 
 }
 .hintlabel.guessnum {
     margin: 0 auto;
@@ -2069,7 +2068,6 @@ span.hintnumheading.allguesserinfo.playerplayed {
   border-top: 3px solid green;
   border-bottom: 3px solid green;
   overflow: hidden;
-  -webkit-backface-visibility: hidden; 
 }
 .raskip {
   right: 0;
@@ -2297,6 +2295,7 @@ section.playboard-signedin {
   width: 100%;
   height: 177.7778vw;
   overflow: hidden;
+  -webkit-backface-visibility: hidden; 
 }
 .playboard-signedin.theme-default {
   background: url(bg_default.png);
