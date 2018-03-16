@@ -21,6 +21,7 @@ body {
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
   margin: 0 auto !important;
+  -webkit-backface-visibility: hidden; 
 }
 @media (min-width: 500px) {
   html {
