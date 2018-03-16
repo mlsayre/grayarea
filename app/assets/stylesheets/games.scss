@@ -21,7 +21,6 @@ body {
   /*background-color: #f8fff8;*/
   background-color: #f0f0f1;
   margin: 0 auto !important;
-  -webkit-backface-visibility: hidden; 
 }
 @media (min-width: 500px) {
   html {
@@ -1942,8 +1941,6 @@ a.bigplaybutton {
     font-size: 22px;
     visibility: visible;
     transition: transform 550ms, top 420ms;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform-style: preserve-3d;
 }
 .hintlabel.guessnum {
     margin: 0 auto;
@@ -2071,6 +2068,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   border-top: 3px solid green;
   border-bottom: 3px solid green;
   overflow: hidden;
+  -webkit-backface-visibility: hidden; 
 }
 .raskip {
   right: 0;
@@ -2092,43 +2090,31 @@ span.hintnumheading.allguesserinfo.playerplayed {
   text-shadow: cyan -1px 1px 6px;
   transition: all 360ms;
   visibility: visible;
-  -webkit-backface-visibility: hidden; 
-  -webkit-transform-style: preserve-3d;
 }
 .bighint.bh_initial {
   visibility: hidden;
   transform: scale(4) rotate(360deg);
   top: -20%;
-  -webkit-backface-visibility: hidden; 
-  -webkit-transform-style: preserve-3d;
 }
 .ra_anim1.raa1_initial {
     left: -140%;
     transform: scale(.1);
     visibility: hidden;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform-style: preserve-3d;
 }
 .ra_anim2.raa2_initial {
     right: -140%;
     transform: scale(.1);
     visibility: hidden;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform-style: preserve-3d;
 }
 .ra_anim1.raa1_final {
     right: -140%;
     transform: scale(.1);
     visibility: hidden;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform-style: preserve-3d;
 }
 .ra_anim2.raa2_final {
     left: -140%;
     transform: scale(.1);
     visibility: hidden;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform-style: preserve-3d;
 }
 .playedgameover {
   display: none;
