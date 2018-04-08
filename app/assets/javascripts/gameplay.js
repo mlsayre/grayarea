@@ -500,6 +500,7 @@ var ready = function() {
           $(".submittedword3").text(hint3);
           $(".submittednum3").text(hint3numselected + " " + wordword3);
           $(".submitted").show();
+          $(".buttons-middle").removeClass("hidden");
 					closemessagebox();
 					if ($(".chatcontent").length === 0) {
         		showChat();

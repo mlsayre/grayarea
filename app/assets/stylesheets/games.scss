@@ -237,7 +237,23 @@ span.feednotify {
   background-repeat: no-repeat;
   border: none;
 }
-.playboard-signedin .word span {
+.giveboard-signedin .allwords li {
+  height: auto;
+  display: inline-block;
+  width: 29%;
+  padding: 40px 4px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  margin: 4.5px 3px;
+  transition: 250ms all, 100ms transform;
+  /* transform: scale(1); */
+  background: url(btn_field_white);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border: none;
+}
+.playboard-signedin .word span, .giveboard-signedin .word span {
     position: absolute;
     left: 0;
     right: 0;
@@ -260,7 +276,7 @@ span.feednotify {
     background-color: #e6efff;
     font-size: 15px;
   }
-  .playboard-signedin .allwords li {
+  .playboard-signedin .allwords li, .giveboard-signedin .allwords li {
     height: auto;
     display: inline-block;
     width: 29%;
@@ -350,7 +366,7 @@ span.feednotify {
   background: linear-gradient(#019c01 30%,#006300);
   color: white;
 }
-.playboard-signedin .allwords li.targetword {
+.playboard-signedin .allwords li.targetword, .giveboard-signedin .allwords li.targetword {
     border: none;
     background-color: transparent;
     background: url(btn_field_green);
@@ -395,6 +411,58 @@ span.guessermsg {
 .hintarea {
   text-align: center;
   margin-top: 0;
+}
+.giveboard-signedin .gametop span.gtoneline {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 9px;
+}
+/*.hintarea.give {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}*/
+.hintarea.give .notifyarea {
+    top: 6vw;
+}
+.hintarea.give .wordnumarea .hintnumheading {
+    margin-top: 0;
+    color: white;
+    font-size: 13px;
+    top: 24.3vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.hintarea.give .wordnumarea .selections {
+    margin-top: 0;
+    color: white;
+    font-size: 13px;
+    top: 27.7vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.hintarea.give .selections button.button {
+  width: 40px;
+  border-radius: 5px;
+  background-color: deepskyblue;
+  border: none;
+  margin: 1vw 4px;
+  color: white;
+  outline: none !important;
+  transition: 300ms all;
+  padding: 0;
+  height: 7.5vw;
+}
+.givesubbuttons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 126vw;
 }
 .hints {
   margin-bottom: 6px;
@@ -504,8 +572,19 @@ span.notifynumber {
   bottom: 2px;
 }
 .firstinfo {
-  font-size: 12px;
-  margin-top: 4px;
+  font-size: 14px;
+  margin-top: 0;
+  color: white;
+  top: 140vw;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.firstinfo:nth-of-type(3) {
+  top: 145vw;
+}
+.firstinfo:nth-of-type(4) {
+  top: 150vw;
 }
 .allguesserinfo {
   margin: 8px auto 0;
@@ -529,6 +608,22 @@ span.notifynumber {
 }
 .guessednotdone .word.neutralword {
   color: black;
+}
+.giveboard-signedin .buttons-middle.hidden {
+  display: none;
+}
+.giveboard-signedin .buttons-middle {
+  display: inline-block;
+  vertical-align: middle;
+  width: 80%;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.giveboard-signedin .mainmenubuttons {
+  top: 22%;
 }
 .hidden {
   display: none;
@@ -651,6 +746,7 @@ form#new_game {
 }
 .hintlabel {
   transition: 350ms opacity;
+  color: white;
 }
 .guessword span.guessinfo {
   padding: 6px 30px;
@@ -814,7 +910,7 @@ select:focus, select:active {
 }
 .selections button.button.wordnumselected {
   box-shadow: inset 0px 0px 2px 2px darkblue;
-  border-radius: 4px;
+  border-radius: 100% !important;
   background-color: #d4fffd;
   font-weight: 700;
   text-decoration: underline;
@@ -1919,7 +2015,7 @@ a.bigplaybutton {
   height: 100%;
   position: absolute;
 }
-.allwords.guesswordslist {
+.allwords.guesswordslist, .allwords.givewordslist {
     position: absolute;
     top: 37vw;
     width: 96%;
@@ -2027,7 +2123,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     top: 147px;
     font-size: 24px;
   }
-  .allwords.guesswordslist {
+  .allwords.guesswordslist, .allwords.givewordslist {
     top: 190px;
   }
   .hintlabel.guessnum {
@@ -2044,6 +2140,62 @@ span.hintnumheading.allguesserinfo.playerplayed {
   .streakwarn {
     top: 140px;
   }
+  .givesubbuttons {
+    top: 641px;
+  }
+  .hintarea.give .wordnumarea .hintnumheading {
+    margin-top: 0;
+    color: white;
+    font-size: 13px;
+    top: 124px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 700px;
+  }
+  .hintarea.give .wordnumarea .selections {
+    margin-top: 0;
+    color: white;
+    font-size: 13px;
+    top: 139px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 700px;
+  }
+  .hintarea.give .selections button.button {
+    width: 40px;
+    border-radius: 5px;
+    background-color: deepskyblue;
+    border: none;
+    margin: 6px 6px;
+    color: white;
+    outline: none !important;
+    transition: 300ms all;
+    padding: 0;
+    height: 34px;
+  }
+  .firstinfo {
+    font-size: 16px;
+    top: 700px
+  }
+  .firstinfo:nth-of-type(3) {
+    top: 720px;
+  }
+  .firstinfo:nth-of-type(4) {
+    top: 740px;
+  }
+  .hints.submitted .wordnumarea {
+    top: 528px !important;
+  }
+}
+.hints.submitted .wordnumarea {
+  position: absolute;
+  width: 80%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 105.2vw;
 }
 @media (min-width: 400px) and (max-width: 499px) {
   .bighint {
@@ -2135,6 +2287,17 @@ span.hintnumheading.allguesserinfo.playerplayed {
   top: 20%;
 }
 .playedgameover button.bigplaybutton {
+    color: blue;
+    background: white !important;
+    width: 200px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    font-family: "Aller";
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+}
+.giveboard-signedin button.bigplaybutton {
     color: blue;
     background: white !important;
     width: 200px;
@@ -2288,7 +2451,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     font-weight: 700;
 }
 
-section.playboard-signedin {
+section.playboard-signedin, section.giveboard-signedin {
   background-size: 100%;
   background-repeat: no-repeat;
   max-height: 888.8889px;
@@ -2306,6 +2469,18 @@ section.playboard-signedin {
   background-size: 100%;
 }
 .playboard-signedin.theme-bubblegum {
+  background: url(bg_pink.png);
+  background-size: 100%;
+}
+.giveboard-signedin.theme-default {
+  background: url(bg_default.png);
+  background-size: 100%;
+}
+.giveboard-signedin.theme-deepsea {
+  background: url(bg_underthesea.png);
+  background-size: 100%;
+}
+.giveboard-signedin.theme-bubblegum {
   background: url(bg_pink.png);
   background-size: 100%;
 }
