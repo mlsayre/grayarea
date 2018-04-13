@@ -225,7 +225,7 @@ $(document).on("click", ".alltimestats .prev", function() {
 	}
 })
 
-$(window).on('turbolinks:load', function() {
+$(document).ready(function() {
 	var curusername = "<%= current_user.username %>";
 	$(".statcontainer li").each(function() {
   	if ($(this).data("uname") === curusername) {
