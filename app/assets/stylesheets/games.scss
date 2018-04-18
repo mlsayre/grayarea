@@ -1464,10 +1464,9 @@ li.newsitem.newsseen1 {
   display: none;
 }
 .giverfeats, .guesserfeats {
-  text-align: center;
-}
-.giverfeats, .guesserfeats {
-  background-color: #f8fff8;
+    background-color: transparent;
+    border: none;
+    text-align: center;
 }
 .featheading {
   font-size: 20px;
@@ -1486,6 +1485,7 @@ img.featpagetrophy {
   background-color: whitesmoke;
   padding: 8px;
   position: relative;
+  border-radius: 6px;
 }
 .feattrophy img {
   width: 100%;
@@ -1503,10 +1503,12 @@ span.featpnttext {
   font-size: 11px;
 }
 .showfeat .featpnttext {
-  color: blue;
+  color: lightblue;
 }
 .feattrophy.showfeat {
-  background-color: #d3fffb;
+    background-color: rgba(0,60,0,.5);
+    border-radius: 6px;
+    color: floralwhite;
 }
 .feattrophy.hidefeat {
   opacity: .72;
@@ -1521,6 +1523,9 @@ span.featimgtext {
   font-weight: 700;
   font-size: 20px;
 }
+.showfeat span.featimgtext {
+  top: 54px;
+}
 .hidefeat span.featimgtext {
   opacity: .75;
 }
@@ -1531,6 +1536,9 @@ span.featimgtext {
   span.featimgtext {
     top: 30px;
     font-size: 18px;
+  }
+  .showfeat span.featimgtext {
+    top: 45px;
   }
 }
 @media (max-width: 320px) {
@@ -2449,6 +2457,26 @@ span.hintnumheading.allguesserinfo.playerplayed {
     color: white;
     font-size: 20px;
     font-weight: 700;
+}
+section.featpage {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.featheading {
+  color: white;
+}
+.featpage button.button.returntomain {
+    top: 0;
+    margin: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-left: 0;
+    border-bottom: 0;
+    z-index: 50;
 }
 
 section.playboard-signedin, section.giveboard-signedin {
