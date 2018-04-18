@@ -1525,6 +1525,7 @@ span.featimgtext {
 }
 .showfeat span.featimgtext {
   top: 54px;
+  display: none;
 }
 .hidefeat span.featimgtext {
   opacity: .75;
@@ -1539,6 +1540,7 @@ span.featimgtext {
   }
   .showfeat span.featimgtext {
     top: 45px;
+    display: none;
   }
 }
 @media (max-width: 320px) {
