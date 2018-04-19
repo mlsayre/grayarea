@@ -1,94 +1,96 @@
-<div class="gametop"><span class="gtoneline">Rankings</span></div>
+<section class="rankingspage">
+	<div class="gametop"><span class="gtoneline">Rankings</span></div>
 
-<div class="rankweeklycontent">
-	<%= render "weeklyranks" %>
-</div>
-
-<div class="rankalltimecontent rankhidden">
-	<%= render "alltimeranks" %>
-</div>
-
-<div class="rankyou rankhidden">
-	<div class="lifetimerankings">
-		<div class="rankingstabletitle">Your Stats</div>
-		<div class="centered">
-			You've created <%= current_user.lifetimegamesgiver %> games<br>
-			You've guessed in <%= current_user.lifetimegamesguesser %> games<br><br>
-		</div>
-
-		<table>
-		  <caption>Giving Stats</caption>
-		  <tr>
-		    <td>They picked all 6 words</td>
-		    <td><%= current_user.statgiverallsix %></td>
-		  </tr>
-		  <tr>
-		    <td>They scored at least 100 points</td>
-		    <td><%= current_user.statgiverscorehundred %></td>
-		  </tr>
-		  <tr>
-		    <td>They had perfect game (all 6, no misses)</td>
-		    <td><%= current_user.statgiverperfect %></td>
-		  </tr>
-		  <tr>
-		    <td>Your current no-spoiler streak</td>
-		    <td><%= current_user.statgivernospoilers %></td>
-		  </tr>
-		  <tr>
-		    <td>Your all-time no-spoiler streak</td>
-		    <td><%= current_user.statalltimegiverstreak %></td>
-		  </tr>
-		  <tr>
-		    <td>They scored 200+ points</td>
-		    <td><%= current_user.statgiverscoretwohundred %></td>
-		  </tr>
-		</table>
-
-		<table>
-		  <caption>Guessing Stats</caption>
-		  <tr>
-		    <td>You guessed all 6 words</td>
-		    <td><%= current_user.statguesserallsix %></td>
-		  </tr>
-		  <tr>
-		    <td>You scored at least 100 points</td>
-		    <td><%= current_user.statguesserscorehundred %></td>
-		  </tr>
-		  <tr>
-		    <td>You had perfect game</td>
-		    <td><%= current_user.statguesserperfect %></td>
-		  </tr>
-		  <tr>
-		    <td>Your current no-spoiler streak</td>
-		    <td><%= current_user.statguessernospoilers %></td>
-		  </tr>
-		  <tr>
-		    <td>Your all-time no-spoiler streak</td>
-		    <td><%= current_user.statalltimeguesserstreak %></td>
-		  </tr>
-		  <tr>
-		    <td>You scored 200+ points</td>
-		    <td><%= current_user.statguesserscoretwohundred %></td>
-		  </tr>
-		</table>
-		<span class="statcat"><u>Your Cheat Score (your games receiving 3+ cheat reports)</u></span>
-		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span>
-
-		<span class="statcat"><u>Games You've Reported</u></span>
-		<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span>
-		<br><br><br><br><br><br><br>
+	<div class="rankweeklycontent">
+		<%= render "weeklyranks" %>
 	</div>
-</div>
 
-<div class="centered">
-	<button class="button returntomain"><img src="/assets/Home-48.png"></button>
-</div>
+	<!-- <div class="rankalltimecontent rankhidden">
+		
+	</div> -->
 
-<div class="rankbuttons temphidden">
-	<button class="button ranktime rtweekly rankselected">Weekly</button>
-	<button class="button ranktime rtalltime">All-time</button>
-	<button class="button ranktime rtyou">You</button>
-</div>
+	<div class="rankyou rankhidden">
+		<div class="lifetimerankings">
+			<div class="rankingstabletitle">Your Stats</div>
+			<div class="centered">
+				You've created <%= current_user.lifetimegamesgiver %> games<br>
+				You've guessed in <%= current_user.lifetimegamesguesser %> games<br><br>
+			</div>
+
+			<table>
+			  <caption>Giving Stats</caption>
+			  <tr>
+			    <td>They picked all 6 words</td>
+			    <td><%= current_user.statgiverallsix %></td>
+			  </tr>
+			  <tr>
+			    <td>They scored at least 100 points</td>
+			    <td><%= current_user.statgiverscorehundred %></td>
+			  </tr>
+			  <tr>
+			    <td>They had perfect game (all 6, no misses)</td>
+			    <td><%= current_user.statgiverperfect %></td>
+			  </tr>
+			  <tr>
+			    <td>Your current no-spoiler streak</td>
+			    <td><%= current_user.statgivernospoilers %></td>
+			  </tr>
+			  <tr>
+			    <td>Your all-time no-spoiler streak</td>
+			    <td><%= current_user.statalltimegiverstreak %></td>
+			  </tr>
+			  <tr>
+			    <td>They scored 200+ points</td>
+			    <td><%= current_user.statgiverscoretwohundred %></td>
+			  </tr>
+			</table>
+
+			<table>
+			  <caption>Guessing Stats</caption>
+			  <tr>
+			    <td>You guessed all 6 words</td>
+			    <td><%= current_user.statguesserallsix %></td>
+			  </tr>
+			  <tr>
+			    <td>You scored at least 100 points</td>
+			    <td><%= current_user.statguesserscorehundred %></td>
+			  </tr>
+			  <tr>
+			    <td>You had perfect game</td>
+			    <td><%= current_user.statguesserperfect %></td>
+			  </tr>
+			  <tr>
+			    <td>Your current no-spoiler streak</td>
+			    <td><%= current_user.statguessernospoilers %></td>
+			  </tr>
+			  <tr>
+			    <td>Your all-time no-spoiler streak</td>
+			    <td><%= current_user.statalltimeguesserstreak %></td>
+			  </tr>
+			  <tr>
+			    <td>You scored 200+ points</td>
+			    <td><%= current_user.statguesserscoretwohundred %></td>
+			  </tr>
+			</table>
+			<span class="statcat"><u>Your Cheat Score (your games receiving 3+ cheat reports)</u></span>
+			<span style="text-align: center; display:block;"><%= current_user.lifetimecheatgames %></span>
+
+			<span class="statcat"><u>Games You've Reported</u></span>
+			<span style="text-align: center; display:block;"><%= current_user.lifetimecheatreports %></span>
+			<br><br><br><br><br><br><br>
+		</div>
+	</div>
+
+	<div class="centered">
+		<button class="button returntomain"><img src="/assets/Home-48.png"></button>
+	</div>
+
+	<div class="rankbuttons temphidden">
+		<button class="button ranktime rtweekly rankselected">Rankings</button>
+		<!-- <button class="button ranktime rtalltime">All-time</button> -->
+		<button class="button ranktime rtyou">You</button>
+	</div>
+</section>
 
 <script>
 $(document).on("click", ".rtweekly", function() {
@@ -98,13 +100,13 @@ $(document).on("click", ".rtweekly", function() {
 	$(".rankalltimecontent").addClass("rankhidden");
 	$(".rankyou").addClass("rankhidden");
 })
-$(document).on("click", ".rtalltime", function() {
-	$(".ranktime").removeClass("rankselected");
-	$(this).addClass("rankselected");
-	$(".rankweeklycontent").addClass("rankhidden");
-	$(".rankalltimecontent").removeClass("rankhidden");
-	$(".rankyou").addClass("rankhidden");
-})
+// $(document).on("click", ".rtalltime", function() {
+// 	$(".ranktime").removeClass("rankselected");
+// 	$(this).addClass("rankselected");
+// 	$(".rankweeklycontent").addClass("rankhidden");
+// 	$(".rankalltimecontent").removeClass("rankhidden");
+// 	$(".rankyou").addClass("rankhidden");
+// })
 $(document).on("click", ".rtyou", function() {
 	$(".ranktime").removeClass("rankselected");
 	$(this).addClass("rankselected");

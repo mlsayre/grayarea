@@ -39,6 +39,17 @@
 				</ul>
 	  	</div>
 
+	  	<div class="statcontainer atfeat">
+		  <span class="statcat"><u>Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(15).each do |user| %>
+			  	  <% if user.statgiverstatus.sum + user.statguesserstatus.sum != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgiverstatus.sum + user.statguesserstatus.sum %></span></li>
+			    	<% end %>
+			  <% end %>
+			</ul>
+		</div>
+
 	  	<div class="statcontainer wknonspoiler">
 			  <span class="statcat"><u>Current Giver Non-Spoiler Streak</u></span>
 				<ul>
@@ -50,12 +61,34 @@
 				</ul>
 		  </div>
 
+		  <div class="statcontainer atnonspoiler">
+		  <span class="statcat"><u>Longest All-time Giver Non-Spoiler Streak</u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(15).each do |user| %>
+			  	  <% if user.statalltimegiverstreak != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimegiverstreak %></span></li>
+			    	<% end %>
+			  <% end %>
+			</ul>
+	  </div>
+
 		  <div class="statcontainer wkgsnonspoiler">
 			  <span class="statcat"><u>Current Guesser Non-Spoiler Streak</u></span>
 				<ul>
 				  <% User.all.sort {|a,b| b.statguessernospoilers <=> a.statguessernospoilers }.first(15).each do |user| %>
 				  	  <% if user.statguessernospoilers != 0 %>
 				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statguessernospoilers %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
+
+		  <div class="statcontainer atgsnonspoiler">
+			  <span class="statcat"><u>Longest All-time Guesser Non-Spoiler Streak</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
+				  	  <% if user.statalltimeguesserstreak != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimeguesserstreak %></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
@@ -72,6 +105,8 @@
 				</ul>
 			</div>
 
+
+
 			<div class="statcontainer wkguesser">
 			  <span class="statcat"><u>Guesser Avg Score - min 5 games</u></span>
 			  <ul>
@@ -83,7 +118,7 @@
 				</ul>
 			</div>
 
-			<!-- <div class="statcontainer wktopgivers">
+			<div class="statcontainer wktopgivers">
 				<span class="statcat"><u>Your Top Hint Givers - min 5 games</u></span>
 			  <ul>
 				  <% User.all.sort {|a,b| @usersgiversweek[b.id] <=> @usersgiversweek[a.id]}.first(15).each do |user| %>
@@ -103,7 +138,7 @@
 				    	<% end %>
 				  <% end %>
 				</ul>
-			</div> -->
+			</div>
 
 			<style>
 			.temphidden {

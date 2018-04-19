@@ -1153,12 +1153,16 @@ img.anim_neutral.animating {
   right: 0;
 }
 .rankyou table {
-  font-size: 14px;
-  width: 95%;
-  border-spacing: 0;
-  border-collapse: collapse;
-  margin: 0 auto 8px;
-  background: linear-gradient(transparent, lightblue);
+    font-size: 14px;
+    width: 95%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin: 0 auto 8px;
+    background: linear-gradient(lightgreen, limegreen);
+    color: #211011;
+}
+.rankyou caption {
+    color: white;
 }
 .rankyou table td {
   border: 1px solid grey;
@@ -2467,10 +2471,30 @@ section.featpage {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+section.rankingspage {
+  background: linear-gradient(#4c9d12, lightgrey);
+  background-size: 100%;
+  background-image: url(bg_title_tablet.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  height: 100vh;
+}
+.rankingspage .lifetimerankings {
+  border: none;
+  background: transparent;
+  margin: 25px auto 0;
+}
+.rankingspage .gametop {
+    top: -6px;
+}
+.rankingspage li {
+    color: #211010;
+}
 .featheading {
   color: white;
 }
-.featpage button.button.returntomain {
+.featpage button.button.returntomain, .rankingspage button.button.returntomain {
     top: 0;
     margin: 0;
     border-bottom-left-radius: 0;
@@ -2479,6 +2503,7 @@ section.featpage {
     border-left: 0;
     border-bottom: 0;
     z-index: 50;
+    opacity: 1;
 }
 
 section.playboard-signedin, section.giveboard-signedin {
