@@ -595,6 +595,19 @@ var ready = function() {
   	}
   });
 
+  // giving hints, check track
+  if ($(".allwords").hasClass("givewordslist")) {
+  	$(".targetword").click(function() {
+  		if ($(this).hasClass("tracked")) {
+  			$(this).removeClass("tracked");
+  			$(this).find(".trackedimage").remove();
+  		} else {
+  			$(this).addClass("tracked");
+  			$(this).append('<img class="trackedimage" src="/assets/obj_tick.png">')
+  		}
+  	})
+  }
+
   if ($(".allwords").hasClass("guesswordslist")) {
   	var GUESS = (function() {
   		var awords = gon.allwords;

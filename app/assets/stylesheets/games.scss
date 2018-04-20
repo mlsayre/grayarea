@@ -261,6 +261,16 @@ span.feednotify {
     transform: translateY(-50%);
     line-height: 1.15;
 }
+.targetword.tracked {
+    filter: saturate(.38);
+    transform: scale(.75);
+}
+img.trackedimage {
+    position: absolute;
+    width: 33%;
+    top: -6%;
+    right: -5%;
+}
 @media (max-width: 480px) {
   .allwords li {
     display: inline-block;
