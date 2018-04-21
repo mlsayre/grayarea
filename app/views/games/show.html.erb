@@ -7,7 +7,7 @@
 		<% if @game.gamestatus == "give" && @game.giver_id == current_user.id%>
 		  <%= render "give" %>
 		<% elsif @game.gamestatus == "give" && @game.giver_id != current_user.id%>
-		  <%= render "underway" %>
+		  <%= render "sorry" %> <!-- used to be 'underway' -->
 		<% elsif @game.gamestatus == "guess" && @game.giver_id == current_user.id%>
 		  <%= render "underwayforgiver" %>
 		<% elsif @game.gamestatus == "guess" && (current_user.id == @game.guesser_id1 || current_user.id == @game.guesser_id2 || current_user.id == @game.guesser_id3 || current_user.id == @game.guesser_id4 || current_user.id == @game.guesser_id5 || current_user.id == @game.guesser_id6) %>

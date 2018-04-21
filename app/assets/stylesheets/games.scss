@@ -225,7 +225,7 @@ span.feednotify {
   height: auto;
   display: inline-block;
   width: 29%;
-  padding: 32px 4px;
+  padding: 33px 4px;
   text-align: center;
   vertical-align: middle;
   position: relative;
@@ -241,7 +241,7 @@ span.feednotify {
   height: auto;
   display: inline-block;
   width: 29%;
-  padding: 40px 4px;
+  padding: 41px 4px;
   text-align: center;
   vertical-align: middle;
   position: relative;
@@ -291,7 +291,7 @@ img.trackedimage {
     display: inline-block;
     width: 29%;
     height: 3vw;
-    padding: 6.5vw 1vw;
+    padding: 6.6vw 1vw;
     text-align: center;
     vertical-align: middle;
     position: relative;
@@ -607,6 +607,24 @@ span.notifynumber {
 }
 .underwayforgiver .guesserinfo, .playerplayed .guesserinfo {
   cursor: pointer;
+}
+span.hintnumheading.allguesserinfo.underwayforgiver {
+  position: absolute;
+  top: 127vw;
+  left: 0;
+  right: 0;
+}
+span.hintnumheading.allguesserinfo.underwayforgiver u {
+  color: white;
+}
+.underwayforgiversec .summaryhints {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    top: 15.4vw;
+    font-size: 15px;
 }
 .finalguessesshow {
   box-shadow: inset 0px 0px 5px 5px #00b8ff;
@@ -2041,7 +2059,7 @@ a.bigplaybutton {
 }
 .allwords.guesswordslist, .allwords.givewordslist {
     position: absolute;
-    top: 37vw;
+    top: 36vw;
     width: 96%;
     margin: 0 auto;
     display: block;
@@ -2148,7 +2166,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     font-size: 24px;
   }
   .allwords.guesswordslist, .allwords.givewordslist {
-    top: 190px;
+    top: 185px;
   }
   .hintlabel.guessnum {
     top: 650px;
@@ -2211,6 +2229,13 @@ span.hintnumheading.allguesserinfo.playerplayed {
   }
   .hints.submitted .wordnumarea {
     top: 528px !important;
+  }
+  span.hintnumheading.allguesserinfo.underwayforgiver {
+    top: 643px;
+  }
+  .underwayforgiversec .summaryhints {
+    top: 144px;
+    font-size: 15px;
   }
 }
 .hints.submitted .wordnumarea {
@@ -2340,7 +2365,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   background-repeat: no-repeat;
 }
 .setmainhome {
-    width: 60px;
+    width: 36px;
     position: absolute;
     top: 12px;
     left: 12px;
