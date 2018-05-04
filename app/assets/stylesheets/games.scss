@@ -80,6 +80,32 @@ body {
 }
 #signin-with {
   text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 24px;
+}
+.si-group {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 24px;
+  font-size: 18px;
+}
+.si-group a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+}
+.txt-link {
+  position: relative;
+  bottom: 11px;
+}
+.signin-bottom {
+  text-align: center;
+}
+.si-bot-line {
+  width: 80%;
+  margin: 8px auto 18px;
 }
 .login-logos {
   display: inline-block;
@@ -168,7 +194,7 @@ span.feednotify {
   list-style: none;
   font-size: 14px;
 }
-.guessergames {
+.yourgames {
   width: 49%;
   display: inline-block;
   vertical-align: top;
@@ -1715,6 +1741,7 @@ span.featimgtext {
   background-image: url(bg_title_tablet.png);
   height: 100vh;
   background-repeat: no-repeat;
+  color: white;
 }
 .titlesignedin {
   background: linear-gradient(#4c9d12, lightgrey);
