@@ -15,7 +15,7 @@ gem 'figaro'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'paperclip'
+gem "paperclip", ">= 5.2.0"
 gem 'jquery-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
