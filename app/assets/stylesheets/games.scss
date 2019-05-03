@@ -19,7 +19,7 @@ body {
 	/*font-family: 'Montserrat', sans-serif;*/
   font-family: 'Aller', sans-serif;
   /*background-color: #f8fff8;*/
-  background-color: #f0f0f1;
+  background-color: #116c6c;
   margin: 0 auto !important;
 }
 @media (min-width: 500px) {
@@ -1143,11 +1143,15 @@ img.anim_neutral.animating {
   right: 0;
   z-index: 5;
   width: 60%;
+  max-width: 282px;
   text-align: center;
   background-color: aliceblue;
+  background: url(obj_menuBG.png);
+  background-size: 100%;
   padding: 24px 20px;
   border-radius: 12px;
-  border: 2px solid rosybrown;
+  border: none;
+  height: 44%;
 }
 .lifetimerankings {
   max-width: 480px;

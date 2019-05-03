@@ -22,9 +22,9 @@ class PagesController < ApplicationController
 
 		@alluserstatsweek = Game.allcombinedrankings(5,5,5,true)
 
-		@usersgiversweek = Game.usersgiversstats(current_user.id,true)
+		# @usersgiversweek = Game.usersgiversstats(current_user.id,true)
 
-		@usersguessersweek = Game.usersguessersstats(current_user.id,true)
+		# @usersguessersweek = Game.usersguessersstats(current_user.id,true)
 	end
 
 	def alltimeranks
@@ -35,9 +35,9 @@ class PagesController < ApplicationController
 
 		@alluserstats = Game.allcombinedrankings(5,5,5,false)
 
-		@usersgivers = Game.usersgiversstats(current_user.id,false)
+		# @usersgivers = Game.usersgiversstats(current_user.id,false)
 
-		@usersguessers = Game.usersguessersstats(current_user.id,false)
+		# @usersguessers = Game.usersguessersstats(current_user.id,false)
 	end
 
 	def allfeedseen
