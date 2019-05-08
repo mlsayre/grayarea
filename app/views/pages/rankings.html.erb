@@ -235,7 +235,7 @@ $(document).ready(function() {
   	}
   })
 
-	weeklyload(["rankweeklycontent"], 150);
+	//weeklyload(["rankweeklycontent"], 150);
   //alltimeload(["rankalltimecontent"], 250);
   // weeklyload(["wktopgivers", "wktopguessers"], 500);
   // alltimeload(["athearts", "atfeat", "atnonspoiler"], 750);
@@ -263,25 +263,25 @@ $(document).ready(function() {
 	// 	}
 	// }
 
-	function weeklyload(containers, time) {
-		for (var i = 0; i < containers.length; i++) {
-			(function() {
-				var container = containers[i];
-				setTimeout(function() {
-					var wrapper = $("." + container);
-					wrapper.load("/pages/weeklyranks" + " ." + container, function() {
-					   wrapper.children("." + container).unwrap();
-					   var curusername = "<%= current_user.username %>";
-						  $("." + container + " li").each(function() {
-						  	if ($(this).data("uname") === curusername) {
-						  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
-						  	}
-						  })
+	// function weeklyload(containers, time) {
+	// 	for (var i = 0; i < containers.length; i++) {
+	// 		(function() {
+	// 			var container = containers[i];
+	// 			setTimeout(function() {
+	// 				var wrapper = $("." + container);
+	// 				wrapper.load("/pages/weeklyranks" + " ." + container, function() {
+	// 				   wrapper.children("." + container).unwrap();
+	// 				   var curusername = "<%= current_user.username %>";
+	// 					  $("." + container + " li").each(function() {
+	// 					  	if ($(this).data("uname") === curusername) {
+	// 					  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+	// 					  	}
+	// 					  })
 
-					});
-				}, time)
-			})();
-		}
-	}
+	// 				});
+	// 			}, time)
+	// 		})();
+	// 	}
+	// }
 })
 </script>
