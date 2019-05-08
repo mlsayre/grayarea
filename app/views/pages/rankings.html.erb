@@ -242,26 +242,26 @@ $(document).ready(function() {
   // alltimeload(["attopgivers", "attopguessers"], 600);
 	
 
-	function alltimeload(containers, time) {
-		for (var i = 0; i < containers.length; i++) {
-			(function() {
-				var container = containers[i];
-				setTimeout(function() {
-					var wrapper = $("." + container);
-					wrapper.load("/pages/alltimeranks" + " ." + container, function() {
-					   wrapper.children("." + container).unwrap();
-					   var curusername = "<%= current_user.username %>";
-						  $("." + container + " li").each(function() {
-						  	if ($(this).data("uname") === curusername) {
-						  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
-						  	}
-						  })
+	// function alltimeload(containers, time) {
+	// 	for (var i = 0; i < containers.length; i++) {
+	// 		(function() {
+	// 			var container = containers[i];
+	// 			setTimeout(function() {
+	// 				var wrapper = $("." + container);
+	// 				wrapper.load("/pages/alltimeranks" + " ." + container, function() {
+	// 				   wrapper.children("." + container).unwrap();
+	// 				   var curusername = "<%= current_user.username %>";
+	// 					  $("." + container + " li").each(function() {
+	// 					  	if ($(this).data("uname") === curusername) {
+	// 					  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+	// 					  	}
+	// 					  })
 
-					});
-				}, time)
-			})();
-		}
-	}
+	// 				});
+	// 			}, time)
+	// 		})();
+	// 	}
+	// }
 
 	function weeklyload(containers, time) {
 		for (var i = 0; i < containers.length; i++) {
