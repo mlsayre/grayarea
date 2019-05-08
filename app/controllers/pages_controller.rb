@@ -27,18 +27,18 @@ class PagesController < ApplicationController
 		# @usersguessersweek = Game.usersguessersstats(current_user.id,true)
 	end
 
-	def alltimeranks
-		userstats = Game.combinedrankings(current_user.id,1,1,1,false)
-		userstats[0] != -1 ? @giveravg = userstats[0] : @giveravg = "na"
-		userstats[1] != -1 ? @guesseravg = userstats[1] : @guesseravg = "na"
-		userstats[2] != -1 ? @combinedavg = userstats[2] : @combinedavg = "na"
+	# def alltimeranks
+	# 	userstats = Game.combinedrankings(current_user.id,1,1,1,false)
+	# 	userstats[0] != -1 ? @giveravg = userstats[0] : @giveravg = "na"
+	# 	userstats[1] != -1 ? @guesseravg = userstats[1] : @guesseravg = "na"
+	# 	userstats[2] != -1 ? @combinedavg = userstats[2] : @combinedavg = "na"
 
-		@alluserstats = Game.allcombinedrankings(5,5,5,false)
+	# 	@alluserstats = Game.allcombinedrankings(5,5,5,false)
 
-		# @usersgivers = Game.usersgiversstats(current_user.id,false)
+	# 	# @usersgivers = Game.usersgiversstats(current_user.id,false)
 
-		# @usersguessers = Game.usersguessersstats(current_user.id,false)
-	end
+	# 	# @usersguessers = Game.usersguessersstats(current_user.id,false)
+	# end
 
 	def allfeedseen
 		usernews = News.where(:targetuser_id => current_user.id).all
