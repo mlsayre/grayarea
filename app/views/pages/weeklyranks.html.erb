@@ -17,18 +17,9 @@
 
 		<div class="rankingstabletitle">Weekly Top 15</div>
 			
-			<div class="statcontainer wkcombined showstat">
-				<span class="statcat"><u>Combined Avg Score - min 5 games</u></span>
-				<ul>
-				  <% User.all.sort {|a,b| @alluserstatsweek[b.id][2] <=> @alluserstatsweek[a.id][2]}.first(15).each do |user| %>
-				  	  <% if @alluserstatsweek[user.id][2] != -1 %>
-				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= @alluserstatsweek[user.id][2] %></span></li>
-				    	<% end %>
-				  <% end %>
-				</ul>
-	  	</div>
+			
 
-	  	<div class="statcontainer wkhearts">
+	  	<div class="statcontainer wkhearts showstat">
 				<span class="statcat"><u>Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
 				<ul>
 				  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, true) <=> Game.averageheartspergame(a.id, 5, true)}.first(15).each do |user| %>
