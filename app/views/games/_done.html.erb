@@ -1,139 +1,65 @@
-<div class="gametop" data-gameid="<%= @game.id %>">
-	<span class="gtoneline">Game Complete!</span>
-</div>
+<section class="playboard-signedin underwayforgiversec <%= current_user.theme %>">
+	<a class="setmainhome" href="/main"><img src="/assets/Home-48.png"></a>
+	<div class="gametop" data-gameid="<%= @game.id %>">
+		<span class="gtoneline">Game Complete!</span>
+	</div>
 
-<div class="allwords">
-	<span id="allwordslist">
-    <%= render 'allwordsguess' %>
-  </span>
-</div>
+	<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) and <%= @game.hintword2 %>(<%= @game.hintnum2 %>) and <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span>
 
-<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;">
-					<span class="summaryhints">Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span>
-					<div class="prevscoreblock">
-						<!-- <span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
-						</span> -->
-						<span class="removeheartsuccess">Awww.</span>
-						<span class="giveheart"><img src="/assets/Heart-48.png"> +</img></span>
-						<div class="scoreblocktitle">Scores So Far (clickable)</div>
-						<!-- <span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
-						</span> -->
-						<span class="giveheartsuccess">Thanks!</span>
-						<span class="removeheart"><img src="/assets/Heart-48.png"></img> -</span><br>
-						<% if @gsrstatus == "over,over" %>
-						<div class="guesserinfo guesser1" data-gsrwords="<%= @game.gsr1_words.join(",") %>">
-							<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
-							<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
-							<% if @game.gsr1_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-						<div class="guesserinfo guesser2"  data-gsrwords="<%= @game.gsr2_words.join(",") %>">
-							<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
-							<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %>pts</span>
-							<% if @game.gsr2_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-						<div class="guesserinfo guesser3" data-gsrwords="<%= @game.gsr3_words.join(",") %>">
-							<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
-							<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %>pts</span>
-							<% if @game.gsr3_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-						<div class="guesserinfo guesser4"  data-gsrwords="<%= @game.gsr4_words.join(",") %>">
-							<span><%= @game.guesser_id4 != 0 ? User.find(@game.guesser_id4).username : "-" %></span>: 
-							<span class="finalpoints4"><%= @game.gsr4_score ? @game.gsr4_score : "-" %>pts</span>
-							<% if @game.gsr4_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-						<div class="guesserinfo guesser5"  data-gsrwords="<%= @game.gsr5_words.join(",") %>">
-							<span><%= @game.guesser_id5 != 0 ? User.find(@game.guesser_id5).username  : "-" %></span>: 
-							<span class="finalpoints5"><%= @game.gsr5_score ? @game.gsr5_score : "-" %>pts</span>
-							<% if @game.gsr5_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-						<div class="guesserinfo guesser6" data-gsrwords="<%= @game.gsr6_words.join(",") %>">
-							<span><%= @game.guesser_id6 != 0 ? User.find(@game.guesser_id6).username  : "-" %></span>: 
-							<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
-							<% if @game.gsr6_heart == 1 %>
-								<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
-							<% end %>
-						</div>
-					</div>
-					<script>
-					GuessFunc = {
-					  seeguessesafter: function() {
-						console.log("loading seeguessesafter")
-						$(".guesswordslist").addClass("guessednotdone");
-						var gsrnum = gon.guessernum;
-						var twords = gon.targetwords;
-				  	var bword = gon.badword;
-				  	var hintword1 = gon.hintword1;
-				  	var hintword2 = gon.hintword2;
-				  	var hintword3 = gon.hintword3;
-				  	var hintnum1 = gon.hintnum1;
-				  	var hintnum2 = gon.hintnum2;
-				  	var hintnum3 = gon.hintnum3;
+	<div class="allwords givewordslist">
+		<span id="allwordslist">
+	    <%= render 'allwordsguess' %>
+	  </span>
+	</div>
 
-				  	var pl1words = <%= raw @game.gsr1_words %>;
-				  	var pl2words = <%= raw @game.gsr2_words %>;
-				  	var pl3words = <%= raw @game.gsr3_words %>;
-				  	var pl4words = <%= raw @game.gsr4_words %>;
-				  	var pl5words = <%= raw @game.gsr5_words %>;
-				  	var pl6words = <%= raw @game.gsr6_words %>;
+	<span class="hintnumheading allguesserinfo underwayforgiver" style="text-align: center;"><u>Final Scores (click to see guesses)</u><br>
+		<div class="prevscoreblock">
+			<div class="guesserinfo guesser1">
+				<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
+				<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
+				<% if @game.gsr1_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+			<div class="guesserinfo guesser2">
+				<span><%= @game.guesser_id2 != 0 ? User.find(@game.guesser_id2).username  : "-" %></span>: 
+				<span class="finalpoints2"><%= @game.gsr2_score ? @game.gsr2_score : "-" %>pts</span>
+				<% if @game.gsr2_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+			<div class="guesserinfo guesser3">
+				<span><%= @game.guesser_id3 != 0 ? User.find(@game.guesser_id3).username  : "-" %></span>: 
+				<span class="finalpoints3"><%= @game.gsr3_score ? @game.gsr3_score : "-" %>pts</span>
+				<% if @game.gsr3_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+			<div class="guesserinfo guesser4">
+				<span><%= @game.guesser_id4 != 0 ? User.find(@game.guesser_id4).username : "-" %></span>: 
+				<span class="finalpoints4"><%= @game.gsr4_score ? @game.gsr4_score : "-" %>pts</span>
+				<% if @game.gsr4_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+			<div class="guesserinfo guesser5">
+				<span><%= @game.guesser_id5 != 0 ? User.find(@game.guesser_id5).username  : "-" %></span>: 
+				<span class="finalpoints5"><%= @game.gsr5_score ? @game.gsr5_score : "-" %>pts</span>
+				<% if @game.gsr5_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+			<div class="guesserinfo guesser6">
+				<span><%= @game.guesser_id6 != 0 ? User.find(@game.guesser_id6).username  : "-" %></span>: 
+				<span class="finalpoints6"><%= @game.gsr6_score ? @game.gsr6_score : "-" %>pts</span>
+				<% if @game.gsr6_heart == 1 %>
+					<span class="heartshow"><img src="/assets/Heart-48.png"></img></span>
+				<% end %>
+			</div>
+		</span>
+	</div>
+	<div class="hintarea guess">
+	  
 
-				  	// $(".word").each(function() {
-				  	// 	var word = $(this).attr("data-guessword");
-				  	// 	if (twords.indexOf(word) !== -1) {
-				  	// 		$(this).addClass("targetword");
-				  	// 	} else if (bword === word) {
-				  	// 		$(this).addClass("badword");
-				  	// 	} else {
-				  	// 		$(this).removeClass("neutralword");
-				  	// 	}
-				  	// })
-				  	$(".neutralword").removeClass("neutralword");
-
-						function showplayerwords(playernum, wordvar) {
-							$(".finalguessesshow").removeClass("finalguessesshow")
-				  		$(".word").removeClass("guesser1show").removeClass("guesser2show").removeClass("guesser3show")
-				  		          .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
-				  		for (var i = 0; i < wordvar.length; i++) {
-				  			$('[data-guessword="' + wordvar[i] + '"]').addClass("guesser" + playernum + "show");
-				  		}
-				  	}
-
-				  	$(".guesser1").click(function() {
-				  		showplayerwords(1, pl1words);
-				  	});
-				  	$(".guesser2").click(function() {
-				  		showplayerwords(2, pl2words);
-				  	});
-				  	$(".guesser3").click(function() {
-				  		showplayerwords(3, pl3words);
-				  	});
-				  	$(".guesser4").click(function() {
-				  		showplayerwords(4, pl4words);
-				  	});
-				  	$(".guesser5").click(function() {
-				  		showplayerwords(5, pl5words);
-				  	});
-				  	$(".guesser6").click(function() {
-				  		showplayerwords(6, pl6words);
-				  	});
-				  	$(".guesser" + gsrnum).click();
-				  	}
-				  }
-					setTimeout(function() { GuessFunc.seeguessesafter(); }, 300);
-					</script>
-					<% end %>
-				</span>
-
-<div class="hintarea guess">
-  Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) and <%= @game.hintword2 %>(<%= @game.hintnum2 %>) and <%= @game.hintword3 %>(<%= @game.hintnum3 %>)<br>
-
-</div>
+	</div>
+</section>

@@ -23,31 +23,13 @@
     </div>
   </div>
 
-  <div id="signin-with">or sign in using<br>
-    <div class="login-logos" id="signin-twitter">
-      <%= link_to(image_tag("https://s3-us-west-2.amazonaws.com/wordstretch/signin/btn_signTwitter.png", size: "62", alt: "Twitter login"),
-          omniauth_authorize_path(:user, :twitter)) %>
-      
-    </div>
-
-   <div class="login-logos" id="signin-facebook">
-      <%= link_to(image_tag("https://s3-us-west-2.amazonaws.com/wordstretch/signin/btn_signFacebook.png", size: "62", alt: "Facebook login"),
-          omniauth_authorize_path(:user, :facebook)) %>
-      
-    </div>
-
-    <div class="login-logos" id="signin-google">
-      <%= link_to(image_tag("https://s3-us-west-2.amazonaws.com/wordstretch/signin/btn_signG%2B.png", size: "62", alt: "Google login"),
-          omniauth_authorize_path(:user, :google_oauth2)) %>
-      
-    </div>
-  </div>
+  
 
   <div class="signin-bottom">
     <img src="https://s3-us-west-2.amazonaws.com/wordstretch/signin/obj_separator.png" class="si-bot-line">
       <div class="si-group">
         <%= link_to(image_tag("/assets/btn_play.png", size: "84", alt: "play as guest"), main_path) %>
-        <%= link_to "as guest", main_path, class: "txt-link" %>
+        <%= link_to "or play as guest", main_path, class: "txt-link" %>
       </div>
   </div>
 
