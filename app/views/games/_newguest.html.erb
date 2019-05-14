@@ -1,40 +1,41 @@
-<div class="gametop gtmain">
-  Welcome, Guest!
-</div>
-
-<div class="mainmenubuttons guestplaying">
-  <button class="button dummyplay disabled">Play as Giver</button>
-  <button class="button startguess playasguest">Play as Guesser</button><br><br>
-
-
-
-  <span class="guessermsg">(Sign up and play 3 games to activate Giver button)</span>
-   <%= link_to "How to Play", howtoplay_pages_path, :class => "button", :style => "margin-top: 6px;" %><br><br>
-
-  Feel free to play as many games as you want as a word guesser! Sign up to enable stat-tracking, to join the rankings, and also to be able to give clues to other players.<br><br>
-  <%= link_to "Sign up", new_user_registration_path %><br><br>
-  <%= link_to "Sign in", new_user_session_path %>
-    <br><br>
-    <div id="signin-with">Or sign in with:<br>
-  <div class="login-logos" id="signin-twitter">
-    <%= link_to(image_tag("Twitter-login.png", size: "48", alt: "Twitter login"),
-        omniauth_authorize_path(:user, :twitter)) %><br>
-    <%= link_to "Twitter", omniauth_authorize_path(:user, :twitter) %>
+<section class="titlesignedout">
+  <div class="titlewelcome">
+    Welcome, Guest!
   </div>
 
- <div class="login-logos" id="signin-facebook">
-    <%= link_to(image_tag("Facebook-login.png", size: "48", alt: "Facebook login"),
-        omniauth_authorize_path(:user, :facebook)) %><br>
-    <%= link_to "Facebook", omniauth_authorize_path(:user, :facebook) %>
+  <div class="titlegamecopy">
+    <!-- <img class="tgc-header" src="/assets/obj_title_header.png"> -->
+    <img class="tgc-main" src="/assets/obj_title.png">
+    <!-- <img class="tgc-subline" src="/assets/obj_title_subline.png"> -->
   </div>
 
-  <div class="login-logos" id="signin-google">
-    <%= link_to(image_tag("Google-login.PNG", size: "48", alt: "Google login"),
-        omniauth_authorize_path(:user, :google_oauth2)) %><br>
-    <%= link_to "Google", omniauth_authorize_path(:user, :google_oauth2) %>
+  <p id="notice"><%= notice %></p>
+
+  <div class="buttonarea">
+    <div class="buttons-left">
+    </div>
+    <div class="buttons-middle">
+      <%= link_to(image_tag("/assets/btn_play.png", :alt => "Play", :title => "Play Word Stretch"), howtoplay_pages_path, :class => "bigplaybutton") %>
+      <div class="mainmenubuttons">
+        <button class="button dummyplay disabled">Give</button>
+        <button class="button startguess playasguest">Guess</button>
+
+          <span class="guessermsg">(Sign up and play 3 games to activate Give button)</span>
+
+      </div>
+    </div>
+    <div class="buttons-right">
+      
+    </div>
+
+     <%= link_to "How to Play", howtoplay_pages_path, :class => "button guesthtp", :style => "margin-top: 6px;" %><br><br>
+     <div class="blurbbox">
+          <span class="guestblurb">Feel free to play as many games as you want as a word guesser! Sign up to enable stat-tracking, to join the rankings, and also to be able to give clues to other players.</span><br>
+          <%= link_to "Sign up", new_user_registration_path %>
+          <%= link_to "Sign in", new_user_session_path %>
+     </div>
+    
   </div>
-</div>
-</div>
+  <div class="pagecover"></div>
 
-
-
+</section>

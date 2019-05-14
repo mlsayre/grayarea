@@ -120,6 +120,15 @@ a.button {
   margin: 4px 0 0;
   font-size: 20px;
 }
+.guestboard button.menu {
+    background: none !important;
+    border: none;
+}
+.guestboard span.guessinfo {
+    background: none;
+    border: none;
+    padding: 8px 0 0;
+}
 .guestplaying .guessermsg {
   margin: 80px auto 0;
 }
@@ -821,7 +830,7 @@ form#new_game {
 li.neutralword {
   background-color: darkgrey;
   /*opacity: .25;*/
-  color: lightgrey;
+  color: lightgrey !important;
   background-color: #f9f9f9;
 }
 .scoreSection {
@@ -1752,15 +1761,38 @@ span.featimgtext {
   background-repeat: no-repeat;
   color: white;
 }
-.titlesignedin {
+.titlesignedin, .titlesignedout {
   background: linear-gradient(#4c9d12, lightgrey);
   background-size: 100%;
   background-image: url(bg_title_tablet.png);
   height: 100vh;
   background-repeat: no-repeat;
 }
-.titlesignedin .pagecover {
+.titlesignedin .pagecover, .titlesignedout .pagecover {
   opacity: .5;
+}
+.titlesignedout .buttonarea {
+  top: 72vw;
+}
+a.button.guesthtp {
+  width: 100px;
+  margin-top: 0 !important;
+  margin-bottom: 0;
+}
+.blurbbox {
+    background: rgba(0,0,0,.44);
+    padding: 12px;
+}
+.guestblurb {
+    color: white;
+}
+.titlesignedout .blurbbox a {
+    display: inline-block;
+    width: 88px;
+    color: white;
+    border: 2px solid blue;
+    padding: 2px;
+    margin: 11px 12px;
 }
 .titlewelcome {
   font-family: "AllerBold";
@@ -2575,6 +2607,26 @@ section.rankingspage {
     border-bottom: 0;
     z-index: 50;
     opacity: 1;
+}
+.pgotitle a {
+    font-weight: 700;
+    font-size: 18px;
+    border: blue 2px solid;
+    background: white;
+    padding: 6px;
+    color: blue;
+    text-decoration: none;
+    border-radius: 8px;
+}
+.guestboard .playedgameover button.bigplaybutton {
+  margin-top: 14px;
+    color: blue;
+    background: white !important;
+    width: 200px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
 }
 
 section.playboard-signedin, section.giveboard-signedin {

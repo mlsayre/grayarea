@@ -650,7 +650,11 @@ class GamesController < ApplicationController
         avgiverdeconum = str.split(":")[1]
       end
     end
-    avguesserarray = current_user.avatar_content_type.split("-")
+    if current_user
+      avguesserarray = current_user.avatar_content_type.split("-")
+    else
+      avguesserarray = ["bg:001", "head:001", "mouth:001", "eyes:001", "hair:001", "deco:001"]
+    end
     avguesserarray.each do |str|
       if str.include?("bg")
         avguesserbgnum = str.split(":")[1]

@@ -1,35 +1,7 @@
 <section class="playboard-signedin theme-default guestboard">
 	<div class="gametop" data-gameid="<%= @game.id %>">Playing 
 		<%= User.find(@game.giver_id).username%>'s Game<br>
-	</div>
-
-<div class="hintnumarea">
-		<span class="hintheadline">First hint</span>
 		<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
-		<span class="giveravatar">
-			<div class="avatarpart avatar_bg">
-				<img src=<%= @avgiverbgurl %>>
-			</div>
-			<div class="avatarpart avatar_head">
-				<img src=<%= @avgiverheadurl %>>
-			</div>
-			<div class="avatarpart avatar_mouth">
-				<img src=<%= @avgivermouthurl %>>
-			</div>
-			<div class="avatarpart avatar_eyes">
-				<img src=<%= @avgivereyesurl %>>
-			</div>
-			<div class="avatarpart avatar_hair">
-				<img src=<%= @avgiverhairurl %>>
-			</div>
-			<div class="avatarpart avatar_deco">
-				<img src=<%= @avgiverdecourl %>>
-			</div>
-		</span>
-	</div>
-
-	<div class="bighint">
-		<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
 	</div>
 
 	<div class="allwords guesswordslist">
@@ -38,58 +10,32 @@
 	  </span>
 	</div>
 
-	<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
-		to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
-	</div>
-
 	<div class="hintarea guess">
 		<div class="hintheading">
 			<div class="notifyarea">
+				<span class="hintheadline">Your first hint is...</span>
 				<span class="gamenotify">You are so cool, seriously.</span>
 			</div>
 			<div class="hints hint1">
 				<div class="hintlabel guessword">
-
-				</div>
-				
-				
-				<div class="guessbottomarea">
-					<span class="guesseravatar">
-						<div class="avatarpart avatar_bg">
-							<img src=<%= @avguesserbgurl %>>
-						</div>
-						<div class="avatarpart avatar_head">
-							<img src=<%= @avguesserheadurl %>>
-						</div>
-						<div class="avatarpart avatar_mouth">
-							<img src=<%= @avguessermouthurl %>>
-						</div>
-						<div class="avatarpart avatar_eyes">
-							<img src=<%= @avguessereyesurl %>>
-						</div>
-						<div class="avatarpart avatar_hair">
-							<img src=<%= @avguesserhairurl %>>
-						</div>
-						<div class="avatarpart avatar_deco">
-							<img src=<%= @avguesserdecourl %>>
-						</div>
+					<span class="guessinfo">
+						<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
 					</span>
-					
-					<div class="guesserskiparea">
-						<div class="riskytext">Too risky?</div>
-						<button class="button skip1">Go to next hint!</button>
-					</div>
 				</div>
-				<button class="menu"><img src="/assets/btn_menu.png"></button>
+				<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
+					to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
+				</div>
+				<button class="button skip1">Too risky? Go to next hint...</button>
+				<button class="menu"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_menu.png"></button>
 			</div>
-		</div>
-		<div class="hints submitted hidden">
-			<span class="hintlabel gameover">Game Over</span>
-			<div class="gameoverinfo">
-				<span class="hintnumheading">
-					<!-- Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points -->
-				</span><br>
-				<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;"><u>Scores (click to see guesses)...</u><br>
+			<div class="hints submitted hidden">
+				<span class="hintlabel gameover">Game Over</span>
+				<div class="gameoverinfo">
+					<span class="hintnumheading">
+						
+						Your Score... Words: <span class="wordcount"></span> for <span class="scorecount"></span> points
+					</span><br>
+					<span class="hintnumheading allguesserinfo playerplayed" style="text-align: center;"><u>Scores (click to see guesses)...</u><br>
 						<div class="guesserinfo guesser1" data-gsrwords="<%= @game.gsr1_words.join(",") %>">
 							<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
 							<span class="finalpoints1"><%= @game.gsr1_score ? @game.gsr1_score : "-" %>pts</span>
@@ -190,13 +136,14 @@
 				  		        .removeClass("guesser4show").removeClass("guesser5show").removeClass("guesser6show")
 						</script>
 					</span>
-				
+					Hints: <%= @game.hintword1 %>(<%= @game.hintnum1 %>) <%= @game.hintword2 %>(<%= @game.hintnum2 %>) <%= @game.hintword3 %>(<%= @game.hintnum3 %>) <br>
+					<%= link_to "Sign up to join the rankings and make your own games", new_user_registration_path %><br>
+					    
+				<button class="menu"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_menu.png"></button>
 			</div>
-			
 		</div>
 	</div>
-
-	<button class="menu"><img src="/assets/btn_menu.png"></button>
+	<%= link_to "How to Play", howtoplay_pages_path, :class => "button centered", :style => "margin-top: 6px; display: block; width: 120px;" %><br><br>
 
 	<div class="gamebottom"></div>
 
@@ -208,48 +155,5 @@
 	</div>
 
 	<div class="pagecover"></div>
-
-	<div class="roundannounce hidden">
-		<div class="raRound1toRound2 hidden">
-			<span class="ra_anim1 raa1_initial">Round 2!</span>
-			<!-- <span class="ra_anim2 raa2_initial"><%= @game.hintword2 %>(<%= @game.hintnum2 %>)</span> -->
-		</div>
-		<div class="raRound2toRound3 hidden">
-			<span class="ra_anim1 raa1_initial">Final Round!</span>
-			<!-- <span class="ra_anim2 raa2_initial"><%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span> -->
-		</div>
-		<div class="raBonustoRound3 hidden">
-			<span class="ra_anim1 raa1_initial">Final Round!</span>
-			<!-- <span class="ra_anim2 raa2_initial"><%= @game.hintword3 %>(<%= @game.hintnum3 %>)</span> -->
-		</div>
-		<div class="raSkiphint hidden">
-			<span class="ra_anim1 raa1_initial">Skipped...</span>
-			<!-- <span class="ra_anim2 raa2_initial">Next round!</span> -->
-		</div>
-		<div class="raBonusstart hidden">
-			<span class="ra_anim1 raa1_initial">Bonus!</span>
-			<!-- <span class="ra_anim2 raa2_initial">Good luck!</span> -->
-		</div>
-	</div>
-
-	<div class="playedgameover">
-		<div class="pgotitle"><%= link_to "Game over! Sign up now?", new_user_registration_path %></div>
-		<div class="buttons-middle">
-			<button class="button bigplaybutton">GUEST PLAY AGAIN</button>
-      <div class="mainmenubuttons">
-
-        <div class="actions">
-           <button class="button contmainplay disabled">Give</button>
-           <span class="guessermsg">(Sign up and play 3 games to activate Give button)</span>
-        </div>
-        <br>
-
-        <button class="button contstartguess">Guess</button><br>
-
-       
-      </div>
-    </div>
-	</div>
-
 	<p id="notice"><%= notice %></p>
 </section>
