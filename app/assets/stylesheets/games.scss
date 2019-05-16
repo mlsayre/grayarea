@@ -49,6 +49,9 @@ body {
   background-color: #0088d6 !important;
   background: linear-gradient(#1facfd 30%, #0069b5) !important;
 }
+.playboard-signedin button.menu {
+  background: none !important;
+}
 .landingtitle {
   margin: 0 auto;
   display: block;
@@ -906,6 +909,12 @@ button.button.returntomain.maininline {
   top: 2px;
   border: 1px solid darkgreen;
 }
+.menubox button.button.returntomain.maininline {
+    border: none;
+    top: 0;
+    display: block;
+    margin: 6px auto 40px;
+}
 button.menu {
   padding: 0;
   margin: 0;
@@ -1160,6 +1169,7 @@ img.anim_neutral.animating {
   background-color: aliceblue;
   background: url(obj_menuBG.png);
   background-size: 100%;
+  background-repeat: no-repeat;
   padding: 24px 20px;
   border-radius: 12px;
   border: none;
