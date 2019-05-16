@@ -19,7 +19,7 @@ body {
 	/*font-family: 'Montserrat', sans-serif;*/
   font-family: 'Aller', sans-serif;
   /*background-color: #f8fff8;*/
-  background-color: #116c6c;
+  background-color: #01624f;
   margin: 0 auto !important;
 }
 @media (min-width: 500px) {
@@ -884,9 +884,9 @@ button.button.returntomain {
   height: 54px;
   width: 54px;
   padding: 3px;
-  opacity: .65;
+  opacity: .75;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   margin: 0;
   border-bottom-left-radius: 0;
@@ -1676,7 +1676,11 @@ span.featimgtext {
 .deviseform {
   text-align: center;
   padding: 30px 12px;
-  background: linear-gradient(#b4ffb4, transparent);
+  background: url(bg_title_tablet.png);
+  height: 100vh;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-size: 18px;
 }
 .deviseform input {
   margin-bottom: 16px;
@@ -1772,7 +1776,7 @@ span.featimgtext {
   opacity: .5;
 }
 .titlesignedout .buttonarea {
-  top: 72vw;
+  top: 36.5%;
 }
 a.button.guesthtp {
   width: 100px;
@@ -1815,6 +1819,9 @@ a.button.guesthtp {
 .titlegamecopy {
   width: 86%;
   margin: 26.5% auto 0;
+}
+.titlesignedout .titlegamecopy {
+  margin: 10% auto 0;
 }
 .landingpage .titlegamecopy {
   width: 86%;
