@@ -18,8 +18,8 @@
 body {
 	/*font-family: 'Montserrat', sans-serif;*/
   font-family: 'Aller', sans-serif;
-  /*background-color: #f8fff8;*/
-  background-color: #01624f;
+  /*background-color: #01624f;*/
+  background-color: black;
   margin: 0 auto !important;
 }
 @media (min-width: 500px) {
@@ -937,9 +937,149 @@ button.menu:hover {
   top: 0px;
   cursor: pointer;
 }
+.pupcontainer {
+    position: absolute;
+    left: 5px;
+    top: 60px;
+}
+.pupbutton {
+    background: transparent !important;
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    padding: 2px;
+    border: 0;
+}
+.pupbutton img {
+  width: 100%;
+  position: relative;
+  top: 0px;
+  cursor: pointer;
+}
+.activepup {
+  position: relative;
+  display: inline-block;
+}
+span.pupnum {
+  color: white;
+  background: red;
+  padding: 2px 8px 3px 6px;
+  border-radius: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  position: absolute;
+  right: -7px;
+  top: -6px;
+}
+.pupnum.pupnumnotactive {
+  background: lightslategray;
+}
+.show4 .posspoiler {
+  position: absolute;
+  top: 13%;
+  left: 0;
+  opacity: .8;
+  animation: spoilwobble 3.6s alternate infinite;
+  font-size: 32px;
+  width: 100%;
+}
+.show4 .posspoiler img {
+  width: 30%;
+}
+.show2 .posspoiler {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  opacity: .8;
+  animation: spoilwobble 5.6s alternate infinite;
+  font-size: 32px;
+  width: 100%;
+}
+.show2 .posspoiler img {
+  width: 15%;
+}
+span.psquestionmark {
+    position: relative;
+    bottom: 1em;
+    color: white;
+}
+.show2 span.psquestionmark {
+    bottom: .5em;
+}
 span.cheatstatus {
   display: block;
 }
+@keyframes spoilwobble {
+  from {
+    transform: rotate(3deg) scale(0.55);
+    
+  }
+  to {
+    transform: rotate(-3deg) scale(0.9);
+  }
+}
+span.pupspoilershow {
+  background: radial-gradient(red 67%, transparent 71%);
+  position: absolute;
+  border-radius: 5%;
+  opacity: .28;
+  z-index: 5;
+  display:none;
+  pointer-events: none;
+}
+span.pupspoilershow.show4 {
+    width: 66.7%;
+    height: 40%;
+    display:block;
+}
+span.pupspoilershow.show2 {
+    width: 66.7%;
+    height: 20%;
+    display:block;
+}
+
+.pupspoilershow.show4.pos-1 {
+  left: 0;
+  top: 0;
+}
+.pupspoilershow.show4.pos-2 {
+  left: 33.3%;
+  top: 0;
+}
+.pupspoilershow.show4.pos-3 {
+  left: 0;
+  top: 20.5%;
+}
+.pupspoilershow.show4.pos-4 {
+  left: 33.3%;
+  top: 20.5%;
+}
+.pupspoilershow.show4.pos-5 {
+  left: 0;
+  top: 40.5%;
+}
+.pupspoilershow.show4.pos-6 {
+  left: 33.3%;
+  top: 40.5%;
+}
+.pupspoilershow.show4.pos-7 {
+  left: 0;
+  top: 60.5%;
+}
+.pupspoilershow.show4.pos-8 {
+  left: 33.3%;
+  top: 60.5%;
+}
+.pupspoilershow.show2.pos-1 {left: 0;top: 0;}
+.pupspoilershow.show2.pos-2 {left: 33.3%;top: 0;}
+.pupspoilershow.show2.pos-3 {left: 0;top: 20.5%;}
+.pupspoilershow.show2.pos-4 {left: 33.3%;top: 20.5%;}
+.pupspoilershow.show2.pos-5 {left: 0;top: 40.5%;}
+.pupspoilershow.show2.pos-6 {left: 33.3%;top: 40.5%;}
+.pupspoilershow.show2.pos-7 {left: 0;top: 60.5%;}
+.pupspoilershow.show2.pos-8 {left: 33.3%;top: 60.5%;}
+.pupspoilershow.show2.pos-9 {left: 0;top: 80.5%;}
+.pupspoilershow.show2.pos-10 {left: 33.3%;top: 80.5%;}
 
 
 select {
@@ -2654,6 +2794,7 @@ section.playboard-signedin, section.giveboard-signedin {
   height: 177.7778vw;
   overflow: hidden;
   -webkit-backface-visibility: hidden; 
+  -webkit-box-reflect: below 0 -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,.65)), color-stop(1, transparent));
 }
 .playboard-signedin.theme-default {
   background: url(bg_default.png);

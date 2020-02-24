@@ -1190,6 +1190,45 @@ var ready = function() {
 		    // 	connectionError();
 		    // })
 			}
+			function loadWrapper(container) {
+				var wrapper = $(container);
+				wrapper.load(pathname + " " + container, function() {
+				   wrapper.children(container).unwrap();
+				});
+			}
+
+			// powerups
+			$(document).on("click", ".pup_spoilerdetect.pupactive", function() {
+				var indtmp = $("[data-guessword=" + bword + "]").index(".word")
+				var inbw = (indtmp * indtmp) + 11;
+				$.ajax({
+		      url: "/games/decreasepupspoiler",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'game_id' : parseInt(gameid),
+		    					'indbw' : inbw }
+		    })
+				.done(function(data) {
+		    	loadWrapper(".pupcontainer");
+		    	console.log("returned number is: " + data.newloc);
+		    	$(".pupspoilershow").fadeIn().addClass(data.firstorsecond).addClass("pos-" + data.newloc);
+		    	console.log(bword)
+		    })
+			})
+
+			$(document).on("click", ".pup_tworemove.pupactive", function() {
+				console.log("two remove pup clicked");
+				$.ajax({
+		      url: "/games/decreasepuptworemove",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'game_id' : parseInt(gameid)}
+		    })
+				.done(function() {
+		    	console.log("user pup decreased")
+		    	loadWrapper(".pupcontainer")
+		    })
+			})
 
 	  })();
 	}
@@ -1435,7 +1474,7 @@ var ready = function() {
 	      data: { 'avstring' : newpartstring}
 	    })
 	    .done(function() {
-	    	$(".compindexshow").text("Saved!");;
+	    	$(".compindexshow").text("Saved!");
 	    })
 	    .fail(function() {
 	    	connectionError();

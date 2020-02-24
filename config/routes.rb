@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       post 'givingdeletegame'
       post 'guessingreportgame'
       post 'playasguest'
+      post 'decreasepupspoiler'
+      post 'decreasepuptworemove'
     end
   end
 

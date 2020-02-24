@@ -103,3 +103,8 @@ var resultscheersfx = new Howl({
   volume: 1,
   preload: true
 });
+var silenceios = new Howl({
+  src: ['/assets/silence.wav'],
+  volume: 1,
+  preload: true
+});

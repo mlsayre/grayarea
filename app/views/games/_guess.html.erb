@@ -35,6 +35,13 @@
 	<div class="allwords guesswordslist">
 		<span id="allwordslist">
 	    <%= render 'allwordsguess' %>
+	    <span class="pupspoilershow">
+				<div class="posspoiler">
+		      <span class="psquestionmark">?</span>
+		      <img src="/assets/skull.png">
+		      <span class="psquestionmark">?</span>
+		    </div>
+		  </span>
 	  </span>
 	</div>
 
@@ -91,7 +98,33 @@
 						<button class="button skip1">Go to next hint!</button>
 					</div>
 				</div>
-				<button class="menu"><img src="/assets/btn_menu.png"></button>
+				<span class="menuarea">
+					<button class="menu"><img src="/assets/btn_menu.png"></button>
+					<span class="pupcontainer">
+						<% if current_user.pupneutraltworemove == 0 %>
+							<div class="activepup">
+								<button class="pupbutton pup_tworemove pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2_grey.png"></button>
+								<span class="pupnum pupnumnotactive"><%= current_user.pupneutraltworemove %></span>
+							</div>
+						<% else %>
+							<div class="activepup">
+								<button class="pupbutton pup_tworemove pupactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png"></button>
+								<span class="pupnum"><%= current_user.pupneutraltworemove %></span>
+							</div>
+						<% end %>
+						<% if current_user.pupspoilerdetector == 0 %>
+							<div class="activepup">
+								<button class="pupbutton pup_spoilerdetect pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect_grey.png"></button>
+								<span class="pupnum pupnumnotactive"><%= current_user.pupspoilerdetector %></span>
+							</div>
+						<% else %>
+							<div class="activepup">
+								<button class="pupbutton pup_spoilerdetect pupactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"></button>
+								<span class="pupnum"><%= current_user.pupspoilerdetector %></span>
+							</div>
+						<% end %>
+					</span>
+				</span>
 			</div>
 		</div>
 		<div class="hints submitted hidden">

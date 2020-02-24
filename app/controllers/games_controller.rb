@@ -879,6 +879,44 @@ class GamesController < ApplicationController
     render body: nil
   end
 
+  def decreasepupspoiler
+    @possible4spoiler = [[1], [1,2], [2], [1,3], [1,2,3,4], [2,4], [3,5], [3,4,5,6], [4,6], [5,7], [5,6,7,8], [6,8], [7], [7,8], [8]]
+
+    @possible2spoiler = [[1], [1,2], [2], [3], [3,4], [4], [5], [5,6], [6], [7], [7,8], [8], [9], [9,10], [10]]
+
+    current_user.decrement!(:pupspoilerdetector, by = 1)
+    @thegame = Game.find(params[:game_id])
+    @tempindex = params[:indbw].to_i
+    @theindex = Math.sqrt(@tempindex - 11)
+
+    if current_user.id == @thegame.guesser_id1
+      if @thegame.pupspoilerusedp1.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp1 => [@newloc])
+        @firstorsecond = "show4";
+      else
+        @oldloc = @thegame.pupspoilerusedp1[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp1 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+      end
+    end
+
+    respond_to do |format|
+      format.json { render json: { :firstorsecond => @firstorsecond, :newloc => @newloc }  }
+    end
+
+  end
+
+  def decreasepuptworemove
+    current_user.decrement!(:pupneutraltworemove, by = 1)
+    render body: nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game

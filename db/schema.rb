@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221235533) do
+ActiveRecord::Schema.define(version: 20200224182139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(version: 20180221235533) do
     t.datetime "endtime_gsr4", default: "2017-09-06 05:23:13"
     t.datetime "endtime_gsr5", default: "2017-09-06 05:23:13"
     t.datetime "endtime_gsr6", default: "2017-09-06 05:23:13"
+    t.integer "pupspoilerusedp1", default: [], array: true
+    t.integer "pupspoilerusedp2", default: [], array: true
+    t.integer "pupspoilerusedp3", default: [], array: true
+    t.integer "pupspoilerusedp4", default: [], array: true
+    t.integer "pupspoilerusedp5", default: [], array: true
+    t.integer "pupspoilerusedp6", default: [], array: true
+    t.boolean "pupneutralused1", default: false
+    t.boolean "pupneutralused2", default: false
+    t.boolean "pupneutralused3", default: false
+    t.boolean "pupneutralused4", default: false
+    t.boolean "pupneutralused5", default: false
+    t.boolean "pupneutralused6", default: false
     t.index ["gamestatus"], name: "index_games_on_gamestatus"
     t.index ["giver_id"], name: "index_games_on_giver_id"
     t.index ["gsr1_score"], name: "index_games_on_gsr1_score"
@@ -189,6 +201,8 @@ ActiveRecord::Schema.define(version: 20180221235533) do
     t.integer "statguesserperfect", default: 0
     t.integer "statguessernospoilers", default: 0
     t.integer "statalltimeguesserstreak", default: 0
+    t.integer "pupspoilerdetector", default: 0
+    t.integer "pupneutraltworemove", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
