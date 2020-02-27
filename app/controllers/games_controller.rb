@@ -536,6 +536,8 @@ class GamesController < ApplicationController
         gon.guessernum = "1"
         gon.playerscore = @game.gsr1_score
         gon.heartstatus = @game.gsr1_heart
+        gon.pupspoiler = @game.pupspoilerusedp1
+        gon.pupneutrals = @game.pupneutralused1
         @cheatstatus = @game.gsr1_cheat
         if @game.gsr1_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true
@@ -551,6 +553,8 @@ class GamesController < ApplicationController
         gon.guessernum = "2"
         gon.playerscore = @game.gsr2_score
         gon.heartstatus = @game.gsr2_heart
+        gon.pupspoiler = @game.pupspoilerusedp2
+        gon.pupneutrals = @game.pupneutralused2
         @cheatstatus = @game.gsr2_cheat
         if @game.gsr2_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true
@@ -566,6 +570,8 @@ class GamesController < ApplicationController
         gon.guessernum = "3"
         gon.playerscore = @game.gsr3_score
         gon.heartstatus = @game.gsr3_heart
+        gon.pupspoiler = @game.pupspoilerusedp3
+        gon.pupneutrals = @game.pupneutralused3
         @cheatstatus = @game.gsr3_cheat
         if @game.gsr3_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true
@@ -581,6 +587,8 @@ class GamesController < ApplicationController
         gon.guessernum = "4"
         gon.playerscore = @game.gsr4_score
         gon.heartstatus = @game.gsr4_heart
+        gon.pupspoiler = @game.pupspoilerusedp4
+        gon.pupneutrals = @game.pupneutralused4
         @cheatstatus = @game.gsr4_cheat
         if @game.gsr4_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true
@@ -596,6 +604,8 @@ class GamesController < ApplicationController
         gon.guessernum = "5"
         gon.playerscore = @game.gsr5_score
         gon.heartstatus = @game.gsr5_heart
+        gon.pupspoiler = @game.pupspoilerusedp5
+        gon.pupneutrals = @game.pupneutralused5
         @cheatstatus = @game.gsr5_cheat
         if @game.gsr5_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true
@@ -611,6 +621,8 @@ class GamesController < ApplicationController
         gon.guessernum = "6"
         gon.playerscore = @game.gsr6_score
         gon.heartstatus = @game.gsr6_heart
+        gon.pupspoiler = @game.pupspoilerusedp6
+        gon.pupneutrals = @game.pupneutralused6
         @cheatstatus = @game.gsr6_cheat
         if @game.gsr6_status == "over,over" && @game.gamestatus != "give"
           @chatshow = true  
@@ -884,17 +896,18 @@ class GamesController < ApplicationController
 
     @possible2spoiler = [[1], [1,2], [2], [3], [3,4], [4], [5], [5,6], [6], [7], [7,8], [8], [9], [9,10], [10]]
 
-    current_user.decrement!(:pupspoilerdetector, by = 1)
     @thegame = Game.find(params[:game_id])
     @tempindex = params[:indbw].to_i
     @theindex = Math.sqrt(@tempindex - 11)
+    @firstorsecond = ""
 
     if current_user.id == @thegame.guesser_id1
       if @thegame.pupspoilerusedp1.length == 0
         @newloc = @possible4spoiler[@theindex].sample
         @thegame.update(:pupspoilerusedp1 => [@newloc])
         @firstorsecond = "show4";
-      else
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp1.length == 1
         @oldloc = @thegame.pupspoilerusedp1[0]
         @iseven = @oldloc.even?
         @newloc = @possible2spoiler[@theindex][0]
@@ -903,6 +916,104 @@ class GamesController < ApplicationController
         end
         @thegame.update(:pupspoilerusedp1 => [@oldloc, @newloc])
         @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id2
+      if @thegame.pupspoilerusedp2.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp2 => [@newloc])
+        @firstorsecond = "show4";
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp2.length == 1
+        @oldloc = @thegame.pupspoilerusedp2[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp2 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id3
+      if @thegame.pupspoilerusedp3.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp3 => [@newloc])
+        @firstorsecond = "show4";
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp3.length == 1
+        @oldloc = @thegame.pupspoilerusedp3[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp3 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id4
+      if @thegame.pupspoilerusedp4.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp4 => [@newloc])
+        @firstorsecond = "show4";
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp4.length == 1
+        @oldloc = @thegame.pupspoilerusedp4[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp4 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id5
+      if @thegame.pupspoilerusedp5.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp5 => [@newloc])
+        @firstorsecond = "show4";
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp5.length == 1
+        @oldloc = @thegame.pupspoilerusedp5[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp5 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id6
+      if @thegame.pupspoilerusedp6.length == 0
+        @newloc = @possible4spoiler[@theindex].sample
+        @thegame.update(:pupspoilerusedp6 => [@newloc])
+        @firstorsecond = "show4";
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      elsif @thegame.pupspoilerusedp6.length == 1
+        @oldloc = @thegame.pupspoilerusedp6[0]
+        @iseven = @oldloc.even?
+        @newloc = @possible2spoiler[@theindex][0]
+        if @possible2spoiler[@theindex].length > 1 && @iseven == true
+          @newloc = @possible2spoiler[@theindex][1]
+        end
+        @thegame.update(:pupspoilerusedp6 => [@oldloc, @newloc])
+        @firstorsecond = "show2"
+        current_user.decrement!(:pupspoilerdetector, by = 1)
+      else 
+        @firstorsecond = "bothdone"
       end
     end
 

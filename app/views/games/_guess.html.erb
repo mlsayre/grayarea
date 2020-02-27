@@ -104,7 +104,7 @@
 						<% if current_user.pupneutraltworemove == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_tworemove pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2_grey.png"></button>
-								<span class="pupnum pupnumnotactive"><%= current_user.pupneutraltworemove %></span>
+								<span class="pupnum pupnumnotactive neutralzero"><%= current_user.pupneutraltworemove %></span>
 							</div>
 						<% else %>
 							<div class="activepup">
@@ -115,7 +115,7 @@
 						<% if current_user.pupspoilerdetector == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_spoilerdetect pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect_grey.png"></button>
-								<span class="pupnum pupnumnotactive"><%= current_user.pupspoilerdetector %></span>
+								<span class="pupnum pupnumnotactive spoilerzero"><%= current_user.pupspoilerdetector %></span>
 							</div>
 						<% else %>
 							<div class="activepup">

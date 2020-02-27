@@ -65,6 +65,7 @@ var ready = function() {
 		$(".pagecover").hide();
 		$(".menubox").hide();
 		$(".mainmenubuttons").hide();
+		$(".menudialog").hide();
 	});
 
 	// $(".opensettings").click(function(e) {
@@ -627,6 +628,10 @@ var ready = function() {
 	  	var guessernum = gon.guessernum;
 	  	var guessedwords = [];
 	  	var guessstatus = "hint1,word1";
+	  	var pupspoilerstatus = gon.pupspoiler;
+	  	var pupneutralstatus = gon.pupneutrals;
+	  	var pupspoilerused = pupspoilerstatus.length;
+	  	var pupneutralused = false;
 
 	  	//beginning state
 	  	guessedwords = gon.guessedwords;
@@ -663,6 +668,17 @@ var ready = function() {
 			if (heartstatus === 1) {
 				$(".giveheart").hide();
 				$(".removeheart").css("display", "inline-block");
+			}
+			
+			if (pupspoilerstatus.length === 1) {
+				setTimeout(function() {
+					$(".pupspoilershow").fadeIn().addClass("show4").addClass("pos-" + pupspoilerstatus[0]);
+				}, 1500)
+			} else if (pupspoilerstatus.length === 2) {
+				$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive");
+				setTimeout(function() {
+					$(".pupspoilershow").fadeIn().addClass("show2").addClass("pos-" + pupspoilerstatus[1]);
+				}, 1500)
 			}
 
 			$(document).on("click", ".giveheart", function() {
@@ -815,6 +831,7 @@ var ready = function() {
 				  	}
 				  	$(".allguesserinfo").addClass("underwayforgiver");
 				  	$(".playedgameover").show();
+				  	$(".pupspoilershow").fadeOut();
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
@@ -1198,22 +1215,41 @@ var ready = function() {
 			}
 
 			// powerups
+			console.log("pupspoilerused: " + pupspoilerused)
 			$(document).on("click", ".pup_spoilerdetect.pupactive", function() {
-				var indtmp = $("[data-guessword=" + bword + "]").index(".word")
-				var inbw = (indtmp * indtmp) + 11;
-				$.ajax({
-		      url: "/games/decreasepupspoiler",
-		      type: "POST",
-		      dataType:'json',
-		      data: { 'game_id' : parseInt(gameid),
-		    					'indbw' : inbw }
-		    })
-				.done(function(data) {
-		    	loadWrapper(".pupcontainer");
-		    	console.log("returned number is: " + data.newloc);
-		    	$(".pupspoilershow").fadeIn().addClass(data.firstorsecond).addClass("pos-" + data.newloc);
-		    	console.log(bword)
-		    })
+				pupspoilerused++
+				console.log("pupspoilerused: " + pupspoilerused)
+				if (pupspoilerused <= 2) {
+					var indtmp = $("[data-guessword=" + bword + "]").index(".word")
+					var inbw = (indtmp * indtmp) + 11;
+					$.ajax({																																																																																																																																																																																															
+			      url: "/games/decreasepupspoiler",
+			      type: "POST",
+			      dataType:'json',
+			      data: { 'game_id' : parseInt(gameid),
+			    					'indbw' : inbw }
+			    })
+					.done(function(data) {
+			    	loadWrapper(".pupcontainer");
+			    	if (data.firstorsecond === "bothdone") {
+			    		$(".pagecover").show();
+							$(".menudialog").show();
+			    	} else {
+			    		$(".pupspoilershow").fadeIn().addClass(data.firstorsecond).addClass("pos-" + data.newloc);
+			    	}
+			    })
+				} else {
+					$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
+				}
+			})
+
+			$(document).on("click", ".pup_spoilerdetect.pupnotactive", function() {
+				if (pupspoilerused <= 2 && $(".spoilerzero").length === 0) {
+	    		$(".pagecover").show();
+					$(".menudialog.menudialogspoiler").show();
+				} else {
+					console.log("DO THE VIDEO FOR SPOILERS HERE")
+				}
 			})
 
 			$(document).on("click", ".pup_tworemove.pupactive", function() {
