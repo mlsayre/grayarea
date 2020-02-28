@@ -164,7 +164,7 @@ GEM
       terrapin (~> 0.6.0)
     pg (0.21.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (3.12.3)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -275,7 +275,7 @@ DEPENDENCIES
   omniauth-twitter
   paperclip (>= 5.2.0)
   pg (~> 0.18)
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.2)
   rails_12factor
   sass-rails (~> 5.0)
