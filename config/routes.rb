@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   end
 
   get '/auth/:provider/callback', to: 'sessions#create'
+  #match '/games/applixir.iframe.html', :to => 'games#applixir', via: [:get]
+  get '/games/applixir.iframe.html', to: 'games#applixir.iframe.html'
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: 'registrations'}
   

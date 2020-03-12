@@ -1,6 +1,7 @@
 <% if user_signed_in? == false %>
 	 <%= render "guestplay" %>
 <% else %>
+	<script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
 	<% if (@game.giver_id != nil && @game.giver_id != current_user.id) && (current_user.id != @game.guesser_id1 && current_user.id != @game.guesser_id2 && current_user.id != @game.guesser_id3 && current_user.id != @game.guesser_id4 && current_user.id != @game.guesser_id5 && current_user.id != @game.guesser_id6) %>
 		<%= render "sorry" %>
 	<% else %>
@@ -21,6 +22,9 @@
 		<% end %>
 	<% end %>
 <% end %>
+<div id="applixir_vanishing_div" hidden>
+   <iframe id="applixir_parent" allow="autoplay, fullscreen"></iframe>
+</div>
 
 <div class="menubox">
 	<div class="menutitle">Menu</div>
@@ -42,6 +46,10 @@
 
 <div class="menudialog menudialogspoiler">
 	<div class="menutitle spoilersused">You've used both Spoiler Detector power-ups for this game!</div>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+<div class="menudialog menudialogneutral">
+	<div class="menutitle spoilersused">You've used both Neutral Remover power-ups for this game!</div>
 	<div class="menusubtext">Click anywhere outside box to close</div>
 </div>
 <!-- <button class="button returntomain"><img src="/assets/Home-48.png"></button> -->
@@ -69,3 +77,20 @@
 		</div>
 	<% end %>
 </span>
+
+<script type='application/javascript'>
+    function adStatusCallback(status) {
+        if (status)
+            console.log('Applixir status: ' + status);
+    }
+
+    var options = {
+        zoneId: 2640,
+        devId: 3705,
+        gameId: 4674,
+        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+        adStatusCb: adStatusCallback,
+    };
+    invokeApplixirVideoUnit(options);
+</script>
+

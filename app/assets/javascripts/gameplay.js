@@ -65,7 +65,8 @@ var ready = function() {
 		$(".pagecover").hide();
 		$(".menubox").hide();
 		$(".mainmenubuttons").hide();
-		$(".menudialog").hide();
+		$(".menudialogspoiler").hide();
+		$(".menudialogneutral").hide();
 	});
 
 	// $(".opensettings").click(function(e) {
@@ -631,7 +632,53 @@ var ready = function() {
 	  	var pupspoilerstatus = gon.pupspoiler;
 	  	var pupneutralstatus = gon.pupneutrals;
 	  	var pupspoilerused = pupspoilerstatus.length;
-	  	var pupneutralused = false;
+	  	var pupneutralused = pupneutralstatus.length;
+	  	console.log(pupneutralstatus)
+
+	  	// ads
+			// function adStatusCallback(status) {
+   //      if (status)
+   //          console.log('Applixir status: ' + status);
+	  //   }
+
+	    var options = {
+	        zoneId: 2640,
+	        devId: 3705,
+	        gameId: 4674,
+	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+	        //muted: true, // the player will start in muted mode/
+					// the player will start normally with no muted option
+					//vpos: 'top',
+	        //adStatusCb: adStatusCallback,
+	        //z2url: document.location.origin + '/games/applixir.iframe.html',
+	    };
+
+	    // window.addEventListener('message', function initZ2(e) {
+	    // // The following if statement is recommended after initial tests
+     //        /*  if (e.origin !== "https://my.gamedomain.com") {
+     //                return;
+     //            } */ 
+     //            if (e.data == 'sys-closing') {
+     //                window.removeEventListener('message', initZ2, false);
+     //            } else if (e.data == 'z2-ready') {
+     //                var options2 = {
+     //                    zoneId: 2640,
+     //                    devId: 3705,
+     //                    gameId: 4674,
+     //                    // custom1: ??,
+     //                    // custom2: ??,
+     //                    dMode: 1,     // 1 for MD5 checksum, 0 for no MD5 checksum
+     //                    // fallback: n,
+     //                    // verbosity: n,
+     //                    vtos: 2,	// do not change unless placement adjustment is needed
+     //                    htos: 3,	//  	"		"		"
+     //                }
+     //                // recommended: replace "*" with "https://my.gamedomain.com" after initial tests
+     //                e.source.postMessage("loadOptions=" + JSON.stringify(options2), "*");
+     //                return;
+     //            }
+     //            adStatusCallback(e.data);
+     //        }, false);
 
 	  	//beginning state
 	  	guessedwords = gon.guessedwords;
@@ -1215,10 +1262,8 @@ var ready = function() {
 			}
 
 			// powerups
-			console.log("pupspoilerused: " + pupspoilerused)
 			$(document).on("click", ".pup_spoilerdetect.pupactive", function() {
 				pupspoilerused++
-				console.log("pupspoilerused: " + pupspoilerused)
 				if (pupspoilerused <= 2) {
 					var indtmp = $("[data-guessword=" + bword + "]").index(".word")
 					var inbw = (indtmp * indtmp) + 11;
@@ -1236,34 +1281,105 @@ var ready = function() {
 							$(".menudialog").show();
 			    	} else {
 			    		$(".pupspoilershow").fadeIn().addClass(data.firstorsecond).addClass("pos-" + data.newloc);
+			    		if (data.firstorsecond === "show2") {
+			    			$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
+			    		}
 			    	}
 			    })
 				} else {
 					$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
+					$(".pupnotactive").click();
 				}
 			})
 
 			$(document).on("click", ".pup_spoilerdetect.pupnotactive", function() {
-				if (pupspoilerused <= 2 && $(".spoilerzero").length === 0) {
-	    		$(".pagecover").show();
-					$(".menudialog.menudialogspoiler").show();
-				} else {
+				if ($(".spoilerzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR SPOILERS HERE")
+				} else {
+					$(".pagecover").show();
+					$(".menudialog.menudialogspoiler").show();
 				}
 			})
 
+			var nonneutralwords = [];
+			nonneutralwords = nonneutralwords.concat(twords);
+			nonneutralwords.push(bword);
+
+			var nwords = awords.filter(function(n) {return nonneutralwords.indexOf(n) === -1});
+			console.log("nwords: " + nwords)
+
+			function picktworandoms(largest) {
+				var tworands = []
+				function randomnum(largest) {
+					var rand = Math.floor(Math.random() * (largest + 1));
+					if (tworands.indexOf(rand) === -1) { 
+						tworands.push(rand)
+						if (tworands.length < 2) {
+							randomnum(largest);
+						} 
+					} else {
+						randomnum(largest);
+					}
+				}
+				randomnum(largest);
+				return tworands
+			}
+
 			$(document).on("click", ".pup_tworemove.pupactive", function() {
-				console.log("two remove pup clicked");
-				$.ajax({
-		      url: "/games/decreasepuptworemove",
-		      type: "POST",
-		      dataType:'json',
-		      data: { 'game_id' : parseInt(gameid)}
-		    })
-				.done(function() {
-		    	console.log("user pup decreased")
-		    	loadWrapper(".pupcontainer")
-		    })
+				pupneutralused++
+				console.log(pupneutralused)
+				if (pupneutralused <= 2) {
+					var possibles = [];
+					var wordspicked = [];
+					$(".word").not(".guessedword").each(function() {
+						if (nwords.indexOf($(this).attr("data-guessword")) !== -1) {
+							possibles.push($(this).attr("data-guessword"));
+						}
+					})
+					console.log("possibles: " + possibles)
+					var twonumpicked = picktworandoms(possibles.length - 1);
+					wordspicked.push(possibles[twonumpicked[0]])
+					wordspicked.push(possibles[twonumpicked[1]])
+					console.log("wordspicked: " + wordspicked)
+					
+					$.ajax({
+			      url: "/games/decreasepuptworemove",
+			      type: "POST",
+			      dataType:'json',
+			      data: { 'game_id' : parseInt(gameid),
+			    					'neutralsshown' : wordspicked }
+			    })
+					.done(function(data) {
+						$("[data-guessword='" + wordspicked[0] + "']").removeClass("firstclick")
+																						.addClass("anim_puppneutral").addClass("pupelimword")
+																						.addClass("guessedword");
+							
+						setTimeout(function() {
+							$("[data-guessword='" + wordspicked[1] + "']").removeClass("firstclick")
+																					.addClass("anim_puppneutral").addClass("pupelimword")
+																					.addClass("guessedword");
+						}, 500)
+						guessedwords = guessedwords.concat(wordspicked);
+			    	console.log("user pup decreased")
+			    	loadWrapper(".pupcontainer")
+			    })
+			    .fail(function() {
+			    	console.log("sorry, internet connection required to use powerups")
+			    })
+				} else {
+					$(".pup_tworemove").removeClass("pupactive").addClass("pupnotactive")
+					$(".pupnotactive").click();
+				}
+			})
+
+			$(document).on("click", ".pup_tworemove.pupnotactive", function() {
+				if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
+					console.log("DO THE VIDEO FOR NEUTRALS HERE")
+					invokeApplixirVideoUnit(options);
+				} else {
+					$(".pagecover").show();
+					$(".menudialog.menudialogneutral").show();
+				}
 			})
 
 	  })();

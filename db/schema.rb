@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200224182139) do
+ActiveRecord::Schema.define(version: 20200227162247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,12 +116,12 @@ ActiveRecord::Schema.define(version: 20200224182139) do
     t.integer "pupspoilerusedp4", default: [], array: true
     t.integer "pupspoilerusedp5", default: [], array: true
     t.integer "pupspoilerusedp6", default: [], array: true
-    t.boolean "pupneutralused1", default: false
-    t.boolean "pupneutralused2", default: false
-    t.boolean "pupneutralused3", default: false
-    t.boolean "pupneutralused4", default: false
-    t.boolean "pupneutralused5", default: false
-    t.boolean "pupneutralused6", default: false
+    t.boolean "pupneutralused1", default: [], array: true
+    t.boolean "pupneutralused2", default: [], array: true
+    t.boolean "pupneutralused3", default: [], array: true
+    t.boolean "pupneutralused4", default: [], array: true
+    t.boolean "pupneutralused5", default: [], array: true
+    t.boolean "pupneutralused6", default: [], array: true
     t.index ["gamestatus"], name: "index_games_on_gamestatus"
     t.index ["giver_id"], name: "index_games_on_giver_id"
     t.index ["gsr1_score"], name: "index_games_on_gsr1_score"

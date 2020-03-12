@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
 	before_action :set_game, only: [:show]
+  
 	# GET /games/new
   def new
     @game = Game.new
@@ -1024,8 +1025,117 @@ class GamesController < ApplicationController
   end
 
   def decreasepuptworemove
-    current_user.decrement!(:pupneutraltworemove, by = 1)
-    render body: nil
+    @thegame = Game.find(params[:game_id])
+    @neutralsshown = params[:neutralsshown]
+
+    if current_user.id == @thegame.guesser_id1
+      @currentwords = @thegame.gsr1_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused1.length == 0
+        @thegame.update(:pupneutralused1 => [true])
+        @thegame.update(:gsr1_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused1.length == 1
+        @thegame.update(:pupneutralused1 => [true, true])
+        @thegame.update(:gsr1_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id2
+      @currentwords = @thegame.gsr2_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused2.length == 0
+        @thegame.update(:pupneutralused2 => [true])
+        @thegame.update(:gsr2_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused2.length == 1
+        @thegame.update(:pupneutralused2 => [true, true])
+        @thegame.update(:gsr2_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id3
+      @currentwords = @thegame.gsr3_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused3.length == 0
+        @thegame.update(:pupneutralused3 => [true])
+        @thegame.update(:gsr3_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused3.length == 1
+        @thegame.update(:pupneutralused3 => [true, true])
+        @thegame.update(:gsr3_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id4
+      @currentwords = @thegame.gsr4_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused4.length == 0
+        @thegame.update(:pupneutralused4 => [true])
+        @thegame.update(:gsr4_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused4.length == 1
+        @thegame.update(:pupneutralused4 => [true, true])
+        @thegame.update(:gsr4_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id5
+      @currentwords = @thegame.gsr5_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused5.length == 0
+        @thegame.update(:pupneutralused5 => [true])
+        @thegame.update(:gsr5_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused5.length == 1
+        @thegame.update(:pupneutralused5 => [true, true])
+        @thegame.update(:gsr5_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+    elsif current_user.id == @thegame.guesser_id6
+      @currentwords = @thegame.gsr6_words
+      @newwords = @currentwords + @neutralsshown
+      if @thegame.pupneutralused6.length == 0
+        @thegame.update(:pupneutralused6 => [true])
+        @thegame.update(:gsr6_words => @newwords)
+        @firstorsecond = "firstok";
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      elsif @thegame.pupneutralused6.length == 1
+        @thegame.update(:pupneutralused6 => [true, true])
+        @thegame.update(:gsr6_words => @newwords)
+        @firstorsecond = "secondok"
+        current_user.decrement!(:pupneutraltworemove, by = 1)
+      else 
+        @firstorsecond = "bothdone"
+      end
+
+    end
+
+    respond_to do |format|
+      format.json { render json: { :firstorsecond => @firstorsecond }  }
+    end
+  end
+
+  def applixir
+    #redirect_to("https://cdn.applixir.com/applixir.iframe.html")
+    #render body: nil
+    #http://localhost:3000/games/applixir.iframe.html" allow="autoplay, fullscreen"></iframe></div>'.html_safe
   end
 
   private

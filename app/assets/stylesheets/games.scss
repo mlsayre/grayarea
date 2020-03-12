@@ -830,7 +830,7 @@ form#new_game {
   cursor: auto;
   pointer-events: none;
 }
-li.neutralword {
+li.neutralword, li.pupelimword {
   background-color: darkgrey;
   /*opacity: .25;*/
   color: lightgrey !important;
@@ -1016,6 +1016,18 @@ span.cheatstatus {
   }
   to {
     transform: rotate(-3deg) scale(0.9);
+  }
+}
+.anim_puppneutral {
+  animation: neutralsshow .28s alternate 2;
+}
+@keyframes neutralsshow {
+  from {
+    transform: scale(1);
+    
+  }
+  to {
+    transform: scale(.65) rotate(360deg);
   }
 }
 span.pupspoilershow {
