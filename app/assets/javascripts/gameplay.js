@@ -1265,7 +1265,7 @@ var ready = function() {
 			$(document).on("click", ".pup_spoilerdetect.pupactive", function() {
 				pupspoilerused++
 				if (pupspoilerused <= 2) {
-					var indtmp = $("[data-guessword=" + bword + "]").index(".word")
+					var indtmp = $("[data-guessword='" + bword + "']").index(".word")
 					var inbw = (indtmp * indtmp) + 11;
 					$.ajax({																																																																																																																																																																																															
 			      url: "/games/decreasepupspoiler",
