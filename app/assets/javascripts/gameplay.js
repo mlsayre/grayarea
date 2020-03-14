@@ -636,20 +636,25 @@ var ready = function() {
 	  	console.log(pupneutralstatus)
 
 	  	// ads
-			// function adStatusCallback(status) {
-   //      if (status)
-   //          console.log('Applixir status: ' + status);
-	  //   }
+			function adStatusCallback(status) {
+        if (status)
+            console.log('Applixir status: ' + status);
+	    }
+
+	  var adsound = false;
+	  if (sound === 1) {
+	  	adsound = true;
+	  }
 
 	    var options = {
 	        zoneId: 2894,
 	        devId: 3705,
 	        gameId: 4932,
 	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-	        //muted: true, // the player will start in muted mode/
+	        muted: adsound, // the player will start in muted mode/
 					// the player will start normally with no muted option
 					//vpos: 'top',
-	        //adStatusCb: adStatusCallback,
+	        adStatusCb: adStatusCallback,
 	        //z2url: document.location.origin + '/games/applixir.iframe.html',
 	    };
 
