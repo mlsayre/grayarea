@@ -635,29 +635,6 @@ var ready = function() {
 	  	var pupneutralused = pupneutralstatus.length;
 	  	console.log(pupneutralstatus)
 
-	  	// ads
-			function adStatusCallback(status) {
-        if (status)
-            console.log('Applixir status: ' + status);
-	    }
-
-	  var adsound = false;
-	  if (sound === 1) {
-	  	adsound = true;
-	  }
-
-	    var options = {
-	        zoneId: 2894,
-	        devId: 3705,
-	        gameId: 4932,
-	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-	        muted: adsound, // the player will start in muted mode/
-					// the player will start normally with no muted option
-					//vpos: 'top',
-	        adStatusCb: adStatusCallback,
-	        //z2url: document.location.origin + '/games/applixir.iframe.html',
-	    };
-
 	    // window.addEventListener('message', function initZ2(e) {
 	    // // The following if statement is recommended after initial tests
      //        /*  if (e.origin !== "https://my.gamedomain.com") {
@@ -1380,7 +1357,33 @@ var ready = function() {
 			$(document).on("click", ".pup_tworemove.pupnotactive", function() {
 				if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR NEUTRALS HERE")
+					function neutralAdStatusCallback(status) {
+						if (status === "ad-watched") {
+							console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
+						}
+        		if (status === "sys-closing") {
+        			$(".pagecover").hide();
+        		}
+			    }
+
+				  var adsound = false;
+				  if (sound === 1) {
+				  	adsound = true;
+				  }
+
+			    var options = {
+		        zoneId: 2894,
+		        devId: 3705,
+		        gameId: 4932,
+		        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+		        muted: adsound, // the player will start in muted mode/
+						// the player will start normally with no muted option
+						//vpos: 'top',
+		        adStatusCb: neutralAdStatusCallback,
+		        //z2url: document.location.origin + '/games/applixir.iframe.html',
+			    };
 					invokeApplixirVideoUnit(options);
+					$(".pagecover").show();
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogneutral").show();
