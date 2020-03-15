@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post 'playasguest'
       post 'decreasepupspoiler'
       post 'decreasepuptworemove'
+      post 'increasepupspoiler'
+      post 'increasepuptworemove'
     end
   end
 

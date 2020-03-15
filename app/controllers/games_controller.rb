@@ -1132,6 +1132,16 @@ class GamesController < ApplicationController
     end
   end
 
+  def increasepupspoiler
+    current_user.increment!(:pupspoilerdetector, by = 2)
+    render body: nil
+  end
+
+  def increasepuptworemove
+    current_user.increment!(:pupneutraltworemove, by = 2)
+    render body: nil
+  end
+
   def applixir
     #redirect_to("https://cdn.applixir.com/applixir.iframe.html")
     #render body: nil

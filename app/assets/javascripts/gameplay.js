@@ -1358,7 +1358,24 @@ var ready = function() {
 				if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR NEUTRALS HERE")
 					function neutralAdStatusCallback(status) {
+						if (status) {console.log('Applixir status: ' + status);}
+
+						if (status === "ad-blocker") {
+							console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+						}
 						if (status === "ad-watched") {
+							$.ajax({
+					      url: "/games/increasepuptworemove",
+					      type: "POST",
+					      dataType:'json'
+					    })
+							.done(function() {
+					    	console.log("user pup increased")
+					    	loadWrapper(".pupcontainer")
+					    })
+					    .fail(function() {
+					    	console.log("sorry, attempt to add neutral remove powerups failed")
+					    })
 							console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
 						}
         		if (status === "sys-closing") {
