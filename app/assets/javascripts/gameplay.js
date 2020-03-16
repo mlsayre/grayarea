@@ -1278,6 +1278,14 @@ var ready = function() {
 			$(document).on("click", ".pup_spoilerdetect.pupnotactive", function() {
 				if ($(".spoilerzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR SPOILERS HERE")
+					$(".watchforpupneutrals").hide();
+					$(".watchforpupspoilers").hide();
+					$(".pagecover").show();
+					$(".menudialogwatch").show();
+					$(".watchforpupspoilers").show();
+					$(".watchforpupspoilers").click(function() {
+						runspoilersad();
+					})
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogspoiler").show();
@@ -1363,7 +1371,7 @@ var ready = function() {
 					$(".pagecover").show();
 					$(".menudialogwatch").show();
 					$(".watchforpupneutrals").show();
-					$(".watchforpupneutrals").click(function() {$(".watchforpupneutrals").show();
+					$(".watchforpupneutrals").click(function() {
 						runneutralad();
 					})
 				} else {
@@ -1413,6 +1421,54 @@ var ready = function() {
 					// the player will start normally with no muted option
 					//vpos: 'top',
 	        adStatusCb: neutralAdStatusCallback,
+	        //z2url: document.location.origin + '/games/applixir.iframe.html',
+		    };
+		    $(".menudialogwatch").hide();
+				invokeApplixirVideoUnit(options);
+				$(".pagecover").show();
+			}
+
+			function runspoilersad() {
+				function spoilerAdStatusCallback(status) {
+					if (status) {console.log('Applixir status: ' + status);}
+
+					if (status === "ad-blocker") {
+						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+					}
+					if (status === "ad-watched") {
+						$.ajax({
+				      url: "/games/increasepupspoiler",
+				      type: "POST",
+				      dataType:'json'
+				    })
+						.done(function() {
+				    	console.log("user spoiler pup increased")
+				    	loadWrapper(".pupcontainer")
+				    })
+				    .fail(function() {
+				    	console.log("sorry, attempt to add spoiler remove powerups failed")
+				    })
+						console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
+					}
+      		if (status === "sys-closing") {
+      			$(".pagecover").hide();
+      		}
+		    }
+
+			  var adsound = false;
+			  if (sound === 1) {
+			  	adsound = true;
+			  }
+
+		    var options = {
+	        zoneId: 2894,
+	        devId: 3705,
+	        gameId: 4932,
+	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+	        muted: adsound, // the player will start in muted mode/
+					// the player will start normally with no muted option
+					//vpos: 'top',
+	        adStatusCb: spoilerAdStatusCallback,
 	        //z2url: document.location.origin + '/games/applixir.iframe.html',
 		    };
 		    $(".menudialogwatch").hide();
