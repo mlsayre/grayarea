@@ -1134,12 +1134,16 @@ class GamesController < ApplicationController
 
   def increasepupspoiler
     current_user.increment!(:pupspoilerdetector, by = 2)
-    render body: nil
+    respond_to do |format|
+      format.json { render json: { }  }
+    end
   end
 
   def increasepuptworemove
     current_user.increment!(:pupneutraltworemove, by = 2)
-    render body: nil
+    respond_to do |format|
+      format.json { render json: { }  }
+    end
   end
 
   def applixir
