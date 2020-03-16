@@ -1275,6 +1275,10 @@ var ready = function() {
 				}
 			})
 
+			$(".watchforpupspoilers").click(function() {
+				runspoilersad();
+			})
+
 			$(document).on("click", ".pup_spoilerdetect.pupnotactive", function() {
 				if ($(".spoilerzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR SPOILERS HERE")
@@ -1283,9 +1287,6 @@ var ready = function() {
 					$(".pagecover").show();
 					$(".menudialogwatch").show();
 					$(".watchforpupspoilers").show();
-					$(".watchforpupspoilers").click(function() {
-						runspoilersad();
-					})
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogspoiler").show();
@@ -1363,6 +1364,10 @@ var ready = function() {
 				}
 			})
 
+			$(".watchforpupneutrals").click(function() {
+				runneutralad();
+			})
+
 			$(document).on("click", ".pup_tworemove.pupnotactive", function() {
 				if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR NEUTRALS HERE")
@@ -1371,9 +1376,6 @@ var ready = function() {
 					$(".pagecover").show();
 					$(".menudialogwatch").show();
 					$(".watchforpupneutrals").show();
-					$(".watchforpupneutrals").click(function() {
-						runneutralad();
-					})
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogneutral").show();
