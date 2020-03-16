@@ -67,6 +67,7 @@ var ready = function() {
 		$(".mainmenubuttons").hide();
 		$(".menudialogspoiler").hide();
 		$(".menudialogneutral").hide();
+		$(".menudialogwatch").hide();
 	});
 
 	// $(".opensettings").click(function(e) {
@@ -1357,55 +1358,67 @@ var ready = function() {
 			$(document).on("click", ".pup_tworemove.pupnotactive", function() {
 				if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
 					console.log("DO THE VIDEO FOR NEUTRALS HERE")
-					function neutralAdStatusCallback(status) {
-						if (status) {console.log('Applixir status: ' + status);}
-
-						if (status === "ad-blocker") {
-							console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-						}
-						if (status === "ad-watched") {
-							$.ajax({
-					      url: "/games/increasepuptworemove",
-					      type: "POST",
-					      dataType:'json'
-					    })
-							.done(function() {
-					    	console.log("user pup increased")
-					    	loadWrapper(".pupcontainer")
-					    })
-					    .fail(function() {
-					    	console.log("sorry, attempt to add neutral remove powerups failed")
-					    })
-							console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
-						}
-        		if (status === "sys-closing") {
-        			$(".pagecover").hide();
-        		}
-			    }
-
-				  var adsound = false;
-				  if (sound === 1) {
-				  	adsound = true;
-				  }
-
-			    var options = {
-		        zoneId: 2894,
-		        devId: 3705,
-		        gameId: 4932,
-		        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-		        muted: adsound, // the player will start in muted mode/
-						// the player will start normally with no muted option
-						//vpos: 'top',
-		        adStatusCb: neutralAdStatusCallback,
-		        //z2url: document.location.origin + '/games/applixir.iframe.html',
-			    };
-					invokeApplixirVideoUnit(options);
+					$(".watchforpupneutrals").hide();
+					$(".watchforpupspoilers").hide();
 					$(".pagecover").show();
+					$(".menudialogwatch").show();
+					$(".watchforpupneutrals").show();
+					$(".watchforpupneutrals").click(function() {$(".watchforpupneutrals").show();
+						runneutralad();
+					})
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogneutral").show();
 				}
 			})
+
+			function runneutralad() {
+				function neutralAdStatusCallback(status) {
+					if (status) {console.log('Applixir status: ' + status);}
+
+					if (status === "ad-blocker") {
+						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+					}
+					if (status === "ad-watched") {
+						$.ajax({
+				      url: "/games/increasepuptworemove",
+				      type: "POST",
+				      dataType:'json'
+				    })
+						.done(function() {
+				    	console.log("user pup increased")
+				    	loadWrapper(".pupcontainer")
+				    })
+				    .fail(function() {
+				    	console.log("sorry, attempt to add neutral remove powerups failed")
+				    })
+						console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
+					}
+      		if (status === "sys-closing") {
+      			$(".pagecover").hide();
+      		}
+		    }
+
+			  var adsound = false;
+			  if (sound === 1) {
+			  	adsound = true;
+			  }
+
+		    var options = {
+	        zoneId: 2894,
+	        devId: 3705,
+	        gameId: 4932,
+	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+	        muted: adsound, // the player will start in muted mode/
+					// the player will start normally with no muted option
+					//vpos: 'top',
+	        adStatusCb: neutralAdStatusCallback,
+	        //z2url: document.location.origin + '/games/applixir.iframe.html',
+		    };
+		    $(".menudialogwatch").hide();
+				invokeApplixirVideoUnit(options);
+				$(".pagecover").show();
+			}
 
 	  })();
 	}

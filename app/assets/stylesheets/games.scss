@@ -1093,6 +1093,58 @@ span.pupspoilershow.show2 {
 .pupspoilershow.show2.pos-9 {left: 0;top: 80.5%;}
 .pupspoilershow.show2.pos-10 {left: 33.3%;top: 80.5%;}
 
+.menudialog.menudialogwatch {
+    color: white;
+    font-size: 18px;
+}
+img.twopups {
+    width: 98%;
+    position: relative;
+    top: -20px;
+}
+.watchleft {
+    width: 34%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -3px;
+}
+.watchleft img {
+    width: 74%;
+}
+.watchright {
+    width: 62%;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -4px;
+}
+button.button.watchpupbutton {
+  background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  border: 0;
+  width: 100%;
+  padding: 12px;
+  color: #0097df;
+  position: relative;
+  top: -50px;
+}
+.watchforpupneutrals, .watchforpupspoilers {
+  display: none;
+}
+.menudialogwatch .menusubtext {
+  position: absolute;
+  bottom: 4%;
+  font-size: 12px;
+  padding: 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 70%;
+  /*background: rgba(0,0,0,.4);*/
+  border-radius: 5px;
+}
 
 select {
   background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50px' height='50px'><polyline points='46.139,15.518 25.166,36.49 4.193,15.519'/></svg>");
