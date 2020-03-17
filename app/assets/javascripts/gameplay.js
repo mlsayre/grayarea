@@ -635,7 +635,6 @@ var ready = function() {
 	  	var pupneutralstatus = gon.pupneutrals;
 	  	var pupspoilerused = pupspoilerstatus.length;
 	  	var pupneutralused = pupneutralstatus.length;
-	  	console.log(pupneutralstatus)
 
 	    // window.addEventListener('message', function initZ2(e) {
 	    // // The following if statement is recommended after initial tests
@@ -1299,7 +1298,7 @@ var ready = function() {
 			nonneutralwords.push(bword);
 
 			var nwords = awords.filter(function(n) {return nonneutralwords.indexOf(n) === -1});
-			console.log("nwords: " + nwords)
+			// console.log("nwords: " + nwords)
 
 			function picktworandoms(largest) {
 				var tworands = []
@@ -1320,7 +1319,6 @@ var ready = function() {
 
 			$(document).on("click", ".pup_tworemove.pupactive", function() {
 				pupneutralused++
-				console.log(pupneutralused)
 				if (pupneutralused <= 2) {
 					var possibles = [];
 					var wordspicked = [];
@@ -1329,11 +1327,11 @@ var ready = function() {
 							possibles.push($(this).attr("data-guessword"));
 						}
 					})
-					console.log("possibles: " + possibles)
+					// console.log("possibles: " + possibles)
 					var twonumpicked = picktworandoms(possibles.length - 1);
 					wordspicked.push(possibles[twonumpicked[0]])
 					wordspicked.push(possibles[twonumpicked[1]])
-					console.log("wordspicked: " + wordspicked)
+					// console.log("wordspicked: " + wordspicked)
 					
 					$.ajax({
 			      url: "/games/decreasepuptworemove",
@@ -1353,7 +1351,7 @@ var ready = function() {
 																					.addClass("guessedword");
 						}, 500)
 						guessedwords = guessedwords.concat(wordspicked);
-			    	console.log("user pup decreased")
+			    	// console.log("user pup decreased")
 			    	loadWrapper(".pupcontainer")
 			    })
 			    .fail(function() {
@@ -1408,6 +1406,7 @@ var ready = function() {
 					}
       		if (status === "sys-closing") {
       			$(".pagecoverunclickable").hide();
+      			$(".pagecover").hide();
       		}
 		    }
 
@@ -1457,6 +1456,7 @@ var ready = function() {
 					}
       		if (status === "sys-closing") {
       			$(".pagecoverunclickable").hide();
+      			$(".pagecover").hide();
       		}
 		    }
 

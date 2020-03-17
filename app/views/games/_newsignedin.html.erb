@@ -146,7 +146,6 @@
           runspoilersad();
         })
         var sound = gon.sound;
-        console.log(sound)
 
         function runneutralad() {
           function neutralAdStatusCallback(status) {
@@ -173,6 +172,7 @@
             }
             if (status === "sys-closing") {
               $(".pagecoverunclickable").hide();
+              $(".pagecover").hide();
             }
           }
 
@@ -222,6 +222,7 @@
             }
             if (status === "sys-closing") {
               $(".pagecoverunclickable").hide();
+              $(".pagecover").hide();
             }
           }
 
