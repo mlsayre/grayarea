@@ -2091,6 +2091,9 @@ img.tgc-header {
 #applixir_vanishing_div {
   z-index: 60;
 }
+#applixir_vanishing_div iframe {
+      left: -327px !important;
+}
 span.titlepupnum {
     position: absolute;
     background: red;
