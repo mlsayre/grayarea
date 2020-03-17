@@ -1267,6 +1267,7 @@ var ready = function() {
 			    		if (data.firstorsecond === "show2") {
 			    			$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
 			    		}
+			    		usespoilerpup.play();
 			    	}
 			    })
 				} else {
@@ -1290,6 +1291,7 @@ var ready = function() {
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogspoiler").show();
+					pupout.play();
 				}
 			})
 
@@ -1344,11 +1346,12 @@ var ready = function() {
 						$("[data-guessword='" + wordspicked[0] + "']").removeClass("firstclick")
 																						.addClass("anim_puppneutral").addClass("pupelimword")
 																						.addClass("guessedword");
-							
+						useneutralspup.play();
 						setTimeout(function() {
 							$("[data-guessword='" + wordspicked[1] + "']").removeClass("firstclick")
 																					.addClass("anim_puppneutral").addClass("pupelimword")
 																					.addClass("guessedword");
+						useneutralspup.play();
 						}, 500)
 						guessedwords = guessedwords.concat(wordspicked);
 			    	// console.log("user pup decreased")
@@ -1378,6 +1381,7 @@ var ready = function() {
 				} else {
 					$(".pagecover").show();
 					$(".menudialog.menudialogneutral").show();
+					pupout.play();
 				}
 			})
 

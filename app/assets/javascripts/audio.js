@@ -108,3 +108,18 @@ var silenceios = new Howl({
   volume: 1,
   preload: true
 });
+var pupout = new Howl({
+  src: ['/assets/pupout.wav'],
+  volume: 1,
+  preload: true
+});
+var useneutralspup = new Howl({
+  src: ['/assets/useneutralspup2.wav'],
+  volume: 1,
+  preload: true
+});
+var usespoilerpup = new Howl({
+  src: ['/assets/usespoilerpup.wav'],
+  volume: 1,
+  preload: true
+});

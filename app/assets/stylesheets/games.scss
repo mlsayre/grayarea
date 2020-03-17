@@ -2672,8 +2672,11 @@ span.hintnumheading.allguesserinfo.playerplayed {
 }
 .playedgameover button.bigplaybutton {
     color: blue;
-    background: white !important;
-    width: 200px;
+    background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
+    background-size: cover !important;
+    width: 180px;
+    height: 46px;
+    margin: 2px;
     font-size: 18px;
     letter-spacing: 4px;
     font-family: "Aller";
@@ -2683,8 +2686,11 @@ span.hintnumheading.allguesserinfo.playerplayed {
 }
 .giveboard-signedin button.bigplaybutton {
     color: blue;
-    background: white !important;
-    width: 200px;
+    background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
+    background-size: cover !important;
+    width: 180px;
+    height: 46px;
+    margin: 2px;
     font-size: 18px;
     letter-spacing: 4px;
     font-family: "Aller";
