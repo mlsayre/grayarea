@@ -61,7 +61,7 @@ var ready = function() {
 		$(".menubox").hide();
 	});
 
-	$(".pagecover").not(".unclickable").on("click", function() {
+	$(".pagecover").not(".unclickable").click(function() {
 		$(".pagecover").hide().removeClass("unclickable");
 		$(".menubox").hide();
 		$(".mainmenubuttons").hide();
@@ -353,7 +353,7 @@ var ready = function() {
 		$(".messageaction").html('<button class="button closemessagebox">Return to game</button>');
 		$(".messagesubtext").text("Push button or click anywhere outside this box to continue.");
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	}
@@ -371,7 +371,7 @@ var ready = function() {
 			closemessagebox();
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	});
@@ -414,7 +414,7 @@ var ready = function() {
 			// }
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	}
@@ -442,7 +442,7 @@ var ready = function() {
 			// }
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	}
@@ -512,7 +512,7 @@ var ready = function() {
         })
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	}
@@ -565,7 +565,7 @@ var ready = function() {
         })
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 		$(".messagebox").show();
 		$(".pagecover").show();
 	}
@@ -1118,7 +1118,7 @@ var ready = function() {
 					closemessagebox();
 				})
 				$(".closemessagebox").click(function() { closemessagebox(); return false; });
-				$(".pagecover").click(function() { closemessagebox(); return false; });
+				$(".pagecover").not(".unclickable").click(function() { closemessagebox(); return false; });
 				$(".messagebox").show();
 				$(".pagecover").show();
 	  		function forrealskip() {
@@ -1211,7 +1211,7 @@ var ready = function() {
 					closemessagebox();
 				})
 				$(".closemessagebox").click(function() { closemessagebox(); });
-				$(".pagecover").click(function() { closemessagebox(); });
+				$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
 				$(".messagebox").show();
 				$(".pagecover").show();
 			});
@@ -1407,7 +1407,7 @@ var ready = function() {
 						console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
 					}
       		if (status === "sys-closing") {
-      			$(".pagecover").hide().removeClass("unclickable");
+      			$(".pagecoverunclickable").hide();
       		}
 		    }
 
@@ -1429,7 +1429,7 @@ var ready = function() {
 		    };
 		    $(".menudialogwatch").hide();
 				invokeApplixirVideoUnit(options);
-				$(".pagecover").show();
+				$(".pagecoverunclickable").show();
 			}
 
 			function runspoilersad() {
@@ -1456,7 +1456,7 @@ var ready = function() {
 						console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
 					}
       		if (status === "sys-closing") {
-      			$(".pagecover").hide().removeClass("unclickable");
+      			$(".pagecoverunclickable").hide();
       		}
 		    }
 
@@ -1478,7 +1478,7 @@ var ready = function() {
 		    };
 		    $(".menudialogwatch").hide();
 				invokeApplixirVideoUnit(options);
-				$(".pagecover").show();
+				$(".pagecoverunclickable").show();
 			}
 
 	  })();

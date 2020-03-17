@@ -127,6 +127,125 @@
         <div class="watchright">2x spoiler</div>
         <span class="titlepupnum"><%= current_user.pupspoilerdetector %></span>
       </button>
+      <script>
+        var pathname = window.location.pathname;
+        function loadWrapper(container) {
+          var wrapper = $(container);
+          wrapper.load(pathname + " " + container, function() {
+             wrapper.children(container).unwrap();
+          });
+        }
+
+        // powerups
+        $(".watchforpupneutrals").click(function() {
+          $(".pagecover").show().addClass("unclickable");
+          runneutralad();
+        })
+        $(".watchforpupspoilers").click(function() {
+          $(".pagecover").show().addClass("unclickable");
+          runspoilersad();
+        })
+        var sound = gon.sound;
+        console.log(sound)
+
+        function runneutralad() {
+          function neutralAdStatusCallback(status) {
+            if (status) {console.log('Applixir status: ' + status);}
+
+            if (status === "ad-blocker") {
+              console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+              $(".menudialogadblocker").show();
+              $(".pagecover").show();
+            }
+            if (status === "ad-watched") {
+              $.ajax({
+                url: "/games/increasepuptworemove",
+                type: "POST",
+                dataType:'json'
+              })
+              .done(function() {
+                console.log("user pup increased")
+                loadWrapper(".powerupstitle")
+              })
+              .fail(function() {
+                console.log("sorry, attempt to add neutral remove powerups failed")
+              })
+            }
+            if (status === "sys-closing") {
+              $(".pagecoverunclickable").hide();
+            }
+          }
+
+          var adsound = false;
+          if (sound === 1) {
+            adsound = true;
+          }
+
+          var options = {
+            zoneId: 2894,
+            devId: 3705,
+            gameId: 4932,
+            //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+            muted: adsound, // the player will start in muted mode/
+            // the player will start normally with no muted option
+            //vpos: 'top',
+            adStatusCb: neutralAdStatusCallback,
+            //z2url: document.location.origin + '/games/applixir.iframe.html',
+          };
+          $(".menudialogwatch").hide();
+          invokeApplixirVideoUnit(options);
+          $(".pagecoverunclickable").show();
+        }
+
+        function runspoilersad() {
+          function spoilerAdStatusCallback(status) {
+            if (status) {console.log('Applixir status: ' + status);}
+
+            if (status === "ad-blocker") {
+              console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+              $(".menudialogadblocker").show();
+              $(".pagecover").show();
+            }
+            if (status === "ad-watched") {
+              $.ajax({
+                url: "/games/increasepupspoiler",
+                type: "POST",
+                dataType:'json'
+              })
+              .done(function() {
+                console.log("user spoiler pup increased")
+                loadWrapper(".powerupstitle")
+              })
+              .fail(function() {
+                console.log("sorry, attempt to add spoiler remove powerups failed")
+              })
+            }
+            if (status === "sys-closing") {
+              $(".pagecoverunclickable").hide();
+            }
+          }
+
+          var adsound = false;
+          if (sound === 1) {
+            adsound = true;
+          }
+
+          var options = {
+            zoneId: 2894,
+            devId: 3705,
+            gameId: 4932,
+            //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+            muted: adsound, // the player will start in muted mode/
+            // the player will start normally with no muted option
+            //vpos: 'top',
+            adStatusCb: spoilerAdStatusCallback,
+            //z2url: document.location.origin + '/games/applixir.iframe.html',
+          };
+          $(".menudialogwatch").hide();
+          invokeApplixirVideoUnit(options);
+          $(".pagecoverunclickable").show();
+        }
+      </script>
     </div>
     
   </div>
@@ -136,6 +255,7 @@
     <div class="menusubtext">Click anywhere outside box to close</div>
   </div>
   <div class="pagecover"></div>
+  <div class="pagecoverunclickable"></div>
 
   <div class="settingsbox boxout">
     <%= link_to "Customize your avatar", avatarcustomize_pages_path, :class => "avatarlink" %><br>
@@ -154,122 +274,4 @@ $(".feednav").click(function() {
       type: "POST"
     })
 })
-
-var pathname = window.location.pathname;
-function loadWrapper(container) {
-  var wrapper = $(container);
-  wrapper.load(pathname + " " + container, function() {
-     wrapper.children(container).unwrap();
-  });
-}
-
-// powerups
-$(".watchforpupneutrals").click(function() {
-  $(".pagecover").show().addClass("unclickable");
-  runneutralad();
-})
-$(".watchforpupspoilers").click(function() {
-  $(".pagecover").show().addClass("unclickable");
-  runspoilersad();
-})
-var sound = gon.sound;
-console.log(sound)
-
-function runneutralad() {
-  function neutralAdStatusCallback(status) {
-    if (status) {console.log('Applixir status: ' + status);}
-
-    if (status === "ad-blocker") {
-      console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-      $(".menudialogadblocker").show();
-      $(".pagecover").show();
-    }
-    if (status === "ad-watched") {
-      $.ajax({
-        url: "/games/increasepuptworemove",
-        type: "POST",
-        dataType:'json'
-      })
-      .done(function() {
-        console.log("user pup increased")
-        loadWrapper(".powerupstitle")
-      })
-      .fail(function() {
-        console.log("sorry, attempt to add neutral remove powerups failed")
-      })
-    }
-    if (status === "sys-closing") {
-      $(".pagecover").hide().removeClass("unclickable");
-    }
-  }
-
-  var adsound = false;
-  if (sound === 1) {
-    adsound = true;
-  }
-
-  var options = {
-    zoneId: 2894,
-    devId: 3705,
-    gameId: 4932,
-    //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-    muted: adsound, // the player will start in muted mode/
-    // the player will start normally with no muted option
-    //vpos: 'top',
-    adStatusCb: neutralAdStatusCallback,
-    //z2url: document.location.origin + '/games/applixir.iframe.html',
-  };
-  $(".menudialogwatch").hide();
-  invokeApplixirVideoUnit(options);
-  $(".pagecover").addClass("unclickable").show();
-}
-
-function runspoilersad() {
-  function spoilerAdStatusCallback(status) {
-    if (status) {console.log('Applixir status: ' + status);}
-
-    if (status === "ad-blocker") {
-      console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-      $(".menudialogadblocker").show();
-      $(".pagecover").show();
-    }
-    if (status === "ad-watched") {
-      $.ajax({
-        url: "/games/increasepupspoiler",
-        type: "POST",
-        dataType:'json'
-      })
-      .done(function() {
-        console.log("user spoiler pup increased")
-        loadWrapper(".powerupstitle")
-      })
-      .fail(function() {
-        console.log("sorry, attempt to add spoiler remove powerups failed")
-      })
-    }
-    if (status === "sys-closing") {
-      $(".pagecover").hide().removeClass("unclickable");
-    }
-  }
-
-  var adsound = false;
-  if (sound === 1) {
-    adsound = true;
-  }
-
-  var options = {
-    zoneId: 2894,
-    devId: 3705,
-    gameId: 4932,
-    //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-    muted: adsound, // the player will start in muted mode/
-    // the player will start normally with no muted option
-    //vpos: 'top',
-    adStatusCb: spoilerAdStatusCallback,
-    //z2url: document.location.origin + '/games/applixir.iframe.html',
-  };
-  $(".menudialogwatch").hide();
-  invokeApplixirVideoUnit(options);
-  $(".pagecover").addClass("unclickable").show();
-}
 </script>
