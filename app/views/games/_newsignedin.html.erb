@@ -192,7 +192,7 @@ function runneutralad() {
       })
       .done(function() {
         console.log("user pup increased")
-        loadWrapper(".titlepupnum")
+        loadWrapper(".powerupstitle")
       })
       .fail(function() {
         console.log("sorry, attempt to add neutral remove powerups failed")
@@ -221,7 +221,7 @@ function runneutralad() {
   };
   $(".menudialogwatch").hide();
   invokeApplixirVideoUnit(options);
-  $(".pagecover").show();
+  $(".pagecover").addClass("unclickable").show();
 }
 
 function runspoilersad() {
@@ -241,7 +241,7 @@ function runspoilersad() {
       })
       .done(function() {
         console.log("user spoiler pup increased")
-        loadWrapper(".titlepupnum")
+        loadWrapper(".powerupstitle")
       })
       .fail(function() {
         console.log("sorry, attempt to add spoiler remove powerups failed")
@@ -270,6 +270,6 @@ function runspoilersad() {
   };
   $(".menudialogwatch").hide();
   invokeApplixirVideoUnit(options);
-  $(".pagecover").show();
+  $(".pagecover").addClass("unclickable").show();
 }
 </script>
