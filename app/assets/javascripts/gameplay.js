@@ -57,17 +57,18 @@ var ready = function() {
 	});
 
 	$(".menuclose").on("click", function() {
-		$(".pagecover").hide();
+		$(".pagecover").hide().removeClass("unclickable");
 		$(".menubox").hide();
 	});
 
-	$(".pagecover").on("click", function() {
-		$(".pagecover").hide();
+	$(".pagecover").not(".unclickable").on("click", function() {
+		$(".pagecover").hide().removeClass("unclickable");
 		$(".menubox").hide();
 		$(".mainmenubuttons").hide();
 		$(".menudialogspoiler").hide();
 		$(".menudialogneutral").hide();
 		$(".menudialogwatch").hide();
+		$(".menudialogadblocker").hide();
 	});
 
 	// $(".opensettings").click(function(e) {
@@ -575,7 +576,7 @@ var ready = function() {
 
 	function closemessagebox() {
 		$(".messagebox").hide();
-		$(".pagecover").hide();
+		$(".pagecover").hide().removeClass("unclickable");
 		$(".messagetitle").html("");
 		$(".messageinfo").html("");
 		$(".messageaction").html("");
@@ -1284,7 +1285,7 @@ var ready = function() {
 					console.log("DO THE VIDEO FOR SPOILERS HERE")
 					$(".watchforpupneutrals").hide();
 					$(".watchforpupspoilers").hide();
-					$(".pagecover").show();
+					$(".pagecover").show().addClass("unclickable");
 					$(".menudialogwatch").show();
 					$(".watchforpupspoilers").show();
 				} else {
@@ -1373,7 +1374,7 @@ var ready = function() {
 					console.log("DO THE VIDEO FOR NEUTRALS HERE")
 					$(".watchforpupneutrals").hide();
 					$(".watchforpupspoilers").hide();
-					$(".pagecover").show();
+					$(".pagecover").show().addClass("unclickable");
 					$(".menudialogwatch").show();
 					$(".watchforpupneutrals").show();
 				} else {
@@ -1388,6 +1389,7 @@ var ready = function() {
 
 					if (status === "ad-blocker") {
 						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+						$(".menudialogadblocker").show();
 					}
 					if (status === "ad-watched") {
 						$.ajax({
@@ -1405,7 +1407,7 @@ var ready = function() {
 						console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
 					}
       		if (status === "sys-closing") {
-      			$(".pagecover").hide();
+      			$(".pagecover").hide().removeClass("unclickable");
       		}
 		    }
 
@@ -1436,6 +1438,7 @@ var ready = function() {
 
 					if (status === "ad-blocker") {
 						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+						$(".menudialogadblocker").show();
 					}
 					if (status === "ad-watched") {
 						$.ajax({
@@ -1453,7 +1456,7 @@ var ready = function() {
 						console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
 					}
       		if (status === "sys-closing") {
-      			$(".pagecover").hide();
+      			$(".pagecover").hide().removeClass("unclickable");
       		}
 		    }
 

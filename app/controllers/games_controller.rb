@@ -6,6 +6,7 @@ class GamesController < ApplicationController
     @game = Game.new
 
     if user_signed_in?
+      gon.sound = current_user.sound
       @featcount = current_user.statgivernotify.sum + current_user.statguessernotify.sum 
 
       @gameguesser = Game.where.not(:giver_id => "").first || 1
