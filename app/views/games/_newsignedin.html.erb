@@ -127,22 +127,51 @@
         <div class="watchright">2x spoiler</div>
         <span class="titlepupnum"><%= current_user.pupspoilerdetector %></span>
       </button>
-      <script>
-        var pathname = window.location.pathname;
-        function loadWrapper(container) {
-          var wrapper = $(container);
-          wrapper.load(pathname + " " + container, function() {
-             wrapper.children(container).unwrap();
-          });
-        }
 
+    </div>
+    
+  </div>
+
+  <div class="menudialog menudialogadblocker">
+    <div class="menutitle spoilersused">Please disable your adblocker so you can watch ads and receive powerups.</div>
+    <div class="menusubtext">Click anywhere outside box to close</div>
+  </div>
+  <div class="pagecover"></div>
+  <div class="pagecoverunclickable"></div>
+
+  <div class="settingsbox boxout">
+    <%= link_to "Customize your avatar", avatarcustomize_pages_path, :class => "avatarlink" %><br>
+    <%= link_to "How to play", howtoplay_pages_path %><br>
+    <%= link_to "About the Game (Dec 27, 2017)", about_pages_path, :style => "color: red;" %><br>
+    <%= link_to "Edit your information", edit_user_registration_path %><br>
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    <div class="settingsclosebutton">Close Settings</div>
+  </div>
+</section>
+
+<script>
+$(".feednav").click(function() {
+  $.ajax({
+      url: "/games/resetheartnotify",
+      type: "POST"
+    })
+})
+</script>
+
+<script>
         // powerups
         $(".watchforpupneutrals").click(function() {
           $(".pagecover").show().addClass("unclickable");
+          setTimeout(function() {
+            $(".pagecoverunclickable").hide();
+          }, 35000)
           runneutralad();
         })
         $(".watchforpupspoilers").click(function() {
           $(".pagecover").show().addClass("unclickable");
+          setTimeout(function() {
+            $(".pagecoverunclickable").hide();
+          }, 35000)
           runspoilersad();
         })
         var sound = gon.sound;
@@ -164,7 +193,8 @@
               })
               .done(function() {
                 console.log("user pup increased")
-                loadWrapper(".powerupstitle")
+                var numtext = parseInt($(".watchforpupneutrals .pupnum").text()) + 2;
+                $(".watchforpupneutrals .pupnum").text(numtext);
               })
               .fail(function() {
                 console.log("sorry, attempt to add neutral remove powerups failed")
@@ -214,7 +244,8 @@
               })
               .done(function() {
                 console.log("user spoiler pup increased")
-                loadWrapper(".powerupstitle")
+                var numtext = parseInt($(".watchforpupspoilers .pupnum").text()) + 2;
+                $(".watchforpupspoilers .pupnum").text(numtext);
               })
               .fail(function() {
                 console.log("sorry, attempt to add spoiler remove powerups failed")
@@ -247,32 +278,3 @@
           $(".pagecoverunclickable").show();
         }
       </script>
-    </div>
-    
-  </div>
-
-  <div class="menudialog menudialogadblocker">
-    <div class="menutitle spoilersused">Please disable your adblocker so you can watch ads and receive powerups.</div>
-    <div class="menusubtext">Click anywhere outside box to close</div>
-  </div>
-  <div class="pagecover"></div>
-  <div class="pagecoverunclickable"></div>
-
-  <div class="settingsbox boxout">
-    <%= link_to "Customize your avatar", avatarcustomize_pages_path, :class => "avatarlink" %><br>
-    <%= link_to "How to play", howtoplay_pages_path %><br>
-    <%= link_to "About the Game (Dec 27, 2017)", about_pages_path, :style => "color: red;" %><br>
-    <%= link_to "Edit your information", edit_user_registration_path %><br>
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-    <div class="settingsclosebutton">Close Settings</div>
-  </div>
-</section>
-
-<script>
-$(".feednav").click(function() {
-  $.ajax({
-      url: "/games/resetheartnotify",
-      type: "POST"
-    })
-})
-</script>
