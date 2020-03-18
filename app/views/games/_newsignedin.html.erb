@@ -193,8 +193,8 @@ $(".feednav").click(function() {
               })
               .done(function() {
                 console.log("user pup increased")
-                var numtext = parseInt($(".watchforpupneutrals .pupnum").text()) + 2;
-                $(".watchforpupneutrals .pupnum").text(numtext);
+                var numtext = parseInt($(".watchforpupneutrals .titlepupnum").text()) + 2;
+                $(".watchforpupneutrals .titlepupnum").text(numtext);
               })
               .fail(function() {
                 console.log("sorry, attempt to add neutral remove powerups failed")
@@ -244,8 +244,8 @@ $(".feednav").click(function() {
               })
               .done(function() {
                 console.log("user spoiler pup increased")
-                var numtext = parseInt($(".watchforpupspoilers .pupnum").text()) + 2;
-                $(".watchforpupspoilers .pupnum").text(numtext);
+                var numtext = parseInt($(".watchforpupspoilers .titlepupnum").text()) + 2;
+                $(".watchforpupspoilers .titlepupnum").text(numtext);
               })
               .fail(function() {
                 console.log("sorry, attempt to add spoiler remove powerups failed")
