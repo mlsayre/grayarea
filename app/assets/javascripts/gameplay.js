@@ -631,8 +631,8 @@ var ready = function() {
 	  	var guessernum = gon.guessernum;
 	  	var guessedwords = [];
 	  	var guessstatus = "hint1,word1";
-	  	var pupspoilerstatus = gon.pupspoiler;
-	  	var pupneutralstatus = gon.pupneutrals;
+	  	var pupspoilerstatus = gon.pupspoiler || 0;
+	  	var pupneutralstatus = gon.pupneutrals || 0;
 	  	var pupspoilerused = pupspoilerstatus.length;
 	  	var pupneutralused = pupneutralstatus.length;
 
