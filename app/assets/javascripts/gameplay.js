@@ -1423,7 +1423,7 @@ var ready = function() {
 	        zoneId: 2894,
 	        devId: 3705,
 	        gameId: 4932,
-	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
 	        muted: adsound, // the player will start in muted mode/
 					// the player will start normally with no muted option
 					//vpos: 'top',
@@ -1473,7 +1473,7 @@ var ready = function() {
 	        zoneId: 2894,
 	        devId: 3705,
 	        gameId: 4932,
-	        //dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
 	        muted: adsound, // the player will start in muted mode/
 					// the player will start normally with no muted option
 					//vpos: 'top',
