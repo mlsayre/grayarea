@@ -1393,7 +1393,7 @@ var ready = function() {
 						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
 						$(".menudialogadblocker").show();
 					}
-					if (status === "ad-watched") {
+					if (status === "ad-watched" || status === "fb-watched") {
 						$.ajax({
 				      url: "/games/increasepuptworemove",
 				      type: "POST",
@@ -1444,7 +1444,7 @@ var ready = function() {
 						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
 						$(".menudialogadblocker").show();
 					}
-					if (status === "ad-watched") {
+					if (status === "ad-watched" || status === "fb-watched") {
 						$.ajax({
 				      url: "/games/increasepupspoiler",
 				      type: "POST",

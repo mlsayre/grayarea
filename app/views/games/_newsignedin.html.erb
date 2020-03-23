@@ -185,7 +185,7 @@ $(".feednav").click(function() {
               $(".menudialogadblocker").show();
               $(".pagecover").show();
             }
-            if (status === "ad-watched") {
+            if (status === "ad-watched" || status === "fb-watched") {
               $.ajax({
                 url: "/games/increasepuptworemove",
                 type: "POST",
@@ -237,7 +237,7 @@ $(".feednav").click(function() {
               $(".menudialogadblocker").show();
               $(".pagecover").show();
             }
-            if (status === "ad-watched") {
+            if (status === "ad-watched" || status === "fb-watched") {
               $.ajax({
                 url: "/games/increasepupspoiler",
                 type: "POST",
