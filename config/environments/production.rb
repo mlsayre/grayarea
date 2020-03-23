@@ -25,7 +25,7 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 "587",
     domain:               'wordstretch.com',
-    user_name:            'matt',
+    user_name:            'matt@wordstretch.com',
     password:             ENV['GM_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true  }
