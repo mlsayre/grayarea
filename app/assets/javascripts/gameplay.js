@@ -1425,6 +1425,7 @@ var ready = function() {
 	        gameId: 4932,
 	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
 	        muted: adsound, // the player will start in muted mode/
+	        fallback: 1,
 					// the player will start normally with no muted option
 					//vpos: 'top',
 	        adStatusCb: neutralAdStatusCallback,
@@ -1475,6 +1476,7 @@ var ready = function() {
 	        gameId: 4932,
 	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
 	        muted: adsound, // the player will start in muted mode/
+	        fallback: 1,
 					// the player will start normally with no muted option
 					//vpos: 'top',
 	        adStatusCb: spoilerAdStatusCallback,
