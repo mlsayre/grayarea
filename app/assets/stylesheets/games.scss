@@ -299,6 +299,7 @@ span.feednotify {
     top: 45%;
     transform: translateY(-50%);
     line-height: 1.15;
+    pointer-events: none;
 }
 .targetword.tracked {
     filter: saturate(.38);
@@ -1191,11 +1192,13 @@ select:focus, select:active {
   transition: 300ms all;
 }
 .selections button.button.wordnumselected {
-  box-shadow: inset 0px 0px 2px 2px darkblue;
+  box-shadow: inset 0px 0px 2px 2px white;
   border-radius: 100% !important;
   background-color: #d4fffd;
+  background: #33cc33 !important;
   font-weight: 700;
-  text-decoration: underline;
+  text-decoration: none;
+  color: black !important;
 }
 #notice {
   font-size: 13px;
@@ -2317,7 +2320,7 @@ span.youhavetext {
   margin: 12px auto;
   border: 1px solid darkgrey;
   border-radius: 12px;
-  padding: 8px 0;
+  padding: 16px 0;
   max-width: 260px;
   background-color: ghostwhite;
   display: none;
@@ -2369,8 +2372,30 @@ a.bigplaybutton {
   background-size: 100% !important;
   background-repeat: no-repeat !important;*/
 }
-.button.mainplay, .button.startguess, .button.dummyplay, .button.contmainplay, .button.contstartguess {
-  text-shadow: rgba(0,0,0,.6) 2px 2px 2px;
+.button.mainplay, .button.startguess, .button.dummyplay, .button.contmainplay, .button.contstartguess, button.revealwords {
+  text-shadow: rgba(0, 0, 40, .3) 2px 2px 2px;
+  background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
+  background-size: contain !important;
+  background-position: 0px 4px !important;
+  color: blue;
+  width: 120px;
+  padding: 0px !important;
+  height: 40px;
+  border: 0;
+  margin: 10px;
+  background-repeat: no-repeat !important;
+}
+button.revealwords {
+  font-size: 24px;
+  width: 240px;
+  height: 80px;
+  background-position: 0px 9px !important;
+  pointer-events: all;
+  cursor: pointer;
+}
+.menudialog.menudialogrevealwords {
+  height: 90px;
+  background: transparent;
 }
 .hintnumarea {
   position: relative;
