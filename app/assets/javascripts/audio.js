@@ -1,76 +1,90 @@
 var wordshow0 = new Howl({
-  src: ['/assets/wordshow0.wav'],
+  src: ['/assets/showcard.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1
 });
 var wordshow1 = new Howl({
-  src: ['/assets/wordshow1.wav'],
+  src: ['/assets/showcard2.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.2
 });
 var wordshow2 = new Howl({
-  src: ['/assets/wordshow2.wav'],
+  src: ['/assets/showcard3.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.45
 });
 var wordshow3 = new Howl({
-  src: ['/assets/wordshow3.wav'],
-  volume: 1,
-  preload: true
+  src: ['/assets/showcard2.wav'],
+  volume: .9,
+  preload: true,
+  rate: 1.6
 });
 var wordshow4 = new Howl({
-  src: ['/assets/wordshow4.wav'],
+  src: ['/assets/showcard.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.94
 });
 var wordshow5 = new Howl({
-  src: ['/assets/wordshow5.wav'],
+  src: ['/assets/showcard3.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.9
 });
 var wordshow6 = new Howl({
-  src: ['/assets/wordshow6.wav'],
+  src: ['/assets/showcard.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.65
 });
 var wordshow7 = new Howl({
-  src: ['/assets/wordshow7.wav'],
+  src: ['/assets/showcard2.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.45
 });
 var wordshow8 = new Howl({
-  src: ['/assets/wordshow8.wav'],
+  src: ['/assets/showcard3.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.18
 });
 var wordshow9 = new Howl({
-  src: ['/assets/wordshow9.wav'],
-  volume: 1,
-  preload: true
+  src: ['/assets/showcard.wav'],
+  volume: .9,
+  preload: true,
+  rate: 1
 });
 var wordshow10 = new Howl({
-  src: ['/assets/wordshow10.wav'],
-  volume: 1,
-  preload: true
+  src: ['/assets/showcard3.wav'],
+  volume: .86,
+  preload: true,
+  rate: 1.24
 });
 var wordshow11 = new Howl({
-  src: ['/assets/wordshow11.wav'],
+  src: ['/assets/showcard2.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: .9
 });
 var wordshow12 = new Howl({
-  src: ['/assets/wordshow12.wav'],
+  src: ['/assets/showcard3.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.21
 });
 var wordshow13 = new Howl({
-  src: ['/assets/wordshow13.wav'],
+  src: ['/assets/showcard.wav'],
   volume: 1,
-  preload: true
+  preload: true,
+  rate: 1.1
 });
 var wordshow14 = new Howl({
-  src: ['/assets/wordshow14.wav'],
-  volume: 1,
+  src: ['/assets/showcard2.wav'],
+  volume: .92,
   preload: true
 });
 var targetwordsfx = new Howl({
