@@ -198,7 +198,7 @@ var ready = function() {
 	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
 	     "This is making the highlight reel!"]
 	//word show anim
-	var wordindarr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+	var wordindarr = [0,2,3,4,5,6,7,8,9,10,11,12,13,14]
 	function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -206,13 +206,28 @@ var ready = function() {
       array[i] = array[j];
       array[j] = temp;
     }
+    array.push(1)
     return array;
 	}
+
+	var wordmoves = {};
+	var cttop = $(".word").eq(1).position().top;
+	var ctleft = $(".word").eq(1).position().left;
+	for (var i = 0; i < $(".word").length; i++) {
+		var curtop = $(".word").eq(i).position().top;
+		var curleft = $(".word").eq(i).position().left;
+		var movetop = cttop - curtop;
+		var moveleft = ctleft - curleft;
+		$(".word").eq(i).animate({top: movetop, left: moveleft}, 0);
+	}
 	wordindarr = shuffleArray(wordindarr);
-	var speedtoshow = 120;
+	var speedtoshow = 100;
 	function removeShrunken(k) {
 		setTimeout(function() {
-			$(".word").eq(wordindarr[k]).removeClass("shrunken")
+			$(".word").eq(wordindarr[k]).animate({top: "0px", left: "0px"}, {duration: 0, easing: "easeOutBounce", complete: function() {
+				$(".word").eq(wordindarr[k]).removeClass("shrunken")
+			}
+			})
 		}, (speedtoshow + 110))
 	}
 
@@ -227,7 +242,8 @@ var ready = function() {
 
 	function revealWords() {
 		$(".pagecoverunclickable").hide();
-		$(".menudialogrevealwords").hide();
+		$(".menudialogrevealwords").addClass("shrunken");
+		$(".revealwords").addClass("shrunken");
 		for (var i = 0; i < wordindarr.length; i++) {
 			(function() {
 				var tm = speedtoshow * (i + 2);
@@ -280,6 +296,9 @@ var ready = function() {
 						} else if (k === 14) {
 							wordshow14.on("play", removeShrunken(k));
 							wordshow14.play();
+							$(".menudialogrevealwords").hide().removeClass("shrunken");
+							$(".revealwords").hide().removeClass("shrunken");
+							$(".word").removeAttr("style");
 						}
 					}, tm)
 				}

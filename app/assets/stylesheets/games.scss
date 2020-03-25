@@ -931,6 +931,7 @@ button.menu {
   background-color: transparent;
   width: 48px;
   height: 48px;
+  background: transparent !important;
 }
 button.menu:hover {
   /*background-color: #0088d6 !important;*/
@@ -2373,17 +2374,28 @@ a.bigplaybutton {
   background-repeat: no-repeat !important;*/
 }
 .button.mainplay, .button.startguess, .button.dummyplay, .button.contmainplay, .button.contstartguess, button.revealwords {
-  text-shadow: rgba(0, 0, 40, .3) 2px 2px 2px;
+  /*text-shadow: rgba(0, 0, 40, .3) 2px 2px 2px;
   background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
   background-size: contain !important;
-  background-position: 0px 4px !important;
+  background-position: 0px 4px !important;*/
   color: blue;
-  width: 120px;
+  /*width: 120px;*/
   padding: 0px !important;
-  height: 40px;
+  /*height: 40px;*/
   border: 0;
   margin: 10px;
+  /*background-repeat: no-repeat !important;*/
+  text-shadow: rgba(0, 0, 200, 0.3) 2px 2px 2px;
+  background: url(btn_field_white) !important;
+  background-size: contain !important;
+  background-position: 0px 4px !important;
   background-repeat: no-repeat !important;
+  width: 110px;
+  height: 63px;
+}
+button.revealwords {
+  width: 232px !important;
+  height: 135px !important;
 }
 button.revealwords {
   font-size: 24px;
@@ -2392,10 +2404,16 @@ button.revealwords {
   background-position: 0px 9px !important;
   pointer-events: all;
   cursor: pointer;
+  transition: all 2250ms;
 }
 .menudialog.menudialogrevealwords {
   height: 90px;
   background: transparent;
+  transition: all 2250ms;
+}
+.revealwords.shrunken, .menudialogrevealwords.shrunken {
+  transform: scale(0) rotate(980deg);
+  z-index:12;
 }
 .hintnumarea {
   position: relative;
