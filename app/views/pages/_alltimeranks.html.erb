@@ -20,18 +20,18 @@
 	
 
 	  <div class="statcontainer athearts showstat">
-			<span class="statcat"><u>1. Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 15 games</u></span>
+			<span class="statcat"><u>1. Avg <img class="newsheart" src="/assets/Heart-48.png"> Received/Game (min 10 games)</u></span>
 			<ul>
-			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 15, false) <=> Game.averageheartspergame(a.id, 15, false)}.first(15).each do |user| %>
-			  	  <% if Game.averageheartspergame(user.id, 15, false) != -1 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 15, false) %></span></li>
+			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 10, false) <=> Game.averageheartspergame(a.id, 10, false)}.first(15).each do |user| %>
+			  	  <% if Game.averageheartspergame(user.id, 10, false) != -1 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 10, false) %></span></li>
 			    	<% end %>
 			  <% end %>
 			</ul>
 	  </div>
 
 	  <div class="statcontainer totalhearts">
-			  <span class="statcat"><u>2. Lifetime <img class="newsheart" src="/assets/Heart-48.png"> received</u></span>
+			  <span class="statcat"><u>2. Lifetime <img class="newsheart" src="/assets/Heart-48.png"> Received</u></span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimehearts <=> a.lifetimehearts }.first(15).each do |user| %>
 				  	  <% if user.lifetimehearts != 0 %>
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="statcontainer atnonspoiler">
-		  <span class="statcat"><u>4. Longest All-time Giver Non-Spoiler Streak</u></span>
+		  <span class="statcat"><u>4. All-time Giver Non-Spoiler Streak</u></span>
 			<ul>
 			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(15).each do |user| %>
 			  	  <% if user.statalltimegiverstreak != 0 %>
@@ -64,7 +64,7 @@
 	  </div>
 
 	  <div class="statcontainer atgsnonspoiler">
-		  <span class="statcat"><u>5. Longest All-time Guesser Non-Spoiler Streak</u></span>
+		  <span class="statcat"><u>5. All-time Guesser Non-Spoiler Streak</u></span>
 			<ul>
 			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
 			  	  <% if user.statalltimeguesserstreak != 0 %>
@@ -96,7 +96,27 @@
 				</ul>
 		  </div>
 
-		  
+		  <div class="statcontainer totalguesser">
+			  <span class="statcat"><u>8. Total Games Played as Guesser</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.lifetimegamesguesser <=> a.lifetimegamesguesser }.first(15).each do |user| %>
+				  	  <% if user.lifetimegamesguesser != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.lifetimegamesguesser %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
+
+		  <div class="statcontainer totalgiver">
+			  <span class="statcat"><u>9. Total Games Created as Giver</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.lifetimegamesgiver <=> a.lifetimegamesgiver }.first(15).each do |user| %>
+				  	  <% if user.lifetimegamesgiver != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.lifetimegamesgiver %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
 
 	</div>
 
