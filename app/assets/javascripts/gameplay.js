@@ -210,99 +210,100 @@ var ready = function() {
     return array;
 	}
 
-	var wordmoves = {};
-	var cttop = $(".word").eq(1).position().top;
-	var ctleft = $(".word").eq(1).position().left;
-	for (var i = 0; i < $(".word").length; i++) {
-		var curtop = $(".word").eq(i).position().top;
-		var curleft = $(".word").eq(i).position().left;
-		var movetop = cttop - curtop;
-		var moveleft = ctleft - curleft;
-		$(".word").eq(i).animate({top: movetop, left: moveleft}, 0);
-	}
-	wordindarr = shuffleArray(wordindarr);
-	var speedtoshow = 100;
-	function removeShrunken(k) {
-		setTimeout(function() {
-			$(".word").eq(wordindarr[k]).animate({top: "0px", left: "0px"}, {duration: 0, easing: "easeOutBounce", complete: function() {
-				$(".word").eq(wordindarr[k]).removeClass("shrunken")
-			}
-			})
-		}, (speedtoshow + 110))
-	}
-
-	if ($("#allwordslist").length > 0) {
-		$(".pagecoverunclickable").show();
-		$(".menudialogrevealwords").show();
-		$(".menudialogrevealwords").click(function() {
-			silenceios.play();
-			revealWords();
-		});
-	}
-
-	function revealWords() {
-		$(".pagecoverunclickable").hide();
-		$(".menudialogrevealwords").addClass("shrunken");
-		$(".revealwords").addClass("shrunken");
-		for (var i = 0; i < wordindarr.length; i++) {
-			(function() {
-				var tm = speedtoshow * (i + 2);
-				var toremove = wordindarr[i];
-				if ($(".allwords").length !== 0) {
-					var k = i;
-					setTimeout(function() {
-						if (k === 0) {
-							wordshow0.on("play", removeShrunken(k));
-							wordshow0.play();
-						} else if (k === 1) {
-							wordshow1.on("play", removeShrunken(k));
-							wordshow1.play();
-						} else if (k === 2) {
-							wordshow2.on("play", removeShrunken(k));
-							wordshow2.play();
-						} else if (k === 3) {
-							wordshow3.on("play", removeShrunken(k));
-							wordshow3.play();
-						} else if (k === 4) {
-							wordshow4.on("play", removeShrunken(k));
-							wordshow4.play();
-						} else if (k === 5) {
-							wordshow5.on("play", removeShrunken(k));
-							wordshow5.play();
-						} else if (k === 6) {
-							wordshow6.on("play", removeShrunken(k));
-							wordshow6.play();
-						} else if (k === 7) {
-							wordshow7.on("play", removeShrunken(k));
-							wordshow7.play();
-						} else if (k === 8) {
-							wordshow8.on("play", removeShrunken(k));
-							wordshow8.play();
-						} else if (k === 9) {
-							wordshow9.on("play", removeShrunken(k));
-							wordshow9.play();
-						} else if (k === 10) {
-							wordshow10.on("play", removeShrunken(k));
-							wordshow10.play();
-						} else if (k === 11) {
-							wordshow11.on("play", removeShrunken(k));
-							wordshow11.play();
-						} else if (k === 12) {
-							wordshow12.on("play", removeShrunken(k));
-							wordshow12.play();
-						} else if (k === 13) {
-							wordshow13.on("play", removeShrunken(k));
-							wordshow13.play();
-						} else if (k === 14) {
-							wordshow14.on("play", removeShrunken(k));
-							wordshow14.play();
-							$(".menudialogrevealwords").hide().removeClass("shrunken");
-							$(".revealwords").hide().removeClass("shrunken");
-							$(".word").removeAttr("style");
-						}
-					}, tm)
+	if ($(".word").length > 0) {
+		var cttop = $(".word").eq(1).position().top;
+		var ctleft = $(".word").eq(1).position().left;
+		for (var i = 0; i < $(".word").length; i++) {
+			var curtop = $(".word").eq(i).position().top;
+			var curleft = $(".word").eq(i).position().left;
+			var movetop = cttop - curtop;
+			var moveleft = ctleft - curleft;
+			$(".word").eq(i).animate({top: movetop, left: moveleft}, 0);
+		}
+		wordindarr = shuffleArray(wordindarr);
+		var speedtoshow = 100;
+		function removeShrunken(k) {
+			setTimeout(function() {
+				$(".word").eq(wordindarr[k]).animate({top: "0px", left: "0px"}, {duration: 0, easing: "easeOutBounce", complete: function() {
+					$(".word").eq(wordindarr[k]).removeClass("shrunken")
 				}
-			})(i);
+				})
+			}, (speedtoshow + 110))
+		}
+
+		if ($("#allwordslist").length > 0) {
+			$(".pagecoverunclickable").show();
+			$(".menudialogrevealwords").show();
+			$(".menudialogrevealwords").click(function() {
+				silenceios.play();
+				revealWords();
+			});
+		}
+
+		function revealWords() {
+			$(".pagecoverunclickable").hide();
+			$(".menudialogrevealwords").addClass("shrunken");
+			$(".revealwords").addClass("shrunken");
+			for (var i = 0; i < wordindarr.length; i++) {
+				(function() {
+					var tm = speedtoshow * (i + 2);
+					var toremove = wordindarr[i];
+					if ($(".allwords").length !== 0) {
+						var k = i;
+						setTimeout(function() {
+							if (k === 0) {
+								wordshow0.on("play", removeShrunken(k));
+								wordshow0.play();
+							} else if (k === 1) {
+								wordshow1.on("play", removeShrunken(k));
+								wordshow1.play();
+							} else if (k === 2) {
+								wordshow2.on("play", removeShrunken(k));
+								wordshow2.play();
+							} else if (k === 3) {
+								wordshow3.on("play", removeShrunken(k));
+								wordshow3.play();
+							} else if (k === 4) {
+								wordshow4.on("play", removeShrunken(k));
+								wordshow4.play();
+							} else if (k === 5) {
+								wordshow5.on("play", removeShrunken(k));
+								wordshow5.play();
+							} else if (k === 6) {
+								wordshow6.on("play", removeShrunken(k));
+								wordshow6.play();
+							} else if (k === 7) {
+								wordshow7.on("play", removeShrunken(k));
+								wordshow7.play();
+							} else if (k === 8) {
+								wordshow8.on("play", removeShrunken(k));
+								wordshow8.play();
+							} else if (k === 9) {
+								wordshow9.on("play", removeShrunken(k));
+								wordshow9.play();
+							} else if (k === 10) {
+								wordshow10.on("play", removeShrunken(k));
+								wordshow10.play();
+							} else if (k === 11) {
+								wordshow11.on("play", removeShrunken(k));
+								wordshow11.play();
+							} else if (k === 12) {
+								wordshow12.on("play", removeShrunken(k));
+								wordshow12.play();
+							} else if (k === 13) {
+								wordshow13.on("play", removeShrunken(k));
+								wordshow13.play();
+							} else if (k === 14) {
+								wordshow14.on("play", removeShrunken(k));
+								wordshow14.play();
+								$(".menudialogrevealwords").hide().removeClass("shrunken");
+								$(".revealwords").hide().removeClass("shrunken");
+								$(".word").removeAttr("style");
+							}
+						}, tm)
+					}
+				})(i);
+			}
 		}
 	}
 

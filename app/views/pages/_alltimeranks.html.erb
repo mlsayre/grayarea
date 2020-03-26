@@ -1,3 +1,4 @@
+<!-- <div class="rankalltimecontent"> -->
 <!-- <div class="lifetimerankings">
 		<div class="centered" style="font-size: 18px; color: darkgreen; margin-bottom: 4px;">Your Combined average: <%= @combinedavg %></div>
 		<div class="centered">Your Giver average: <%= @giveravg %></div>
@@ -16,67 +17,88 @@
 
 		<div class="rankingstabletitle">All-time Top 15</div>
 
-		<div class="statcontainer atcombined showstat">
-			<span class="statcat"><u>Combined Avg Score - min 5 games</u></span>
-			<ul class="spinloading">
-				<img class="spinning" src="/assets/spinner.gif">
+	
+
+	  <div class="statcontainer athearts showstat">
+			<span class="statcat"><u>1. Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
+			<ul>
+			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, false) <=> Game.averageheartspergame(a.id, 5, false)}.first(15).each do |user| %>
+			  	  <% if Game.averageheartspergame(user.id, 5, false) != -1 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, false) %></span></li>
+			    	<% end %>
+			  <% end %>
 			</ul>
 	  </div>
 
-	  <div class="statcontainer athearts">
-			<span class="statcat"><u>Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
-			<ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
-			</ul>
-	  </div>
+	  <div class="statcontainer totalhearts">
+			  <span class="statcat"><u>2. Lifetime <img class="newsheart" src="/assets/Heart-48.png"> received</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.lifetimehearts <=> a.lifetimehearts }.first(15).each do |user| %>
+				  	  <% if user.lifetimehearts != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.lifetimehearts %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
 
 	  <div class="statcontainer atfeat">
-		  <span class="statcat"><u>Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </u></span>
-			<ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
+		  <span class="statcat"><u>3. Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(15).each do |user| %>
+			  	  <% if user.statgiverstatus.sum + user.statguesserstatus.sum != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgiverstatus.sum + user.statguesserstatus.sum %></span></li>
+			    	<% end %>
+			  <% end %>
 			</ul>
 		</div>
 
 		<div class="statcontainer atnonspoiler">
-		  <span class="statcat"><u>Longest All-time Giver Non-Spoiler Streak</u></span>
-			<ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
+		  <span class="statcat"><u>4. Longest All-time Giver Non-Spoiler Streak</u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(15).each do |user| %>
+			  	  <% if user.statalltimegiverstreak != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimegiverstreak %></span></li>
+			    	<% end %>
+			  <% end %>
 			</ul>
 	  </div>
 
 	  <div class="statcontainer atgsnonspoiler">
-		  <span class="statcat"><u>Longest All-time Guesser Non-Spoiler Streak</u></span>
-			<ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
+		  <span class="statcat"><u>5. Longest All-time Guesser Non-Spoiler Streak</u></span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
+			  	  <% if user.statalltimeguesserstreak != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimeguesserstreak %></span></li>
+			    	<% end %>
+			  <% end %>
 			</ul>
-	  </div>
+	  </div>		
 
-	  <div class="statcontainer atgiver">
-		  <span class="statcat"><u>Giver Avg Score - min 5 games</u></span>
-		  <ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
-			</ul>
-	  </div>
+	  <div class="statcontainer wknonspoiler">
+			  <span class="statcat"><u>6. Current Giver Non-Spoiler Streak</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.statgivernospoilers <=> a.statgivernospoilers }.first(15).each do |user| %>
+				  	  <% if user.statgivernospoilers != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgivernospoilers %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
 
-	  <div class="statcontainer atguesser">
-		  <span class="statcat"><u>Guesser Avg Score - min 5 games</u></span>
-		  <ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
-			</ul>
-		</div>
+		  <div class="statcontainer wkgsnonspoiler">
+			  <span class="statcat"><u>7. Current Guesser Non-Spoiler Streak</u></span>
+				<ul>
+				  <% User.all.sort {|a,b| b.statguessernospoilers <=> a.statguessernospoilers }.first(15).each do |user| %>
+				  	  <% if user.statguessernospoilers != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statguessernospoilers %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
 
-		<!-- <div class="statcontainer attopgivers">
-			<span class="statcat"><u>Your Top Hint Givers - min 5 games</u></span>
-		  <ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
-			</ul>
-		</div> -->
-
-		<!-- <div class="statcontainer attopguessers">
-			<span class="statcat"><u>Your Top Guessers - min 5 games</u></span>
-		  <ul class="spinloading">
-			  <img class="spinning" src="/assets/spinner.gif">
-			</ul>
-		</div> -->
+		  
 
 	</div>
+
+<!-- </div> -->
+

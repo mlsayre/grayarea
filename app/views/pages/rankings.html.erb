@@ -2,7 +2,7 @@
 	<div class="gametop"><span class="gtoneline">Rankings</span></div>
 
 	<div class="rankweeklycontent">
-		<%= render "weeklyranks" %>
+		<%= render "alltimeranks" %>
 	</div>
 
 	<!-- <div class="rankalltimecontent rankhidden">
@@ -233,6 +233,10 @@ $(document).ready(function() {
   	if ($(this).data("uname") === curusername) {
   		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
   	}
+  })
+
+  $(".returntomain").click(function() {
+  	window.location = "/main";
   })
 
 	//weeklyload(["rankweeklycontent"], 150);
