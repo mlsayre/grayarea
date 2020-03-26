@@ -20,11 +20,11 @@
 	
 
 	  <div class="statcontainer athearts showstat">
-			<span class="statcat"><u>1. Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 5 games</u></span>
+			<span class="statcat"><u>1. Avg <img class="newsheart" src="/assets/Heart-48.png"> per game - min 15 games</u></span>
 			<ul>
-			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 5, false) <=> Game.averageheartspergame(a.id, 5, false)}.first(15).each do |user| %>
-			  	  <% if Game.averageheartspergame(user.id, 5, false) != -1 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 5, false) %></span></li>
+			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 15, false) <=> Game.averageheartspergame(a.id, 15, false)}.first(15).each do |user| %>
+			  	  <% if Game.averageheartspergame(user.id, 15, false) != -1 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 15, false) %></span></li>
 			    	<% end %>
 			  <% end %>
 			</ul>
