@@ -137,3 +137,8 @@ var usespoilerpup = new Howl({
   volume: 1,
   preload: true
 });
+var beginsfx = new Howl({
+  src: ['/assets/begin.wav'],
+  volume: .5,
+  preload: true
+});

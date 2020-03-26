@@ -46,4 +46,41 @@
 		<%= link_to(image_tag("/assets/btn_logout.png"), destroy_user_session_path, :method => :delete, :class => "setmain-gologout") %>
 		<a class="setmain-gonotes" href="<%= about_pages_path %>"><img src="/assets/btn_info.png"></a>
 	</div>
+
+	<div class="settingsrow">
+		<a class="setmain-setsound" data-sound="<% current_user.sound %>"href="#">
+			<% if current_user.sound == 1 %>
+			  <img src="/assets/btn_soundOn.png">
+			<% else %>
+			  <img src="/assets/btn_soundOff.png">
+			<% end %>
+		</a>
 </section>
+
+<script>
+var sound = $(".setmain-setsound").data("sound");
+function soundOnOff(onoff) {
+if (onoff === 0) {
+		$(".setmain-setsound img").attr("src", "/assets/btn_soundOff.png");
+		Howler.mute(true);
+	} else {
+		$(".setmain-setsound img").attr("src", "/assets/btn_soundOn.png");
+		Howler.mute(false);
+	}
+}
+
+$(".setmain-setsound").on("click", function() {
+	if (sound === 1) {
+		sound = 0;
+	} else {
+		sound = 1;
+	}
+	soundOnOff(sound);
+	$.ajax({
+    url: "/games/soundonoff",
+    type: "POST",
+    dataType:'json',
+    data: { 'sound' : sound }
+  })
+})
+</script>

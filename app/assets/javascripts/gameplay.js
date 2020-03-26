@@ -235,7 +235,7 @@ var ready = function() {
 			$(".pagecoverunclickable").show();
 			$(".menudialogrevealwords").show();
 			$(".menudialogrevealwords").click(function() {
-				silenceios.play();
+				beginsfx.play();
 				revealWords();
 			});
 		}
