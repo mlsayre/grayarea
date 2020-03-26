@@ -213,6 +213,9 @@ span.feednotify {
   vertical-align: top;
   text-align: center;
 }
+.thefeed {
+  padding-top: 20px;
+}
 .gametop {
   position: relative;
   font-size: 16px;
@@ -227,6 +230,15 @@ span.feednotify {
   left: 0;
   right: 0;
   top: 12px;
+}
+.gametop span.gtoneline.feedheadline {
+  position: static;
+}
+.newsseen0 .newsdate {
+  font-size: 14px;
+}
+.newsseen0 .newstext {
+  font-size: 16px;
 }
 .gametop.gtmain {
   min-height: 32px;
@@ -1740,7 +1752,8 @@ li.newsitem {
     list-style-type: none;
     margin-bottom: 16px;
     text-indent: -20px;
-    margin-left: 20px;
+    margin-left: 44px;
+    margin-right: 44px;
 }
 .newsitem a.newslink {
     color: black;
