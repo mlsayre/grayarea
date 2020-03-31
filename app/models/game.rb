@@ -233,6 +233,24 @@ class Game < ApplicationRecord
     return avg
   end
 
+  def self.avgpointsguesser(userid, min)
+    if User.find(userid).lifetimegamesguesser < min
+      avg = -1
+    else
+      avg = User.find(userid).averagepointsguesser
+    end
+    return avg
+  end
+
+  def self.avgpointsgiver(userid, min)
+    if User.find(userid).lifetimegamesgiver < min
+      avg = -1
+    else
+      avg = User.find(userid).averagepointsgiver
+    end
+    return avg
+  end
+
   def self.checkspecialfeats(userid, giverid, type)
     curruser = User.find(userid)
     giveuser = User.find(giverid)
@@ -430,6 +448,22 @@ class Game < ApplicationRecord
         Game.statarrayupdategiver(featindexesgiver["givein1"], featpointsgiver["givein1"], giveuser)
       end
     end
+  end
+
+  def self.updatescoreaverages(guesserid, giverid, score)
+    oldguesserpoints = User.find(guesserid).lifetimepointsguesser
+    newguesserpoints = oldguesserpoints + score.to_i
+    User.find(guesserid).update(:lifetimepointsguesser => newguesserpoints)
+    guessergames = User.find(guesserid).lifetimegamesguesser
+    newguessavg = (newguesserpoints.to_f/guessergames.to_f).round(2)
+    User.find(guesserid).update(:averagepointsguesser => newguessavg)
+
+    oldgiverpoints = User.find(giverid).lifetimepointsgiver
+    newgiverpoints= oldgiverpoints + score.to_i
+    User.find(giverid).update(:lifetimepointsgiver => newgiverpoints)
+    givergames = User.find(giverid).lifetimeplayedgamesgiver
+    newgiveavg = (newgiverpoints.to_f/givergames.to_f).round(2)
+    User.find(giverid).update(:averagepointsgiver => newgiveavg)
   end
 
   def self.statarrayupdateguesser(guessind, guesspts, curruser)

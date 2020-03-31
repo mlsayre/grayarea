@@ -259,7 +259,9 @@ class GamesController < ApplicationController
           Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "perfect")
         end
       end
+      User.find(@thisgame.giver_id).increment!(:lifetimeplayedgamesgiver, by = 1)
       Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
+      Game.updatescoreaverages(current_user.id, @thisgame.giver_id, params[:gamescore])
       
       if current_user.id == @thisgame.guesser_id1
         @thisgame.update(:endtime_gsr1 => Time.current)
@@ -274,6 +276,7 @@ class GamesController < ApplicationController
       elsif current_user.id == @thisgame.guesser_id6
         @thisgame.update(:endtime_gsr6 => Time.current)
       end
+
     end
     
     #render body: nil

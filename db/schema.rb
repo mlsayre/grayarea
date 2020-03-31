@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200227162247) do
+ActiveRecord::Schema.define(version: 20200331224836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,11 @@ ActiveRecord::Schema.define(version: 20200227162247) do
     t.integer "statalltimeguesserstreak", default: 0
     t.integer "pupspoilerdetector", default: 0
     t.integer "pupneutraltworemove", default: 0
+    t.integer "lifetimepointsguesser", default: 0
+    t.float "averagepointsguesser", default: 0.0
+    t.integer "lifetimepointsgiver", default: 0
+    t.integer "lifetimeplayedgamesgiver", default: 0
+    t.float "averagepointsgiver", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
