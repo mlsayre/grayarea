@@ -1,7 +1,7 @@
 <section class="giveboard-signedin <%= current_user.theme %>">
 	<div class="gametop" data-gameid="<%= @game.id %>"><span class="gtoneline">New Game: Enter your hints</span></div>
 
-	<div class="allwords givewordslist">
+	<div class="allwords givewordslist creatinggame">
 		<span id="allwordslist">
 	    <%= render 'allwords' %>
 	  </span>
