@@ -552,19 +552,33 @@ span.guessermsg {
 span.giveheart, span.removeheart {
   position: absolute;
   top: 19%;
-  left: 4%;
+  left: 5%;
   background-color: transparent;
   padding: 1px 2px 4px;
   transition: 200ms all;
   border-radius: 0px;
   display: inline-block;
-  width: 40px;
+  width: 20%;
+  height: 100%;
   margin: 0 auto;
   line-height: 1.2;
   cursor: pointer;
   background: url(btn_field_green.png);
   background-size: 100%;
   background-repeat: no-repeat;
+  font-size: 32px;
+}
+.giveheartsuccess, .removeheartsuccess {
+  display: none;
+  color: white;
+  position: absolute;
+  right: 6%;
+  top: 30%;
+  font-style: italic;
+  font-size: 24px;
+  background: rgba(100,200,70,.5);
+  padding: 4px;
+  border-radius: 6px;
 }
 span.removeheart {
   display: none;
@@ -573,17 +587,12 @@ span.giveheart:hover, span.removeheart:hover {
   /*background-color: pink;*/
 }
 .giveheart img, .giveheartsuccess img, .removeheart img, .removeheartsuccess img {
-  width: 16px;
+  width: 40%;
   position: relative;
-  top: 2px;
+  top: 4px;
+  vertical-align: top;
 }
-.giveheartsuccess, .removeheartsuccess {
-  display: none;
-  color: black;
-  position: absolute;
-  right: 4%;
-  font-style: italic;
-}
+
 span.removeheart {
   display: none;
 }
@@ -1040,7 +1049,7 @@ span.cheatstatus {
 }
 @keyframes neutralsshow {
   from {
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
     
   }
   to {
@@ -2541,7 +2550,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   color: black;
   font-size: 13px;
   margin-bottom: 3px;
-  display: inline-block;
+  display: block;
 }
 .summaryhints {
   color: white;

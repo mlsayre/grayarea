@@ -138,13 +138,11 @@
 					<div class="prevscoreblock">
 						<!-- <span class="removeheartsuccess">Your <img src="/assets/Heart-48.png"></img> removed from <%= User.find(@game.giver_id).username %>'s game.
 						</span> -->
-						<span class="removeheartsuccess">Awww.</span>
-						<span class="giveheart"><img src="/assets/Heart-48.png"> +</img></span>
+						
 						<div class="scoreblocktitle">Scores So Far (clickable)</div>
 						<!-- <span class="giveheartsuccess">Thank you! <img src="/assets/Heart-48.png"></img> given to <%= User.find(@game.giver_id).username %>
 						</span> -->
-						<span class="giveheartsuccess">Thanks!</span>
-						<span class="removeheart"><img src="/assets/Heart-48.png"></img> -</span><br>
+						
 						<% if @gsrstatus == "over,over" %>
 						<div class="guesserinfo guesser1" data-gsrwords="<%= @game.gsr1_words.join(",") %>">
 							<span><%= @game.guesser_id1 != 0 ? User.find(@game.guesser_id1).username : "-" %></span>: 
@@ -306,7 +304,11 @@
 	<div class="playedgameover">
 		<div class="pgotitle">Game Over!</div>
 		<div class="buttons-middle">
+			<span class="giveheart"><img src="/assets/Heart-48.png"> +</img></span>
+			<span class="giveheartsuccess">Thanks!</span>
 			<button class="button bigplaybutton">CONTINUE</button>
+			<span class="removeheart"><img src="/assets/Heart-48.png"></img> -</span><br>
+			<span class="removeheartsuccess">Awww.</span>
       <div class="mainmenubuttons">
 
         <div class="actions">

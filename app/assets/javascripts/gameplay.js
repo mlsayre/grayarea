@@ -210,7 +210,11 @@ var ready = function() {
     return array;
 	}
 
-	if ($(".word").length > 0) {
+	if ($(".word").length > 0 && $(".guesswordslist").length === 0) {
+		$(".shrunken").removeClass("shrunken");
+	}
+
+	if ($(".word").length > 0 && $(".guesswordslist").length > 0) {
 		var cttop = $(".word").eq(1).position().top;
 		var ctleft = $(".word").eq(1).position().left;
 		for (var i = 0; i < $(".word").length; i++) {
@@ -231,7 +235,7 @@ var ready = function() {
 			}, (speedtoshow + 110))
 		}
 
-		if ($("#allwordslist").length > 0) {
+		if ($(".guesswordslist").length > 0) {
 			$(".pagecoverunclickable").show();
 			$(".menudialogrevealwords").show();
 			$(".menudialogrevealwords").click(function() {
