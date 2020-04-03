@@ -25,6 +25,15 @@
   <% end %>
 </div>
 
+<% if current_user.username == "Matt" %>
+  <ul class="lastuserlist">Newest users - User count: <%= User.count %>
+  <% lastusers = User.all.sort_by(&:created_at).reverse.first(10) %>
+  <% lastusers.each do |user| %>
+    <li class="lastusers"><%= user.username %> - <%= user.email %> - <%= local_time(user.created_at, "%b %d, %Y %l:%M%P") %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <button class="button returntomain"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
 
 <script>
