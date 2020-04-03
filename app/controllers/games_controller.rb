@@ -78,7 +78,12 @@ class GamesController < ApplicationController
         end
 
     	elsif @availgames.length > 0
-  	  	@game = @availgames.order("RANDOM()").first
+        @randnum = rand(6)
+        if @randnum < 2
+  	  	  @game = @availgames.order("RANDOM()").first
+        else
+          @game = @availgames.order("gsr1_heart + gsr2_heart + gsr3_heart + gsr4_heart + gsr5_heart desc").first #best by heart
+        end
 
   	  	if @game.guesser_id1 == 0
   	  		@game.update(:guesser_id1 => current_user.id)
