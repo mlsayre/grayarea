@@ -4,7 +4,7 @@
 		<img class="featpagetrophy" src="/assets/Trophy-32.png">
 	</div>
 
-	<div class="lifetimerankings howtoplay giverfeats">
+	<div class="lifetimerankings howtoplay giverfeats featcontainer">
 	  <div class="featheading">Giver Feats</div>
 
 	  <div class="feattrophy givefeat0 hidefeat">
@@ -649,5 +649,8 @@ $(document).ready(function() {
       type: "POST"
     })
 	}, 500)
+	$(document).ready(function() {
+		$("body").addClass("bodyscrollable");
+	})
 });
 </script>

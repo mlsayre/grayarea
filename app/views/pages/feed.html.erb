@@ -1,46 +1,47 @@
 <% @usernews = News.where(:targetuser_id => current_user.id).order('created_at DESC').all %>
+<span class="pagebody">
+  <div class="gametop"><span class="gtoneline feedheadline">Stretch Feed</span></div>
 
-<div class="gametop"><span class="gtoneline feedheadline">Stretch Feed</span></div>
+  <div class="lifetimerankings howtoplay thefeed">
+  	<% if @usernews.where(:seen => 0).count == 0 %>
+  	  <span style="text-align: center; margin-bottom: 24px; display: block;">No new notifications</span>
+  	<% end %>
+    <% @usernews.each do |item| %>
+      <li class="newsitem newsseen<%= item.seen %>">
+      	<span class="newsdate"><%= local_time(item.created_at, "%b %d, %Y %l:%M%P") %>:</span>
+      	<span class="newstext">
+      		<% if item.newstype == 1 %>
+      		  <%= User.find(item.giveruser_id).username %> played <a class="newslink" href="/games/<%= item.targetgame_id %>">your game</a> and scored <%= item.points %> points.
+      		<% elsif item.newstype == 2 %>
+      		  <%= User.find(item.giveruser_id).username %> was the sixth player to play <a class="newslink" href="/games/<%= item.targetgame_id %>">your game</a>, and they scored <%= item.points %> points. That game is now over!
+      		<% elsif item.newstype == 3 %>
+      			You received a <img class="newsheart" src="/assets/Heart-48.png"> from <%= User.find(item.giveruser_id).username %> for <a class="newslink" href="/games/<%= item.targetgame_id %>">this game</a> after they scored <%= item.points %> points.
+      			<% elsif item.newstype == 4 %>
+      			<%= User.find(item.giveruser_id).username %> has chatted in <a class="newslink" href="/games/<%= item.targetgame_id %>">a game</a> you are in.
+      	  <% end %>
+      	</span>
+      </li>
+      <hr></hr>
+    <% end %>
+  </div>
 
-<div class="lifetimerankings howtoplay thefeed">
-	<% if @usernews.where(:seen => 0).count == 0 %>
-	  <span style="text-align: center; margin-bottom: 24px; display: block;">No new notifications</span>
-	<% end %>
-  <% @usernews.each do |item| %>
-    <li class="newsitem newsseen<%= item.seen %>">
-    	<span class="newsdate"><%= local_time(item.created_at, "%b %d, %Y %l:%M%P") %>:</span>
-    	<span class="newstext">
-    		<% if item.newstype == 1 %>
-    		  <%= User.find(item.giveruser_id).username %> played <a class="newslink" href="/games/<%= item.targetgame_id %>">your game</a> and scored <%= item.points %> points.
-    		<% elsif item.newstype == 2 %>
-    		  <%= User.find(item.giveruser_id).username %> was the sixth player to play <a class="newslink" href="/games/<%= item.targetgame_id %>">your game</a>, and they scored <%= item.points %> points. That game is now over!
-    		<% elsif item.newstype == 3 %>
-    			You received a <img class="newsheart" src="/assets/Heart-48.png"> from <%= User.find(item.giveruser_id).username %> for <a class="newslink" href="/games/<%= item.targetgame_id %>">this game</a> after they scored <%= item.points %> points.
-    			<% elsif item.newstype == 4 %>
-    			<%= User.find(item.giveruser_id).username %> has chatted in <a class="newslink" href="/games/<%= item.targetgame_id %>">a game</a> you are in.
-    	  <% end %>
-    	</span>
-    </li>
-    <hr></hr>
+  <% if current_user.username == "Matt" %>
+    <ul class="lastuserlist">Newest users - User count: <%= User.count %>
+    <% lastusers = User.all.sort_by(&:created_at).reverse.first(10) %>
+    <% lastusers.each do |user| %>
+      <li class="lastusers"><%= user.username %> - <%= user.email %> - <%= local_time(user.created_at, "%b %d, %Y %l:%M%P") %></li>
+    <% end %>
+    </ul>
   <% end %>
-</div>
 
-<% if current_user.username == "Matt" %>
-  <ul class="lastuserlist">Newest users - User count: <%= User.count %>
-  <% lastusers = User.all.sort_by(&:created_at).reverse.first(10) %>
-  <% lastusers.each do |user| %>
-    <li class="lastusers"><%= user.username %> - <%= user.email %> - <%= local_time(user.created_at, "%b %d, %Y %l:%M%P") %></li>
-  <% end %>
-  </ul>
-<% end %>
-
-<button class="button returntomain"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
-
+  <button class="button returntomain"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
+</span>
 <script>
 $(document).ready(function() {
 	$.ajax({
       url: "/pages/allfeedseen",
       type: "POST"
     })
+  $("body").addClass("bodyscrollable");
 })
 </script>
