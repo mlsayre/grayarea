@@ -224,10 +224,10 @@ class Game < ApplicationRecord
         avg = (totalhearts.to_f / availgames.count.to_f).round(2)
       end
     else
-      if User.find(userid).lifetimegamesgiver < min
+      if User.find(userid).lifetimeplayedgamesgiver < min
         avg = -1
       else
-        avg = (User.find(userid).lifetimehearts.to_f  / User.find(userid).lifetimegamesgiver.to_f).round(2)
+        avg = (User.find(userid).lifetimehearts.to_f  / User.find(userid).lifetimeplayedgamesgiver.to_f).round(2)
       end
     end
     return avg
