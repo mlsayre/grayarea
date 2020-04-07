@@ -24,7 +24,7 @@
 			<ul>
 			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 10, false) <=> Game.averageheartspergame(a.id, 10, false)}.first(15).each do |user| %>
 			  	  <% if Game.averageheartspergame(user.id, 10, false) != -1 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.averageheartspergame(user.id, 10, false) * 100 %>%</span></li>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= (Game.averageheartspergame(user.id, 10, false) * 100).round(2) %>%</span></li>
 			    	<% end %>
 			  <% end %>
 			</ul>
