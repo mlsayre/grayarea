@@ -243,7 +243,7 @@ class Game < ApplicationRecord
   end
 
   def self.avgpointsgiver(userid, min)
-    if User.find(userid).lifetimegamesgiver < min
+    if User.find(userid).lifetimeplayedgamesgiver < min
       avg = -1
     else
       avg = User.find(userid).averagepointsgiver

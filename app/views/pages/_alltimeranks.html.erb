@@ -53,7 +53,7 @@
 	  </div>
 
 	  <div class="statcontainer avggiver">
-			<span class="statcat"><u>4. Avg Giver Points/Game (min 10 games)</u></span>
+			<span class="statcat"><u>4. Avg Giver Points/Game (min 10 played)</u></span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.avgpointsgiver(b.id, 10) <=> Game.avgpointsgiver(a.id, 10)}.first(15).each do |user| %>
 			  	  <% if Game.avgpointsgiver(user.id, 10) != -1 %>
