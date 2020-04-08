@@ -5,10 +5,6 @@
 		<%= render "alltimeranks" %>
 	</div>
 
-	<!-- <div class="rankalltimecontent rankhidden">
-		
-	</div> -->
-
 	<div class="rankyou rankhidden">
 		<div class="lifetimerankings">
 			<div class="rankingstabletitle">Your Stats</div>
@@ -115,6 +111,14 @@ $(document).on("click", ".rtyou", function() {
 	$(".rankyou").removeClass("rankhidden");
 })
 
+var containernum = $(".statcontainer").length - 1;
+var indicatorwidth = $(".rankfloatingnum").width() - $(".innernum").width();
+var segmentwidth = indicatorwidth / containernum;
+$(".statcontainer").each(function(index) {
+	var left = ((segmentwidth * index) - ((2 / containernum) * index)).toFixed(2);
+	$(this).attr("data-indicator-left", left)
+})
+
 $(document).on("click", ".weeklystats .next", function() {
 	if ($(".showstat").next(".weeklystats .statcontainer").length === 0) {
 		$(".weeklystats .showstat").addClass("statleaving");
@@ -123,6 +127,7 @@ $(document).on("click", ".weeklystats .next", function() {
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 			$(".weeklystats .statcontainer").first().addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -135,6 +140,7 @@ $(document).on("click", ".weeklystats .next", function() {
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 			  .next(".statcontainer").addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -151,6 +157,7 @@ $(document).on("click", ".weeklystats .prev", function() {
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 			$(".weeklystats .statcontainer").last().addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -163,6 +170,7 @@ $(document).on("click", ".weeklystats .prev", function() {
 		setTimeout(function() {
 			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 			  .prev(".statcontainer").addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -179,6 +187,7 @@ $(document).on("click", ".alltimestats .next", function() {
 		setTimeout(function() {
 			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 			$(".alltimestats .statcontainer").first().addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -191,6 +200,7 @@ $(document).on("click", ".alltimestats .next", function() {
 		setTimeout(function() {
 			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 			  .next(".statcontainer").addClass("showstat");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
@@ -210,6 +220,7 @@ $(document).on("click", ".alltimestats .prev", function() {
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			},120)
 		}, 120)
 	} else {
@@ -222,6 +233,7 @@ $(document).on("click", ".alltimestats .prev", function() {
 			setTimeout(function() {
 				$(".slidetoright").removeClass("slidetoright");
 				$(".slidetoleft").removeClass("slidetoleft");
+				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 			},120)
 		}, 120)
 	}
