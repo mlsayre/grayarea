@@ -300,7 +300,7 @@ class GamesController < ApplicationController
     @gamegiver = User.find(@thisgame.giver_id)
     @gamegiver.increment!(:lifetimehearts, by = 1).increment!(:heartnotify, by = 1)
     if @gamegiver.lifetimeplayedgamesgiver > 0
-      @heartavg = (@gamegiver.lifetimehearts.to_f  / @gamegiver.lifetimeplayedgamesgiver.to_f).round(2)
+      @heartavg = (@gamegiver.lifetimehearts.to_f  / @gamegiver.lifetimeplayedgamesgiver.to_f).round(4)
       @gamegiver.update(:averagehearts => @heartavg)
     end
 
@@ -340,7 +340,7 @@ class GamesController < ApplicationController
     if @gamegiver.lifetimehearts > 0
       @gamegiver.decrement!(:lifetimehearts, by = 1)
       if @gamegiver.lifetimeplayedgamesgiver > 0
-        @heartavg = (@gamegiver.lifetimehearts.to_f  / @gamegiver.lifetimeplayedgamesgiver.to_f).round(2)
+        @heartavg = (@gamegiver.lifetimehearts.to_f  / @gamegiver.lifetimeplayedgamesgiver.to_f).round(4)
         @gamegiver.update(:averagehearts => @heartavg)
       end
     end
