@@ -251,6 +251,15 @@ class Game < ApplicationRecord
     return avg
   end
 
+  def self.avgtotal(userid, min)
+    if User.find(userid).lifetimegamesguesser < min || User.find(userid).lifetimeplayedgamesgiver < min
+      avg = -1
+    else
+      avg = (User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver).round(2)
+    end
+    return avg
+  end
+
   def self.checkspecialfeats(userid, giverid, type)
     curruser = User.find(userid)
     giveuser = User.find(giverid)
