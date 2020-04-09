@@ -2,7 +2,8 @@
 	<div class="gametop"><span class="gtoneline">Rankings</span></div>
 
 	<div class="rankweeklycontent">
-		<%= render "alltimeranks" %>
+		<span class="spinnerwait"><img src="/assets/spinner.gif"></span>
+		<span class="loadlate"></span>
 	</div>
 
 	<div class="rankyou rankhidden">
@@ -111,141 +112,13 @@ $(document).on("click", ".rtyou", function() {
 	$(".rankyou").removeClass("rankhidden");
 })
 
-var containernum = $(".statcontainer").length - 1;
-var indicatorwidth = $(".rankfloatingnum").width() - $(".innernum").width();
-var segmentwidth = indicatorwidth / containernum;
-$(".statcontainer").each(function(index) {
-	var left = ((segmentwidth * index) - ((2 / containernum) * index)).toFixed(2);
-	$(this).attr("data-indicator-left", left)
-})
-
-$(document).on("click", ".weeklystats .next", function() {
-	if ($(".showstat").next(".weeklystats .statcontainer").length === 0) {
-		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
-		setTimeout(function() {
-			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
-			$(".weeklystats .statcontainer").first().addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	} else {
-		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
-		setTimeout(function() {
-			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
-			  .next(".statcontainer").addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	}
-})
-
-$(document).on("click", ".weeklystats .prev", function() {
-	if ($(".showstat").prev(".weeklystats .statcontainer").length === 0) {
-		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
-		setTimeout(function() {
-			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
-			$(".weeklystats .statcontainer").last().addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	} else {
-		$(".weeklystats .showstat").addClass("statleaving");
-		$(".weeklystats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
-		$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
-		setTimeout(function() {
-			$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
-			  .prev(".statcontainer").addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	}
-})
-
-$(document).on("click", ".alltimestats .next", function() {
-	if ($(".showstat").next(".alltimestats .statcontainer").length === 0) {
-		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
-		setTimeout(function() {
-			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
-			$(".alltimestats .statcontainer").first().addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	} else {
-		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
-		setTimeout(function() {
-			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
-			  .next(".statcontainer").addClass("showstat");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-			},120)
-		}, 120)
-	}
-})
-
-$(document).on("click", ".alltimestats .prev", function() {
-	if ($(".showstat").prev(".alltimestats .statcontainer").length === 0) {
-		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
-		setTimeout(function() {
-			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
-			$(".alltimestats .statcontainer").last().addClass("showstat");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			},120)
-		}, 120)
-	} else {
-		$(".alltimestats .showstat").addClass("statleaving");
-		$(".alltimestats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
-		$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
-		setTimeout(function() {
-			$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
-			  .prev(".statcontainer").addClass("showstat");
-			setTimeout(function() {
-				$(".slidetoright").removeClass("slidetoright");
-				$(".slidetoleft").removeClass("slidetoleft");
-				$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
-			},120)
-		}, 120)
-	}
-})
-
 $(document).ready(function() {
 	var curusername = "<%= current_user.username %>";
-	$(".statcontainer li").each(function() {
-  	if ($(this).data("uname") === curusername) {
-  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
-  	}
-  })
+	// $(".statcontainer li").each(function() {
+ //  	if ($(this).data("uname") === curusername) {
+ //  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+ //  	}
+ //  })
 
   $(".returntomain").click(function() {
   	window.location = "/main";
@@ -258,26 +131,150 @@ $(document).ready(function() {
   // alltimeload(["attopgivers", "attopguessers"], 600);
 	
 
-	// function alltimeload(containers, time) {
-	// 	for (var i = 0; i < containers.length; i++) {
-	// 		(function() {
-	// 			var container = containers[i];
-	// 			setTimeout(function() {
-	// 				var wrapper = $("." + container);
-	// 				wrapper.load("/pages/alltimeranks" + " ." + container, function() {
-	// 				   wrapper.children("." + container).unwrap();
-	// 				   var curusername = "<%= current_user.username %>";
-	// 					  $("." + container + " li").each(function() {
-	// 					  	if ($(this).data("uname") === curusername) {
-	// 					  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
-	// 					  	}
-	// 					  })
 
-	// 				});
-	// 			}, time)
-	// 		})();
-	// 	}
-	// }
+	var container = "loadlate";
+	setTimeout(function() {
+		var wrapper = $("." + container);
+		wrapper.load("/pages/alltimeranks .atcontent", function() {
+		   wrapper.children("." + container).unwrap();
+		   var curusername = "<%= current_user.username %>";
+			  $(".statcontainer" + " li").each(function() {
+			  	if ($(this).data("uname") === curusername) {
+			  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
+			  	}
+			  })
+			console.log("loaded js")
+			var containernum = $(".statcontainer").length - 1;
+			var indicatorwidth = $(".rankfloatingnum").width() - $(".innernum").width();
+			var segmentwidth = indicatorwidth / containernum;
+			$(".statcontainer").each(function(index) {
+				var left = ((segmentwidth * index) - ((2 / containernum) * index)).toFixed(2);
+				$(this).attr("data-indicator-left", left)
+			})
+
+			$(document).on("click", ".weeklystats .next", function() {
+				if ($(".showstat").next(".weeklystats .statcontainer").length === 0) {
+					$(".weeklystats .showstat").addClass("statleaving");
+					$(".weeklystats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
+					$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+					setTimeout(function() {
+						$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+						$(".weeklystats .statcontainer").first().addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				} else {
+					$(".weeklystats .showstat").addClass("statleaving");
+					$(".weeklystats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+					$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoleft");
+					setTimeout(function() {
+						$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+						  .next(".statcontainer").addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				}
+			})
+
+			$(document).on("click", ".weeklystats .prev", function() {
+				if ($(".showstat").prev(".weeklystats .statcontainer").length === 0) {
+					$(".weeklystats .showstat").addClass("statleaving");
+					$(".weeklystats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
+					$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
+					setTimeout(function() {
+						$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+						$(".weeklystats .statcontainer").last().addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				} else {
+					$(".weeklystats .showstat").addClass("statleaving");
+					$(".weeklystats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
+					$(".weeklystats .showstat ul, .weeklystats .showstat .statcat").addClass("slidetoright");
+					setTimeout(function() {
+						$(".weeklystats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+						  .prev(".statcontainer").addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				}
+			})
+			$(document).on("click", ".alltimestats .next", function() {
+				if ($(".showstat").next(".alltimestats .statcontainer").length === 0) {
+					$(".alltimestats .showstat").addClass("statleaving");
+					$(".alltimestats .statcontainer").first().find("ul, .statcat").addClass("slidetoright");
+					$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+					setTimeout(function() {
+						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+						$(".alltimestats .statcontainer").first().addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				} else {
+					$(".alltimestats .showstat").addClass("statleaving");
+					$(".alltimestats .showstat").next(".statcontainer").find("ul, .statcat").addClass("slidetoright");
+					$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoleft");
+					setTimeout(function() {
+						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+						  .next(".statcontainer").addClass("showstat");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+						},120)
+					}, 120)
+				}
+			})
+
+			$(document).on("click", ".alltimestats .prev", function() {
+				if ($(".showstat").prev(".alltimestats .statcontainer").length === 0) {
+					$(".alltimestats .showstat").addClass("statleaving");
+					$(".alltimestats .statcontainer").last().find("ul, .statcat").addClass("slidetoleft");
+					$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
+					setTimeout(function() {
+						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
+						$(".alltimestats .statcontainer").last().addClass("showstat");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						},120)
+					}, 120)
+				} else {
+					$(".alltimestats .showstat").addClass("statleaving");
+					$(".alltimestats .showstat").prev(".statcontainer").find("ul, .statcat").addClass("slidetoleft");
+					$(".alltimestats .showstat ul, .alltimestats .showstat .statcat").addClass("slidetoright");
+					setTimeout(function() {
+						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
+						  .prev(".statcontainer").addClass("showstat");
+						setTimeout(function() {
+							$(".slidetoright").removeClass("slidetoright");
+							$(".slidetoleft").removeClass("slidetoleft");
+							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						},120)
+					}, 120)
+				}
+			})
+			$(".spinnerwait").fadeOut(5000)
+
+		});
+	}, 250)
+		
 
 	// function weeklyload(containers, time) {
 	// 	for (var i = 0; i < containers.length; i++) {
