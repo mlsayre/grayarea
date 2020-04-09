@@ -3,6 +3,7 @@
 
 	<div class="rankweeklycontent">
 		<span class="spinnerwait"><img src="/assets/spinner.gif"></span>
+		<span class="calcwait">Calculating...</span>
 		<span class="loadlate"></span>
 	</div>
 
@@ -270,7 +271,7 @@ $(document).ready(function() {
 					}, 120)
 				}
 			})
-			$(".spinnerwait").fadeOut(3000)
+			$(".spinnerwait, .calcwait").fadeOut(3000)
 
 		});
 	}, 250)
