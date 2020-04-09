@@ -1955,20 +1955,20 @@ span.spinnerwait {
     margin: 20% auto;
     padding: 6px;
     border-radius: 10px;
-    animation: rankspinner 10s;
+    animation: rankspinner 7s alternate infinite;
     position: absolute;
     left: 0;
     right: 0;
 }
 @keyframes rankspinner {
   from {
-    box-shadow: black 0px 0px 4px 3px;
+    box-shadow: white 0px 0px 14px 6px;
     transform: rotate(0deg) scale(1);
     
   }
   to {
-    box-shadow: white 0px 0px 14px 6px;
-    transform: rotate(-360deg) scale(0);
+    box-shadow: purple 0px 0px 24px 7px;
+    transform: rotate(-360deg) scale(0.2);
   }
 }
 .statcontainer {
