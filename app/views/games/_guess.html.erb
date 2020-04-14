@@ -274,8 +274,12 @@
 
 	<div class="pagecover"></div>
 	<div class="pagecoverunclickable"></div>
+	<div class="pagecoverabout"></div>
 	<div class="menudialog menudialogrevealwords">
     <button class="revealwords">Reveal words!</button>
+  </div>
+  <div class="menudialog menudialogaboutgiver">
+  	About <%= User.find(@game.giver_id).username %>: "<%= User.find(@game.giver_id).aboutme %>"
   </div>
 
 	<div class="roundannounce hidden">
@@ -334,3 +338,18 @@
 	<% end %>
 	<p id="notice"><%= notice %></p>
 </section>
+
+<script>
+$(document).ready(function() {
+	$(document).on("click", ".giveravatar.avatarclick .avatarpart img", function() {
+		$(".pagecoverabout").show();
+		$(".menudialogaboutgiver").show();
+		$(".giveravatar").addClass("avatarmoved");
+	})
+	$(document).on("click", ".giveravatar.avatarclick.avatarmoved .avatarpart img", function() {
+		$(".pagecoverabout").hide();
+		$(".menudialogaboutgiver").hide();
+		$(".giveravatar").removeClass("avatarmoved");
+	})
+})
+</script>

@@ -69,6 +69,19 @@ var ready = function() {
 		$(".menudialogneutral").hide();
 		$(".menudialogwatch").hide();
 		$(".menudialogadblocker").hide();
+		$(".menudialogaboutgiver").hide();
+		$(".giveravatar").removeClass("avatarmoved");
+	});
+	$(".pagecoverabout").not(".unclickable").click(function() {
+		$(".pagecoverabout").hide().removeClass("unclickable");
+		$(".menubox").hide();
+		$(".mainmenubuttons").hide();
+		$(".menudialogspoiler").hide();
+		$(".menudialogneutral").hide();
+		$(".menudialogwatch").hide();
+		$(".menudialogadblocker").hide();
+		$(".menudialogaboutgiver").hide();
+		$(".giveravatar").removeClass("avatarmoved");
 	});
 
 	// $(".opensettings").click(function(e) {
@@ -237,16 +250,19 @@ var ready = function() {
 		}
 
 		if ($(".guesswordslist").length > 0 || $(".creatinggame").length > 0 || $(".guestplayboard").length > 0) {
-			$(".pagecoverunclickable").show();
+			$(".pagecoverabout").show();
 			$(".menudialogrevealwords").show();
+			$(".giveravatar").addClass("avatarmoved");
 			$(".menudialogrevealwords").click(function() {
+				$(".giveravatar").removeClass("avatarmoved");
 				beginsfx.play();
 				revealWords();
+				$(".giveravatar").addClass("avatarclick");
 			});
 		}
 
 		function revealWords() {
-			$(".pagecoverunclickable").hide();
+			$(".pagecoverabout").hide();
 			$(".menudialogrevealwords").addClass("shrunken");
 			$(".revealwords").addClass("shrunken");
 			for (var i = 0; i < wordindarr.length; i++) {
@@ -564,6 +580,11 @@ var ready = function() {
 			$(".hint1").hide();
 			$(".hint2").hide();
 			$(".hint3").show();
+			$(".hinteditbutton").remove();
+			$(".submithint3final").remove();
+			$(".deletegame").remove();
+			$(".deletegameoff").remove();
+			$(".summarytitle").addClass("summaryended")
 			$.ajax({
         url: "/games/submithints",
         type: "POST",
@@ -1256,10 +1277,12 @@ var ready = function() {
 	  	});
 
 	  	function shownotification(trigger) {
-	  		$(".gamenotify").show();
-				notifytimeout = setTimeout(function() {
-	  			$(".gamenotify").hide();
-	  		}, 4000)
+	  		if ($(".gamenotify").text().length > 0) {
+		  		$(".gamenotify").show();
+					notifytimeout = setTimeout(function() {
+		  			$(".gamenotify").hide();
+		  		}, 4000)
+				}
 	  	}
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
 

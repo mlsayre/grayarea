@@ -15,11 +15,16 @@
   <% end %>
 
   <div><%= f.label :username %><br />
-    <%= f.text_field :username, :autofocus => true %></div>
+    <%= f.text_field :username, :autofocus => true %>
+  </div>
+  <div><%= f.label :aboutme, "About Me!" %><br />
+    <%= f.text_area :aboutme, size: "30x4", :class => "aboutme" %>
+    <div class="aboutmecharcount"><span>Characters remaining: </span><span class="charnum"></span></div>
+  </div>
 
   <% if !current_user.provider %>
     <div class="field">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.label :password %> <i>(leave blank for no change)</i><br />
       <%= f.password_field :password, autocomplete: "off" %>
       <% if @minimum_password_length %>
         <br />
@@ -33,7 +38,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.label :current_password %> <i>(to confirm changes)</i><br />
       <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
   <% end %>
@@ -45,3 +50,17 @@
 
 <%= link_to "Back", main_path %>
 </div>
+
+<script>
+$(document).ready(function() {
+  $(".charnum").text(100 - $(".aboutme").val().length)
+  $(".aboutme").on("keyup", function(e) {
+    var charnum = 100 - $(".aboutme").val().length;
+    $(".charnum").text(charnum)
+    if (charnum < 1) {
+      $(".aboutme").val($(".aboutme").val().slice(0,100))
+      $(".charnum").text("0")
+    }
+  })
+})
+</script>

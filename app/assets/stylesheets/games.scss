@@ -182,6 +182,21 @@ a.button {
     font-size: 14px;
     cursor: pointer;
 }
+.reglegal {
+    font-size: 14px;
+    width: 80%;
+    margin: 0 auto;
+    background: rgba(0,200,10,.5);
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+.aboutmecharcount {
+    font-size: 15px;
+    position: relative;
+    bottom: 3px;
+    margin-bottom: 12px;
+    color: darkred;
+}
 .howtoplay {
   font-size: 15px;
 }
@@ -432,9 +447,13 @@ img.trackedimage {
   left: 0;
   right: 0;
   width: 74%;
-  padding: 1px;
+  padding: 3px;
   top: 0px;
   text-shadow: grey 0 0 3px;
+  z-index: 11;
+    background: rgba(0,0,0,.75);
+    height: auto !important;
+    border-radius: 5px;
 }
 .allwords li.targetword {
   border: 1px solid darkgreen;
@@ -814,7 +833,7 @@ form#new_game {
   margin: 0 auto;
   left: 0;
   right: 0;
-  z-index: 5;
+  z-index: 11;
   width: 60%;
   text-align: center;
   background-color: aliceblue;
@@ -839,7 +858,7 @@ form#new_game {
   border-radius: 10px;
   position: relative;
   top: 66%;
-  transition: .35s all;
+  transition: .5s all;
 }
 span.summarytitle {
     position: absolute;
@@ -849,11 +868,25 @@ span.summarytitle {
     color: white;
     font-size: 20px;
     text-shadow: blue 2px 2px 6px;
+    transition: .5s all;
+}
+span.summarytitle.summaryended {
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    bottom: 94%;
+    top: auto;
+    width: fit-content;
+    transform: rotate(360deg);
+    color: white;
+    font-size: 22px;
+    text-shadow: blue 2px 2px 6px;
 }
 .wordsummary {
   margin: 5px auto;
   width: 94%;
-  transition: .45s all;
+  transition: .6s all;
   background: rgba(51, 204, 51, 0.8);
   padding: 0 3px 0 6px;
   border-radius: 10px;
@@ -929,7 +962,18 @@ textarea.sumword {
   height: 100%;
   background-color: black;
   opacity: .8;
-  z-index: 4;
+  z-index: 10;
+}
+.pagecoverabout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .8;
+  z-index: 7;
 }
 .unclickable {
   /*pointer-events: none;*/
@@ -1174,7 +1218,7 @@ span.pupspoilershow {
   position: absolute;
   border-radius: 5%;
   opacity: .28;
-  z-index: 5;
+  z-index: 11;
   display:none;
   pointer-events: none;
 }
@@ -1419,7 +1463,7 @@ img.anim_correct.animating {
 }
 div.anim_correct.inarow.animating {
   transform: translateY(55%);
-  z-index: 5;
+  z-index: 11;
   background-color: rgba(144, 238, 144, .8);
   border-radius: 20%;
   padding: 0;
@@ -1511,7 +1555,7 @@ span.pagebody {
   margin: 0 auto;
   left: 0;
   right: 0;
-  z-index: 5;
+  z-index: 11;
   width: 60%;
   max-width: 282px;
   text-align: center;
@@ -2556,7 +2600,7 @@ span.youhavetext {
   background-color: ghostwhite;
   display: none;
   position: fixed;
-  z-index: 5;
+  z-index: 11;
   left: 0;
   right: 0;
   top: 42%;
@@ -2641,6 +2685,7 @@ button.revealwords {
   background: transparent;
   transition: all 2250ms;
   width: auto !important;
+  z-index: 88;
 }
 .revealwords.shrunken, .menudialogrevealwords.shrunken {
   transform: scale(0) rotate(980deg);
@@ -2657,6 +2702,19 @@ button.revealwords {
   border-radius: 50%;
   top: 42%;
   left: 98%;
+  right: 0;
+  margin: 0 auto;
+  z-index: 8;
+}
+.giveravatar.avatarclick {
+  transition: .6s all;
+}
+span.giveravatar.avatarmoved {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 112%;
+  transform: scale(1.5);
 }
 .avatarpart img {
   width: 100%;
@@ -2665,6 +2723,19 @@ button.revealwords {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+.menudialog.menudialogaboutgiver {
+    height: 10%;
+    background: white;
+    top: 22%;
+    z-index: 9;
+}
+@media (max-width: 499px) {
+  .menudialog.menudialogaboutgiver {
+    height: 10%;
+    background: white;
+    top: 19.5%;
+  }
 }
 .allwords.guesswordslist, .allwords.givewordslist {
     position: absolute;
@@ -2984,7 +3055,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     position: absolute;
     top: 12px;
     left: 12px;
-    z-index: 5;
+    z-index: 11;
 }
 .setmainhome img {
   width: 100%;
@@ -2994,7 +3065,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 5;
+    z-index: 11;
 }
 .setsubset img {
   width: 100%;
