@@ -559,6 +559,14 @@ span.guessermsg {
 .hints textarea:focus {
   outline: none;
 }
+@media (min-width: 500px) {
+  .hints textarea {
+    top: 30px !important;
+  }
+  .givesummary {
+    top: 68.5% !important;
+}
+}
 .notifyarea {
   height: 37px;
   position: relative;
@@ -760,22 +768,24 @@ button.deletegame img, button.deletegameoff img {
     width: 100%;
 }
 button.deletegameoff {
-    cursor: auto;
+    /*cursor: auto;
     pointer-events: none;
-    background-color: rgba(0,100,0,.5);
+    background-color: rgba(0,100,0,.5);*/
 }
 button.deletegameoff img {
-    opacity: .5;
+    /*opacity: .5;*/
 }
 .deletenum {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0px;
+  left: 80%;
+  bottom: 53%;
   margin: 0 auto;
-  font-size: 30px;
+  font-size: 16px;
   color: floralwhite;
-  font-weight: bold;
+  font-weight: 400;
+  background-color: red;
+  padding: 1px 7px;
+  border-radius: 100%;
 }
 button.button.thumbdown {
   right: 4px;
@@ -820,6 +830,95 @@ form#new_game {
   font-size: 11px;
   width: 80%;
   margin: 24px auto 0;
+}
+.givesummary {
+  background: rgba(19, 85, 72, .94);
+  padding: 1px 0px;
+  width: 92%;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
+  top: 66%;
+  transition: .35s all;
+}
+span.summarytitle {
+    position: absolute;
+    right: -8%;
+    top: 39%;
+    transform: rotate(90deg);
+    color: white;
+    font-size: 20px;
+    text-shadow: blue 2px 2px 6px;
+}
+.wordsummary {
+  margin: 5px auto;
+  width: 94%;
+  transition: .45s all;
+  background: rgba(51, 204, 51, 0.8);
+  padding: 0 3px 0 6px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+@media (min-width: 500px) {
+  .offscreen {
+    transform: translateY(-1100px) scale(0.3) !important;
+  }
+  .hints.submitted .hintlabel {
+    top: 104px !important;
+    font-size: 20px !important;
+  }
+}
+.offscreen {
+  transform: translateY(-800px) scale(0.3);
+}
+.hints.submitted .hintlabel {
+    position: relative;
+    top: 75px;
+    left: 0;
+    right: 0;
+}
+
+span.hintwordsummary {
+    width: 62%;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-weight: 700;
+}
+span.sumword {
+    margin-left: 18px;
+}
+span.hintnumsummary {
+    width: 18%;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-weight: 700;
+}
+span.hinteditbutton {
+    width: 16%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.hinteditsummary img {
+    width: 70%;
+    display: block;
+    position: relative;
+    top: 3px;
+}
+textarea.sumword {
+  background: transparent;
+    border-bottom: 1px solid #3498DB;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    resize: none;
+    width: 100%;
+    cursor: pointer;
+    pointer-events: none;
+}
+.sumnum {
+  font-weight: 700;
 }
 .pagecover, .pagecoverunclickable {
   display: none;
@@ -2541,6 +2640,7 @@ button.revealwords {
   height: 90px;
   background: transparent;
   transition: all 2250ms;
+  width: auto !important;
 }
 .revealwords.shrunken, .menudialogrevealwords.shrunken {
   transform: scale(0) rotate(980deg);

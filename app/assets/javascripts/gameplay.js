@@ -312,6 +312,16 @@ var ready = function() {
 		}
 	}
 
+	$(".hintenter.hint1word").on("keyup", function() {
+		$(".hws1 .sumword").text($(".hintenter.hint1word").val().toUpperCase())
+	})
+	$(".hintenter.hint2word").on("keyup", function() {
+		$(".hws2 .sumword").text($(".hintenter.hint2word").val().toUpperCase())
+	})
+	$(".hintenter.hint3word").on("keyup", function() {
+		$(".hws3 .sumword").text($(".hintenter.hint3word").val().toUpperCase())
+	})
+
 	var hint1numselected = 0;
 	var hint2numselected = 0;
 	var hint3numselected = 0;
@@ -319,16 +329,19 @@ var ready = function() {
 		$(".hint1number button").removeClass("wordnumselected");
 		$(this).addClass("wordnumselected");
 		hint1numselected = parseInt($(this).attr("value"));
+		$(".hns1 .sumnum").text($(this).attr("value"))
 	})
 	$(".hint2number button").on("click", function() {
 		$(".hint2number button").removeClass("wordnumselected");
 		$(this).addClass("wordnumselected");
 		hint2numselected = parseInt($(this).attr("value"));
+		$(".hns2 .sumnum").text($(this).attr("value"))
 	})
 	$(".hint3number button").on("click", function() {
 		$(".hint3number button").removeClass("wordnumselected");
 		$(this).addClass("wordnumselected");
 		hint3numselected = parseInt($(this).attr("value"));
+		$(".hns3 .sumnum").text($(this).attr("value"))
 	})
 
 	$(".submithint1").click(function() {
@@ -339,6 +352,8 @@ var ready = function() {
 		}
 		hint1 = enteredtext.toUpperCase();
 		submithint1(hint1, hint1numselected);
+		$(".givesummary").removeClass("offscreen");
+		$(".wordsummary1").removeClass("offscreen");
 	});
 
 	$(".submithint2").click(function() {
@@ -349,6 +364,7 @@ var ready = function() {
 		}
 		hint2 = enteredtext.toUpperCase();
 		submithint2(hint2, hint2numselected);
+		$(".wordsummary2").removeClass("offscreen");
 	});
 
 	$(".submithint3").click(function() {
@@ -359,6 +375,7 @@ var ready = function() {
 		}
 		hint3 = enteredtext.toUpperCase();
 		submithint3(hint3, hint3numselected);
+		$(".wordsummary3").removeClass("offscreen");
 	});
 
 	$(".skiphint2").click(function() {
@@ -372,17 +389,17 @@ var ready = function() {
 			errorbox("Please enter a hint word.");
 			return false;
 		} else if (word.length > 28) {
-			errorbox("Please keep hint shorter than 29 characters. Reminder: just give one word or two words if it's somebody's name.");
+			errorbox('Please keep "' + word.toUpperCase() + '" shorter than 29 characters. Reminder: just give one word or two joined words if it is a name.');
 			return false;
 		} else if (!word.match(letters)) {
-			errorbox("Please make sure your hint contains letters only.");
+			errorbox('Please make sure your hint "' + word.toUpperCase() + '" contains letters only.');
 			return false;
 		} else if (numberofwords > 1) {
-			errorbox("Please make sure your hint is one word only.");
+			errorbox('Please make sure your hint "' + word.toUpperCase() + '" is one word only.');
 			return false;
 		}
 		if (num === 0) {
-			errorbox("Please select a number of words this hint applies to.");
+			errorbox('Please select a number of words "' + word.toUpperCase() + '" applies to.');
 			return false;
 		}
 	}
@@ -401,13 +418,28 @@ var ready = function() {
 	$(".deletegame").click(function() {
 		$(".messagetitle").text("Delete game?")
 		$(".messageinfo").html("No good hints coming to mind? You may " +
-			"delete this game. Note you can only delete at most one out of every 3 games. Once you've created " +
-			"another 2 games, you'll be able to delete another unfinished game.");
+			"delete this game. Note you have a limited number of delete credits, but receive a new credit for " +
+			"every two games you successfully create. ");
 		$(".messageaction").html('<button class="button deleteunfinished">Delete the Game</button>' +
 			                       '<button class="button closemessagebox">Cancel</button>');
 		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
 		$(".deleteunfinished").click(function() {
 			givingdeletegame();
+			closemessagebox();
+		})
+		$(".closemessagebox").click(function() { closemessagebox(); });
+		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
+		$(".messagebox").show();
+		$(".pagecover").show();
+	});
+
+	$(".deletegameoff").click(function() {
+		$(".messagetitle").text("Sorry!")
+		$(".messageinfo").html("You don't have enough delete credits to delete this board. For every 2 games you " +
+			"successfully create, you'll receive one delete credit. Good luck!");
+		$(".messageaction").html('<button class="button closemessagebox">Cancel</button>');
+		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		$(".deleteunfinished").click(function() {
 			closemessagebox();
 		})
 		$(".closemessagebox").click(function() { closemessagebox(); });
@@ -437,26 +469,26 @@ var ready = function() {
 		} else {
 			wordword = "words"
 		}
-		$(".messagetitle").text("Submit Hint?")
-		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
-		                        num + '</bold> ' + wordword + '. Submit this hint and move to the next hint?');
-		$(".messageaction").html('<button class="button submithint1final">Submit Hint 1</button>' +
-			                       '<button class="button closemessagebox">Cancel</button>');
-		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
-		$(".submithint1final").click(function() {
+		// $(".messagetitle").text("Submit Hint?")
+		// $(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
+		//                         num + '</bold> ' + wordword + '. Submit this hint and move to the next hint?');
+		// $(".messageaction").html('<button class="button submithint1final">Submit Hint 1</button>' +
+		// 	                       '<button class="button closemessagebox">Cancel</button>');
+		// $(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		// $(".submithint1final").click(function() {
 			$(".hint1").hide();
-			$(".firstinfoword").text(hint);
-			$(".firstinfonum").text(num + " " + wordword);
+			// $(".firstinfoword").text(hint);
+			// $(".firstinfonum").text(num + " " + wordword);
 			$(".hint2").show();
-			closemessagebox();
+			// closemessagebox();
 			// if (num === 6) {
 			// 	skiphint("true");
 			// }
-		})
-		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
-		$(".messagebox").show();
-		$(".pagecover").show();
+		// })
+		// $(".closemessagebox").click(function() { closemessagebox(); });
+		// $(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
+		// $(".messagebox").show();
+		// $(".pagecover").show();
 	}
 
 	function submithint2(hint, num) {
@@ -465,26 +497,26 @@ var ready = function() {
 		} else {
 			wordword = "words"
 		}
-		$(".messagetitle").text("Submit Second Hint?")
-		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
-		                        num + '</bold> ' + wordword + '. Submit this hint and move to the final hint?');
-		$(".messageaction").html('<button class="button submithint2final">Submit Hint 2</button>' +
-			                       '<button class="button closemessagebox">Cancel</button>');
-		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
-		$(".submithint2final").click(function() {
+		// $(".messagetitle").text("Submit Second Hint?")
+		// $(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
+		//                         num + '</bold> ' + wordword + '. Submit this hint and move to the final hint?');
+		// $(".messageaction").html('<button class="button submithint2final">Submit Hint 2</button>' +
+		// 	                       '<button class="button closemessagebox">Cancel</button>');
+		// $(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		// $(".submithint2final").click(function() {
 			$(".hint2").hide();
-			$(".secondinfoword").text(hint);
-			$(".secondinfonum").text(num + " " + wordword);
+			// $(".secondinfoword").text(hint);
+			// $(".secondinfonum").text(num + " " + wordword);
 			$(".hint3").show();
-			closemessagebox();
+			// closemessagebox();
 			// if (num === 6) {
 			// 	skiphint("true");
 			// }
-		})
-		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
-		$(".messagebox").show();
-		$(".pagecover").show();
+		// })
+		// $(".closemessagebox").click(function() { closemessagebox(); });
+		// $(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
+		// $(".messagebox").show();
+		// $(".pagecover").show();
 	}
 
 	function submithint3(hint, num) {
@@ -493,20 +525,45 @@ var ready = function() {
 		} else {
 			var wordword = "words"
 		}
-		$(".messagetitle").text("Submit Final Hint?")
-		$(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
-		                        num + '</bold> ' + wordword + '. Submit final hint and let people play the game?');
-		$(".messageaction").html('<button class="button submithint3final">Submit - Ready for Players!</button>' +
-														 '<button class="button submitredo">Start Over</button>' +
-			                       '<button class="button closemessagebox">Cancel</button>');
-		$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
-		$(".submitredo").click(function() {
-			$(".hint3").hide();
-			$(".hint1").show();
-			$(".hintenter").val("");
-			closemessagebox();
-		})
+		// $(".messagetitle").text("Submit Final Hint?")
+		// $(".messageinfo").html('You have entered the hint "' + hint + '" which applies to <bold>' +
+		//                         num + '</bold> ' + wordword + '. Submit final hint and let people play the game?');
+		// $(".messageaction").html('<button class="button submithint3final">Submit - Ready for Players!</button>' +
+		// 												 '<button class="button submitredo">Start Over</button>' +
+		// 	                       '<button class="button closemessagebox">Cancel</button>');
+		// $(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+		// $(".submitredo").click(function() {
+			// $(".hint3").hide();
+			// $(".hint1").show();
+			$(".submithint1").replaceWith('<button class="button submithint3final">Submit - Ready for Players!</button>')
+			$(".submithint2").replaceWith('<button class="button submithint3final">Submit - Ready for Players!</button>')
+			$(".submithint3").replaceWith('<button class="button submithint3final">Submit - Ready for Players!</button>')
+
+			// $(".hintenter").val("");
+			// closemessagebox();
+		// })
 		$(".submithint3final").click(function() {
+			var enteredtext = $(".hint1word").val();
+			var val = validate(enteredtext, hint1numselected);
+			if (val === false) {
+				return false;
+			}
+			hint1 = enteredtext.toUpperCase();
+			var enteredtext = $(".hint2word").val();
+			var val = validate(enteredtext, hint2numselected);
+			if (val === false) {
+				return false;
+			}
+			hint2 = enteredtext.toUpperCase();
+			var enteredtext = $(".hint3word").val();
+			var val = validate(enteredtext, hint3numselected);
+			if (val === false) {
+				return false;
+			}
+			hint3 = enteredtext.toUpperCase();
+			$(".hint1").hide();
+			$(".hint2").hide();
+			$(".hint3").show();
 			$.ajax({
         url: "/games/submithints",
         type: "POST",
@@ -537,12 +594,12 @@ var ready = function() {
 					}
           $(".hint3").hide();
           $(".hintheadline").hide();
-          $(".submittedword1").text(hint1);
-          $(".submittednum1").text(hint1numselected + " " + wordword1);
-          $(".submittedword2").text(hint2);
-          $(".submittednum2").text(hint2numselected + " " + wordword2);
-          $(".submittedword3").text(hint3);
-          $(".submittednum3").text(hint3numselected + " " + wordword3);
+          // $(".submittedword1").text(hint1);
+          // $(".submittednum1").text(hint1numselected + " " + wordword1);
+          // $(".submittedword2").text(hint2);
+          // $(".submittednum2").text(hint2numselected + " " + wordword2);
+          // $(".submittedword3").text(hint3);
+          // $(".submittednum3").text(hint3numselected + " " + wordword3);
           $(".submitted").show();
           $(".buttons-middle").removeClass("hidden");
 					closemessagebox();
@@ -551,11 +608,30 @@ var ready = function() {
         	}
         })
 		})
-		$(".closemessagebox").click(function() { closemessagebox(); });
-		$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
-		$(".messagebox").show();
-		$(".pagecover").show();
+		// $(".closemessagebox").click(function() { closemessagebox(); });
+		// $(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
+		// $(".messagebox").show();
+		// $(".pagecover").show();
 	}
+
+	$(".hes1").click(function(e) {
+		e.preventDefault();
+		$(".hint2").hide();
+		$(".hint3").hide();
+		$(".hint1").show()
+	})
+	$(".hes2").click(function(e) {
+		e.preventDefault();
+		$(".hint1").hide();
+		$(".hint3").hide();
+		$(".hint2").show()
+	})
+	$(".hes3").click(function(e) {
+		e.preventDefault();
+		$(".hint1").hide();
+		$(".hint2").hide();
+		$(".hint3").show()
+	})
 
 	function connectionError() {
 		$("body").html("Please check your connection. Please reload game when you have reconnected to the internet.")

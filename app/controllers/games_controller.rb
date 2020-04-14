@@ -727,8 +727,12 @@ class GamesController < ApplicationController
 			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num], 
       :hintword3 => params[:word3], :hintnum3 => params[:word3num])
     current_user.increment!(:lifetimegamesgiver, by = 1)
-    if current_user.giverdeletegamesleft > 0
-      current_user.decrement!(:giverdeletegamesleft, by = 1)
+    
+    if current_user.giverdeletecounter < 1
+      current_user.increment!(:giverdeletecounter, by = 1)
+    else
+      current_user.update(:giverdeletecounter => 0)
+      current_user.increment!(:giverdeletegamesleft, by = 1)
     end
 
     Game.checkfeats(current_user.id, current_user.id, "giver")
@@ -737,16 +741,21 @@ class GamesController < ApplicationController
   end
 
   def givingdeletegame
-    @thisgame = Game.find(params[:game_id])
-    @thisgame.delete
+    if current_user.giverdeletegamesleft > 0
+      @thisgame = Game.find(params[:game_id])
+      @thisgame.delete
+      current_user.decrement!(:giverdeletegamesleft, by = 1)
+    
 
-    current_user.update(:giverdeletegamesleft => 2)
+      respond_to do |format|
+        format.json  { render json: {} , status: 200 }
+      end
 
-    respond_to do |format|
-      format.json  { render json: {} , status: 200 }
+      flash[:notice] = 'Game was successfully deleted.'
+    else
+      render body: nil
+      flash[:notice] = 'Sorry, cannot delete. You do not have enough delete credits'
     end
-
-    flash[:notice] = 'Game was successfully deleted.'
   end
 
   def guessingreportgame

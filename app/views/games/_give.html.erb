@@ -28,8 +28,11 @@
 				</div>
 				<div class="givesubbuttons">
 					<button class="button submithint1">Submit First Hint</button>
-					<% if current_user.giverdeletegamesleft == 0 %>
-						<button class="button deletegame"><img src="/assets/Garbage.png"></button>
+					<% if current_user.giverdeletegamesleft > 0 %>
+						<button class="button deletegame">
+							<img src="/assets/Garbage.png">
+							<span class="deletenum"><%= current_user.giverdeletegamesleft %></span>
+						</button>
 					<% else %>
 					  <button class="button deletegameoff">
 					  	<img src="/assets/Garbage.png">
@@ -53,7 +56,7 @@
 					  <button class="button" value="6">6</button>
 					</div>
 				</div>
-				<div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div>
+				<!-- <div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div> -->
 				<div class="givesubbuttons">
 					<button class="button submithint2">Submit Second Hint</button>
 					<% if current_user.giverdeletegamesleft == 0 %>
@@ -65,7 +68,7 @@
 					  </button>
 					<% end %>
 				</div>
-				<button class="menu"><img src="/assets/menu.png"></button>
+				<button class="menu"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_menu.png"></button>
 				<!--<button class="button skiphint2">Skip Second Hint</button>-->
 			</div>
 			<div class="hints hint3 hidden">
@@ -82,8 +85,8 @@
 					  <button class="button" value="6">6</button>
 					</div>
 				</div>
-				<div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div>
-				<div class="firstinfo">(Second hint was: <span class="secondinfoword"></span> for <span class="secondinfonum">.</span>)</div>
+				<!-- <div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div>
+				<div class="firstinfo">(Second hint was: <span class="secondinfoword"></span> for <span class="secondinfonum">.</span>)</div> -->
 				<div class="givesubbuttons">
 					<button class="button submithint3">Submit Third Hint</button>
 					<% if current_user.giverdeletegamesleft == 0 %>
@@ -95,19 +98,19 @@
 					  </button>
 					<% end %>
 				</div>
-				<button class="menu"><img src="/assets/menu.png"></button>
+				<button class="menu"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_menu.png"></button>
 				<!--<button class="button skiphint2">Skip Second Hint</button>-->
 			</div>
 			<div class="hints submitted hidden">
-				<span class="hintlabel">You've submitted your game!</span>
-				<div class="wordnumarea">
+				<span class="hintlabel">You've submitted your game, thank you!</span>
+				<!-- <div class="wordnumarea">
 					<span class="hintnumheading">Your hints: 
 						<span class="submittedword1"></span> (<span class="submittednum1"></span>),&nbsp;
 						<span class="submittedword2"></span> (<span class="submittednum2"></span>), and&nbsp;
 						<span class="submittedword3"></span> (<span class="submittednum3"></span>)
 					</span>
-				</div>
-				<button class="menu"><img src="/assets/menu.png"></button>
+				</div> -->
+				<button class="menu"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_menu.png"></button>
 			</div>
 		</div>
 	</div>
@@ -145,5 +148,24 @@
         <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
       <% end %>
     </div>
+  </div>
+
+  <div class="givesummary offscreen">
+  	<div class="wordsummary wordsummary1 offscreen">
+	  	<span class="hintwordsummary hws1"><span class="sumword"></span></span>
+	  	<span class="hintnumsummary hns1"><span></span><span class="sumnum">-</span></span>
+	  	<span class="hinteditbutton"><a class="hinteditsummary hes1" href="#"><img src="/assets/btn_editInfo.png"></a></span>
+	  </div>
+	  <div class="wordsummary wordsummary2 offscreen">
+	  	<span class="hintwordsummary hws2"><span class="sumword"></span></span>
+	  	<span class="hintnumsummary hns2"><span></span><span class="sumnum">-</span></span>
+	  	<span class="hinteditbutton"><a class="hinteditsummary hes2" href="#"><img src="/assets/btn_editInfo.png"></a></span>
+	  </div>
+	  <div class="wordsummary wordsummary3 offscreen">
+	  	<span class="hintwordsummary hws3"><span class="sumword"></span></span>
+	  	<span class="hintnumsummary hns3"><span></span><span class="sumnum">-</span></span>
+	  	<span class="hinteditbutton"><a class="hinteditsummary hes3" href="#"><img src="/assets/btn_editInfo.png"></a></span>
+	  </div>
+	  <span class="summarytitle">SUMMARY</span>
   </div>
 </section>
