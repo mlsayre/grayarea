@@ -112,6 +112,7 @@ class PagesController < ApplicationController
 
 	def updateavatar
 		current_user.update(:avatar_content_type => params[:avstring])
+		current_user.update(:aboutme => params[:aboutme])
 
     respond_to do |format|
       format.json  { render json: {} , status: 200 }

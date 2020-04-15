@@ -66,8 +66,28 @@
 
 	<div class="avlowerbuttons">
 		<a class="avbutton-random" href="#"></a>
-		<a class="avbutton-save" href="#"></a>
+		<div class="aboutmeupdate">
+			<textarea id="aboutme" class="aboutme" rows="6" cols="18"><%= current_user.aboutme %></textarea>
+			<div class="aboutmecharcount"><span>Characters: </span><span class="charnum"></span>/100</div>
+		</div>
+		<a class="avbutton-save avatarabout" href="#"></a>
 		<a class="avbutton-home" href="/main"><img src="/assets/Home-48.png"></a>
 	</div>
+
+
 	
 </section>
+
+<script>
+$(document).ready(function() {
+  $(".charnum").text($(".aboutme").val().length)
+  $(".aboutme").on("keyup", function(e) {
+    var charnum = $(".aboutme").val().length;
+    $(".charnum").text(charnum)
+    if (charnum < 1) {
+      $(".aboutme").val($(".aboutme").val().slice(0,100))
+      $(".charnum").text("0")
+    }
+  })
+})
+</script>

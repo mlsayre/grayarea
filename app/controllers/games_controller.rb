@@ -391,7 +391,7 @@ class GamesController < ApplicationController
       @game = @posgames.first
 
       respond_to do |format|
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to @game }
         format.json { render :show, status: :created, location: @game }
       end
     else
@@ -409,7 +409,7 @@ class GamesController < ApplicationController
 
   		respond_to do |format|
         if @game.save
-          format.html { redirect_to @game, notice: 'Game was successfully created.' }
+          format.html { redirect_to @game }
           format.json { render :show, status: :created, location: @game }
         else
           format.html { render :new }
@@ -425,7 +425,7 @@ class GamesController < ApplicationController
       @game = @posgames.first
 
       respond_to do |format|
-        format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'Game was successfully created.' }
+        format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
       end
     else
       @allwords = File.new("config/wordlist").readlines.sample(15)
@@ -442,7 +442,7 @@ class GamesController < ApplicationController
 
       respond_to do |format|
         if @game.save
-          format.js { render :js => "window.location.href = '#{game_path(@game)}'", notice: 'Game was successfully created.' }
+          format.js { render :js => "window.location.href = '#{game_path(@game)}'" }
         else
           format.html { render :new }
           format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -754,7 +754,7 @@ class GamesController < ApplicationController
       flash[:notice] = 'Game was successfully deleted.'
     else
       render body: nil
-      flash[:notice] = 'Sorry, cannot delete. You do not have enough delete credits'
+      flash[:notice] = 'Sorry, cannot delete. You do not have enough delete credits.'
     end
   end
 

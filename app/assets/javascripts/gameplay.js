@@ -263,6 +263,7 @@ var ready = function() {
 
 		function revealWords() {
 			$(".pagecoverabout").hide();
+			$(".pagecoveraboutstart").removeClass("pagecoveraboutstart")
 			$(".menudialogrevealwords").addClass("shrunken");
 			$(".revealwords").addClass("shrunken");
 			for (var i = 0; i < wordindarr.length; i++) {
@@ -1872,13 +1873,15 @@ var ready = function() {
 				var newactive = $(this).find(".compitem.avactive").attr("data-avatarcomponent");
 				newpartarray.push(newactive);
 			})
+			var aboutmestring = $("#aboutme").val();
 			var newpartstring = newpartarray.join("-");
 			$(".avatar-customize").attr("data-usercomponents", newpartstring);
 			$.ajax({
 	      url: "/pages/updateavatar",
 	      type: "POST",
 	      dataType:'json',
-	      data: { 'avstring' : newpartstring}
+	      data: { 'avstring' : newpartstring,
+	              'aboutme' : aboutmestring}
 	    })
 	    .done(function() {
 	    	$(".compindexshow").text("Saved!");

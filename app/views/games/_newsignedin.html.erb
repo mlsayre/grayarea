@@ -58,7 +58,9 @@
     </div>
   </div>
 
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
 
   <div class="buttonarea">
     <div class="buttons-left">

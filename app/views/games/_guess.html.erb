@@ -274,7 +274,7 @@
 
 	<div class="pagecover"></div>
 	<div class="pagecoverunclickable"></div>
-	<div class="pagecoverabout"></div>
+	<div class="pagecoverabout pagecoveraboutstart"></div>
 	<div class="menudialog menudialogrevealwords">
     <button class="revealwords">Reveal words!</button>
   </div>
@@ -336,7 +336,9 @@
 	<% if current_user.username == "Matt" %>
 	  <div class="gd button">Delete game</div>
 	<% end %>
-	<p id="notice"><%= notice %></p>
+	<% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
 </section>
 
 <script>

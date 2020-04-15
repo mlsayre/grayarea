@@ -19,7 +19,7 @@
   </div>
   <div><%= f.label :aboutme, "About Me!" %><br />
     <%= f.text_area :aboutme, size: "30x4", :class => "aboutme" %>
-    <div class="aboutmecharcount"><span>Characters remaining: </span><span class="charnum"></span></div>
+    <div class="aboutmecharcount"><span>Characters: </span><span class="charnum"></span>/100</div>
   </div>
 
   <% if !current_user.provider %>
@@ -53,9 +53,9 @@
 
 <script>
 $(document).ready(function() {
-  $(".charnum").text(100 - $(".aboutme").val().length)
+  $(".charnum").text($(".aboutme").val().length)
   $(".aboutme").on("keyup", function(e) {
-    var charnum = 100 - $(".aboutme").val().length;
+    var charnum = $(".aboutme").val().length;
     $(".charnum").text(charnum)
     if (charnum < 1) {
       $(".aboutme").val($(".aboutme").val().slice(0,100))

@@ -197,6 +197,9 @@ a.button {
     margin-bottom: 12px;
     color: darkred;
 }
+.avlowerbuttons .aboutmecharcount {
+  bottom: 1px;
+}
 .howtoplay {
   font-size: 15px;
 }
@@ -975,6 +978,10 @@ textarea.sumword {
   opacity: .8;
   z-index: 7;
 }
+.pagecoveraboutstart {
+  pointer-events: none;
+  cursor: auto;
+}
 .unclickable {
   /*pointer-events: none;*/
 }
@@ -1380,45 +1387,44 @@ select:focus, select:active {
   color: black !important;
 }
 #notice {
-  font-size: 13px;
+  font-size: 18px;
   text-align: center;
-  color: red;
-  -moz-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Firefox */
-  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Safari and Chrome */
-  -o-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Opera */
-  animation: cssAnimation 0s ease-in 5s forwards;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+  color: midnightblue;
+  animation: cssAnimation 5.5s 1 forwards;
   margin: 0 auto;
-  position: fixed;
-  top: 40%;
-  max-width: 480px;
   left: 0;
   right: 0;
-  text-shadow:
-       1px 1px 0 white,
-     -1px -1px 0 white,  
-      1px -1px 0 white,
-      -1px 1px 0 white,
-       1px 1px 0 white;
-  padding: 0;
-  background-color: lightgrey;
+  position: fixed;
+  top: 40%;
+  width: 80%;
+  max-width: 480px;
+  text-shadow: 3px 3px 5px lightslategrey;
+  background-color: white;
+  z-index: 12;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid lightgrey;
 }
 @keyframes cssAnimation {
-  to {
-      width:0;
-      height:0;
-      overflow:hidden;
+  from {
+      transform: rotate(180deg);
+      left: -202%;
   }
-}
-@-webkit-keyframes cssAnimation {
+  20% {
+      transform: rotate(4deg);
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+  }
+  80% {
+      transform: rotate(-4deg);
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+  }
   to {
-      width:0;
-      height:0;
-      visibility:hidden;
+      transform: rotate(-180deg);
+      left: 121%;
   }
 }
 .anim_correct {
@@ -2409,6 +2415,13 @@ span.titlepupnum {
 .avatar-customize .avatarpart .avactive {
   display: block;
 }
+#aboutme {
+  resize: none;
+  border-radius: 8px;
+  padding: 8px;
+  border: 2px solid darkgrey;
+}
+
 .partbuttons {
   text-align: center;
   margin-top: 5%;
@@ -2495,8 +2508,24 @@ a.avbutton-deco.avpartactive {
     padding: 0;
     margin: 0 6px;
 }
+.avlowerbuttons * {
+    vertical-align: top;
+}
+.avatarabout {
+      display: inline-block;
+    width: 80px;
+    height: 80px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0 6px;
+}
 .avlowerbuttons img {
     width: 100%;
+}
+.aboutmeupdate {
+    display: inline-block;
 }
 a.avbutton-random {
     background: url(https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_avatarRandom.png);

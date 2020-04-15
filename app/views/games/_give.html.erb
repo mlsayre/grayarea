@@ -59,8 +59,11 @@
 				<!-- <div class="firstinfo">(First hint was: <span class="firstinfoword"></span> for <span class="firstinfonum">.</span>)</div> -->
 				<div class="givesubbuttons">
 					<button class="button submithint2">Submit Second Hint</button>
-					<% if current_user.giverdeletegamesleft == 0 %>
-						<button class="button deletegame"><img src="/assets/Garbage.png"></button>
+					<% if current_user.giverdeletegamesleft > 0 %>
+						<button class="button deletegame">
+							<img src="/assets/Garbage.png">
+							<span class="deletenum"><%= current_user.giverdeletegamesleft %></span>
+						</button>
 					<% else %>
 					  <button class="button deletegameoff">
 					  	<img src="/assets/Garbage.png">
@@ -89,8 +92,11 @@
 				<div class="firstinfo">(Second hint was: <span class="secondinfoword"></span> for <span class="secondinfonum">.</span>)</div> -->
 				<div class="givesubbuttons">
 					<button class="button submithint3">Submit Third Hint</button>
-					<% if current_user.giverdeletegamesleft == 0 %>
-						<button class="button deletegame"><img src="/assets/Garbage.png"></button>
+					<% if current_user.giverdeletegamesleft > 0 %>
+						<button class="button deletegame">
+							<img src="/assets/Garbage.png">
+							<span class="deletenum"><%= current_user.giverdeletegamesleft %></span>
+						</button>
 					<% else %>
 					  <button class="button deletegameoff">
 					  	<img src="/assets/Garbage.png">
@@ -126,7 +132,7 @@
 
 	<div class="pagecover"></div>
 	<div class="pagecoverunclickable"></div>
-	<div class="pagecoverabout"></div>
+	<div class="pagecoverabout pagecoveraboutstart"></div>
 	<div class="menudialog menudialogrevealwords">
     <button class="revealwords">Reveal words!</button>
   </div>
