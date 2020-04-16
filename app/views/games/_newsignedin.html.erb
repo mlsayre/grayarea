@@ -5,7 +5,11 @@
 <section class="titlesignedin">
   <%= link_to(image_tag("/assets/btn_options.png", :alt => "How to Play", :title => "How to Play"), settings_pages_path, :class => "menunav opensettings") %>
   <div class="titlewelcome">
-    Welcome back, <%= current_user.username %>!
+    <% if current_user.lifetimegamesguesser < 3 %>
+      Welcome, <%= current_user.username %>!
+    <% else %>
+      Welcome back, <%= current_user.username %>!
+    <% end %>
     <span class="titleavatar">
       <div class="avatarpart avatar_bg">
         <img src=<%= @avguesserbgurl %>>
@@ -85,6 +89,7 @@
     <div class="buttons-middle">
       <%= link_to(image_tag("/assets/btn_play.png", :alt => "Play", :title => "Play Word Stretch"), howtoplay_pages_path, :class => "bigplaybutton") %>
       <div class="mainmenubuttons">
+        <div class="mmheading"><%= @playheading %></div>
         <%= form_for(@game) do |f| %>
 
           <div class="actions">
@@ -102,6 +107,11 @@
         <% if current_user.lifetimegamesguesser < 3 %>
           <span class="guessermsg">(Play 3 games as Guesser to activate Give button)</span>
         <% end %>
+
+        <%= link_to yourgames_pages_path, :class => "button seeyourgames" do %>
+          <span>See Your Games</span>
+        <% end %>
+        
       </div>
     </div>
     <div class="buttons-right">

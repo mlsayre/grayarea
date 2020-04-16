@@ -57,6 +57,19 @@ class PagesController < ApplicationController
 		gon.guessernotify = current_user.statguessernotify
 	end
 
+	def yourgames
+		@gamesgiver = Game.where(:giver_id => current_user.id).order('created_at DESC').all
+    @gamesguesser = Game.where(:guesser_id1 => current_user.id)
+      .or(Game.where(:guesser_id2 => current_user.id))
+      .or(Game.where(:guesser_id3 => current_user.id))
+      .or(Game.where(:guesser_id4 => current_user.id))
+      .or(Game.where(:guesser_id5 => current_user.id))
+      .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
+
+    @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(30)
+    @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(30)
+	end
+
 	def avatar_customize
 		@bgcount = User.avatarpartspoints("bg", 1, "true")
 		@headcount = User.avatarpartspoints("head", 1, "true")

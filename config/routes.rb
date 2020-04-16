@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       get 'avatarcustomize' => 'pages#avatar_customize'
       get 'settings' => 'pages#settings'
       get 'changetheme' => 'pages#changetheme'
+      get 'yourgames' => 'pages#yourgames'
       post 'allfeedseen'
       post 'resetstatnotify'
       post 'updateavatar'

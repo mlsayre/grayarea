@@ -1,0 +1,37 @@
+<span class="pagebody">
+  <div class="gametop"><span class="gtoneline feedheadline">Your Games</span></div>
+  <div class="lifetimerankings howtoplay thefeed">
+    <div class="yourgames givergames">
+      <span class="gamelisttitle">Giver:</span>
+      <span class="mainstreakinfo">Non-spoiler streak: <b><%= current_user.statgivernospoilers %></b></span>
+      <span id="gamesgiverlist">
+        <%= render '/games/giverlist' %>
+      </span>
+      <div id="paginator" style="margin-top: 10px; text-align: center;">
+        <%= paginate @gamesgiverlist, remote: true, :param_name => 'page' %>
+      </div>
+    </div>
+    <div class="yourgames guessergames">
+      <span class="gamelisttitle">Guesser:</span>
+      <span class="mainstreakinfo">Non-spoiler streak: <b><%= current_user.statguessernospoilers %></b></span>
+      <span id="gamesguesserlist">
+        <%= render '/games/guesserlist' %>
+      </span>
+      <div id="paginator2" style="margin-top: 10px; text-align: center;">
+        <%= paginate @gamesguesserlist, remote: true, :param_name => 'page_2' %>
+      </div>
+    </div>
+  </div>
+  
+
+  <button class="button returntomain"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
+</span>
+<script>
+$(document).ready(function() {
+	$.ajax({
+      url: "/pages/allfeedseen",
+      type: "POST"
+    })
+  $("body").addClass("bodyscrollable");
+})
+</script>

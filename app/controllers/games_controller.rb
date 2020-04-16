@@ -53,6 +53,10 @@ class GamesController < ApplicationController
       @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
       @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
 
+      @playheadings = ["Time to Play!", "Have Fun!", "Start a Game", "Let's Go!", "Stretch Some Words",
+                       "Game Time!", "Word Time!", "Begin Festivities", "Let's Play!"]
+      @playheading = @playheadings.sample
+
     end
   end
 

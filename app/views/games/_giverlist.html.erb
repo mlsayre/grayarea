@@ -1,4 +1,5 @@
-<% @gamesgiverlist.each do |game| %>
+<% @gamesgiverlist.each_with_index do |game, index| %>
+<% @humanindex = index + 1 %>
   <% if Game.find(game.id).guesser_id1 == 0 %>
     <% numplayers = "0" %>
   <% elsif Game.find(game.id).guesser_id2 == 0 %>
@@ -15,18 +16,20 @@
     <% numplayers = "6" %>
   <% end %>
   <li class="gamelist">
-    <a href="<%= game_path(game.id) %>"><!-- <%= User.find(Game.find(game.id).giver_id).username %> -->
-      <%= numplayers %>/6 pl
+    <% if Game.getchatnumber(current_user.id, game.id) != "" %>
       <span class='listnotify'> 
-        <% if Game.getchatnumber(current_user.id, game.id) != "" %>
-          <!-- <img src="/assets/chat.png"> -->
-        <% end %>
+          <img src="/assets/chat.png">
         <span><%= Game.getchatnumber(current_user.id, game.id) %></span>
       </span>
-    <span class="timeshow"><%= local_time(game.created_at, "%b %d") %></span>
+    <% end %>
+    <a href="<%= game_path(game.id) %>"><!-- <%= User.find(Game.find(game.id).giver_id).username %> -->
+      <div class="gltop">
+        <%= game.id %>: <%= numplayers %>/6 pl
+      </div>
+    <span class="timeshow"><%= local_time(game.created_at, "%b %d, '%y") %></span>
     <% heartnum = Game.find(game.id).gsr1_heart + Game.find(game.id).gsr2_heart + Game.find(game.id).gsr3_heart + 
       Game.find(game.id).gsr4_heart + Game.find(game.id).gsr5_heart + Game.find(game.id).gsr6_heart %>
-    <span class="timeshow heartsnum"><img src="/assets/Heart-48.png"> x <%= heartnum %></span>
+    <span class="timeshow heartsnum"><img src="/assets/Heart-48.png"> <%= heartnum %></span>
   </a>
     
     <!--<% if heartnum > 0 %>

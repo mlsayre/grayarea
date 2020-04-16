@@ -1,0 +1,5 @@
+$('span#gamesgiverlist').html('<%= escape_javascript render("/games/giverlist") %>');
+$('#paginator').html('<%= escape_javascript(paginate(@gamesgiverlist, remote: true, param_name: "page").to_s) %>');
+
+$('span#gamesguesserlist').html('<%= escape_javascript render("/games/guesserlist") %>');
+$('#paginator2').html('<%= escape_javascript(paginate(@gamesguesserlist, remote: true, param_name: "page_2").to_s) %>');
