@@ -496,7 +496,7 @@ class GamesController < ApplicationController
       gon.hintnum1 = @game.hintnum1
       gon.hintnum2 = @game.hintnum2
       gon.hintnum3 = @game.hintnum3
-      gon.sound = 0
+      gon.sound = 1
       @chatshow = false
 
       # underway vars
