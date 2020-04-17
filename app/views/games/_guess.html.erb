@@ -280,7 +280,8 @@
   </div>
   <div class="menudialog menudialogaboutgiver">
   	About <%= User.find(@game.giver_id).username %>: "<%= User.find(@game.giver_id).aboutme %>"<br><br>
-  	WSRating: <%= Game.avgtotal(@game.giver_id, 0) %>
+  	WSRating: <%= Game.avgtotal(@game.giver_id, 0) %><br>
+  	<span style="font-size:12px;">(Your WSRating: <%= Game.avgtotal(current_user.id, 0) %>)</span>
   </div>
 
 	<div class="roundannounce hidden">
