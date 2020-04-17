@@ -147,3 +147,23 @@ var trophyshow = new Howl({
   volume: .7,
   preload: true
 });
+var wordenter = new Howl({
+  src: ['/assets/wordenter.wav'],
+  volume: .7,
+  preload: true
+});
+var wordenter2 = new Howl({
+  src: ['/assets/wordenter2.wav'],
+  volume: .7,
+  preload: true
+});
+var wordenter3 = new Howl({
+  src: ['/assets/wordenter3.wav'],
+  volume: .7,
+  preload: true
+});
+var gamecreated = new Howl({
+  src: ['/assets/gamecreated.wav'],
+  volume: .8,
+  preload: true
+});

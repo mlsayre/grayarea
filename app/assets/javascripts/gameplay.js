@@ -369,6 +369,7 @@ var ready = function() {
 		}
 		hint1 = enteredtext.toUpperCase();
 		submithint1(hint1, hint1numselected);
+		wordenter.play();
 		$(".givesummary").removeClass("offscreen");
 		$(".wordsummary1").removeClass("offscreen");
 	});
@@ -381,6 +382,7 @@ var ready = function() {
 		}
 		hint2 = enteredtext.toUpperCase();
 		submithint2(hint2, hint2numselected);
+		wordenter2.play();
 		$(".wordsummary2").removeClass("offscreen");
 	});
 
@@ -392,6 +394,7 @@ var ready = function() {
 		}
 		hint3 = enteredtext.toUpperCase();
 		submithint3(hint3, hint3numselected);
+		wordenter3.play();
 		$(".wordsummary3").removeClass("offscreen");
 	});
 
@@ -622,6 +625,7 @@ var ready = function() {
           // $(".submittednum2").text(hint2numselected + " " + wordword2);
           // $(".submittedword3").text(hint3);
           // $(".submittednum3").text(hint3numselected + " " + wordword3);
+          gamecreated.play();
           $(".submitted").show();
           $(".buttons-middle").removeClass("hidden");
 					closemessagebox();
