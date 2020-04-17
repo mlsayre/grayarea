@@ -256,7 +256,7 @@ class Game < ApplicationRecord
       avg = -1
     else
       gamecreatedmult = (User.find(userid).lifetimegamesgiver.to_f * User.find(userid).averagehearts.to_f).round(4)
-      avg = (((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver + gamecreatedmult).round(2)) * 10).round(0)
+      avg = (((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver + gamecreatedmult).round(2)) * 10).round(1)
     end
     return avg
   end
