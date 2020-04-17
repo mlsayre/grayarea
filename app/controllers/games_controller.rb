@@ -235,16 +235,20 @@ class GamesController < ApplicationController
     end
 
     #stats
+    @returnedfeats = []
+    @returnedspecialfeats = []
     if params[:guessstatus] == "over,over"
       if params[:gamescore].to_i >= 200
         User.find(current_user.id).increment!(:statguesserscoretwohundred, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverscoretwohundred, by = 1)
-        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "twohundred")
+        @temp1 = @Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "twohundred")
+        @returnedspecialfeats.push(@temp1)
       end
       if params[:gamescore].to_i > 99
         User.find(current_user.id).increment!(:statguesserscorehundred, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverscorehundred, by = 1)
-        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "hundred")
+        @temp2 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "hundred")
+        @returnedspecialfeats.push(@temp2)
       end
       if params[:gamespoiled].to_i == 0
         User.find(current_user.id).increment!(:statguessernospoilers, by = 1)
@@ -257,24 +261,28 @@ class GamesController < ApplicationController
         if newstreak > User.find(@thisgame.giver_id).statalltimegiverstreak
           User.find(@thisgame.giver_id).update(:statalltimegiverstreak => newstreak)
         end
-        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
+        @temp3 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
+        @returnedspecialfeats.push(@temp3)
       elsif params[:gamespoiled].to_i == 1
         User.find(current_user.id).update(:statguessernospoilers => 0)
         User.find(@thisgame.giver_id).update(:statgivernospoilers => 0)
-        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
+        @temp4 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "spoilstreak")
+        @returnedspecialfeats.push(@temp4)
       end
       if params[:hint1words].length + params[:hint2words].length + params[:hint3words].length == 6
         User.find(current_user.id).increment!(:statguesserallsix, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverallsix, by = 1)
-        Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "allsix")
+        @temp5 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "allsix")
+        @returnedspecialfeats.push(@temp5)
         if params[:guessedwords].length == 6
           User.find(current_user.id).increment!(:statguesserperfect, by = 1)
           User.find(@thisgame.giver_id).increment!(:statgiverperfect, by = 1)
-          Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "perfect")
+          @temp6 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "perfect")
+          @returnedspecialfeats.push(@temp6)
         end
       end
       User.find(@thisgame.giver_id).increment!(:lifetimeplayedgamesgiver, by = 1)
-      Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
+      @returnedfeats = Game.checkfeats(current_user.id, @thisgame.giver_id, "guesser")
       Game.updatescoreaverages(current_user.id, @thisgame.giver_id, params[:gamescore])
       
       if current_user.id == @thisgame.guesser_id1
@@ -290,12 +298,16 @@ class GamesController < ApplicationController
       elsif current_user.id == @thisgame.guesser_id6
         @thisgame.update(:endtime_gsr6 => Time.current)
       end
-
     end
+    @returnedfeats.concat(@returnedspecialfeats)
+    # for testing @returnedfeats = ["allsix1","nospoil6","perfect12","guessin6","scorehundred5"]
     
     #render body: nil
+    # respond_to do |format|
+    #   format.json  { render json: {} , status: 200 }
+    # end
     respond_to do |format|
-      format.json  { render json: {} , status: 200 }
+      format.json { render json: { :returnedfeats => @returnedfeats }  }
     end
   end
 

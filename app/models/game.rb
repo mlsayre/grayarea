@@ -261,6 +261,7 @@ class Game < ApplicationRecord
   end
 
   def self.checkspecialfeats(userid, giverid, type)
+    guesserfeatstoreturn = []
     curruser = User.find(userid)
     giveuser = User.find(giverid)
     featindexesguesser = {"allsix1" => 1, "allsix5" => 5, "allsix20" => 9, "allsix50" => 12, "allsix100" => 15,
@@ -291,6 +292,7 @@ class Game < ApplicationRecord
       notarr = curruser.statguessernotify
       notarr[featindexesguesser["scoretwohundred"]] = 1
       curruser.update(:statguessernotify => notarr)
+      guesserfeatstoreturn.push("scoretwohundred")
       #now do for giver
       newarr2 = giveuser.statgiverstatus
       newarr2[featindexesgiver["scoretwohundred"]] = giveuser.statgiverscoretwohundred * 300
@@ -301,14 +303,19 @@ class Game < ApplicationRecord
     elsif type == "hundred"
       if curruser.statguesserstatus[featindexesguesser["scorehundred100"]] == 0 && curruser.statguesserscorehundred > 99
         Game.statarrayupdateguesser(featindexesguesser["scorehundred100"], featpointsguesser["scorehundred100"], curruser)
+        guesserfeatstoreturn.push("scorehundred100")
       elsif curruser.statguesserstatus[featindexesguesser["scorehundred50"]] == 0 && curruser.statguesserscorehundred > 49
         Game.statarrayupdateguesser(featindexesguesser["scorehundred50"], featpointsguesser["scorehundred50"], curruser)
+        guesserfeatstoreturn.push("scorehundred50")
       elsif curruser.statguesserstatus[featindexesguesser["scorehundred20"]] == 0 && curruser.statguesserscorehundred > 19
         Game.statarrayupdateguesser(featindexesguesser["scorehundred20"], featpointsguesser["scorehundred20"], curruser)
+        guesserfeatstoreturn.push("scorehundred20")
       elsif curruser.statguesserstatus[featindexesguesser["scorehundred5"]] == 0 && curruser.statguesserscorehundred > 4
         Game.statarrayupdateguesser(featindexesguesser["scorehundred5"], featpointsguesser["scorehundred5"], curruser)
+        guesserfeatstoreturn.push("scorehundred5")
       elsif curruser.statguesserstatus[featindexesguesser["scorehundred1"]] == 0 && curruser.statguesserscorehundred > 0
         Game.statarrayupdateguesser(featindexesguesser["scorehundred1"], featpointsguesser["scorehundred1"], curruser)
+        guesserfeatstoreturn.push("scorehundred1")
       end
       if giveuser.statgiverstatus[featindexesgiver["scorehundred100"]] == 0 && giveuser.statgiverscorehundred > 99
         Game.statarrayupdategiver(featindexesgiver["scorehundred100"], featpointsgiver["scorehundred100"], giveuser)
@@ -324,14 +331,19 @@ class Game < ApplicationRecord
     elsif type == "spoilstreak"
       if curruser.statguesserstatus[featindexesguesser["nospoil60"]] == 0 && curruser.statguessernospoilers > 59
         Game.statarrayupdateguesser(featindexesguesser["nospoil60"], featpointsguesser["nospoil60"], curruser)
+        guesserfeatstoreturn.push("nospoil60")
       elsif curruser.statguesserstatus[featindexesguesser["nospoil40"]] == 0 && curruser.statguessernospoilers > 39
         Game.statarrayupdateguesser(featindexesguesser["nospoil40"], featpointsguesser["nospoil40"], curruser)
+        guesserfeatstoreturn.push("nospoil40")
       elsif curruser.statguesserstatus[featindexesguesser["nospoil25"]] == 0 && curruser.statguessernospoilers > 24
         Game.statarrayupdateguesser(featindexesguesser["nospoil25"], featpointsguesser["nospoil25"], curruser)
+        guesserfeatstoreturn.push("nospoil25")
       elsif curruser.statguesserstatus[featindexesguesser["nospoil12"]] == 0 && curruser.statguessernospoilers > 11
         Game.statarrayupdateguesser(featindexesguesser["nospoil12"], featpointsguesser["nospoil12"], curruser)
+        guesserfeatstoreturn.push("nospoil12")
       elsif curruser.statguesserstatus[featindexesguesser["nospoil6"]] == 0 && curruser.statguessernospoilers > 5
         Game.statarrayupdateguesser(featindexesguesser["nospoil6"], featpointsguesser["nospoil6"], curruser)
+        guesserfeatstoreturn.push("nospoil6")
       end
       if giveuser.statgiverstatus[featindexesgiver["nospoil50"]] == 0 && giveuser.statgivernospoilers > 49
         Game.statarrayupdategiver(featindexesgiver["nospoil50"], featpointsgiver["nospoil50"], giveuser)
@@ -347,14 +359,19 @@ class Game < ApplicationRecord
     elsif type =="allsix"
       if curruser.statguesserstatus[featindexesguesser["allsix100"]] == 0 && curruser.statguesserallsix > 99
         Game.statarrayupdateguesser(featindexesguesser["allsix100"], featpointsguesser["allsix100"], curruser)
+        guesserfeatstoreturn.push("allsix100")
       elsif curruser.statguesserstatus[featindexesguesser["allsix50"]] == 0 && curruser.statguesserallsix > 49
         Game.statarrayupdateguesser(featindexesguesser["allsix50"], featpointsguesser["allsix50"], curruser)
+        guesserfeatstoreturn.push("allsix50")
       elsif curruser.statguesserstatus[featindexesguesser["allsix20"]] == 0 && curruser.statguesserallsix > 19
         Game.statarrayupdateguesser(featindexesguesser["allsix20"], featpointsguesser["allsix20"], curruser)
+        guesserfeatstoreturn.push("allsix20")
       elsif curruser.statguesserstatus[featindexesguesser["allsix5"]] == 0 && curruser.statguesserallsix > 4
         Game.statarrayupdateguesser(featindexesguesser["allsix5"], featpointsguesser["allsix5"], curruser)
+        guesserfeatstoreturn.push("allsix5")
       elsif curruser.statguesserstatus[featindexesguesser["allsix1"]] == 0 && curruser.statguesserallsix > 0
         Game.statarrayupdateguesser(featindexesguesser["allsix1"], featpointsguesser["allsix1"], curruser)
+        guesserfeatstoreturn.push("allsix1")
       end
       if giveuser.statgiverstatus[featindexesgiver["allsix100"]] == 0 && giveuser.statgiverallsix > 99
         Game.statarrayupdategiver(featindexesgiver["allsix100"], featpointsgiver["allsix100"], giveuser)
@@ -370,14 +387,19 @@ class Game < ApplicationRecord
     elsif type == "perfect"
       if curruser.statguesserstatus[featindexesguesser["perfect60"]] == 0 && curruser.statguesserperfect > 59
         Game.statarrayupdateguesser(featindexesguesser["perfect60"], featpointsguesser["perfect60"], curruser)
+        guesserfeatstoreturn.push("perfect60")
       elsif curruser.statguesserstatus[featindexesguesser["perfect30"]] == 0 && curruser.statguesserperfect > 29
         Game.statarrayupdateguesser(featindexesguesser["perfect30"], featpointsguesser["perfect30"], curruser)
+        guesserfeatstoreturn.push("perfect30")
       elsif curruser.statguesserstatus[featindexesguesser["perfect12"]] == 0 && curruser.statguesserperfect > 11
         Game.statarrayupdateguesser(featindexesguesser["perfect12"], featpointsguesser["perfect12"], curruser)
+        guesserfeatstoreturn.push("perfect12")
       elsif curruser.statguesserstatus[featindexesguesser["perfect3"]] == 0 && curruser.statguesserperfect > 2
         Game.statarrayupdateguesser(featindexesguesser["perfect3"], featpointsguesser["perfect3"], curruser)
+        guesserfeatstoreturn.push("perfect3")
       elsif curruser.statguesserstatus[featindexesguesser["perfect1"]] == 0 && curruser.statguesserperfect > 0
         Game.statarrayupdateguesser(featindexesguesser["perfect1"], featpointsguesser["perfect1"], curruser)
+        guesserfeatstoreturn.push("perfect1")
       end
       if giveuser.statgiverstatus[featindexesgiver["perfect60"]] == 0 && giveuser.statgiverperfect > 59
         Game.statarrayupdategiver(featindexesgiver["perfect60"], featpointsgiver["perfect60"], giveuser)
@@ -391,9 +413,16 @@ class Game < ApplicationRecord
         Game.statarrayupdategiver(featindexesgiver["perfect1"], featpointsgiver["perfect1"], giveuser)
       end
     end
+
+    if guesserfeatstoreturn[0] == nil
+      guesserfeatstoreturn[0] = ""
+    end
+
+    return guesserfeatstoreturn[0]
   end
 
   def self.checkfeats(userid, giverid, who)
+    featstoreturn = []
     curruser = User.find(userid)
     giveuser = User.find(giverid)
     featindexesguesser = {"guessin3" => 0, "guessin6" => 2, "guessin20" => 4, "guessin50" => 6, "guessin100" => 8, 
@@ -408,27 +437,35 @@ class Game < ApplicationRecord
     if who == "guesser"
       if curruser.statguesserstatus[featindexesguesser["guessin500"]] == 0 && curruser.lifetimegamesguesser > 499
         Game.statarrayupdateguesser(featindexesguesser["guessin500"], featpointsguesser["guessin500"], curruser)
+        featstoreturn.push("guessin500")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin250"]] == 0 && curruser.lifetimegamesguesser > 249
         Game.statarrayupdateguesser(featindexesguesser["guessin250"], featpointsguesser["guessin250"], curruser)
+        featstoreturn.push("guessin250")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin150"]] == 0 && curruser.lifetimegamesguesser > 149
         Game.statarrayupdateguesser(featindexesguesser["guessin150"], featpointsguesser["guessin150"], curruser)
+        featstoreturn.push("guessin150")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin100"]] == 0 && curruser.lifetimegamesguesser > 99
         Game.statarrayupdateguesser(featindexesguesser["guessin100"], featpointsguesser["guessin100"], curruser)
+        featstoreturn.push("guessin100")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin50"]] == 0 && curruser.lifetimegamesguesser > 49
         Game.statarrayupdateguesser(featindexesguesser["guessin50"], featpointsguesser["guessin50"], curruser)
+        featstoreturn.push("guessin50")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin20"]] == 0 && curruser.lifetimegamesguesser > 19
         Game.statarrayupdateguesser(featindexesguesser["guessin20"], featpointsguesser["guessin20"], curruser)
+        featstoreturn.push("guessin20")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin6"]] == 0 && curruser.lifetimegamesguesser > 5
         Game.statarrayupdateguesser(featindexesguesser["guessin6"], featpointsguesser["guessin6"], curruser)
+        featstoreturn.push("guessin6")
       end
       if curruser.statguesserstatus[featindexesguesser["guessin3"]] == 0 && curruser.lifetimegamesguesser > 2
         Game.statarrayupdateguesser(featindexesguesser["guessin3"], featpointsguesser["guessin3"], curruser)
+        featstoreturn.push("guessin3")
       end
     end
     if who == "giver"
@@ -457,6 +494,8 @@ class Game < ApplicationRecord
         Game.statarrayupdategiver(featindexesgiver["givein1"], featpointsgiver["givein1"], giveuser)
       end
     end
+
+    return featstoreturn
   end
 
   def self.updatescoreaverages(guesserid, giverid, score)

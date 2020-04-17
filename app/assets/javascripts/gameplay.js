@@ -1017,7 +1017,7 @@ var ready = function() {
 		                'hint2words' : correctwordshint2,
 		                'hint3words' : correctwordshint3 }
 		      })
-		        .done(function() {
+		        .done(function(data) {
 		        	$("body").css("pointer-events", "all");
 		        	if ($(".chatcontent").length === 0) {
 		        		showChat();
@@ -1031,6 +1031,90 @@ var ready = function() {
 									  GuessFuncDuring.seeguessesafter();
 									});
 		        		}, 600)
+
+		        		// trophy show!
+		        		gotfeats = data.returnedfeats;
+		        		gotfeats = gotfeats.filter(feat => feat.length > 0)
+		        		console.log(gotfeats)
+		        		if (gotfeats.length > 0) {
+		        			setTimeout(function() {
+			        			$("body").append('<div class="pagecovertrophies"></div>');
+			        		
+			        			var trophydata = {
+			        			 "guessin500" : "Guess in 500 Games,,+150,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_028.png",
+										 "guessin250" : "Guess in 250 Games,,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_023.png",
+										 "guessin150" : "Guess in 150 Games,,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_018.png",
+										 "guessin100" : "Guess in 100 Games,,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_013.png",
+										 "guessin50" : "Guess in 50 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_009.png",
+										 "guessin20" : "Guess in 20 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_007.png",
+										 "guessin6" : "Guess in 6 Games,,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_003.png",
+										 "guessin3" : "Guess in 3 Games,,+10,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_001.png",
+										 "scoretwohundred" : "You Scored 200+!,,+300,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_029.png",
+										 "scorehundred100" : "You Scored 100+,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_025.png",
+										 "scorehundred50" : "You Scored 100+,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_020.png",
+										 "scorehundred20" : "You Scored 100+,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_015.png",
+										 "scorehundred5" : "You Scored 100+,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_010.png",
+										 "scorehundred1" : "You Scored 100+,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_004.png",
+										 "nospoil60" : "No-Spoiler Streak,60,+250,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_027.png",
+										 "nospoil40" : "No-Spoiler Streak,40,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_022.png",
+										 "nospoil25" : "No-Spoiler Streak,25,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_017.png",
+										 "nospoil12" : "No-Spoiler Streak,12,+50,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_012.png",
+										 "nospoil6" : "No-Spoiler Streak,6,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_006.png",
+										 "allsix100" : "You Got All Six,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_024.png",
+										 "allsix50" : "You Got All Six,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_019.png",
+										 "allsix20" : "You Got All Six,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_014.png",
+										 "allsix5" : "You Got All Six,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_008.png",
+										 "allsix1" : "You Got All Six,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_002.png",
+										 "perfect60" : "You had Perfect Game,60x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_026.png",
+										 "perfect30" : "You had Perfect Game,30x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_021.png",
+										 "perfect12" : "You had Perfect Game,12x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_016.png",
+										 "perfect3" : "You had Perfect Game,3x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_011.png",
+										 "perfect1" : "You had Perfect Game,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_005.png"
+										}
+										if (gotfeats.length === 1) {
+											var trophytext = "Trophy Received!"
+										} else {
+											var trophytext = "Trophies Received!"
+										}
+										$("body").append('<div class="featpopin">' + trophytext + '<span class="clicktrophy">Click trophy to continue</span></div>');
+										trophyshow.play()
+										var flyintime = 400;
+										for (var i = 0; i < gotfeats.length; i++) {
+											(function(i) {
+												var thetime = (gotfeats.length - 1 - i) * flyintime;
+												var theoffset = i;
+												var thedata = trophydata[gotfeats[i]];
+												var fulltext = thedata.split(",")[0];
+												var multi = thedata.split(",")[1];
+												var pnts = thedata.split(",")[2];
+												var imgurl = thedata.split(",")[3];
+												setTimeout(function(i) {
+													
+													$(".featpopin").append('<span class="popinfeat trophyflyin trophyoffset' + theoffset + '">' +
+													                      '<div class="popinimg"><img src="' + imgurl + '"></div>' +
+																							  '<div class="popindesc">' + fulltext + '</div>' +
+																								'<span class="popinmult">' + multi.replace("x", " times") + '</span>' +
+																								'<span class="popinpoints">' + pnts + ' feat points!</span></span>')
+													wordshow3.play();
+												}, thetime)
+											})(i)
+										}
+										$(document).on("click", ".popinfeat", function() {
+											function cardflyoff(card) {
+												$(card).removeClass("trophyflyin").addClass("trophyflyout");
+											}
+											wordshow8.on("play", cardflyoff(this));
+											wordshow8.play();
+											if ($(".trophyflyin").length === 0) {
+												setTimeout(function() {
+													$(".pagecovertrophies").remove();
+													$(".featpopin").remove();
+												},1000)
+											}
+											
+										})
+									}, 4500)
+								}
 		        	}
 		        })
 		        .fail(function() {
@@ -1174,7 +1258,7 @@ var ready = function() {
 						})
 					}, 3100);
 					targetwordsfx.play();
-					boardupdate(4000, "false", scoretoadd);
+					boardupdate(3500, "false", scoretoadd);
 	  		}
 	  		// bad word
 	  		if (bword === chosen) {
@@ -1194,7 +1278,7 @@ var ready = function() {
 						})
 					}, 3100);
 					badwordsfx.play();
-  				boardupdate(4000);
+  				boardupdate(3500);
 	  		}
 	  		// neutral word
 	  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
@@ -1251,7 +1335,7 @@ var ready = function() {
 						})
 					}, 3100);
 					neutralwordsfx.play();
-					boardupdate(4000, "false", 0);
+					boardupdate(3500, "false", 0);
 	  		}
 	  	}
 
@@ -1293,7 +1377,7 @@ var ready = function() {
 		  		$(".gamenotify").show();
 					notifytimeout = setTimeout(function() {
 		  			$(".gamenotify").hide();
-		  		}, 4000)
+		  		}, 3500)
 				}
 	  	}
 	  	var ratimeout, raanimall, raanim1, raanim2, raanim3;

@@ -142,3 +142,8 @@ var beginsfx = new Howl({
   volume: .5,
   preload: true
 });
+var trophyshow = new Howl({
+  src: ['/assets/trophyshow.wav'],
+  volume: .7,
+  preload: true
+});

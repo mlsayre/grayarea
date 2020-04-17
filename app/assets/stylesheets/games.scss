@@ -979,6 +979,16 @@ textarea.sumword {
   opacity: .8;
   z-index: 7;
 }
+.pagecovertrophies {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .8;
+  z-index: 700;
+}
 .pagecoveraboutstart {
   pointer-events: none;
   cursor: auto;
@@ -3268,6 +3278,201 @@ section.featpage {
 }
 .featpage .gametop {
   background: transparent;
+}
+.featpopin {
+    z-index: 701;
+    position: fixed;
+    animation: none;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: block;
+    width: 95%;
+    top: 15%;
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    text-shadow: 2px 2px 4px black;
+}
+span.popinfeat {
+    width: 37%;
+    margin: 8px 8px;
+    max-width: 186px;
+    display: inline-block;
+    font-size: 18px;
+    padding: 14px 4px;
+    background: purple;
+    border-radius: 20px;
+    box-shadow: 2px 2px 6px black;
+    vertical-align: top;
+    position: absolute;
+    right: 0;
+    margin: 0 auto;
+}
+span.popinfeat.trophyflyin.trophyoffset0 {
+  animation: trophyflyin0 .5s 1 forwards;
+}
+@keyframes trophyflyin0 {
+  from {
+      transform: rotate(360deg);
+      left: -500px;
+      top: 400px;
+  }
+  to {
+      transform: rotate(0deg);
+      left: 0;
+      top: 70px;
+  }
+}
+span.popinfeat.trophyflyin.trophyoffset1 {
+  animation: trophyflyin1 .5s 1 forwards;
+}
+@keyframes trophyflyin1 {
+  from {
+      transform: rotate(360deg);
+      left: -500px;
+      top: 400px;
+  }
+  to {
+      transform: rotate(-3deg);
+      left: -10px;
+      top: 65px;
+  }
+}
+span.popinfeat.trophyflyin.trophyoffset2 {
+  animation: trophyflyin2 .5s 1 forwards;
+}
+@keyframes trophyflyin2 {
+  from {
+      transform: rotate(360deg);
+      left: -500px;
+      top: 400px;
+  }
+  to {
+      transform: rotate(-6deg);
+      left: -20px;
+      top: 60px;
+  }
+}
+span.popinfeat.trophyflyin.trophyoffset3 {
+  animation: trophyflyin3 .5s 1 forwards;
+}
+@keyframes trophyflyin3 {
+  from {
+      transform: rotate(360deg);
+      left: -500px;
+      top: 400px;
+  }
+  to {
+      transform: rotate(-9deg);
+      left: -30px;
+      top: 55px;
+  }
+}
+span.popinfeat.trophyflyin.trophyoffset4 {
+  animation: trophyflyin4 .5s 1 forwards;
+}
+@keyframes trophyflyin4 {
+  from {
+      transform: rotate(360deg);
+      left: -500px;
+      top: 400px;
+  }
+  to {
+      transform: rotate(-12deg);
+      left: -40px;
+      top: 50px;
+  }
+}
+span.popinfeat.trophyflyout.trophyoffset0 {
+  animation: trophyflyout0 .5s 1 forwards;
+}
+@keyframes trophyflyout0 {
+  from {
+      transform: rotate(0deg);
+      left: 0;
+      top: 70px;      
+  }
+  to {
+      transform: rotate(360deg);
+      left: 800px;
+      top: -700px;
+  }
+}
+span.popinfeat.trophyflyout.trophyoffset1 {
+  animation: trophyflyout1 .5s 1 forwards;
+}
+@keyframes trophyflyout1 {
+  from {
+      transform: rotate(-3deg);
+      left: -10px;
+      top: 65px;
+  }
+  to {
+      transform: rotate(360deg);
+      left: 800px;
+      top: -700px;
+  }
+}
+span.popinfeat.trophyflyout.trophyoffset2 {
+  animation: trophyflyout2 .5s 1 forwards;
+}
+@keyframes trophyflyout2 {
+  from {
+      transform: rotate(-6deg);
+      left: -20px;
+      top: 60px;
+  }
+  to {
+      transform: rotate(360deg);
+      left: 800px;
+      top: -700px;
+  }
+}
+span.popinfeat.trophyflyout.trophyoffset3 {
+  animation: trophyflyout3 .5s 1 forwards;
+}
+@keyframes trophyflyout3 {
+  from {
+      transform: rotate(-9deg);
+      left: -30px;
+      top: 55px;
+  }
+  to {
+      transform: rotate(360deg);
+      left: 800px;
+      top: -700px;
+  }
+}
+span.popinfeat.trophyflyout.trophyoffset4 {
+  animation: trophyflyout4 .5s 1 forwards;
+}
+@keyframes trophyflyout4 {
+  from {
+      transform: rotate(-12deg);
+      left: -40px;
+      top: 50px;
+  }
+  to {
+      transform: rotate(360deg);
+      left: 800px;
+      top: -700px;
+  }
+}
+.popinimg img {
+    width: 100%;
+}
+span.popinmult {
+    display: block;
+}
+span.popinpoints {
+    display: block;
+}
+.clicktrophy {
+  font-size: 14px;
+  display: block;
+  top: 349px;
+  position: relative;
 }
 section.rankingspage {
   background: linear-gradient(#4c9d12, lightgrey);
