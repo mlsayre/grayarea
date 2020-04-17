@@ -18,7 +18,7 @@
 		<div class="rankingstabletitle">All-time Top 15</div>
 
 		<div class="statcontainer supreme showstat">
-			<span class="statcat"><u>Supreme Stretchers<br>(avg guess + avg give, min 5 each)</u></span>
+			<span class="statcat"><u>Supreme Stretchers*</u></span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 5) <=> Game.avgtotal(a.id, 5)}.first(15).each do |user| %>
 			  	  <% if Game.avgtotal(user.id, 5) != -1 %>
@@ -151,6 +151,8 @@
 
 	</div>
 	<span class="rankfloatingnum"><span class="innernum" style="left: 0;">•</span></span>
+
+	<span class="ratingdefinition">*WSRatings calculated as: (average guess score + average give + (<img class="newsheart" src="/assets/Heart-48.png"> average x games created), minimum 5 each) x 10</span>
 
 <!-- </div> -->
 

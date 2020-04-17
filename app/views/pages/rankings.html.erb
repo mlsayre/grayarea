@@ -11,6 +11,7 @@
 		<div class="lifetimerankings">
 			<div class="rankingstabletitle">Your Stats</div>
 			<div class="centered">
+				Your WSRating: <%= Game.avgtotal(current_user.id, 0) %><br>
 				You've created <%= current_user.lifetimegamesgiver %> games<br>
 				You've guessed in <%= current_user.lifetimegamesguesser %> games<br><br>
 			</div>
@@ -220,10 +221,15 @@ $(document).ready(function() {
 					setTimeout(function() {
 						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving");
 						$(".alltimestats .statcontainer").first().addClass("showstat");
-							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 						setTimeout(function() {
 							$(".slidetoright").removeClass("slidetoright");
 							$(".slidetoleft").removeClass("slidetoleft");
+							if($(".supreme").hasClass("showstat")) {
+								$(".ratingdefinition").removeClass("hidden");
+							} else {
+								$(".ratingdefinition").addClass("hidden");
+							}
 						},120)
 					}, 120)
 				} else {
@@ -233,10 +239,15 @@ $(document).ready(function() {
 					setTimeout(function() {
 						$(".alltimestats .showstat.statleaving").removeClass("showstat").removeClass("statleaving")
 						  .next(".statcontainer").addClass("showstat");
-							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+						$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
 						setTimeout(function() {
 							$(".slidetoright").removeClass("slidetoright");
 							$(".slidetoleft").removeClass("slidetoleft");
+							if($(".supreme").hasClass("showstat")) {
+								$(".ratingdefinition").removeClass("hidden");
+							} else {
+								$(".ratingdefinition").addClass("hidden");
+							}
 						},120)
 					}, 120)
 				}
@@ -254,6 +265,11 @@ $(document).ready(function() {
 							$(".slidetoright").removeClass("slidetoright");
 							$(".slidetoleft").removeClass("slidetoleft");
 							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+							if($(".supreme").hasClass("showstat")) {
+								$(".ratingdefinition").removeClass("hidden");
+							} else {
+								$(".ratingdefinition").addClass("hidden");
+							}
 						},120)
 					}, 120)
 				} else {
@@ -267,6 +283,11 @@ $(document).ready(function() {
 							$(".slidetoright").removeClass("slidetoright");
 							$(".slidetoleft").removeClass("slidetoleft");
 							$(".innernum").attr("style", "left:" + $(".showstat").attr("data-indicator-left") + "px");
+							if($(".supreme").hasClass("showstat")) {
+								$(".ratingdefinition").removeClass("hidden");
+							} else {
+								$(".ratingdefinition").addClass("hidden");
+							}
 						},120)
 					}, 120)
 				}

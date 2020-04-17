@@ -760,7 +760,7 @@ span.hintnumheading.allguesserinfo.underwayforgiver u {
   top: 22%;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .avlowerbuttons a.hidden {
   display: none;
@@ -1109,7 +1109,7 @@ button.button.returntomain.maininline {
   top: 2px;
   border: 1px solid darkgreen;
 }
-.menubox button.button.returntomain.maininline {
+.menubox button.button.returntomain.maininline, .giveboard-signedin button.button.returntomain.maininline {
     border: none;
     top: 0;
     display: block;
@@ -3075,7 +3075,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   top: 6%;
   color: white;
 }
-.playedgameover .actions {
+.playedgameover .actions, .giveboard-signedin .actions {
   display: inline-block;
 }
 .playedgameover button.button.returntomain.maininline {
@@ -3493,6 +3493,23 @@ section.rankingspage {
 }
 .rankingspage li {
     color: #211010;
+}
+span.ratingdefinition {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    bottom: 24%;
+    background: rgba(0,0,0,.4);
+    padding: 4px;
+    border-radius: 5px;
+}
+.ratingdefinition img.newsheart {
+    top: 4px;
+    height: 14px;
 }
 .featheading {
   color: white;

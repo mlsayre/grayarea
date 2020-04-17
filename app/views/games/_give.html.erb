@@ -139,21 +139,26 @@
 	<div class="buttons-middle hidden">
 		<button class="button bigplaybutton">CONTINUE</button>
     <div class="mainmenubuttons">
+      <div class="mmheading">Continue</div>
 
       <div class="actions">
-        <% if current_user.lifetimegamesguesser > 2 %>
-          <button class="button contmainplay">Give</button>
-        <% else %>
-          <button class="button contmainplay disabled">Give</button>
-        <% end %>
-      </div>
-      <br>
+	      <% if current_user.lifetimegamesguesser > 2 %>
+	        <button class="button contmainplay">Give</button>
+	      <% else %>
+	        <button class="button contmainplay disabled">Give</button>
+	      <% end %>
+	    </div>
 
-      <button class="button contstartguess">Guess</button><br>
+	    <button class="button startguess">Guess</button><br>
 
-      <% if current_user.lifetimegamesguesser < 3 %>
-        <span class="guessermsg">(Play 3 games as Guesser to activate Giver button)</span>
-      <% end %>
+	    <% if current_user.lifetimegamesguesser < 2 %>
+	      <span class="guessermsg">(Play 3 games as Guesser to activate Give button)</span>
+	    <% end %>
+
+	    <%= link_to yourgames_pages_path, :class => "button seeyourgames" do %>
+	      <span>See Your Games</span>
+	    <% end %>
+	    <button class="button returntomain maininline"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
     </div>
   </div>
 

@@ -279,7 +279,8 @@
     <button class="revealwords">Reveal words!</button>
   </div>
   <div class="menudialog menudialogaboutgiver">
-  	About <%= User.find(@game.giver_id).username %>: "<%= User.find(@game.giver_id).aboutme %>"
+  	About <%= User.find(@game.giver_id).username %>: "<%= User.find(@game.giver_id).aboutme %>"<br><br>
+  	WSRating: <%= Game.avgtotal(@game.giver_id, 0) %>
   </div>
 
 	<div class="roundannounce hidden">
