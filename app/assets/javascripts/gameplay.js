@@ -777,6 +777,7 @@ var ready = function() {
 	  	var pupneutralstatus = gon.pupneutrals || 0;
 	  	var pupspoilerused = pupspoilerstatus.length;
 	  	var pupneutralused = pupneutralstatus.length;
+	  	var hintnumtotal = hintnum1 + hintnum2 + hintnum3;
 
 	    // window.addEventListener('message', function initZ2(e) {
 	    // // The following if statement is recommended after initial tests
@@ -953,7 +954,7 @@ var ready = function() {
 		  	$(".streakwarn").hide();
 
 		  	if (guessstatus === "bonus,hint2") {
-		  		$(".hintheadline").text("Bonus! Try one more?")
+		  		$(".hintheadline").text("Make up round! Pick up a previous word?")
 		  		$(".guessword").hide();
 		  		$(".guessnum").text("The first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
 		  			"(" + hintnum2 + ").");
@@ -961,11 +962,24 @@ var ready = function() {
 		  	}
 
 		  	if (guessstatus === "bonus,hint3") {
-		  		$(".hintheadline").text("Bonus! Try one more?")
-		  		$(".guessword").hide();
-		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
-		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
-		  		$(".streakwarn").show();
+		  		if (correctwordcount === hintnumtotal) {
+		  			$(".raBonusstart span").text("Chance It?")
+		  			if (hintnumtotal === 5) {
+		  				$(".hintheadline").text("Chance it round! Random final guess?")
+		  			} else {
+		  				$(".hintheadline").text("Chance it round! Random guess?")
+		  			}		
+			  		$(".guessword").hide();
+			  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+			  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
+			  		$(".streakwarn").show();
+		  		} else {
+		  			$(".hintheadline").text("Make up round! Try to pick up a previous target word?")
+			  		$(".guessword").hide();
+			  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+			  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
+			  		$(".streakwarn").show();
+		  		}
 		  	}
 		  	
 		  	if (guessstatus === "over,over") {
@@ -1238,10 +1252,19 @@ var ready = function() {
 	  				currenthintnum = hintnum3;
 	  				guessstatus = "hint3,word1";
 	  			}  else if (guessstatus === "bonus,hint3") {
-	  				var gmtext = "You picked up a bonus word. Great way to end the game!";
+	  				if (correctwordsguessed === hintnumtotal) {
+		  				if (hintnumtotal === 5) {
+		  					var gmtext = "You guessed the final target word. Great way to end the game!";
+		  				} else {
+		  					var gmtext = "You picked up another target word. Great way to end the game!";
+		  				}
+		  			} else {
+		  				var gmtext = "You picked up a target word. Great way to end the game!";
+		  			}
 						$(".gamenotify").html(gmtext);
 						shownotification(gmtext);
 	  				guessstatus = "over,over";
+		  			
 	  			} else if (correctwordsguessed.length < 6) {
 	  				var gmtext = "is one of the six words you're looking for!";
 	  				$(".gamenotify").html(chosen + " is one of the six words you're looking for! " + 
@@ -1398,6 +1421,7 @@ var ready = function() {
 	  		  }, delay + 360)
 	  		}
 	  		raanimall = setTimeout(function() {
+	  			$(".pagecoverunclickable").addClass("lightercover").fadeIn(75);
 	  			$(".roundannounce").fadeIn(75, function() {
 						$(container).find(".ra_anim1").removeClass("raa1_initial");
 						raanim1 = setTimeout(function() {
@@ -1410,6 +1434,9 @@ var ready = function() {
 	  		}, delay)
 				$(container).removeClass("hidden");
 				ratimeout = setTimeout(function() {
+					$(".pagecoverunclickable").fadeOut(75, function() {
+						$(".pagecoverunclickable").removeClass("lightercover");
+					});
 	  			$(".roundannounce").fadeOut(75, function() {
 	  				$(".bighint").css("visibility", "visible").removeClass("bh_initial");
 	  				$(".hintlabel").css("opacity", "1");

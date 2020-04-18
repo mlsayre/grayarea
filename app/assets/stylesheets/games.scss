@@ -992,6 +992,9 @@ textarea.sumword {
   opacity: .8;
   z-index: 700;
 }
+.pagecoverunclickable.lightercover {
+  opacity: .05;
+}
 .pagecoveraboutstart {
   pointer-events: none;
   cursor: auto;
@@ -1404,7 +1407,7 @@ select:focus, select:active {
   font-size: 18px;
   text-align: center;
   color: midnightblue;
-  animation: cssAnimation 5.5s 1 forwards;
+  animation: cssAnimation 2.8s 1 forwards;
   margin: 0 auto;
   left: 0;
   right: 0;
@@ -2768,6 +2771,7 @@ button.revealwords {
   position: relative;
   width: 50%;
   margin: 3% auto 0;
+  text-shadow: black 1px 1px 3px;
 }
 .giveravatar {
   position: absolute;
@@ -2798,14 +2802,14 @@ span.giveravatar.avatarmoved {
   position: absolute;
 }
 .menudialog.menudialogaboutgiver {
-    height: 10%;
+    height: auto;
     background: white;
     top: 22%;
     z-index: 9;
 }
 @media (max-width: 499px) {
   .menudialog.menudialogaboutgiver {
-    height: 10%;
+    height: auto;
     background: white;
     top: 19.5%;
   }
@@ -3040,7 +3044,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
   margin: 0 auto;
   text-align: center;
   top: 25%;
-  text-shadow: cyan -1px 1px 6px;
+  text-shadow: black -1px 1px 3px;
   transition: all 360ms;
   visibility: visible;
 }

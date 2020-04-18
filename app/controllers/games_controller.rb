@@ -241,7 +241,7 @@ class GamesController < ApplicationController
       if params[:gamescore].to_i >= 200
         User.find(current_user.id).increment!(:statguesserscoretwohundred, by = 1)
         User.find(@thisgame.giver_id).increment!(:statgiverscoretwohundred, by = 1)
-        @temp1 = @Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "twohundred")
+        @temp1 = Game.checkspecialfeats(current_user.id, @thisgame.giver_id, "twohundred")
         @returnedspecialfeats.push(@temp1)
       end
       if params[:gamescore].to_i > 99
