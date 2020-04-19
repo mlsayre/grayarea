@@ -1894,7 +1894,7 @@ li.gamelist {
     font-size: 18px;
 }
 .guessergames li.gamelist {
-    background: rgba(255, 130, 255, 0.8);
+    background: rgba(56, 202, 121, 0.8);
 }
 .gamelist span {
     vertical-align: middle;
@@ -2733,9 +2733,15 @@ a.bigplaybutton {
   font-weight: 400;
 }
 .button.seeyourgames {
-    font-size: 18px;
-    line-height: 1.1;
-    margin: 0 auto 6px;
+  font-size: 19px;
+  line-height: .8;
+  margin: 0 auto 6px;
+  width: 189px;
+  height: 58px;
+  background: url(https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_empty_long.png) !important;
+  background-size: contain !important;
+  background-position: 0 !important;
+  background-repeat: no-repeat !important;
 }
 a.button.seeyourgames span {
     position: relative;
