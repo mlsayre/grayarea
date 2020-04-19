@@ -1,5 +1,5 @@
 <% @gamesgiverlist.each_with_index do |game, index| %>
-<% @humanindex = index + 1 %>
+<% @humanindex = @gamesgiverlist.count - index %>
   <% if Game.find(game.id).guesser_id1 == 0 %>
     <% numplayers = "0" %>
   <% elsif Game.find(game.id).guesser_id2 == 0 %>
@@ -24,7 +24,7 @@
     <% end %>
     <a href="<%= game_path(game.id) %>"><!-- <%= User.find(Game.find(game.id).giver_id).username %> -->
       <div class="gltop">
-        <%= game.id %>: <%= numplayers %>/6 pl
+        <%= @humanindex %>: <%= numplayers %>/6 pl
       </div>
     <span class="timeshow"><%= local_time(game.created_at, "%b %d, '%y") %></span>
     <% heartnum = Game.find(game.id).gsr1_heart + Game.find(game.id).gsr2_heart + Game.find(game.id).gsr3_heart + 

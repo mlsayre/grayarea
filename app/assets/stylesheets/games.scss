@@ -1893,6 +1893,9 @@ li.gamelist {
     border-radius: 10px;
     font-size: 18px;
 }
+.guessergames li.gamelist {
+    background: rgba(255, 130, 255, 0.8);
+}
 .gamelist span {
     vertical-align: middle;
 }
@@ -1941,6 +1944,7 @@ span.timeshow {
 }
 .gamelist a {
   text-decoration: none;
+  display: block;
 }
 .gd.button {
   position: fixed;
