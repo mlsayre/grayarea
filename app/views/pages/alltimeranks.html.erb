@@ -18,7 +18,7 @@
 		<div class="rankingstabletitle">All-time Top 15</div>
 
 		<div class="statcontainer supreme showstat">
-			<span class="statcat"><u>Supreme Stretchers*</u></span>
+			<span class="statcat">Supreme Stretchers*</span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 5) <=> Game.avgtotal(a.id, 5)}.first(15).each do |user| %>
 			  	  <% if Game.avgtotal(user.id, 5) != -1 %>
@@ -29,7 +29,7 @@
 	  </div>
 
 	  <div class="statcontainer athearts">
-			<span class="statcat"><u>% of Time <img class="newsheart" src="/assets/Heart-48.png"> Received (min 10)</u></span>
+			<span class="statcat">% of Time <img class="newsheart" src="/assets/Heart-48.png"> Received (min 10 played)</span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.averageheartspergame(b.id, 10, false) <=> Game.averageheartspergame(a.id, 10, false)}.first(15).each do |user| %>
 			  	  <% if Game.averageheartspergame(user.id, 10, false) != -1 %>
@@ -40,7 +40,7 @@
 	  </div>
 
 	  <div class="statcontainer totalhearts">
-			  <span class="statcat"><u>Lifetime <img class="newsheart" src="/assets/Heart-48.png"> Received</u></span>
+			  <span class="statcat">Lifetime <img class="newsheart" src="/assets/Heart-48.png"> Received</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimehearts <=> a.lifetimehearts }.first(15).each do |user| %>
 				  	  <% if user.lifetimehearts != 0 %>
@@ -51,7 +51,7 @@
 		  </div>
 
 		<div class="statcontainer avgguesser">
-			<span class="statcat"><u>Avg Guesser Points/Game (min 10 games)</u></span>
+			<span class="statcat">Avg Guesser Points/Game (min 10 games)</span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.avgpointsguesser(b.id, 10) <=> Game.avgpointsguesser(a.id, 10)}.first(15).each do |user| %>
 			  	  <% if Game.avgpointsguesser(user.id, 10) != -1 %>
@@ -62,7 +62,7 @@
 	  </div>
 
 	  <div class="statcontainer avggiver">
-			<span class="statcat"><u>Avg Giver Points/Game (min 10 played)</u></span>
+			<span class="statcat">Avg Giver Points/Game (min 10 played)</span>
 			<ul>
 			  <% User.all.sort {|a,b| Game.avgpointsgiver(b.id, 10) <=> Game.avgpointsgiver(a.id, 10)}.first(15).each do |user| %>
 			  	  <% if Game.avgpointsgiver(user.id, 10) != -1 %>
@@ -73,7 +73,7 @@
 	  </div>
 
 	  <div class="statcontainer atfeat">
-		  <span class="statcat"><u>Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </u></span>
+		  <span class="statcat">Feat Score <img class="newsheart" src="/assets/Trophy-32.png"> </span>
 			<ul>
 			  <% User.all.sort {|a,b| b.statgiverstatus.sum + b.statguesserstatus.sum <=> a.statgiverstatus.sum + a.statguesserstatus.sum}.first(15).each do |user| %>
 			  	  <% if user.statgiverstatus.sum + user.statguesserstatus.sum != 0 %>
@@ -84,7 +84,7 @@
 		</div>
 
 		<div class="statcontainer atnonspoiler">
-		  <span class="statcat"><u>All-time Giver Non-Spoiler Streak</u></span>
+		  <span class="statcat">All-time Giver Non-Spoiler Streak</span>
 			<ul>
 			  <% User.all.sort {|a,b| b.statalltimegiverstreak <=> a.statalltimegiverstreak }.first(15).each do |user| %>
 			  	  <% if user.statalltimegiverstreak != 0 %>
@@ -95,7 +95,7 @@
 	  </div>
 
 	  <div class="statcontainer atgsnonspoiler">
-		  <span class="statcat"><u>All-time Guesser Non-Spoiler Streak</u></span>
+		  <span class="statcat">All-time Guesser Non-Spoiler Streak</span>
 			<ul>
 			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
 			  	  <% if user.statalltimeguesserstreak != 0 %>
@@ -106,7 +106,7 @@
 	  </div>		
 
 	  <div class="statcontainer wknonspoiler">
-			  <span class="statcat"><u>Current Giver Non-Spoiler Streak</u></span>
+			  <span class="statcat">Current Giver Non-Spoiler Streak</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.statgivernospoilers <=> a.statgivernospoilers }.first(15).each do |user| %>
 				  	  <% if user.statgivernospoilers != 0 %>
@@ -117,7 +117,7 @@
 		  </div>
 
 		  <div class="statcontainer wkgsnonspoiler">
-			  <span class="statcat"><u>Current Guesser Non-Spoiler Streak</u></span>
+			  <span class="statcat">Current Guesser Non-Spoiler Streak</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.statguessernospoilers <=> a.statguessernospoilers }.first(15).each do |user| %>
 				  	  <% if user.statguessernospoilers != 0 %>
@@ -128,7 +128,7 @@
 		  </div>
 
 		  <div class="statcontainer totalguesser">
-			  <span class="statcat"><u>Total Games Played as Guesser</u></span>
+			  <span class="statcat">Total Games Played as Guesser</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimegamesguesser <=> a.lifetimegamesguesser }.first(15).each do |user| %>
 				  	  <% if user.lifetimegamesguesser != 0 %>
@@ -139,7 +139,7 @@
 		  </div>
 
 		  <div class="statcontainer totalgiver">
-			  <span class="statcat"><u>Total Games Created as Giver</u></span>
+			  <span class="statcat">Total Games Created as Giver</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimegamesgiver <=> a.lifetimegamesgiver }.first(15).each do |user| %>
 				  	  <% if user.lifetimegamesgiver != 0 %>

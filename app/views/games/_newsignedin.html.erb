@@ -90,8 +90,8 @@
       <%= link_to(image_tag("/assets/btn_play.png", :alt => "Play", :title => "Play Word Stretch"), howtoplay_pages_path, :class => "bigplaybutton") %>
       <div class="mainmenubuttons">
         <div class="mmheading"><%= @playheading %></div>
-        <%= form_for(@game) do |f| %>
 
+        <%= form_for(@game) do |f| %>
           <div class="actions">
             <% if current_user.lifetimegamesguesser > 2 %>
               <%= f.button "Give", :class => "button mainplay" %>
@@ -102,7 +102,13 @@
           <br>
 
         <% end %>
-        <button class="button startguess">Guess</button><br>
+        <% if current_user.showtutorial == true %>
+          <%= link_to tutorial_pages_path, :class => "button tutorialguess" do %>
+            <span>Guess Tutorial</span>
+          <% end %>
+        <% else %>
+          <button class="button startguess">Guess</button><br>
+        <% end %>
 
         <% if current_user.lifetimegamesguesser < 3 %>
           <span class="guessermsg">(Play 3 games as Guesser to activate Give button)</span>
@@ -217,9 +223,9 @@ $(".feednav").click(function() {
             }
           }
 
-          var adsound = false;
+          var adsound = true;
           if (sound === 1) {
-            adsound = true;
+            adsound = false;
           }
 
           var options = {
@@ -269,9 +275,9 @@ $(".feednav").click(function() {
             }
           }
 
-          var adsound = false;
+          var adsound = true;
           if (sound === 1) {
-            adsound = true;
+            adsound = false;
           }
 
           var options = {

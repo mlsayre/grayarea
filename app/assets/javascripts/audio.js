@@ -164,6 +164,11 @@ var wordenter3 = new Howl({
 });
 var gamecreated = new Howl({
   src: ['/assets/gamecreated.wav'],
-  volume: .8,
+  volume: 1,
+  preload: true
+});
+var tutpopup = new Howl({
+  src: ['/assets/tutpopup.wav'],
+  volume: 1,
   preload: true
 });

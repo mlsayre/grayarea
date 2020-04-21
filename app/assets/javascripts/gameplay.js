@@ -205,7 +205,7 @@ var ready = function() {
 	var hint2num = 0;
 	var hint3 = "";
 	var hint3num = 0;
-	var scoring = {0:0, 1:10, 2:15, 3:25, 4:40, 5:50, 6:60};
+	var scoring = {0:0, 1:10, 2:15, 3:25, 4:50, 5:80, 6:120};
 	var scoringrow = {0: "", 1: "", 2: "Two in a row!", 3: "One, two, THREE!", 4: "Four in a row!", 5: "Five in a row!", 6: "SIX in a row!!"}
 	var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
 	     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
@@ -423,6 +423,12 @@ var ready = function() {
 			return false;
 		}
 	}
+	function validateAll(word1, word2, word3) {
+		if (word1 === word2 || word1 === word3 || word2 === word3) {
+			errorbox('Please make sure all hints are unique.');
+			return false;
+		}
+	}
 
 	function errorbox(message) {
 		$(".messagetitle").text("Oopies!")
@@ -581,6 +587,10 @@ var ready = function() {
 				return false;
 			}
 			hint3 = enteredtext.toUpperCase();
+			var valall = validateAll(hint1,hint2,hint3);
+			if (valall === false) {
+				return false;
+			}
 			$(".hint1").hide();
 			$(".hint2").hide();
 			$(".hint3").show();
@@ -1021,7 +1031,7 @@ var ready = function() {
 				  }, endgametime);
 		  	}
 		  	//ajax call to update db
-		  	if (firstload !== "true" && gon.signedin === true) {
+		  	if (firstload !== "true" && gon.signedin === true && $(".guesswordslisttutorial").length === 0) {
 			  	$.ajax({
 		        url: "/games/updategame",
 		        type: "POST",
@@ -1680,9 +1690,9 @@ var ready = function() {
       		}
 		    }
 
-			  var adsound = false;
+			  var adsound = true;
 			  if (sound === 1) {
-			  	adsound = true;
+			  	adsound = false;
 			  }
 
 		    var options = {
@@ -1731,9 +1741,9 @@ var ready = function() {
       		}
 		    }
 
-			  var adsound = false;
+			  var adsound = true;
 			  if (sound === 1) {
-			  	adsound = true;
+			  	adsound = false;
 			  }
 
 		    var options = {

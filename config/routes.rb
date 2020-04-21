@@ -37,10 +37,12 @@ Rails.application.routes.draw do
       get 'settings' => 'pages#settings'
       get 'changetheme' => 'pages#changetheme'
       get 'yourgames' => 'pages#yourgames'
+      get 'tutorial' => 'pages#tutorial'
       post 'allfeedseen'
       post 'resetstatnotify'
       post 'updateavatar'
       post 'updatetheme'
+      post 'didtutorial'
     end
   end
 

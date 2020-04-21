@@ -140,6 +140,79 @@ class PagesController < ApplicationController
     end
 	end
 
+	def tutorial
+		avguesserbgnum = ''
+    avguesserheadnum = ''
+    avguessermouthnum = ''
+    avguessereyesnum = ''
+    avguesserhairnum = ''
+    avguesserdeconum = ''
+    avguesserarray = current_user.avatar_content_type.split("-")
+    avguesserarray.each do |str|
+      puts str
+      if str.include?("bg")
+        avguesserbgnum = str.split(":")[1]
+      elsif str.include?("head")
+        avguesserheadnum = str.split(":")[1]
+      elsif str.include?("mouth")
+        avguessermouthnum = str.split(":")[1]
+      elsif str.include?("eyes")
+        avguessereyesnum = str.split(":")[1]
+      elsif str.include?("hair")
+        avguesserhairnum = str.split(":")[1]
+      elsif str.include?("deco")
+        avguesserdeconum = str.split(":")[1]
+      end
+    end
+    @avgiverbgurl = User.avatarpartsurl("bg", 005)
+    @avgiverheadurl = User.avatarpartsurl("head", 004)
+    @avgivermouthurl = User.avatarpartsurl("mouth", 004)
+    @avgivereyesurl = User.avatarpartsurl("eyes", 004)
+    @avgiverhairurl = User.avatarpartsurl("hair", 004)
+    @avgiverdecourl = User.avatarpartsurl("deco", 000)
+
+    @avguesserbgurl = User.avatarpartsurl("bg", avguesserbgnum.to_i)
+    @avguesserheadurl = User.avatarpartsurl("head", avguesserheadnum.to_i)
+    @avguessermouthurl = User.avatarpartsurl("mouth", avguessermouthnum.to_i)
+    @avguessereyesurl = User.avatarpartsurl("eyes", avguessereyesnum.to_i)
+    @avguesserhairurl = User.avatarpartsurl("hair", avguesserhairnum.to_i)
+    @avguesserdecourl = User.avatarpartsurl("deco", avguesserdeconum.to_i)
+
+		@allthewords = ["DOG", "SNORKEL", "GHOST", "STONEHENGE", "BUCKET", "KITTEN", "CASTLE", "MAGNET", "MONKEY", 
+      "BUBBLE", "FUR", "ISLAND", "BLIZZARD", "ZEUS", "SOCCER"]
+
+		@game = {
+			:tutcreator => "Uhura",
+			:hintword1 => "PET", :hintnum1 => 3,
+			:hintword2 => "VACATION", :hintnum2 => 2,
+			:hintword3 => "SPOOKY", :hintnum3 => 1,
+
+		}
+		gon.allwords = @allthewords
+    gon.targetwords = ["DOG", "KITTEN", "FUR", "SNORKEL", "ISLAND", "GHOST"]
+    gon.badword = "CASTLE"
+    gon.hintword1 = @game[:hintword1]
+    gon.hintword2 = @game[:hintword2]
+    gon.hintword3 = @game[:hintword3]
+    gon.hintnum1 = @game[:hintnum1]
+    gon.hintnum2 = @game[:hintnum2]
+    gon.hintnum3 = @game[:hintnum3]
+    gon.guessedwords = []
+    gon.wordsh1 = []
+    gon.wordsh2 = []
+    gon.wordsh3 = []
+    gon.guessstatus = "hint1,word1"
+    @gsrstatus = "hint1,word1"
+    gon.spoiler = 0
+    gon.guessernum = "1"
+    gon.playerscore = 0
+    gon.heartstatus = 0
+	end
+
+  def didtutorial
+    current_user.update(:showtutorial => false)
+  end
+
 	def resetstatnotify
 		current_user.update(:statgivernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
 			:statguessernotify => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])

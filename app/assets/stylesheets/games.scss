@@ -999,17 +999,145 @@ textarea.sumword {
   pointer-events: none;
   cursor: auto;
 }
+.pagecovertutorial {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  z-index: 2000;
+}
+.pagecovertutorial.darker {
+  opacity: .7;
+}
+.tutbubble {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 65%;
+    max-width: 380px;
+    height: auto;
+    background-color: white;
+    z-index: 2010;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 12px 21px;
+    border-radius: 30px;
+    border: 1px solid lightblue;
+    box-shadow: 0px 0px 40px lightseagreen;
+    transition: 400ms all;
+    display: none;
+}
+.tutbubbletop {
+  top: 10%;
+}
+.tutbubblemiddle {
+  top: 23%;
+}
+.tutbubblemiddleshake {
+  top: 23%;
+  animation: midShake 1s alternate infinite;
+}
+.tutbubblebottom {
+    top: calc(100% - 245px);
+}
+.tutbubblepup {
+    top: 1%;
+    left: 114px;
+    width: 190px;
+}
+@keyframes midShake {
+  from {
+    box-shadow: red 0px 0px 22px 3px;
+    transform: rotate(3deg);
+    
+  }
+  to {
+    box-shadow: red 0px 0px 44px 9px;
+    transform: rotate(-3deg);
+  }
+}
+.tutarrow {
+  display: none;
+}
+.tutarrow.arrowtop {
+  position: absolute;
+  bottom: 98%;
+  left: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-bottom: 24px solid white;
+}
+.tutarrow.arrowleft {
+  position: absolute;
+  bottom: 0;
+  top: 46px;
+  left: -108%;
+  right: 0;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-top: 24px solid transparent;
+  border-right: 24px solid white;
+  border-bottom: 24px solid transparent;
+}
+.tutarrow.arrowbottom {
+  position: absolute;
+  top: 98%;
+  left: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-top: 24px solid white;
+}
+.tutorialinfo {
+  display: none;
+}
+.button.tutbutton {
+  padding: 8px 14px;
+  margin-top: 20px;
+}
+.button.tutbutton img {
+    width: 14px;
+    position: relative;
+    top: 1px;
+}
+.bringtotop {
+  z-index: 2005;
+  pointer-events: none;
+  cursor: auto;
+  /*outline: 4px groove lawngreen;
+  outline-offset: -4px;*/
+}
+.bringtotopclickable {
+  z-index: 2005;
+  /*outline: 4px groove lawngreen;
+  outline-offset: -4px;*/
+}
+.tuttext img {
+    width: 40px;
+    vertical-align: middle;
+}
 .unclickable {
   /*pointer-events: none;*/
 }
-.guesswordslist li {
+.guesswordslist li, .allwords.guesswordslisttutorial li {
   cursor: pointer;
 }
-.guesswordslist li:not(.guessedword):hover {
+.guesswordslist li:not(.guessedword):hover, .guesswordslisttutorial li:not(.guessedword):hover {
   background-color: white;
   transition: 200ms all;
 }
-.playboard-signedin .guesswordslist li:not(.guessedword):hover {
+.playboard-signedin .guesswordslist li:not(.guessedword):hover, .playboard-signedin .guesswordslisttutorial li:not(.guessedword):hover {
   background-color: rgba(255,255,255,.3);
   border-radius: 12px;
   transition: 200ms all;
@@ -2196,7 +2324,7 @@ span.calcwait {
     position: relative;
 }
 .statcat {
-  font-size: 80%; 
+  font-size: 20px; 
   padding-top: 5px;
   text-align: center; 
   display: block;
@@ -2717,7 +2845,8 @@ a.bigplaybutton {
   background-size: 100% !important;
   background-repeat: no-repeat !important;*/
 }
-.button.mainplay, .button.startguess, .button.seeyourgames, .button.dummyplay, .button.contmainplay, .button.contstartguess, button.revealwords {
+.button.mainplay, .button.startguess, .button.seeyourgames, .button.dummyplay, 
+.button.contmainplay, .button.contstartguess, button.revealwords, .button.tutorialguess {
   color: #0097df;
   padding: 0px !important;
   border: 0;
@@ -2731,6 +2860,14 @@ a.bigplaybutton {
   height: 74px;
   font-size: 21px;
   font-weight: 400;
+}
+.button.tutorialguess {
+  display: inline-block;
+  line-height: 1;
+}
+.button.tutorialguess span {
+    position: relative;
+    top: 13px;
 }
 .button.seeyourgames {
   font-size: 19px;
@@ -2824,7 +2961,7 @@ span.giveravatar.avatarmoved {
     top: 19.5%;
   }
 }
-.allwords.guesswordslist, .allwords.givewordslist {
+.allwords.guesswordslist, .allwords.givewordslist, .allwords.guesswordslisttutorial {
     position: absolute;
     top: 36vw;
     width: 96%;
@@ -2932,7 +3069,7 @@ span.hintnumheading.allguesserinfo.playerplayed {
     top: 147px;
     font-size: 24px;
   }
-  .allwords.guesswordslist, .allwords.givewordslist {
+  .allwords.guesswordslist, .allwords.givewordslist, .allwords.guesswordslisttutorial {
     top: 185px;
   }
   .hintlabel.guessnum {

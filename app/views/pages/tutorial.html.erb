@@ -1,0 +1,1827 @@
+<section class="playboard-signedin <%= current_user.theme %>">
+	<div class="gametop">Playing Guess Tutorial<br>
+	</div>
+
+	<div class="hintnumarea">
+		<span class="hintheadline">First hint</span>
+		<div class="scoreSection">Words: <span class="wordcount">0</span> | Score: <span class="scorecount">0</span> pts</div>
+		<span class="giveravatar">
+			<div class="avatarpart avatar_bg">
+				<img src=<%= @avgiverbgurl %>>
+			</div>
+			<div class="avatarpart avatar_head">
+				<img src=<%= @avgiverheadurl %>>
+			</div>
+			<div class="avatarpart avatar_mouth">
+				<img src=<%= @avgivermouthurl %>>
+			</div>
+			<div class="avatarpart avatar_eyes">
+				<img src=<%= @avgivereyesurl %>>
+			</div>
+			<div class="avatarpart avatar_hair">
+				<img src=<%= @avgiverhairurl %>>
+			</div>
+			<div class="avatarpart avatar_deco">
+				<img src=<%= @avgiverdecourl %>>
+			</div>
+		</span>
+	</div>
+
+	<div class="bighint">
+		<span class="thehintword"></span> <span class="hintpar">(<span class="thehintnum"></span>)</span>
+	</div>
+
+	<div class="allwords guesswordslisttutorial">
+		<span id="allwordslist">
+	    <% @allthewords.each do |word| %>
+			  <li class="word shrunken firstclick" data-guessword="<%= word %>">
+			  	<div class="clickagain">Click again to submit</div>
+			  	<img class="anim_correct starline" src="/assets/stararc.png">
+			  	<img class="anim_correct starscatter" src="/assets/starspread.png">
+			  	<div class="anim_correct scoretxt">Correct!</div>
+			      <div class="anim_correct inarow"></div>
+			  	<img class="anim_spoiler skull" src="/assets/skull.png">
+			  	<div class="anim_spoiler">Spoiler!</div>
+			  	<img class="anim_neutral neutralx" src="/assets/neutralx.png">
+			  	<div class="anim_neutral">Almost</div>
+			  	<span><%= word %></span>
+			  </li>
+			<% end %>
+	    <span class="pupspoilershow">
+				<div class="posspoiler">
+		      <span class="psquestionmark">?</span>
+		      <img src="/assets/skull.png">
+		      <span class="psquestionmark">?</span>
+		    </div>
+		  </span>
+	  </span>
+	</div>
+
+	<div class="hintlabel guessnum"><span>The word <span class="thehintword"></span> applies 
+		to <span class="thehintnum"></span> <span class="thewordword"></span>. Click on a word to guess it...</span></div>
+	</div>
+
+	<div class="hintarea guess">
+		<div class="hintheading">
+			<div class="notifyarea">
+				<span class="gamenotify">You are so cool, seriously.</span>
+			</div>
+			<div class="hints hint1">
+				<div class="hintlabel guessword">
+					
+				</div>
+				
+				<div class="streakwarn">
+					<!-- <span class="bonusstreakheadline">Current non-spoiler streaks at risk:</span> -->
+					<span class="bonusstreak bonusguesserstreak">Your Streak: <%= current_user.statguessernospoilers %></span>
+					<span class="bonusstreak bonusgiverstreak"><%= @game[:tutcreator] %>'s Streak: 17</span>
+				</div>
+				<div class="guessbottomarea">
+					<span class="guesseravatar">
+						<div class="avatarpart avatar_bg">
+							<img src=<%= @avguesserbgurl %>>
+						</div>
+						<div class="avatarpart avatar_head">
+							<img src=<%= @avguesserheadurl %>>
+						</div>
+						<div class="avatarpart avatar_mouth">
+							<img src=<%= @avguessermouthurl %>>
+						</div>
+						<div class="avatarpart avatar_eyes">
+							<img src=<%= @avguessereyesurl %>>
+						</div>
+						<div class="avatarpart avatar_hair">
+							<img src=<%= @avguesserhairurl %>>
+						</div>
+						<div class="avatarpart avatar_deco">
+							<img src=<%= @avguesserdecourl %>>
+						</div>
+					</span>
+					<span class="guessername"><%= current_user.username %></span>
+					<div class="guesserskiparea">
+						<div class="riskytext">Too risky?</div>
+						<button class="button skip1">Go to next hint!</button>
+					</div>
+				</div>
+				<span class="menuarea">
+					<button class="menu"><img src="/assets/btn_menu.png"></button>
+					<span class="pupcontainer">
+						<% if current_user.pupneutraltworemove == 0 %>
+							<div class="activepup">
+								<button class="pupbutton pup_tworemove pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png"></button>
+								<span class="pupnum pupnumnotactive neutralzero">3</span>
+							</div>
+						<% else %>
+							<div class="activepup">
+								<button class="pupbutton pup_tworemove pupactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png"></button>
+								<span class="pupnum">3</span>
+							</div>
+						<% end %>
+						<% if current_user.pupspoilerdetector == 0 %>
+							<div class="activepup">
+								<button class="pupbutton pup_spoilerdetect pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"></button>
+								<span class="pupnum pupnumnotactive spoilerzero">3</span>
+							</div>
+						<% else %>
+							<div class="activepup">
+								<button class="pupbutton pup_spoilerdetect pupactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"></button>
+								<span class="pupnum">3</span>
+							</div>
+						<% end %>
+					</span>
+				</span>
+			</div>
+		</div>
+		<div class="hints submitted hidden">
+			<span class="hintlabel gameover">Game Over</span>
+			
+			
+		</div>
+	</div>
+
+	<button class="menu"><img src="/assets/btn_menu.png"></button>
+
+	<div class="gamebottom"></div>
+
+	<div class="messagebox">
+		<div class="messagetitle"></div>
+		<div class="messageinfo"></div>
+		<div class="messageaction"></div>
+		<div class="messagesubtext"></div>
+	</div>
+
+	<div class="tutorialinfo">
+		<div class="pagecovertutorial"></div>
+		<div class="tutbubble">
+			<div class="tutarrow arrowtop"></div>
+			<div class="tutarrow arrowleft"></div>
+			<div class="tutarrow arrowbottom"></div>
+			<h3 class="tutheading"></h3>
+			<div class="tuttext"></div>
+			<div class="button tutbutton"></div>
+		</div>
+	</div>
+	<div class="pagecover"></div>
+	<div class="pagecoverunclickable"></div>
+	<div class="pagecoverabout pagecoveraboutstart"></div>
+	<div class="menudialog menudialogrevealwords">
+    <button class="revealwords">Begin Tutorial!</button>
+  </div>
+  <div class="menudialog menudialogaboutgiver">
+  	About <%= @game[:tutcreator] %>: "I'm not an actual player."<br><br>
+  	WSRating: 1220<br>
+  	<span style="font-size:14px;margin-top: 4px;display: block;">(Your WSRating: <%= Game.avgtotal(current_user.id, 0) %>)</span>
+  </div>
+
+	<div class="roundannounce hidden">
+		<div class="raRound1toRound2 hidden">
+			<span class="ra_anim1 raa1_initial">Round 2!</span>
+		</div>
+		<div class="raRound2toRound3 hidden">
+			<span class="ra_anim1 raa1_initial">Final Round!</span>
+		</div>
+		<div class="raBonustoRound3 hidden">
+			<span class="ra_anim1 raa1_initial">Final Round!</span>
+		</div>
+		<div class="raSkiphint hidden">
+			<span class="ra_anim1 raa1_initial">Skipped...</span>
+		</div>
+		<div class="raBonusstart hidden">
+			<span class="ra_anim1 raa1_initial">Make Up Round!</span>
+		</div>
+	</div>
+
+	<div class="playedgameover">
+		<div class="pgotitle">Game Over!</div>
+		<div class="buttons-middle">
+			<span class="giveheart"><img src="/assets/Heart-48.png"> +</img></span>
+			<span class="giveheartsuccess">Thanks!</span>
+			<button class="button bigplaybutton">CONTINUE</button>
+			<span class="removeheart"><img src="/assets/Heart-48.png"></img> -</span><br>
+			<span class="removeheartsuccess">Awww.</span>
+      
+      <div class="mainmenubuttons">
+        <div class="mmheading">Continue</div>
+
+          <div class="actions">
+          <% if current_user.lifetimegamesguesser > 2 %>
+            <button class="button contmainplay">Give</button>
+          <% else %>
+            <button class="button contmainplay disabled">Give</button>
+          <% end %>
+        </div>
+
+        <button class="button startguess">Guess</button><br>
+
+        <% if current_user.lifetimegamesguesser < 3 %>
+          <span class="guessermsg">(Play 3 games as Guesser to activate Give button)</span>
+        <% end %>
+
+        <button class="button returntomain maininline"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
+      </div>
+    </div>
+	</div>
+
+	<% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+</section>
+
+<script>
+$(document).ready(function() {
+	$(document).on("click", ".giveravatar.avatarclick .avatarpart img", function() {
+		$(".pagecoverabout").show();
+		$(".menudialogaboutgiver").show();
+		$(".giveravatar").addClass("avatarmoved");
+	})
+	$(document).on("click", ".giveravatar.avatarclick.avatarmoved .avatarpart img", function() {
+		$(".pagecoverabout").hide();
+		$(".menudialogaboutgiver").hide();
+		$(".giveravatar").removeClass("avatarmoved");
+	})
+})
+</script>
+
+
+
+
+
+<!-- END TUTORIAL PLAYER BOARD -->
+
+<div class="menubox">
+	<div class="menutitle">Menu</div>
+	<%= link_to "In-depth How to Play", howtoplay_pages_path, :class => "button" %><br>
+	<button class="button soundon"></button><br>
+	<button class="button returntomain maininline"><img src="https://s3-us-west-2.amazonaws.com/wordstretch/avatarui/btn_home.png"></button>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+
+<div class="menudialog menudialogspoiler">
+	<div class="menutitle spoilersused">You've used both Spoiler Detector power-ups for this game!</div>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+<div class="menudialog menudialogneutral">
+	<div class="menutitle spoilersused">You've used both Neutral Remover power-ups for this game!</div>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+<div class="menudialog menudialogadblocker">
+	<div class="menutitle spoilersused">Please disable your adblocker so you can watch ads and receive powerups</div>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+<div class="menudialog menudialogwatch">
+	<div class="menutitle">Get powerups</div>
+	<img class="twopups" src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/obj_powerups.png">
+	<button class="button watchpupbutton watchforpupneutrals">
+		<div class="watchleft"><img src="/assets/ico_watch_ad.png"></div>
+		<div class="watchright">watch for 2x neutrals powerup</div>
+	</button>
+	<button class="button watchpupbutton watchforpupspoilers">
+		<div class="watchleft"><img src="/assets/ico_watch_ad.png"></div>
+		<div class="watchright">watch for 2x spoiler powerup</div>
+	</button>
+	<div class="menusubtext">Click anywhere outside box to close</div>
+</div>
+<!-- <button class="button returntomain"><img src="/assets/Home-48.png"></button> -->
+
+<span class="chatarea">
+	<% if @chatshow == true %>
+		<div class="chatopenbutton">
+			<img src="/assets/btn_chat.png">
+			<span class="unreadchats"><%= Game.getchatnumber(current_user.id, @game.id) %></span>
+		</div>
+		<div class="chatbox" data-chatopen="closed">
+			<div class="chattitle">Chat</div>
+			<div class="chatcontent">
+				<% Chat.where(:game_id => @game.id).order('created_at DESC').all.each do |chat| %>
+				  <div class="messageline">
+				  	<span class="messageauthor"><%= User.find(chat.user_id).username %>: </span>
+				  	<span class="messagetext"><%= chat.message %></span>
+				  	<span class="messagetime"><%= chat.time_ago_in_words(chat.created_at) %></span>
+				  </div>
+				<% end %>
+			</div>
+			<textarea maxlength="300" placeholder="Enter message here" class="chatenter"></textarea>
+			<button class="button messageenter"><img src="/assets/chatbutton.png"></button>
+			<div class="chatclosebutton">Close chat</div>
+		</div>
+	<% end %>
+</span>
+
+<script>
+var hint1 = "";
+var hint1num = 0;
+var hint2 = "";
+var hint2num = 0;
+var hint3 = "";
+var hint3num = 0;
+var scoring = {0:0, 1:10, 2:15, 3:25, 4:40, 5:50, 6:60};
+var scoringrow = {0: "", 1: "", 2: "Two in a row!", 3: "One, two, THREE!", 4: "Four in a row!", 5: "Five in a row!", 6: "SIX in a row!!"}
+var keepitup = ["Keep it up!", "Great work!", "Keep it going!", "Very nice!", "Superb vocabulary!",
+     "Happy dance!", "Next up!", "Fantastic work!", "Superb effort!", "No end in sight!", 
+     "This is making the highlight reel!"]
+var wordindarr = [0,2,3,4,5,6,7,8,9,10,11,12,13,14]
+	function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    array.push(1)
+    return array;
+	}
+if ($(".word").length > 0 && $(".guesswordslisttutorial").length > 0) {
+		var cttop = $(".word").eq(1).position().top;
+		var ctleft = $(".word").eq(1).position().left;
+		for (var i = 0; i < $(".word").length; i++) {
+			var curtop = $(".word").eq(i).position().top;
+			var curleft = $(".word").eq(i).position().left;
+			var movetop = cttop - curtop;
+			var moveleft = ctleft - curleft;
+			$(".word").eq(i).animate({top: movetop, left: moveleft}, 0);
+		}
+		wordindarr = shuffleArray(wordindarr);
+		var speedtoshow = 100;
+		function removeShrunken(k) {
+			setTimeout(function() {
+				$(".word").eq(wordindarr[k]).animate({top: "0px", left: "0px"}, {duration: 0, easing: "easeOutBounce", complete: function() {
+					$(".word").eq(wordindarr[k]).removeClass("shrunken")
+				}
+				})
+			}, (speedtoshow + 110))
+		}
+
+		if ($(".guesswordslisttutorial").length > 0 || $(".creatinggame").length > 0 || $(".guestplayboard").length > 0) {
+			$(".pagecoverabout").show();
+			$(".menudialogrevealwords").show();
+			$(".giveravatar").addClass("avatarmoved");
+			$(".menudialogrevealwords").click(function() {
+				$(".giveravatar").removeClass("avatarmoved");
+				beginsfx.play();
+				revealWords();
+				$(".giveravatar").addClass("avatarclick");
+			});
+		}
+
+		function revealWords() {
+			$(".pagecoverabout").hide();
+			$(".pagecoveraboutstart").removeClass("pagecoveraboutstart")
+			$(".tutorialinfo").show();
+			$(".menudialogrevealwords").addClass("shrunken");
+			$(".revealwords").addClass("shrunken");
+			for (var i = 0; i < wordindarr.length; i++) {
+				(function() {
+					var tm = speedtoshow * (i + 2);
+					var toremove = wordindarr[i];
+					if ($(".allwords").length !== 0) {
+						var k = i;
+						setTimeout(function() {
+							if (k === 0) {
+								wordshow0.on("play", removeShrunken(k));
+								wordshow0.play();
+							} else if (k === 1) {
+								wordshow1.on("play", removeShrunken(k));
+								wordshow1.play();
+							} else if (k === 2) {
+								wordshow2.on("play", removeShrunken(k));
+								wordshow2.play();
+							} else if (k === 3) {
+								wordshow3.on("play", removeShrunken(k));
+								wordshow3.play();
+							} else if (k === 4) {
+								wordshow4.on("play", removeShrunken(k));
+								wordshow4.play();
+							} else if (k === 5) {
+								wordshow5.on("play", removeShrunken(k));
+								wordshow5.play();
+							} else if (k === 6) {
+								wordshow6.on("play", removeShrunken(k));
+								wordshow6.play();
+							} else if (k === 7) {
+								wordshow7.on("play", removeShrunken(k));
+								wordshow7.play();
+							} else if (k === 8) {
+								wordshow8.on("play", removeShrunken(k));
+								wordshow8.play();
+							} else if (k === 9) {
+								wordshow9.on("play", removeShrunken(k));
+								wordshow9.play();
+							} else if (k === 10) {
+								wordshow10.on("play", removeShrunken(k));
+								wordshow10.play();
+							} else if (k === 11) {
+								wordshow11.on("play", removeShrunken(k));
+								wordshow11.play();
+							} else if (k === 12) {
+								wordshow12.on("play", removeShrunken(k));
+								wordshow12.play();
+							} else if (k === 13) {
+								wordshow13.on("play", removeShrunken(k));
+								wordshow13.play();
+							} else if (k === 14) {
+								wordshow14.on("play", removeShrunken(k));
+								wordshow14.play();
+								$(".menudialogrevealwords").hide().removeClass("shrunken");
+								$(".revealwords").hide().removeClass("shrunken");
+								$(".word").removeAttr("style");
+								setTimeout(function() {
+									$(".pagecovertutorial").addClass("darker");
+									$(".tutbubble").show();
+									tutShow(1);
+								}, 400)
+								
+							}
+						}, tm)
+					}
+				})(i);
+			}
+		}
+	}
+if ($(".allwords").hasClass("guesswordslisttutorial")) {
+	var GUESS = (function() {
+		var awords = gon.allwords;
+  	var twords = gon.targetwords;
+  	var bword = gon.badword;
+  	var hintword1 = gon.hintword1;
+  	var hintword2 = gon.hintword2;
+  	var hintword3 = gon.hintword3;
+  	var hintnum1 = gon.hintnum1;
+  	var hintnum2 = gon.hintnum2;
+  	var hintnum3 = gon.hintnum3;
+  	var guessernum = 1;
+  	var guessedwords = [];
+  	var guessstatus = "hint1,word1";
+  	var pupspoilerstatus = gon.pupspoiler || 0;
+  	var pupneutralstatus = gon.pupneutrals || 0;
+  	var pupspoilerused = pupspoilerstatus.length;
+  	var pupneutralused = pupneutralstatus.length;
+  	var hintnumtotal = hintnum1 + hintnum2 + hintnum3;
+
+  	//beginning state
+  	guessedwords = gon.guessedwords;
+  	if (guessedwords === null) {guessedwords = [];}
+  	guessstatus = gon.guessstatus
+  	var gamespoiled = gon.spoiler;
+  	var currenthint = hintword1;
+  	var currenthintnum = hintnum1;
+  	if (guessstatus.split(",")[0] === "hint2") {
+  		currenthint = hintword2;
+  		currenthintnum = hintnum2;
+  	} else if (guessstatus.split(",")[0] === "hint3") {
+  		currenthint = hintword3;
+  		currenthintnum = hintnum3;
+  	} else if (guessstatus == "bonus,hint2") {
+  		currenthint = hintword2;
+  		currenthintnum = hintnum2;
+  	} else if (guessstatus == "bonus,hint3") {
+  		currenthint = hintword3;
+  		currenthintnum = hintnum3;
+  	}
+  	var correctwordsguessed = [];
+  	var correctwordshint1 = gon.wordsh1;
+  	var correctwordshint2 = gon.wordsh2;
+  	var correctwordshint3 = gon.wordsh3;
+  	for (var i = 0; i < guessedwords.length; i++) {
+  		if (twords.indexOf(guessedwords[i]) !== -1) {
+  			correctwordsguessed.push(guessedwords[i]);
+  		}
+  	}
+  	var playerscore = gon.playerscore;
+  	var notifytimeout;
+  	var heartstatus = gon.heartstatus;
+		if (heartstatus === 1) {
+			$(".giveheart").hide();
+			$(".removeheart").css("display", "inline-block");
+		}
+		
+		if (pupspoilerstatus.length === 1) {
+			setTimeout(function() {
+				$(".pupspoilershow").fadeIn().addClass("show4").addClass("pos-" + pupspoilerstatus[0]);
+			}, 1500)
+		} else if (pupspoilerstatus.length === 2) {
+			$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive");
+			setTimeout(function() {
+				$(".pupspoilershow").fadeIn().addClass("show2").addClass("pos-" + pupspoilerstatus[1]);
+			}, 1500)
+		}
+
+		$(document).on("click", ".giveheart", function() {
+			$.ajax({
+        url: "/games/addheart",
+        type: "POST",
+        dataType:'json',
+        data: { 'game_id' : parseInt(gameid),
+                'heartgiven' : 1 }
+      })
+        .done(function() {
+        	var wrapper = $('.allguesserinfo');
+					wrapper.load(pathname + " .allguesserinfo", function() {
+					  wrapper.children('.allguesserinfo').unwrap();
+					  GuessFuncDuring.seeguessesafter(); 
+					  $(".giveheart").hide();
+					  $(".removeheartsuccess").css("display", "none");
+        		$(".giveheartsuccess").css("display", "inline-block");
+					  setTimeout(function() {
+	        		$(".giveheartsuccess").fadeOut( function() {
+	        			$(".removeheart").show();
+	        		});
+	        	}, 1500);
+					});
+        })
+        .fail(function() {
+        	connectionError();
+        })
+		})
+
+		$(document).on("click", ".removeheart", function() {
+			$.ajax({
+        url: "/games/removeheart",
+        type: "POST",
+        dataType:'json',
+        data: { 'game_id' : parseInt(gameid),
+                'heartgiven' : 0 }
+      })
+        .done(function() {
+        	var wrapper = $('.allguesserinfo');
+					wrapper.load(pathname + " .allguesserinfo", function() {
+					  wrapper.children('.allguesserinfo').unwrap();
+					  GuessFuncDuring.seeguessesafter();
+					  $(".giveheart").hide();
+					  $(".removeheart").hide();
+					  $(".giveheartsuccess").css("display", "none");
+        		$(".removeheartsuccess").css("display", "inline-block");
+					  setTimeout(function() {
+	        		$(".removeheartsuccess").fadeOut(function() {
+	        			$(".giveheart").show();
+	        		});
+	        	}, 1500);
+					});
+        })
+        .fail(function() {
+        	connectionError();
+        })
+		})
+  	boardupdate(0, "true", 0);
+
+  	//board setup/update
+  	function boardupdate(endgametime, firstload, scoreadd) {
+  		$("body").css("pointer-events", "none");
+	  	if (guessedwords.length > 0) {
+	  		for (var i = 0; i < guessedwords.length; i++) {
+		  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
+		  	}
+	  	}
+	  	$(".guessedword").each(function() {
+	  		var theword = $(this).attr("data-guessword");
+	  		if (twords.indexOf(theword) !== -1) {
+	  			$(this).addClass("targetword");
+	  		} 
+	  		if (bword === theword) {
+	  			$(this).addClass("badword");
+	  		}
+	  		if (bword !== theword && twords.indexOf(theword) === -1) {
+	  			$(this).addClass("neutralword");
+	  		}
+	  	})
+	  	playerscore = playerscore + scoreadd;
+	  	var correctwordcount = correctwordsguessed.length
+	  	if (gamespoiled === 1) {
+	  		playerscore = 0;
+	  		correctwordcount = 0;
+	  	}
+	  	$(".wordcount").text(correctwordcount);
+	  	$(".scorecount").text(playerscore);
+	  	$(".thehintword").text(currenthint);
+	  	$(".thehintnum").text(currenthintnum);
+	  	if (currenthintnum === 1) {var thewordword = "word";} else {var thewordword = "words";}
+	  	$(".thewordword").text(thewordword);
+	  	if (currenthint === hintword2) {
+	  		$(".skip1").text("See final hint!");
+	  		$(".hintheadline").text("Second hint")
+	  	} else if (currenthint === hintword3) {
+	  		$(".skip1").text("End game now!");
+	  		$(".hintheadline").text("Final hint")
+	  	}
+	  	$(".streakwarn").hide();
+
+	  	if (guessstatus === "bonus,hint2") {
+	  		$(".hintheadline").text("Make up round! Pick up a previous word?")
+	  		$(".guessword").hide();
+	  		$(".guessnum").text("The first two hints were " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+	  			"(" + hintnum2 + ").");
+	  		$(".streakwarn").show();
+	  	}
+
+	  	if (guessstatus === "bonus,hint3") {
+	  		if (correctwordcount === hintnumtotal) {
+	  			$(".raBonusstart span").text("Chance It?")
+	  			if (hintnumtotal === 5) {
+	  				$(".hintheadline").text("Chance it round! Random final guess?")
+	  			} else {
+	  				$(".hintheadline").text("Chance it round! Random guess?")
+	  			}		
+		  		$(".guessword").hide();
+		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
+		  		$(".streakwarn").show();
+	  		} else {
+	  			$(".hintheadline").text("Make up round! Try to pick up a previous target word?")
+		  		$(".guessword").hide();
+		  		$(".guessnum").text("All hints: " + hintword1 + "(" + hintnum1 + ") and " + hintword2 + 
+		  			"(" + hintnum2 + ") and " + hintword3 + "(" + hintnum3 + ")");
+		  		$(".streakwarn").show();
+	  		}
+	  	}
+	  	
+	  	if (guessstatus === "over,over") {
+	  		// if (playerscore < 50) {
+	  		// 	$(".giveheart").remove();
+	  		// }
+	  		$(".bighint").html("");
+	  		var sstext = $(".scoreSection").html();
+	  		$(".bighint").html(sstext);
+	  		$(".scoreSection").remove();
+	  		$(".hintheadline").remove();
+	  		$(".hintlabel").remove();
+	  		$(".giveravatar").remove();
+	  		$(".skip1").remove();
+	  		$("[data-guessword]").addClass("guessedword").addClass("neutralword");
+	  		for (var i = 0; i < twords.length; i++) {
+	  			$("[data-guessword='" + twords[i] + "']").removeClass("neutralword").addClass("targetword");
+	  		}
+	  		$("[data-guessword='" + bword + "']").removeClass("neutralword").addClass("badword");
+	  		if (gamespoiled === 1) {
+		  		playerscore = 0;
+		  	}
+		  	$(".streakwarn").hide();
+		  	setTimeout(function() {
+		  		$(".hintheading").remove();
+		  		$(".submitted").removeClass("hidden");
+		  		for (var i = 0; i < guessedwords.length; i++) {
+			  		$("[data-guessword='" + guessedwords[i] + "']").addClass("finalguessesshow");
+			  	}
+			  	if (gamespoiled === 0 && endgametime !== 0) {
+			  		gameovergoodsfx.play();
+			  	}
+			  	if (gon.signedin === true) {
+			  		$(".finalpoints" + guessernum).text(playerscore + "pts");
+			  	}
+			  	$(".allguesserinfo").addClass("underwayforgiver");
+			  	$(".playedgameover").show();
+			  	$(".pupspoilershow").fadeOut();
+			  }, endgametime);
+	  	}
+	  	//ajax call to update db
+	  	if (firstload !== "true" && gon.signedin === true) {
+		  	$.ajax({
+	        url: "/games/updategame",
+	        type: "POST",
+	        dataType:'json',
+	        data: { 'game_id' : parseInt(gameid),
+	                'guessedwords' : guessedwords,
+	                'guessstatus' : guessstatus,
+	                'gamespoiled' : gamespoiled,
+	                'gamescore' : playerscore,
+	                'hint1words' : correctwordshint1,
+	                'hint2words' : correctwordshint2,
+	                'hint3words' : correctwordshint3 }
+	      })
+	        .done(function(data) {
+	        	$("body").css("pointer-events", "all");
+	        	if ($(".chatcontent").length === 0) {
+	        		showChat();
+	        	}
+	        	if (guessstatus === "over,over") {
+	        		console.log("game is over, should load stuff")
+	        		var wrapper = $('.allguesserinfo');
+	        		setTimeout(function() {
+	        			wrapper.load(pathname + " .allguesserinfo", function() {
+								  wrapper.children('.allguesserinfo').unwrap();
+								  GuessFuncDuring.seeguessesafter();
+								});
+	        		}, 600)
+
+	        		// trophy show!
+	        		gotfeats = data.returnedfeats;
+	        		gotfeats = gotfeats.filter(feat => feat.length > 0)
+	        		console.log(gotfeats)
+	        		if (gotfeats.length > 0) {
+	        			setTimeout(function() {
+		        			$("body").append('<div class="pagecovertrophies"></div>');
+		        		
+		        			var trophydata = {
+		        			 "guessin500" : "Guess in 500 Games,,+150,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_028.png",
+									 "guessin250" : "Guess in 250 Games,,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_023.png",
+									 "guessin150" : "Guess in 150 Games,,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_018.png",
+									 "guessin100" : "Guess in 100 Games,,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_013.png",
+									 "guessin50" : "Guess in 50 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_009.png",
+									 "guessin20" : "Guess in 20 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_007.png",
+									 "guessin6" : "Guess in 6 Games,,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_003.png",
+									 "guessin3" : "Guess in 3 Games,,+10,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_001.png",
+									 "scoretwohundred" : "You Scored 200+!,,+300,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_029.png",
+									 "scorehundred100" : "You Scored 100+,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_025.png",
+									 "scorehundred50" : "You Scored 100+,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_020.png",
+									 "scorehundred20" : "You Scored 100+,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_015.png",
+									 "scorehundred5" : "You Scored 100+,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_010.png",
+									 "scorehundred1" : "You Scored 100+,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_004.png",
+									 "nospoil60" : "No-Spoiler Streak,60,+250,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_027.png",
+									 "nospoil40" : "No-Spoiler Streak,40,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_022.png",
+									 "nospoil25" : "No-Spoiler Streak,25,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_017.png",
+									 "nospoil12" : "No-Spoiler Streak,12,+50,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_012.png",
+									 "nospoil6" : "No-Spoiler Streak,6,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_006.png",
+									 "allsix100" : "You Got All Six,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_024.png",
+									 "allsix50" : "You Got All Six,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_019.png",
+									 "allsix20" : "You Got All Six,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_014.png",
+									 "allsix5" : "You Got All Six,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_008.png",
+									 "allsix1" : "You Got All Six,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_002.png",
+									 "perfect60" : "You had Perfect Game,60x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_026.png",
+									 "perfect30" : "You had Perfect Game,30x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_021.png",
+									 "perfect12" : "You had Perfect Game,12x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_016.png",
+									 "perfect3" : "You had Perfect Game,3x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_011.png",
+									 "perfect1" : "You had Perfect Game,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_005.png"
+									}
+									if (gotfeats.length === 1) {
+										var trophytext = "Trophy Received!"
+									} else {
+										var trophytext = "Trophies Received!"
+									}
+									$("body").append('<div class="featpopin">' + trophytext + '<span class="clicktrophy">Click trophy to continue</span></div>');
+									trophyshow.play()
+									var flyintime = 400;
+									for (var i = 0; i < gotfeats.length; i++) {
+										(function(i) {
+											var thetime = (gotfeats.length - 1 - i) * flyintime;
+											var theoffset = i;
+											var thedata = trophydata[gotfeats[i]];
+											var fulltext = thedata.split(",")[0];
+											var multi = thedata.split(",")[1];
+											var pnts = thedata.split(",")[2];
+											var imgurl = thedata.split(",")[3];
+											setTimeout(function(i) {
+												
+												$(".featpopin").append('<span class="popinfeat trophyflyin trophyoffset' + theoffset + '">' +
+												                      '<div class="popinimg"><img src="' + imgurl + '"></div>' +
+																						  '<div class="popindesc">' + fulltext + '</div>' +
+																							'<span class="popinmult">' + multi.replace("x", " times") + '</span>' +
+																							'<span class="popinpoints">' + pnts + ' feat points!</span></span>')
+												wordshow3.play();
+											}, thetime)
+										})(i)
+									}
+									$(document).on("click", ".popinfeat", function() {
+										function cardflyoff(card) {
+											$(card).removeClass("trophyflyin").addClass("trophyflyout");
+										}
+										wordshow8.on("play", cardflyoff(this));
+										wordshow8.play();
+										if ($(".trophyflyin").length === 0) {
+											setTimeout(function() {
+												$(".pagecovertrophies").remove();
+												$(".featpopin").remove();
+											},1000)
+										}
+										
+									})
+								}, 4500)
+							}
+	        	}
+	        })
+	        .fail(function() {
+	        	connectionError();
+	        	$("body").css("pointer-events", "all");
+	        })
+	     } else {
+	     	$("body").css("pointer-events", "all");
+	     }
+	  }
+
+  	$(document).on("click", ".firstclick", function() {
+  		var selected = $(this).data("guessword");
+  		clearTimeout(notifytimeout);
+  		$(".word").removeClass("unselected");
+  		$(".word").addClass("firstclick");
+  		$(".clickagain").removeClass("wordsubmitanim");
+  		//$(document).off("click", ".reallysubmit");
+  		$(".reallysubmit").removeClass("reallysubmit");
+  		$(this).find(".clickagain").addClass("wordsubmitanim");
+  		$(this).addClass("reallysubmit").removeClass("firstclick");
+  		$(".firstclick").addClass("unselected");
+  	})
+  	$(document).on("click", ".reallysubmit", function() {
+  		var selected = $(this).data("guessword");
+			guessoutcome(selected);
+			$(".clickagain").removeClass("wordsubmitanim");
+			$(".reallysubmit").removeClass("reallysubmit");
+			$(".word").removeClass("unselected");
+		})
+
+  	$(document).on("click", ".gametop, .hintheading", function() {
+  		$(".word").addClass("firstclick");
+  		//$(document).off("click", ".firstclick");
+  		//$(".clickagain").removeClass("wordsubmitanim");
+  		//$(".reallysubmit").removeClass("reallysubmit");
+  		$(".clickagain").removeClass("wordsubmitanim");
+  		$(".reallysubmit").removeClass("reallysubmit");
+  		$(".word").removeClass("unselected");
+  	})
+
+  	function guessoutcome(chosen) {
+  		$(".guessword").show();
+  		var scoretoadd = 0;
+  		var inarowmsg = "";
+  		guessedwords.push(chosen);
+  		$(".clickagain").removeClass("wordsubmitanim");
+  		$(".reallysubmit").removeClass("reallysubmit");
+  		// correct word 
+  		if (twords.indexOf(chosen) !== -1) {
+  			correctwordsguessed.push(chosen);
+  			if (currenthint === hintword1) {
+  				correctwordshint1.push(chosen);
+  				scoretoadd = scoring[correctwordshint1.length];
+  				inarowmsg = scoringrow[correctwordshint1.length];
+  			}
+  			if (currenthint === hintword2) {
+  				correctwordshint2.push(chosen);
+  				scoretoadd = scoring[correctwordshint2.length];
+  				inarowmsg = scoringrow[correctwordshint2.length];
+  			}
+  			if (currenthint === hintword3) {
+  				correctwordshint3.push(chosen);
+  				scoretoadd = scoring[correctwordshint3.length];
+  				inarowmsg = scoringrow[correctwordshint3.length];
+  			}
+  			if (guessstatus.split(",")[0] === "bonus") {
+  				scoretoadd = 5;
+  				inarowmsg = "";
+  			}
+  			if (correctwordsguessed.length === 6) {
+  				var gmtext = "You got all six words! Very difficult to do... Well done!";
+  				$(".gamenotify").html(gmtext);
+  				resultscheersfx.play();
+					shownotification(gmtext);
+					scoretoadd+= 25;
+					guessstatus = "over,over";
+				} else if (currenthint === hintword1 && correctwordshint1.length === currenthintnum) {
+  				// $(".gamenotify").html("You found all the words for the first hint! On to the second hint...");
+  				var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raRound1toRound2");
+					currenthint = hintword2;
+  				currenthintnum = hintnum2;
+  				guessstatus = "hint2,word1";
+  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum && correctwordshint1.length < hintnum1) {
+  				// $(".gamenotify").html("You found all the words for the second hint! Try for one bonus word?");
+  				var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raBonusstart", 1000, "bonusstart");
+  				guessstatus = "bonus,hint2";
+  			} else if (currenthint === hintword2 && correctwordshint2.length === currenthintnum) {
+  				// $(".gamenotify").html("You found all the words for the first two hints! On to the final hint...");
+  				var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raRound2toRound3");
+  				currenthint = hintword3;
+  				currenthintnum = hintnum3;
+  				guessstatus = "hint3,word1";
+  			} else if (currenthint === hintword3 && correctwordshint3.length === currenthintnum) {
+  				// $(".gamenotify").html("You found all the words for the last hint! Try for one bonus word?");
+  				var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raBonusstart", 1000, "bonusstart");
+  				guessstatus = "bonus,hint3";
+  			} else if (guessstatus === "bonus,hint2") {
+					// $(".gamenotify").html("You picked up a bonus word. On to the third hint...");
+					var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raBonustoRound3");
+					currenthint = hintword3;
+  				currenthintnum = hintnum3;
+  				guessstatus = "hint3,word1";
+  			}  else if (guessstatus === "bonus,hint3") {
+  				if (correctwordsguessed === hintnumtotal) {
+	  				if (hintnumtotal === 5) {
+	  					var gmtext = "You guessed the final target word. Great way to end the game!";
+	  				} else {
+	  					var gmtext = "You picked up another target word. Great way to end the game!";
+	  				}
+	  			} else {
+	  				var gmtext = "You picked up a target word. Great way to end the game!";
+	  			}
+					$(".gamenotify").html(gmtext);
+					shownotification(gmtext);
+  				guessstatus = "over,over";
+	  			
+  			} else if (correctwordsguessed.length < 6) {
+  				var gmtext = "is one of the six words you're looking for!";
+  				$(".gamenotify").html(chosen + " is one of the six words you're looking for! " + 
+						keepitup[Math.floor(Math.random() * keepitup.length)]);
+					shownotification(gmtext);
+				} 
+				$('[data-guessword="' + chosen + '"]').find("div.anim_correct").text("+" + scoretoadd);
+				$('[data-guessword="' + chosen + '"]').find("div.anim_correct.inarow").text(inarowmsg);
+				$("[data-guessword='" + chosen + "'] .anim_correct").fadeIn(200).addClass("animating");
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+						$("[data-guessword='" + chosen + "'] img.animating").remove();
+					})
+				}, 1100);
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(-500%)").fadeOut(400, function() {
+						$("[data-guessword='" + chosen + "'] div.animating").remove();
+					})
+				}, 3100);
+				targetwordsfx.play();
+				boardupdate(3500, "false", scoretoadd);
+  		}
+  		// bad word
+  		if (bword === chosen) {
+  			$(".gamenotify").html('Oh no! ' + chosen + ' was the "Spoiler". Game over and all points lost.');
+				shownotification("oh no...");
+				guessstatus = "over,over";
+				gamespoiled = 1;
+				$("[data-guessword='" + chosen + "'] .anim_spoiler").fadeIn(200).addClass("animating");
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+						$("[data-guessword='" + chosen + "'] img.animating").remove();
+					})
+				}, 1100);
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(500%)").fadeOut(400, function() {
+						$("[data-guessword='" + chosen + "'] div.animating").remove();
+					})
+				}, 3100);
+				badwordsfx.play();
+				boardupdate(3500);
+  		}
+  		// neutral word
+  		if (twords.indexOf(chosen) === -1 && bword !== chosen) {
+  			if (currenthint === hintword1) {
+  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+  				// 	"Moving on to the second hint...");
+					var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raRound1toRound2");
+					currenthint = hintword2;
+  				currenthintnum = hintnum2;
+  				guessstatus = "hint2,word1";
+  			} else if (guessstatus === "bonus,hint3") {
+  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
+  					"Game over.");
+					shownotification("was not one");
+					guessstatus = "over,over";
+				} else if (guessstatus === "bonus,hint2") {
+  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+  				// 	"Moving on to the final hint...");
+					var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raBonustoRound3");
+					currenthint = hintword3;
+  				currenthintnum = hintnum3;
+					guessstatus = "hint3,word1";
+				} else if (currenthint === hintword2) {
+  				// $(".gamenotify").html(chosen + " was not one of the target words. " + 
+  				// 	"Moving on to the final hint...");
+					var gmtext = "";
+  				$(".gamenotify").hide();
+					//shownotification(gmtext);
+					roundannounce(".raRound2toRound3");
+					currenthint = hintword3;
+  				currenthintnum = hintnum3;
+					guessstatus = "hint3,word1";
+				} else if (currenthint === hintword3) {
+  				$(".gamenotify").html(chosen + " was not one of the target words. " + 
+  					"Game over.");
+					shownotification("game over");
+					guessstatus = "over,over";
+				}
+				$("[data-guessword='" + chosen + "'] .anim_neutral").fadeIn(200).addClass("animating");
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] img.animating").fadeOut(1200, function() {
+						$("[data-guessword='" + chosen + "'] img.animating").remove();
+					})
+				}, 1100);
+				setTimeout(function() {
+					$("[data-guessword='" + chosen + "'] div.animating").css("transform", "translateY(200%)").fadeOut(400, function() {
+						$("[data-guessword='" + chosen + "'] div.animating").remove();
+					})
+				}, 3100);
+				neutralwordsfx.play();
+				boardupdate(3500, "false", 0);
+  		}
+  	}
+
+  	$(".skip1").click(function() {
+  		$(".messagetitle").text("Skip hint?")
+			$(".messageinfo").html("Do you really want to skip this hint?");
+			$(".messageaction").html('<button class="button reallyskip">Skip</button>' +
+				                       '<button class="button closemessagebox">Cancel</button>');
+			$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+			$(".reallyskip").click(function() {
+				forrealskip();
+				closemessagebox();
+			})
+			$(".closemessagebox").click(function() { closemessagebox(); return false; });
+			$(".pagecover").not(".unclickable").click(function() { closemessagebox(); return false; });
+			$(".messagebox").show();
+			$(".pagecover").show();
+  		function forrealskip() {
+  			$(".guessword").show();
+	  		if (currenthint === hintword1) {
+	  			roundannounce(".raSkiphint", 5);
+	  			currenthint = hintword2;
+  				currenthintnum = hintnum2;
+  				guessstatus = "hint2,word1";
+	  		} else if (currenthint === hintword2) {
+	  			roundannounce(".raSkiphint", 5);
+	  			currenthint = hintword3;
+  				currenthintnum = hintnum3;
+  				guessstatus = "hint3,word1";
+	  		} else {
+	  			guessstatus = "over,over";
+	  		}
+	  		boardupdate(0, "false", 0);
+  		}
+  	});
+
+  	function shownotification(text) {
+  		if (text.length > 1) {
+	  		$(".gamenotify").show();
+				notifytimeout = setTimeout(function() {
+	  			$(".gamenotify").hide();
+	  		}, 3500)
+			}
+  	}
+  	var ratimeout, raanimall, raanim1, raanim2, raanim3;
+
+  	function roundannounce(container, delay, status) {
+  		$(".hintlabel").css("opacity", "0");
+  		if (!delay) { delay = 1000 }
+  			$(".bighint").css("visibility", "hidden");
+  		if (status !== "bonusstart") {
+  			$(".bighint").addClass("bh_initial");
+  		} else { // it's a bonus round
+  		  setTimeout(function() {
+  		  	bonusstartsfx.play();
+  		  }, delay + 360)
+  		}
+  		raanimall = setTimeout(function() {
+  			$(".pagecoverunclickable").addClass("lightercover").fadeIn(75);
+  			$(".roundannounce").fadeIn(75, function() {
+					$(container).find(".ra_anim1").removeClass("raa1_initial");
+					raanim1 = setTimeout(function() {
+						$(container).find(".ra_anim1").addClass("raa1_final");
+					}, 1500)
+					// raanim3 = setTimeout(function() {
+					// 	$(container).find(".ra_anim2").addClass("raa2_final");
+					// }, 2720)
+				});
+  		}, delay)
+			$(container).removeClass("hidden");
+			ratimeout = setTimeout(function() {
+				$(".pagecoverunclickable").fadeOut(75, function() {
+					$(".pagecoverunclickable").removeClass("lightercover");
+				});
+  			$(".roundannounce").fadeOut(75, function() {
+  				$(".bighint").css("visibility", "visible").removeClass("bh_initial");
+  				$(".hintlabel").css("opacity", "1");
+  				$(".roundannounce div").addClass("hidden");
+  				$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
+  				$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
+  			});
+				$(".roundannounce div").addClass("hidden");
+  		}, delay + 1800)
+  	}
+
+  	// $(".roundannounce").click(function() {
+  	// 	clearTimeout(ratimeout);
+  	// 	clearTimeout(raanimall);
+  	// 	clearTimeout(raanim1);
+  	// 	clearTimeout(raanim2);
+  	// 	clearTimeout(raanim3);
+  	// 	$(".roundannounce").fadeOut(125, function() {
+  	// 		$(".roundannounce div").addClass("hidden");
+  	// 		$(".ra_anim1").removeClass("raa1_final").addClass("raa1_initial");
+  	// 		$(".ra_anim2").removeClass("raa2_final").addClass("raa2_initial");
+  	// 	});
+  	// })
+
+
+  	$(".thumbdown").click(function() {
+  		$(".menubox").hide();
+  		$(".messagetitle").text("Report game?")
+			$(".messageinfo").html("If this game uses hints you consider to be cheating or offensive, " +
+				"feel free to report it. If half of the players in the game (3) report the game, it will be deleted. " +
+				"<br>Current reports: " + gon.currentcheatnum);
+			$(".messageaction").html('<button class="button reportacheat">Report the Game</button>' +
+				                       '<button class="button closemessagebox">Cancel</button>');
+			$(".messagesubtext").text("Push cancel or click anywhere outside this box to cancel.");
+			$(".reportacheat").click(function() {
+				guessingreportgame();
+				closemessagebox();
+			})
+			$(".closemessagebox").click(function() { closemessagebox(); });
+			$(".pagecover").not(".unclickable").click(function() { closemessagebox(); });
+			$(".messagebox").show();
+			$(".pagecover").show();
+		});
+
+		function guessingreportgame() {
+			$.ajax({
+	      url: "/games/guessingreportgame",
+	      type: "POST",
+	      dataType:'json',
+	      data: { 'game_id' : parseInt(gameid)},
+	      statusCode: {
+			    666: function() {
+			      location.href = '/main';
+			    },
+			    200: function() {
+			      var wrapper = $('.cheatstatus');
+						wrapper.load(pathname + " .cheatstatus", function() {
+						   wrapper.children('.cheatstatus').unwrap();
+						});
+			    },
+			  }
+	    })
+	    // .fail(function() {
+	    // 	connectionError();
+	    // })
+		}
+		function loadWrapper(container) {
+			var wrapper = $(container);
+			wrapper.load(pathname + " " + container, function() {
+			   wrapper.children(container).unwrap();
+			});
+		}
+
+		// powerups
+		$(document).on("click", ".pup_spoilerdetect.pupactive", function() {
+			pupspoilerused++
+			if (pupspoilerused <= 2) {
+				var indtmp = $("[data-guessword='" + bword + "']").index(".word")
+				var inbw = (indtmp * indtmp) + 11;
+				$.ajax({																																																																																																																																																																																															
+		      url: "/games/decreasepupspoiler",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'game_id' : parseInt(gameid),
+		    					'indbw' : inbw }
+		    })
+				.done(function(data) {
+		    	loadWrapper(".pupcontainer");
+		    	if (data.firstorsecond === "bothdone") {
+		    		$(".pagecover").show();
+						$(".menudialog").show();
+		    	} else {
+		    		$(".pupspoilershow").fadeIn().addClass(data.firstorsecond).addClass("pos-" + data.newloc);
+		    		if (data.firstorsecond === "show2") {
+		    			$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
+		    		}
+		    		usespoilerpup.play();
+		    	}
+		    })
+			} else {
+				$(".pup_spoilerdetect").removeClass("pupactive").addClass("pupnotactive")
+				$(".pupnotactive").click();
+			}
+		})
+
+		$(".watchforpupspoilers").click(function() {
+			runspoilersad();
+		})
+
+		$(document).on("click", ".pup_spoilerdetect.pupnotactive", function() {
+			if ($(".spoilerzero").length > 0) {  //pupspoilerused <= 2 && 
+				console.log("DO THE VIDEO FOR SPOILERS HERE")
+				$(".watchforpupneutrals").hide();
+				$(".watchforpupspoilers").hide();
+				$(".pagecover").show().addClass("unclickable");
+				$(".menudialogwatch").show();
+				$(".watchforpupspoilers").show();
+			} else {
+				$(".pagecover").show();
+				$(".menudialog.menudialogspoiler").show();
+				pupout.play();
+			}
+		})
+
+		var nonneutralwords = [];
+		nonneutralwords = nonneutralwords.concat(twords);
+		nonneutralwords.push(bword);
+
+		var nwords = awords.filter(function(n) {return nonneutralwords.indexOf(n) === -1});
+		// console.log("nwords: " + nwords)
+
+		function picktworandoms(largest) {
+			var tworands = []
+			function randomnum(largest) {
+				var rand = Math.floor(Math.random() * (largest + 1));
+				if (tworands.indexOf(rand) === -1) { 
+					tworands.push(rand)
+					if (tworands.length < 2) {
+						randomnum(largest);
+					} 
+				} else {
+					randomnum(largest);
+				}
+			}
+			randomnum(largest);
+			return tworands
+		}
+
+		$(document).on("click", ".pup_tworemove.pupactive", function() {
+			pupneutralused++
+			if (pupneutralused <= 2) {
+				var possibles = [];
+				var wordspicked = [];
+				$(".word").not(".guessedword").each(function() {
+					if (nwords.indexOf($(this).attr("data-guessword")) !== -1) {
+						possibles.push($(this).attr("data-guessword"));
+					}
+				})
+				// console.log("possibles: " + possibles)
+				var twonumpicked = picktworandoms(possibles.length - 1);
+				wordspicked.push(possibles[twonumpicked[0]])
+				wordspicked.push(possibles[twonumpicked[1]])
+				// console.log("wordspicked: " + wordspicked)
+				
+				$.ajax({
+		      url: "/games/decreasepuptworemove",
+		      type: "POST",
+		      dataType:'json',
+		      data: { 'game_id' : parseInt(gameid),
+		    					'neutralsshown' : wordspicked }
+		    })
+				.done(function(data) {
+					$("[data-guessword='" + wordspicked[0] + "']").removeClass("firstclick")
+																					.addClass("anim_puppneutral").addClass("pupelimword")
+																					.addClass("guessedword");
+					useneutralspup.play();
+					setTimeout(function() {
+						$("[data-guessword='" + wordspicked[1] + "']").removeClass("firstclick")
+																				.addClass("anim_puppneutral").addClass("pupelimword")
+																				.addClass("guessedword");
+					useneutralspup.play();
+					}, 500)
+					guessedwords = guessedwords.concat(wordspicked);
+		    	// console.log("user pup decreased")
+		    	loadWrapper(".pupcontainer")
+		    })
+		    .fail(function() {
+		    	console.log("sorry, internet connection required to use powerups")
+		    })
+			} else {
+				$(".pup_tworemove").removeClass("pupactive").addClass("pupnotactive")
+				$(".pupnotactive").click();
+			}
+		})
+
+		$(".watchforpupneutrals").click(function() {
+			runneutralad();
+		})
+
+		$(document).on("click", ".pup_tworemove.pupnotactive", function() {
+			if ($(".neutralzero").length > 0) {  //pupspoilerused <= 2 && 
+				console.log("DO THE VIDEO FOR NEUTRALS HERE")
+				$(".watchforpupneutrals").hide();
+				$(".watchforpupspoilers").hide();
+				$(".pagecover").show().addClass("unclickable");
+				$(".menudialogwatch").show();
+				$(".watchforpupneutrals").show();
+			} else {
+				$(".pagecover").show();
+				$(".menudialog.menudialogneutral").show();
+				pupout.play();
+			}
+		})
+
+		function runneutralad() {
+			function neutralAdStatusCallback(status) {
+				if (status) {console.log('Applixir status: ' + status);}
+
+				if (status === "ad-blocker") {
+					console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+					$(".menudialogadblocker").show();
+				}
+				if (status === "ad-watched" || status === "fb-watched") {
+					$.ajax({
+			      url: "/games/increasepuptworemove",
+			      type: "POST",
+			      dataType:'json'
+			    })
+					.done(function() {
+			    	console.log("user pup increased")
+			    	loadWrapper(".pupcontainer")
+			    })
+			    .fail(function() {
+			    	console.log("sorry, attempt to add neutral remove powerups failed")
+			    })
+					console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
+				}
+    		if (status === "sys-closing") {
+    			$(".pagecoverunclickable").hide();
+    			$(".pagecover").hide();
+    		}
+	    }
+
+		  var adsound = false;
+		  if (sound === 1) {
+		  	adsound = true;
+		  }
+
+	    var options = {
+        zoneId: 2894,
+        devId: 3705,
+        gameId: 4932,
+        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+        muted: adsound, // the player will start in muted mode/
+        fallback: 1,
+				// the player will start normally with no muted option
+				//vpos: 'top',
+        adStatusCb: neutralAdStatusCallback,
+        //z2url: document.location.origin + '/games/applixir.iframe.html',
+	    };
+	    $(".menudialogwatch").hide();
+			invokeApplixirVideoUnit(options);
+			$(".pagecoverunclickable").show();
+		}
+
+		function runspoilersad() {
+			function spoilerAdStatusCallback(status) {
+				if (status) {console.log('Applixir status: ' + status);}
+
+				if (status === "ad-blocker") {
+					console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+					$(".menudialogadblocker").show();
+				}
+				if (status === "ad-watched" || status === "fb-watched") {
+					$.ajax({
+			      url: "/games/increasepupspoiler",
+			      type: "POST",
+			      dataType:'json'
+			    })
+					.done(function() {
+			    	console.log("user spoiler pup increased")
+			    	loadWrapper(".pupcontainer")
+			    })
+			    .fail(function() {
+			    	console.log("sorry, attempt to add spoiler remove powerups failed")
+			    })
+					console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
+				}
+    		if (status === "sys-closing") {
+    			$(".pagecoverunclickable").hide();
+    			$(".pagecover").hide();
+    		}
+	    }
+
+		  var adsound = false;
+		  if (sound === 1) {
+		  	adsound = true;
+		  }
+
+	    var options = {
+        zoneId: 2894,
+        devId: 3705,
+        gameId: 4932,
+        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+        muted: adsound, // the player will start in muted mode/
+        fallback: 1,
+				// the player will start normally with no muted option
+				//vpos: 'top',
+        adStatusCb: spoilerAdStatusCallback,
+        //z2url: document.location.origin + '/games/applixir.iframe.html',
+	    };
+	    $(".menudialogwatch").hide();
+			invokeApplixirVideoUnit(options);
+			$(".pagecoverunclickable").show();
+		}
+
+  })();
+}
+
+// tutorial behavior
+var tutscript = { 1:{ showbubble: true,
+											shownextms: 0,
+											arrow: "none",
+											heading: "Welcome to Word Stretch!",
+											copy: "Quick to learn, and fun to master - here's how to play!",
+											position: "top",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: "none",
+											boardshowclick: "none"
+										},
+									2:{ showbubble: false,
+											shownext: 800,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "middle",
+											button: "",
+											boardshownotclick: ".guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+									3:{ showbubble: true,
+											shownext: 0,
+											arrow: "top",
+											heading: "The Possible Words",
+											copy: "Here are 15 random words. Six of them are the target words. It's your goal to find them using hints provided by the board's creator.",
+											position: "bottom",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+									4:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "But BEWARE!",
+											copy: "There also lurks one spoiler! If you pick the spoiler, the game will be over and you and the game creator will get no points.",
+											position: "middleshake",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+									5:{ showbubble: false,
+											shownext: 1000,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "middle",
+											button: "",
+											boardshownotclick: ".bighint",
+											boardshowclick: "none"
+										},
+									6:{ showbubble: true,
+											shownext: 0,
+											arrow: "top",
+											heading: "The First Hint!",
+											copy: 'The first hint word is "PET", and it applies to 3 words. Take a look again at the board to see which 3 words might relate to "PET"...',
+											position: "middle",
+											button: "OK! <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".bighint",
+											boardshowclick: "none"
+										},
+									7:{ showbubble: false,
+											shownext: 2500,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+									8:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Our Answers",
+											copy: 'Two words immediately jump out - go ahead and click twice on DOG and KITTEN.',
+											position: "bottom",
+											button: "none",
+											boardshownotclick: ".bighint,.word",
+											boardshowclick: "[data-guessword='DOG'],[data-guessword='KITTEN']"
+										},
+									9:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Wooo!",
+											copy: 'DOG and KITTEN are two "PET" words, great! The number of words "PET" applies to is 3, though, so we need to find the last "PET" word.',
+											position: "middle",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: "",
+											boardshowclick: ""
+										},
+								 10:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Hmmm...",
+											copy: 'Two possibilities come to mind: FUR and MONKEY. Maybe enough people have monkeys as pets in the world to make that the answer. Go ahead and click twice on MONKEY now.',
+											position: "bottom",
+											button: "none",
+											boardshownotclick: ".bighint,.word",
+											boardshowclick: "[data-guessword='MONKEY']"
+										},
+								 11:{ showbubble: false,
+											shownext: 3100,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+								 12:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Rats!",
+											copy: "So MONKEY wasn't the third target word. But at least it wasn't the spoiler! That would have ended the game with 0 points for us and the board's creator. We may have a chance to get the right word later. For now, we see the hint word has changed.",
+											position: "middle",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".bighint",
+											boardshowclick: ""
+										},
+								 13:{ showbubble: true,
+											shownext: 0,
+											arrow: "top",
+											heading: "The Second Hint",
+											copy: 'The second hint word is "VACATION", and it applies to 2 words. Take a look again at the board to see which 2 words might relate to "VACATION"...',
+											position: "middle",
+											button: "OK! <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".bighint",
+											boardshowclick: "none"
+										},
+								 14:{ showbubble: false,
+											shownext: 2500,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+								 15:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Our 2nd Hint Answers...",
+											copy: 'It seems "VACATION" could probably only relate to SNORKEL and ISLAND. Go ahead and click on those two words now.',
+											position: "bottom",
+											button: "none",
+											boardshownotclick: ".bighint,.word",
+											boardshowclick: "[data-guessword='SNORKEL'],[data-guessword='ISLAND']"
+										},
+								 16:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Great!",
+											copy: 'We got both "VACATION" words! And since we got all the words related to the hint, we get a chance to go back and pick up a word from the last clue...',
+											position: "middle",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: "",
+											boardshowclick: ""
+										},
+								 17:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Pick Up Round...",
+											copy: 'We missed with MONKEY earlier, but make up rounds allow us to right the wrongs of the past! Go ahead and click twice on FUR now...',
+											position: "bottom",
+											button: "none",
+											boardshownotclick: ".word",
+											boardshowclick: "[data-guessword='FUR']"
+										},
+								 18:{ showbubble: false,
+											shownext: 3100,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+								 19:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Got It!",
+											copy: "So it was FUR, after all. We now only have only one target word left to find, and a new hint word to help find it. But let's take a look at the powerups first.",
+											position: "middle",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: "",
+											boardshowclick: ""
+										},
+								 20:{ showbubble: true,
+											shownext: 0,
+											arrow: "left",
+											heading: "The Powerups",
+											copy: "We haven't needed them in this game, but these powerups are available in every game. Here is what each one does...",
+											position: "pup",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".pupcontainer",
+											boardshowclick: "none"
+										},
+								 21:{ showbubble: true,
+											shownext: 0,
+											arrow: "left",
+											heading: "Neutral Remover",
+											copy: "The Neutral Remover will take away two random neutral words.",
+											position: "pup",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".activepup:eq(0)",
+											boardshowclick: "none"
+										},
+								 22:{ showbubble: true,
+											shownext: 0,
+											arrow: "left",
+											heading: "Spoiler Detector",
+											copy: "The Spoiler Detector will highlight a section of 4 words where the spoiler is located. If you use it a second time, it narrows the area down to only 2 words, very helpful! You can use each powerup twice per game. Don't forget you have them!",
+											position: "pup",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".activepup:eq(1)",
+											boardshowclick: "none"
+										},
+								 23:{ showbubble: true,
+											shownext: 0,
+											arrow: "top",
+											heading: "The Final Hint",
+											copy: 'Now back to the game - take one more look at the board to find the one word "SPOOKY" applies to...',
+											position: "middle",
+											button: "OK! <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".bighint",
+											boardshowclick: "none"
+										},
+								 24:{ showbubble: false,
+											shownext: 2500,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+								 25:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Our Final Hint Answer...",
+											copy: '"SPOOKY" could relate to CASTLE, but the much more likely answer seems to be GHOST. Go ahead and click twice on GHOST now...',
+											position: "bottom",
+											button: "none",
+											boardshownotclick: ".bighint,.word",
+											boardshowclick: "[data-guessword='GHOST']"
+										},
+								 26:{ showbubble: false,
+											shownext: 3100,
+											arrow: "none",
+											heading: "",
+											copy: "",
+											position: "bottom",
+											button: "",
+											boardshownotclick: ".bighint,.guesswordslisttutorial",
+											boardshowclick: "none"
+										},
+								 27:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Got It!",
+											copy: 'The game has ended and you got all 6 target words! (Glad we didn\'t pick CASTLE - it was the spoiler!)',
+											position: "bottom",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".guesswordslisttutorial",
+											boardshowclick: ""
+										},
+								 28:{ showbubble: true,
+											shownext: 0,
+											arrow: "left",
+											heading: "Heart It?",
+											copy: 'If you enjoyed the board and thought the hints were well done, you can give it a heart here. The board creator will appreciate it!',
+											position: "pup",
+											button: "Next <img src='/assets/Right-01-48.png'>",
+											boardshownotclick: ".playedgameover",
+											boardshowclick: ""
+										},
+								 29:{ showbubble: true,
+											shownext: 0,
+											arrow: "none",
+											heading: "Tutorial Complete!",
+											copy: "You\'ve completed the tutorial and now know the basics of the game. Check out <img src='/assets/btn_help.png'> from the main menu to see more details, like how scoring works (basically, streaks are good!). Have fun, and thanks for stretching your mind with us!",
+											position: "middle",
+											button: "none",
+											boardshownotclick: "",
+											boardshowclick: ".mainmenubuttons,.playedgameover"
+										},
+								}
+
+function tutShow(step) {
+	if (step === 2) {
+		$.ajax({
+      url: "/pages/didtutorial",
+      type: "POST",
+      dataType:'json'
+    })
+	}
+	if (step === 4) {
+		badwordsfx.play();
+	}
+	if (step === 29) {
+		$(".giveheart").css("opacity", "0");
+	}
+	$(".tutbutton").off("click")
+	//tutpopup.play();
+	$(".bringtotop").removeClass("bringtotop");
+	$(".bringtotopclickable").removeClass("bringtotopclickable");
+	$(".tutarrow").hide();
+
+	var showbubble = tutscript[step].showbubble;
+	var shownextms = tutscript[step].shownext;
+	var arrow = tutscript[step].arrow;
+	var tutheading = tutscript[step].heading;
+	var tuttext = tutscript[step].copy;
+	var buttonhtml = tutscript[step].button;
+	var boardshownotclick = tutscript[step].boardshownotclick;
+	var boardshowclick = tutscript[step].boardshowclick;
+	var tutpos = tutscript[step].position;
+
+	if (showbubble === false) {
+		$(".tutbubble").hide();
+	} else {
+		$(".tutbubble").show();
+	}
+
+	$(".tutbubble").removeClass("tutbubblemiddle").removeClass("tutbubbletop").removeClass("tutbubblebottom")
+	               .removeClass("tutbubblemiddleshake").removeClass("tutbubblepup")
+	$(".tutbubble").addClass("tutbubble" + tutpos).attr("data-tutstep", step)
+	$(".tutheading").text(tutheading);
+	$(".tuttext").html(tuttext);
+	if (buttonhtml !== "none") {
+		$(".tutbutton").html(buttonhtml).show();
+		$(".tutbutton").on("click", function() {
+			var nextstep = parseInt($(".tutbubble").attr("data-tutstep")) + 1;
+			tutShow(nextstep)
+		})
+	} else {
+		$(".tutbutton").hide();
+	}
+	if (boardshownotclick !== "none") {
+		var elements = boardshownotclick.split(",");
+		for (var i = 0; i < elements.length; i++) {
+			$(elements[i]).addClass("bringtotop")
+		}
+	}
+	if (boardshowclick !== "none") {
+		var elements = boardshowclick.split(",");
+		for (var i = 0; i < elements.length; i++) {
+			$(elements[i]).removeClass("bringtotop")
+			$(elements[i]).addClass("bringtotopclickable")
+		}
+	}
+	if (arrow !== "none") {
+		$(".arrow" + arrow).show()
+	}
+
+	if (shownextms > 0) {
+		setTimeout(function() {
+			var nextstep = parseInt($(".tutbubble").attr("data-tutstep")) + 1;
+			tutShow(nextstep)
+		},shownextms)
+	}
+
+}
+$(document).on("click", "[data-guessword='DOG']", function() {
+	if ($(".targetword").length === 2) {
+		$(".tutbubble").hide();
+		tutShow(9);
+	}
+})
+$(document).on("click", "[data-guessword='KITTEN']", function() {
+	if ($(".targetword").length === 2) {
+		$(".tutbubble").hide();
+		tutShow(9);
+	}
+})
+$(document).on("click", "[data-guessword='MONKEY']", function() {
+	$(".tutbubble").hide();
+	if ($(".neutralword").length === 1) {
+		tutShow(11);
+	}
+})
+$(document).on("click", "[data-guessword='SNORKEL']", function() {
+	if ($(".targetword").length === 4) {
+		$(".tutbubble").hide();
+		setTimeout(function() {
+			tutShow(16);
+		},3100)
+	}
+})
+$(document).on("click", "[data-guessword='ISLAND']", function() {
+	if ($(".targetword").length === 4) {
+		$(".tutbubble").hide();
+		setTimeout(function() {
+			tutShow(16);
+		},3100)
+	}
+})
+$(document).on("click", "[data-guessword='FUR']", function() {
+	$(".tutbubble").hide();
+	if ($(".targetword").length === 5) {
+		tutShow(18);
+	}
+})
+$(document).on("click", "[data-guessword='GHOST']", function() {
+	if ($(".targetword").length === 6) {
+		tutShow(26);
+	}
+})
+$(document).on("click", ".bigplaybutton", function() {
+	$(".tutbubble").hide();
+})
+</script>
+
