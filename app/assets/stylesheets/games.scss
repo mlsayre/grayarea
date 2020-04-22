@@ -1749,7 +1749,7 @@ span.pagebody {
   margin-top: 1px;
 }
 span.rankfloatingnum {
-    top: -20vh;
+    top: -12vh;
     position: relative;
     left: 0;
     height: 18px;
@@ -1774,7 +1774,7 @@ span.innernum {
   transition: .4s left;
 }
 .button.rankingnav {
-  height: 50%;
+  height: 70%;
   padding: 0;
   width: 43px;
   position: absolute;
@@ -1788,7 +1788,7 @@ span.innernum {
   width: 80%;
   margin: 3px;
   position: relative;
-  top: 40%;
+  top: 45%;
 }
 .button.rankingnav.prev {
     left: 12px;
@@ -2348,8 +2348,16 @@ span.calcwait {
 }
 .statcontainer li:first-child {
   background-color: #86ff86;
-  font-size: 16px;
+  font-size: 22px !important;
   text-shadow: orange 0px 0px 1px;
+}
+.rankingspage .statcontainer ul {
+    border-radius: 12px;
+    padding: 4px 5px;
+}
+.rankingspage .statcontainer li {
+    font-size: 20px;
+    border-radius: 6px;
 }
 .deviseform {
   text-align: center;
