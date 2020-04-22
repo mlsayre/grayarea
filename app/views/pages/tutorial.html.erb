@@ -109,7 +109,7 @@
 						<% if current_user.pupneutraltworemove == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_tworemove pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png"></button>
-								<span class="pupnum pupnumnotactive neutralzero">3</span>
+								<span class="pupnum neutralzero">3</span>
 							</div>
 						<% else %>
 							<div class="activepup">
@@ -120,7 +120,7 @@
 						<% if current_user.pupspoilerdetector == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_spoilerdetect pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"></button>
-								<span class="pupnum pupnumnotactive spoilerzero">3</span>
+								<span class="pupnum spoilerzero">3</span>
 							</div>
 						<% else %>
 							<div class="activepup">
@@ -428,6 +428,7 @@ if ($(".word").length > 0 && $(".guesswordslisttutorial").length > 0) {
 									$(".pagecovertutorial").addClass("darker");
 									$(".tutbubble").show();
 									tutShow(1);
+									$("body").css("pointer-events", "auto")
 								}, 400)
 								
 							}
@@ -565,7 +566,7 @@ if ($(".allwords").hasClass("guesswordslisttutorial")) {
 
   	//board setup/update
   	function boardupdate(endgametime, firstload, scoreadd) {
-  		$("body").css("pointer-events", "none");
+  		// $("body").css("pointer-events", "none");
 	  	if (guessedwords.length > 0) {
 	  		for (var i = 0; i < guessedwords.length; i++) {
 		  		$("[data-guessword='" + guessedwords[i] + "']").addClass("guessedword");
@@ -671,128 +672,8 @@ if ($(".allwords").hasClass("guesswordslisttutorial")) {
 			  	$(".pupspoilershow").fadeOut();
 			  }, endgametime);
 	  	}
-	  	//ajax call to update db
-	  	if (firstload !== "true" && gon.signedin === true) {
-		  	$.ajax({
-	        url: "/games/updategame",
-	        type: "POST",
-	        dataType:'json',
-	        data: { 'game_id' : parseInt(gameid),
-	                'guessedwords' : guessedwords,
-	                'guessstatus' : guessstatus,
-	                'gamespoiled' : gamespoiled,
-	                'gamescore' : playerscore,
-	                'hint1words' : correctwordshint1,
-	                'hint2words' : correctwordshint2,
-	                'hint3words' : correctwordshint3 }
-	      })
-	        .done(function(data) {
-	        	$("body").css("pointer-events", "all");
-	        	if ($(".chatcontent").length === 0) {
-	        		showChat();
-	        	}
-	        	if (guessstatus === "over,over") {
-	        		console.log("game is over, should load stuff")
-	        		var wrapper = $('.allguesserinfo');
-	        		setTimeout(function() {
-	        			wrapper.load(pathname + " .allguesserinfo", function() {
-								  wrapper.children('.allguesserinfo').unwrap();
-								  GuessFuncDuring.seeguessesafter();
-								});
-	        		}, 600)
-
-	        		// trophy show!
-	        		gotfeats = data.returnedfeats;
-	        		gotfeats = gotfeats.filter(feat => feat.length > 0)
-	        		console.log(gotfeats)
-	        		if (gotfeats.length > 0) {
-	        			setTimeout(function() {
-		        			$("body").append('<div class="pagecovertrophies"></div>');
-		        		
-		        			var trophydata = {
-		        			 "guessin500" : "Guess in 500 Games,,+150,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_028.png",
-									 "guessin250" : "Guess in 250 Games,,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_023.png",
-									 "guessin150" : "Guess in 150 Games,,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_018.png",
-									 "guessin100" : "Guess in 100 Games,,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_013.png",
-									 "guessin50" : "Guess in 50 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_009.png",
-									 "guessin20" : "Guess in 20 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_007.png",
-									 "guessin6" : "Guess in 6 Games,,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_003.png",
-									 "guessin3" : "Guess in 3 Games,,+10,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_001.png",
-									 "scoretwohundred" : "You Scored 200+!,,+300,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_029.png",
-									 "scorehundred100" : "You Scored 100+,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_025.png",
-									 "scorehundred50" : "You Scored 100+,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_020.png",
-									 "scorehundred20" : "You Scored 100+,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_015.png",
-									 "scorehundred5" : "You Scored 100+,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_010.png",
-									 "scorehundred1" : "You Scored 100+,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_004.png",
-									 "nospoil60" : "No-Spoiler Streak,60,+250,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_027.png",
-									 "nospoil40" : "No-Spoiler Streak,40,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_022.png",
-									 "nospoil25" : "No-Spoiler Streak,25,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_017.png",
-									 "nospoil12" : "No-Spoiler Streak,12,+50,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_012.png",
-									 "nospoil6" : "No-Spoiler Streak,6,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_006.png",
-									 "allsix100" : "You Got All Six,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_024.png",
-									 "allsix50" : "You Got All Six,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_019.png",
-									 "allsix20" : "You Got All Six,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_014.png",
-									 "allsix5" : "You Got All Six,5x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_008.png",
-									 "allsix1" : "You Got All Six,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_002.png",
-									 "perfect60" : "You had Perfect Game,60x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_026.png",
-									 "perfect30" : "You had Perfect Game,30x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_021.png",
-									 "perfect12" : "You had Perfect Game,12x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_016.png",
-									 "perfect3" : "You had Perfect Game,3x,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_011.png",
-									 "perfect1" : "You had Perfect Game,1x,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_005.png"
-									}
-									if (gotfeats.length === 1) {
-										var trophytext = "Trophy Received!"
-									} else {
-										var trophytext = "Trophies Received!"
-									}
-									$("body").append('<div class="featpopin">' + trophytext + '<span class="clicktrophy">Click trophy to continue</span></div>');
-									trophyshow.play()
-									var flyintime = 400;
-									for (var i = 0; i < gotfeats.length; i++) {
-										(function(i) {
-											var thetime = (gotfeats.length - 1 - i) * flyintime;
-											var theoffset = i;
-											var thedata = trophydata[gotfeats[i]];
-											var fulltext = thedata.split(",")[0];
-											var multi = thedata.split(",")[1];
-											var pnts = thedata.split(",")[2];
-											var imgurl = thedata.split(",")[3];
-											setTimeout(function(i) {
-												
-												$(".featpopin").append('<span class="popinfeat trophyflyin trophyoffset' + theoffset + '">' +
-												                      '<div class="popinimg"><img src="' + imgurl + '"></div>' +
-																						  '<div class="popindesc">' + fulltext + '</div>' +
-																							'<span class="popinmult">' + multi.replace("x", " times") + '</span>' +
-																							'<span class="popinpoints">' + pnts + ' feat points!</span></span>')
-												wordshow3.play();
-											}, thetime)
-										})(i)
-									}
-									$(document).on("click", ".popinfeat", function() {
-										function cardflyoff(card) {
-											$(card).removeClass("trophyflyin").addClass("trophyflyout");
-										}
-										wordshow8.on("play", cardflyoff(this));
-										wordshow8.play();
-										if ($(".trophyflyin").length === 0) {
-											setTimeout(function() {
-												$(".pagecovertrophies").remove();
-												$(".featpopin").remove();
-											},1000)
-										}
-										
-									})
-								}, 4500)
-							}
-	        	}
-	        })
-	        .fail(function() {
-	        	connectionError();
-	        	$("body").css("pointer-events", "all");
-	        })
-	     } else {
-	     	$("body").css("pointer-events", "all");
-	     }
+	  	
+	  	
 	  }
 
   	$(document).on("click", ".firstclick", function() {
@@ -1532,7 +1413,7 @@ var tutscript = { 1:{ showbubble: true,
 											shownext: 0,
 											arrow: "top",
 											heading: "The Second Hint",
-											copy: 'The second hint word is "VACATION", and it applies to 2 words. Take a look again at the board to see which 2 words might relate to "VACATION"...',
+											copy: 'The second hint word is "HAWAII", and it applies to 2 words. Take a look again at the board to see which 2 words might relate to "HAWAII"...',
 											position: "middle",
 											button: "OK! <img src='/assets/Right-01-48.png'>",
 											boardshownotclick: ".bighint",
@@ -1552,7 +1433,7 @@ var tutscript = { 1:{ showbubble: true,
 											shownext: 0,
 											arrow: "none",
 											heading: "Our 2nd Hint Answers...",
-											copy: 'It seems "VACATION" could probably only relate to SNORKEL and ISLAND. Go ahead and click on those two words now.',
+											copy: 'It seems "HAWAII" could probably only relate to SNORKEL and ISLAND. Go ahead and click on those two words now.',
 											position: "bottom",
 											button: "none",
 											boardshownotclick: ".bighint,.word",
@@ -1562,7 +1443,7 @@ var tutscript = { 1:{ showbubble: true,
 											shownext: 0,
 											arrow: "none",
 											heading: "Great!",
-											copy: 'We got both "VACATION" words! And since we got all the words related to the hint, we get a chance to go back and pick up a word from the last clue...',
+											copy: 'We got both "HAWAII" words! And since we got all the words related to the hint, we get a chance to go back and pick up a word from the last clue...',
 											position: "middle",
 											button: "Next <img src='/assets/Right-01-48.png'>",
 											boardshownotclick: "",
@@ -1592,7 +1473,7 @@ var tutscript = { 1:{ showbubble: true,
 											shownext: 0,
 											arrow: "none",
 											heading: "Got It!",
-											copy: "So it was FUR, after all. We now only have only one target word left to find, and a new hint word to help find it. But let's take a look at the powerups first.",
+											copy: "So it was FUR, after all. We now only have one target word left to find, and a new hint word to help find it. But let's take a look at the powerups first.",
 											position: "middle",
 											button: "Next <img src='/assets/Right-01-48.png'>",
 											boardshownotclick: "",
@@ -1613,7 +1494,7 @@ var tutscript = { 1:{ showbubble: true,
 											arrow: "left",
 											heading: "Neutral Remover",
 											copy: "The Neutral Remover will take away two random neutral words.",
-											position: "pup",
+											position: "pupleft",
 											button: "Next <img src='/assets/Right-01-48.png'>",
 											boardshownotclick: ".activepup:eq(0)",
 											boardshowclick: "none"
@@ -1737,7 +1618,7 @@ function tutShow(step) {
 	}
 
 	$(".tutbubble").removeClass("tutbubblemiddle").removeClass("tutbubbletop").removeClass("tutbubblebottom")
-	               .removeClass("tutbubblemiddleshake").removeClass("tutbubblepup")
+	               .removeClass("tutbubblemiddleshake").removeClass("tutbubblepup").removeClass("tutbubblepupleft")
 	$(".tutbubble").addClass("tutbubble" + tutpos).attr("data-tutstep", step)
 	$(".tutheading").text(tutheading);
 	$(".tuttext").html(tuttext);

@@ -103,8 +103,8 @@
 
         <% end %>
         <% if current_user.showtutorial == true %>
-          <%= link_to tutorial_pages_path, :class => "button tutorialguess" do %>
-            <span>Guess Tutorial</span>
+          <%= link_to tutorial_pages_path, :class => "button tutorialguess", :style => "font-size: 17px;line-height: 1.4;" do %>
+            <span>How to Play Guess Mode</span>
           <% end %>
         <% else %>
           <button class="button startguess">Guess</button><br>

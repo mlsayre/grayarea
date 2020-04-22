@@ -184,7 +184,7 @@ class PagesController < ApplicationController
 		@game = {
 			:tutcreator => "Uhura",
 			:hintword1 => "PET", :hintnum1 => 3,
-			:hintword2 => "VACATION", :hintnum2 => 2,
+			:hintword2 => "HAWAII", :hintnum2 => 2,
 			:hintword3 => "SPOOKY", :hintnum3 => 1,
 
 		}
