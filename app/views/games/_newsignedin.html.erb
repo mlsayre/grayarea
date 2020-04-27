@@ -1,4 +1,5 @@
 <script type='text/javascript' src="https://cdn.applixir.com/applixir.sdk3.0m.js"></script>
+
 <div id="applixir_vanishing_div" hidden>
    <iframe id="applixir_parent" allow="autoplay, fullscreen"></iframe>
 </div>
@@ -165,6 +166,18 @@
     <div class="settingsclosebutton">Close Settings</div>
   </div>
 </section>
+<div class="facebook-vidad">
+  <div class="facebookad">
+    <ins class="adsbygoogle"
+     style="display:inline-block;width:320px;height:680px"
+     data-ad-client="ca-pub-2363108822222571"
+     data-ad-slot="2898493173"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <div class="facebooktimebar"></div>
+</div>
 
 <script>
 $(".feednav").click(function() {
@@ -178,122 +191,135 @@ $(".feednav").click(function() {
 <script>
         // powerups
         $(".watchforpupneutrals").click(function() {
-          $(".pagecover").show().addClass("unclickable");
-          setTimeout(function() {
-            $(".pagecoverunclickable").hide();
-          }, 35000)
           runneutralad();
         })
         $(".watchforpupspoilers").click(function() {
-          $(".pagecover").show().addClass("unclickable");
-          setTimeout(function() {
-            $(".pagecoverunclickable").hide();
-          }, 35000)
           runspoilersad();
         })
         var sound = gon.sound;
 
         function runneutralad() {
-          function neutralAdStatusCallback(status) {
-            if (status) {console.log('Applixir status: ' + status);}
-
-            if (status === "ad-blocker") {
-              console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-              $(".menudialogadblocker").show();
-              $(".pagecover").show();
-            }
-            if (status === "ad-watched" || status === "fb-watched") {
-              $.ajax({
-                url: "/games/increasepuptworemove",
-                type: "POST",
-                dataType:'json'
-              })
-              .done(function() {
-                console.log("user pup increased")
-                var numtext = parseInt($(".watchforpupneutrals .titlepupnum").text()) + 2;
-                $(".watchforpupneutrals .titlepupnum").text(numtext);
-              })
-              .fail(function() {
-                console.log("sorry, attempt to add neutral remove powerups failed")
-              })
-            }
-            if (status === "sys-closing") {
+          if (adcompany === "applixir") {
+            $(".pagecover").show().addClass("unclickable");
+            setTimeout(function() {
               $(".pagecoverunclickable").hide();
-              $(".pagecover").hide();
+            }, 35000)
+            function neutralAdStatusCallback(status) {
+              if (status) {console.log('Applixir status: ' + status);}
+
+              if (status === "ad-blocker") {
+                console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+                $(".menudialogadblocker").show();
+                $(".pagecover").show();
+              }
+              if (status === "ad-watched" || status === "fb-watched") {
+                $.ajax({
+                  url: "/games/increasepuptworemove",
+                  type: "POST",
+                  dataType:'json'
+                })
+                .done(function() {
+                  console.log("user pup increased")
+                  var numtext = parseInt($(".watchforpupneutrals .titlepupnum").text()) + 2;
+                  $(".watchforpupneutrals .titlepupnum").text(numtext);
+                })
+                .fail(function() {
+                  console.log("sorry, attempt to add neutral remove powerups failed")
+                })
+              }
+              if (status === "sys-closing") {
+                $(".pagecoverunclickable").hide();
+                $(".pagecover").hide();
+              }
             }
-          }
 
-          var adsound = true;
-          if (sound === 1) {
-            adsound = false;
-          }
+            var adsound = true;
+            if (sound === 1) {
+              adsound = false;
+            }
 
-          var options = {
-            zoneId: 2894,
-            devId: 3705,
-            gameId: 4932,
-            dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-            muted: adsound, // the player will start in muted mode/
-            fallback: 1,
-            // the player will start normally with no muted option
-            //vpos: 'top',
-            adStatusCb: neutralAdStatusCallback,
-            //z2url: document.location.origin + '/games/applixir.iframe.html',
-          };
-          $(".menudialogwatch").hide();
-          invokeApplixirVideoUnit(options);
-          $(".pagecoverunclickable").show();
+            var options = {
+              zoneId: 2894,
+              devId: 3705,
+              gameId: 4932,
+              dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+              muted: adsound, // the player will start in muted mode/
+              fallback: 1,
+              // the player will start normally with no muted option
+              //vpos: 'top',
+              adStatusCb: neutralAdStatusCallback,
+              //z2url: document.location.origin + '/games/applixir.iframe.html',
+            };
+            $(".menudialogwatch").hide();
+            invokeApplixirVideoUnit(options);
+            $(".pagecoverunclickable").show();
+          } else if (adcompany === "facebook") {
+            $(".facebook-vidad").show().addClass("vidslidein");
+            // $(".facebook-vidad .facebookad").append('<ins class="adsbygoogle" style="display:block"' + 
+            //   'data-ad-client="ca-pub-2363108822222571" data-ad-slot="2898493173" data-ad-format="auto"' +
+            //   'data-full-width-responsive="true"></ins>' + 
+            //   '<script>(adsbygoogle = window.adsbygoogle || []).push({})</sc' + 'ript>');
+            
+          }
         }
 
         function runspoilersad() {
-          function spoilerAdStatusCallback(status) {
-            if (status) {console.log('Applixir status: ' + status);}
-
-            if (status === "ad-blocker") {
-              console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-              $(".menudialogadblocker").show();
-              $(".pagecover").show();
-            }
-            if (status === "ad-watched" || status === "fb-watched") {
-              $.ajax({
-                url: "/games/increasepupspoiler",
-                type: "POST",
-                dataType:'json'
-              })
-              .done(function() {
-                console.log("user spoiler pup increased")
-                var numtext = parseInt($(".watchforpupspoilers .titlepupnum").text()) + 2;
-                $(".watchforpupspoilers .titlepupnum").text(numtext);
-              })
-              .fail(function() {
-                console.log("sorry, attempt to add spoiler remove powerups failed")
-              })
-            }
-            if (status === "sys-closing") {
+          if (adcompany === "applixir") {
+            $(".pagecover").show().addClass("unclickable");
+            setTimeout(function() {
               $(".pagecoverunclickable").hide();
-              $(".pagecover").hide();
+            }, 35000)
+            function spoilerAdStatusCallback(status) {
+              if (status) {console.log('Applixir status: ' + status);}
+
+              if (status === "ad-blocker") {
+                console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+                $(".menudialogadblocker").show();
+                $(".pagecover").show();
+              }
+              if (status === "ad-watched" || status === "fb-watched") {
+                $.ajax({
+                  url: "/games/increasepupspoiler",
+                  type: "POST",
+                  dataType:'json'
+                })
+                .done(function() {
+                  console.log("user spoiler pup increased")
+                  var numtext = parseInt($(".watchforpupspoilers .titlepupnum").text()) + 2;
+                  $(".watchforpupspoilers .titlepupnum").text(numtext);
+                })
+                .fail(function() {
+                  console.log("sorry, attempt to add spoiler remove powerups failed")
+                })
+              }
+              if (status === "sys-closing") {
+                $(".pagecoverunclickable").hide();
+                $(".pagecover").hide();
+              }
             }
-          }
 
-          var adsound = true;
-          if (sound === 1) {
-            adsound = false;
-          }
+            var adsound = true;
+            if (sound === 1) {
+              adsound = false;
+            }
 
-          var options = {
-            zoneId: 2894,
-            devId: 3705,
-            gameId: 4932,
-            dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-            muted: adsound, // the player will start in muted mode/
-            fallback: 1,
-            // the player will start normally with no muted option
-            //vpos: 'top',
-            adStatusCb: spoilerAdStatusCallback,
-            //z2url: document.location.origin + '/games/applixir.iframe.html',
-          };
-          $(".menudialogwatch").hide();
-          invokeApplixirVideoUnit(options);
-          $(".pagecoverunclickable").show();
+            var options = {
+              zoneId: 2894,
+              devId: 3705,
+              gameId: 4932,
+              dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+              muted: adsound, // the player will start in muted mode/
+              fallback: 1,
+              // the player will start normally with no muted option
+              //vpos: 'top',
+              adStatusCb: spoilerAdStatusCallback,
+              //z2url: document.location.origin + '/games/applixir.iframe.html',
+            };
+            $(".menudialogwatch").hide();
+            invokeApplixirVideoUnit(options);
+            $(".pagecoverunclickable").show();
+          } else if (adcompany === "facebook") {
+
+          }
         }
       </script>

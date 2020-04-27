@@ -1,4 +1,5 @@
 var ready = function() {
+	adcompany = "applixir" // "applixir" "facebook"
 	if(!!window.performance && window.performance.navigation.type == 2)
 		{
 		  window.location.reload();
@@ -7,6 +8,8 @@ var ready = function() {
 	$(document).off("click", ".chatopenbutton");
 	$(document).off("click", ".chatclosebutton");
 	$(document).off("click", ".messageenter");
+
+	if ($(document).width() > 500) {$("body").addClass("bodyscrollable");}
 
 	$(document).on("click", ".chatclosebutton", function() {
 		clearInterval(refreshingChat);
@@ -1662,107 +1665,115 @@ var ready = function() {
 			})
 
 			function runneutralad() {
-				function neutralAdStatusCallback(status) {
-					if (status) {console.log('Applixir status: ' + status);}
+				if (adcompany === "applixir") {
+					function neutralAdStatusCallback(status) {
+						if (status) {console.log('Applixir status: ' + status);}
 
-					if (status === "ad-blocker") {
-						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-						$(".menudialogadblocker").show();
-					}
-					if (status === "ad-watched" || status === "fb-watched") {
-						$.ajax({
-				      url: "/games/increasepuptworemove",
-				      type: "POST",
-				      dataType:'json'
-				    })
-						.done(function() {
-				    	console.log("user pup increased")
-				    	loadWrapper(".pupcontainer")
-				    })
-				    .fail(function() {
-				    	console.log("sorry, attempt to add neutral remove powerups failed")
-				    })
-						console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
-					}
-      		if (status === "sys-closing") {
-      			$(".pagecoverunclickable").hide();
-      			$(".pagecover").hide();
-      		}
-		    }
+						if (status === "ad-blocker") {
+							console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+							$(".menudialogadblocker").show();
+						}
+						if (status === "ad-watched" || status === "fb-watched") {
+							$.ajax({
+					      url: "/games/increasepuptworemove",
+					      type: "POST",
+					      dataType:'json'
+					    })
+							.done(function() {
+					    	console.log("user pup increased")
+					    	loadWrapper(".pupcontainer")
+					    })
+					    .fail(function() {
+					    	console.log("sorry, attempt to add neutral remove powerups failed")
+					    })
+							console.log("MAKE CALL TO SERVER, ADD NEUTRAL POWERUPS!")
+						}
+	      		if (status === "sys-closing") {
+	      			$(".pagecoverunclickable").hide();
+	      			$(".pagecover").hide();
+	      		}
+			    }
 
-			  var adsound = true;
-			  if (sound === 1) {
-			  	adsound = false;
-			  }
+				  var adsound = true;
+				  if (sound === 1) {
+				  	adsound = false;
+				  }
 
-		    var options = {
-	        zoneId: 2894,
-	        devId: 3705,
-	        gameId: 4932,
-	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-	        muted: adsound, // the player will start in muted mode/
-	        fallback: 1,
-					// the player will start normally with no muted option
-					//vpos: 'top',
-	        adStatusCb: neutralAdStatusCallback,
-	        //z2url: document.location.origin + '/games/applixir.iframe.html',
-		    };
-		    $(".menudialogwatch").hide();
-				invokeApplixirVideoUnit(options);
-				$(".pagecoverunclickable").show();
+			    var options = {
+		        zoneId: 2894,
+		        devId: 3705,
+		        gameId: 4932,
+		        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+		        muted: adsound, // the player will start in muted mode/
+		        fallback: 1,
+						// the player will start normally with no muted option
+						//vpos: 'top',
+		        adStatusCb: neutralAdStatusCallback,
+		        //z2url: document.location.origin + '/games/applixir.iframe.html',
+			    };
+			    $(".menudialogwatch").hide();
+					invokeApplixirVideoUnit(options);
+					$(".pagecoverunclickable").show();
+				} else if (adcompany === "facebook") {
+
+				}
 			}
 
 			function runspoilersad() {
-				function spoilerAdStatusCallback(status) {
-					if (status) {console.log('Applixir status: ' + status);}
+				if (adcompany === "applixir") {
+					function spoilerAdStatusCallback(status) {
+						if (status) {console.log('Applixir status: ' + status);}
 
-					if (status === "ad-blocker") {
-						console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
-						$(".menudialogadblocker").show();
-					}
-					if (status === "ad-watched" || status === "fb-watched") {
-						$.ajax({
-				      url: "/games/increasepupspoiler",
-				      type: "POST",
-				      dataType:'json'
-				    })
-						.done(function() {
-				    	console.log("user spoiler pup increased")
-				    	loadWrapper(".pupcontainer")
-				    })
-				    .fail(function() {
-				    	console.log("sorry, attempt to add spoiler remove powerups failed")
-				    })
-						console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
-					}
-      		if (status === "sys-closing") {
-      			$(".pagecoverunclickable").hide();
-      			$(".pagecover").hide();
-      		}
-		    }
+						if (status === "ad-blocker") {
+							console.log("USER HAS AD-BLOCKER, ASK THEM TO DISABLE")
+							$(".menudialogadblocker").show();
+						}
+						if (status === "ad-watched" || status === "fb-watched") {
+							$.ajax({
+					      url: "/games/increasepupspoiler",
+					      type: "POST",
+					      dataType:'json'
+					    })
+							.done(function() {
+					    	console.log("user spoiler pup increased")
+					    	loadWrapper(".pupcontainer")
+					    })
+					    .fail(function() {
+					    	console.log("sorry, attempt to add spoiler remove powerups failed")
+					    })
+							console.log("MAKE CALL TO SERVER, ADD SPOILER POWERUPS!")
+						}
+	      		if (status === "sys-closing") {
+	      			$(".pagecoverunclickable").hide();
+	      			$(".pagecover").hide();
+	      		}
+			    }
 
-			  var adsound = true;
-			  if (sound === 1) {
-			  	adsound = false;
-			  }
+				  var adsound = true;
+				  if (sound === 1) {
+				  	adsound = false;
+				  }
 
-		    var options = {
-	        zoneId: 2894,
-	        devId: 3705,
-	        gameId: 4932,
-	        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
-	        muted: adsound, // the player will start in muted mode/
-	        fallback: 1,
-					// the player will start normally with no muted option
-					//vpos: 'top',
-	        adStatusCb: spoilerAdStatusCallback,
-	        //z2url: document.location.origin + '/games/applixir.iframe.html',
-		    };
-		    $(".menudialogwatch").hide();
-				invokeApplixirVideoUnit(options);
-				$(".pagecoverunclickable").show();
+			    var options = {
+		        zoneId: 2894,
+		        devId: 3705,
+		        gameId: 4932,
+		        dMode: 1,       // dMode 1 for MD5 checksum 0 for no MD5 checksum
+		        muted: adsound, // the player will start in muted mode/
+		        fallback: 1,
+						// the player will start normally with no muted option
+						//vpos: 'top',
+		        adStatusCb: spoilerAdStatusCallback,
+		        //z2url: document.location.origin + '/games/applixir.iframe.html',
+			    };
+			    $(".menudialogwatch").hide();
+					invokeApplixirVideoUnit(options);
+					$(".pagecoverunclickable").show();
+				
+				} else if (adcompany === "facebook") {
+
+				}
 			}
-
 	  })();
 	}
 
