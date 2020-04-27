@@ -23,7 +23,8 @@ body {
   margin: 0 auto !important;
 }
 .bodyscrollable {
-  overflow: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden;
 }
 @media (min-width: 500px) {
   html {
