@@ -67,7 +67,7 @@ class PagesController < ApplicationController
       .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
 
     @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(30)
-    @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(30)
+    @gamesgiverlist = @gamesgiver.page(params[:page]).per(30)
 	end
 
 	def avatar_customize

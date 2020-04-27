@@ -1,5 +1,5 @@
 <% @gamesgiverlist.each_with_index do |game, index| %>
-<% @humanindex = @gamesgiverlist.count - index %>
+<% @humanindex = @gamesgiver.count - (@gamesgiver.index(Game.find(game.id))) %>
   <% if Game.find(game.id).guesser_id1 == 0 %>
     <% numplayers = "0" %>
   <% elsif Game.find(game.id).guesser_id2 == 0 %>

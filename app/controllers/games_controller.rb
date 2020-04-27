@@ -20,7 +20,7 @@ class GamesController < ApplicationController
         .or(Game.where(:guesser_id6 => current_user.id)).order('updated_at DESC').all
 
       @gamesguesserlist = @gamesguesser.page(params[:page_2]).per(6)
-      @gamesgiverlist = Kaminari.paginate_array(@gamesgiver).page(params[:page]).per(6)
+      @gamesgiverlist = @gamesgiver.page(params[:page]).per(6)
 
       avguesserbgnum = ''
       avguesserheadnum = ''
