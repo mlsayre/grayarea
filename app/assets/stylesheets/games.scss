@@ -245,6 +245,24 @@ span.feednotify {
   vertical-align: top;
   text-align: center;
 }
+nav.pagination {
+    margin-bottom: 24px;
+}
+nav.pagination span {
+    font-size: 24px;
+    padding: 6px 4px;
+}
+nav.pagination span a {
+  font-size: 24px;
+    margin: 1px;
+    background: lightgrey;
+    padding: 5px 4px;
+    border-radius: 10px;
+    line-height: 1.9;
+    text-decoration: none;
+    white-space: nowrap;
+    color: darkgreen;
+}
 .thefeed {
   padding-top: 20px;
 }
