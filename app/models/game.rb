@@ -255,8 +255,18 @@ class Game < ApplicationRecord
     if User.find(userid).lifetimegamesguesser < min || User.find(userid).lifetimeplayedgamesgiver < min
       avg = -1
     else
-      gamecreatedmult = (User.find(userid).lifetimegamesgiver.to_f * User.find(userid).averagehearts.to_f).round(4)
-      avg = (((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver + gamecreatedmult).round(2)) * 10).round(1)
+      #gamecreatedmult = (User.find(userid).lifetimegamesgiver.to_f * User.find(userid).averagehearts.to_f).round(4)
+      ratiorewardpossible = 300
+      if User.find(userid).lifetimegamesgiver > 0 && User.find(userid).lifetimegamesguesser > 0
+        usergiveratio = (User.find(userid).lifetimegamesgiver.to_f / User.find(userid).lifetimegamesguesser.to_f).round(4) * 6
+      else
+        usergiveratio = 0
+      end
+      if usergiveratio > 1
+        usergiveratio = 1
+      end
+      finalratiobonus = (ratiorewardpossible.to_f * usergiveratio.to_f).round(1)
+      avg = ((((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver).round(2)) * 10).round(1)) + finalratiobonus
     end
     return avg
   end

@@ -254,14 +254,14 @@ nav.pagination span {
 }
 nav.pagination span a {
   font-size: 24px;
-    margin: 1px;
-    background: lightgrey;
-    padding: 5px 4px;
-    border-radius: 10px;
-    line-height: 1.9;
-    text-decoration: none;
-    white-space: nowrap;
-    color: darkgreen;
+  margin: 1px;
+  background: lightgrey;
+  padding: 5px 4px;
+  border-radius: 10px;
+  line-height: 1.9;
+  text-decoration: none;
+  white-space: nowrap;
+  color: darkgreen;
 }
 .thefeed {
   padding-top: 20px;
@@ -2806,6 +2806,9 @@ span.youhavetext {
   }
   .titlegamecopy {
     margin: 13% auto 0;
+  }
+  .giveboard-signedin .buttons-middle {
+    top: 5%;
   }
 }
 .buttonarea a {
