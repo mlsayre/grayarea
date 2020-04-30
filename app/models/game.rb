@@ -266,7 +266,7 @@ class Game < ApplicationRecord
         usergiveratio = 1
       end
       finalratiobonus = (ratiorewardpossible.to_f * usergiveratio.to_f).round(1)
-      avg = ((((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver).round(2)) * 10).round(1)) + finalratiobonus
+      avg = (((((User.find(userid).averagepointsguesser + User.find(userid).averagepointsgiver).round(2)) * 10).round(1)) + finalratiobonus).round(1)
     end
     return avg
   end

@@ -20,9 +20,9 @@
 		<div class="statcontainer supreme showstat">
 			<span class="statcat">Supreme Stretchers*</span>
 			<ul>
-			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 5) <=> Game.avgtotal(a.id, 5)}.first(15).each do |user| %>
-			  	  <% if Game.avgtotal(user.id, 5) != -1 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.avgtotal(user.id, 5) %></span></li>
+			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 10) <=> Game.avgtotal(a.id, 10)}.first(15).each do |user| %>
+			  	  <% if Game.avgtotal(user.id, 10) != -1 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.avgtotal(user.id, 10) %></span></li>
 			    	<% end %>
 			  <% end %>
 			</ul>
@@ -152,7 +152,7 @@
 	</div>
 	<span class="rankfloatingnum"><span class="innernum" style="left: 0;">•</span></span>
 
-	<span class="ratingdefinition">*WSRatings calculated as: (average guess score + average give score (minimum 5 each)) x 10 + give ratio bonus (maximum 300 if you maintain 1/6 give/guess ratio)</span>
+	<span class="ratingdefinition">*WSRatings calculated as: (average guess score + average give score (minimum 10 each)) x 10 + give ratio bonus (maximum 300 if you maintain 1/6 give/guess ratio)</span>
 
 <!-- </div> -->
 
