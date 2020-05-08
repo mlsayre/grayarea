@@ -614,7 +614,7 @@ var ready = function() {
                 'word3' : hint3,
                 'word3num' : hint3numselected,}
       })
-        .always(function() {
+        .always(function(data) {
         	if (hint1numselected === 1) {
 						var wordword1 = "word";
 					} else {
@@ -645,6 +645,78 @@ var ready = function() {
 					if ($(".chatcontent").length === 0) {
         		showChat();
         	}
+
+        	// trophy show!
+      		gotfeats = data.returnedfeats;
+      		gotfeats = gotfeats.filter(feat => feat.length > 0)
+      		console.log(gotfeats)
+      		if (gotfeats.length > 0) {
+      			setTimeout(function() {
+        			$("body").append('<div class="pagecovertrophies"></div>');
+        		
+        			var trophydata = {
+        			 "givein500" : "Created 500 Games,,+200,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_027.png",
+							 "givein250" : "Created 250 Games,,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_023.png",
+							 "givein150" : "Created 150 Games,,+70,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_018.png",
+							 "givein100" : "Created 100 Games,,+50,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_013.png",
+							 "givein50" : "Created 50 Games,,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_009.png",
+							 "givein20" : "Created 20 Games,,+30,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_007.png",
+							 "givein6" : "Created 6 Games,,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_003.png",
+							 "givein1" : "Created 1 Game,,+10,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_creator_medal_001.png",
+							 "randomNeutPup" : "Random Reward!,,+4,https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png",
+							 "randomSpoilerPup" : "Random Reward!,,+4,https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"
+							}
+							if (gotfeats.length === 1) {
+								var trophytext = "Trophy Received!"
+							} else {
+								var trophytext = "Trophies Received!"
+							}
+							$("body").append('<div class="featpopin">' + trophytext + '<span class="clicktrophy">Click trophy to continue</span></div>');
+							trophyshow.play()
+							var flyintime = 400;
+							for (var i = 0; i < gotfeats.length; i++) {
+								(function(i) {
+									var thetime = (gotfeats.length - 1 - i) * flyintime;
+									var theoffset = i;
+									var thedata = trophydata[gotfeats[i]];
+									var fulltext = thedata.split(",")[0];
+									var multi = thedata.split(",")[1];
+									var pnts = thedata.split(",")[2];
+									var imgurl = thedata.split(",")[3];
+									var feattext = "feat points"
+									if (gotfeats[i] === "randomNeutPup") {
+										feattext = "Neutral Removers"
+									} else if (gotfeats[i] === "randomSpoilerPup") {
+										feattext = "Spoiler Detectors"
+									}
+									setTimeout(function(i) {
+										
+										$(".featpopin").append('<span class="popinfeat trophyflyin trophyoffset' + theoffset + '">' +
+										                      '<div class="popinimg"><img src="' + imgurl + '"></div>' +
+																				  '<div class="popindesc">' + fulltext + '</div>' +
+																					'<span class="popinmult">' + multi.replace("x", " times") + '</span>' +
+																					'<span class="popinpoints">' + pnts + ' ' + feattext + '!</span></span>')
+										wordshow3.play();
+									}, thetime)
+								})(i)
+							}
+							$(document).on("click", ".popinfeat", function() {
+								function cardflyoff(card) {
+									$(card).removeClass("trophyflyin").addClass("trophyflyout");
+								}
+								wordshow8.on("play", cardflyoff(this));
+								wordshow8.play();
+								if ($(".trophyflyin").length === 0) {
+									setTimeout(function() {
+										$(".pagecovertrophies").remove();
+										$(".featpopin").remove();
+									},1000)
+								}
+								
+							})
+						}, 1750)
+					}
+
         })
 		})
 		// $(".closemessagebox").click(function() { closemessagebox(); });

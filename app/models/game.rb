@@ -438,11 +438,11 @@ class Game < ApplicationRecord
     giveuser = User.find(giverid)
     featindexesguesser = {"guessin3" => 0, "guessin6" => 2, "guessin20" => 4, "guessin50" => 6, "guessin100" => 8, 
                           "guessin150" => 11, "guessin250" => 14, "guessin500" => 17}
-    featindexesgiver = {"givein1" => 0, "givein5" => 2, "givein20" => 5, "givein50" => 7, "givein100" => 10, 
+    featindexesgiver = {"givein1" => 0, "givein6" => 2, "givein20" => 5, "givein50" => 7, "givein100" => 10, 
                         "givein150" => 14, "givein250" => 18, "givein500" => 21}
     featpointsguesser = {"guessin3" => 10, "guessin6" => 20, "guessin20" => 30, "guessin50" => 30, "guessin100" => 40, 
                          "guessin150" => 60, "guessin250" => 70, "guessin500" => 150}
-    featpointsgiver = {"givein1" => 10, "givein5" => 20, "givein20" => 30, "givein50" => 40, "givein100" => 50, 
+    featpointsgiver = {"givein1" => 10, "givein6" => 20, "givein20" => 30, "givein50" => 40, "givein100" => 50, 
                        "givein150" => 70, "givein250" => 100, "givein500" => 200}
 
     if who == "guesser"
@@ -482,27 +482,35 @@ class Game < ApplicationRecord
     if who == "giver"
       if giveuser.statguesserstatus[featindexesgiver["givein500"]] == 0 && giveuser.lifetimegamesgiver > 499
         Game.statarrayupdategiver(featindexesgiver["givein500"], featpointsgiver["givein500"], giveuser)
+        featstoreturn.push("givein500")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein250"]] == 0 && giveuser.lifetimegamesgiver > 249
         Game.statarrayupdategiver(featindexesgiver["givein250"], featpointsgiver["givein250"], giveuser)
+        featstoreturn.push("givein250")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein150"]] == 0 && giveuser.lifetimegamesgiver > 149
         Game.statarrayupdategiver(featindexesgiver["givein150"], featpointsgiver["givein150"], giveuser)
+        featstoreturn.push("givein150")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein100"]] == 0 && giveuser.lifetimegamesgiver > 99
         Game.statarrayupdategiver(featindexesgiver["givein100"], featpointsgiver["givein100"], giveuser)
+        featstoreturn.push("givein100")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein50"]] == 0 && giveuser.lifetimegamesgiver > 49
         Game.statarrayupdategiver(featindexesgiver["givein50"], featpointsgiver["givein50"], giveuser)
+        featstoreturn.push("givein50")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein20"]] == 0 && giveuser.lifetimegamesgiver > 19
         Game.statarrayupdategiver(featindexesgiver["givein20"], featpointsgiver["givein20"], giveuser)
+        featstoreturn.push("givein20")
       end
-      if giveuser.statgiverstatus[featindexesgiver["givein5"]] == 0 && giveuser.lifetimegamesgiver > 4
-        Game.statarrayupdategiver(featindexesgiver["givein5"], featpointsgiver["givein5"], giveuser)
+      if giveuser.statgiverstatus[featindexesgiver["givein6"]] == 0 && giveuser.lifetimegamesgiver > 5
+        Game.statarrayupdategiver(featindexesgiver["givein6"], featpointsgiver["givein6"], giveuser)
+        featstoreturn.push("givein6")
       end
       if giveuser.statgiverstatus[featindexesgiver["givein1"]] == 0 && giveuser.lifetimegamesgiver > 0
         Game.statarrayupdategiver(featindexesgiver["givein1"], featpointsgiver["givein1"], giveuser)
+        featstoreturn.push("givein1")
       end
     end
 

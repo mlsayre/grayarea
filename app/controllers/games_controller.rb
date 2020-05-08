@@ -738,6 +738,7 @@ class GamesController < ApplicationController
   end
 
   def submithints
+    @returnedfeats = []
   	@thisgame = Game.find(params[:game_id])
 		@thisgame.update(:giver_id => current_user.id, :hintword1 => params[:word1], :gamestatus => "guess",
 			:hintword2 => params[:word2], :hintnum1 => params[:word1num], :hintnum2 => params[:word2num], 
@@ -751,9 +752,22 @@ class GamesController < ApplicationController
       current_user.increment!(:giverdeletegamesleft, by = 1)
     end
 
-    Game.checkfeats(current_user.id, current_user.id, "giver")
+    @temp1 = Game.checkfeats(current_user.id, current_user.id, "giver")
+    @returnedfeats.push(@temp1)
+    @randnum = rand(24)
+    if @randnum == 0
+      @returnedfeats.push("randomNeutPup")
+      current_user.increment!(:pupneutraltworemove, by = 4)
+    elsif @randnum == 1
+      @returnedfeats.push("randomSpoilerPup")
+      current_user.increment!(:pupspoilerdetector, by = 4)
+    end
 
-		render body: nil
+    #@returnedfeats = ["randomSpoilerPup"] # to test
+
+		respond_to do |format|
+      format.json { render json: { :returnedfeats => @returnedfeats }  }
+    end
   end
 
   def givingdeletegame
