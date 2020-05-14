@@ -11,7 +11,7 @@
 		<div class="lifetimerankings">
 			<div class="rankingstabletitle">Your Stats</div>
 			<div class="centered">
-				Your WSRating: <%= Game.avgtotal(current_user.id, 0) %><br>
+				Your WSRating: <%= Game.avgtotal(current_user.id, 0, false) %><br>
 				You've created <%= current_user.lifetimegamesgiver %> games<br>
 				You've guessed in <%= current_user.lifetimegamesguesser %> games<br><br>
 			</div>

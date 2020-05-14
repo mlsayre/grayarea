@@ -20,9 +20,9 @@
 		<div class="statcontainer supreme showstat">
 			<span class="statcat">Supreme Stretchers*</span>
 			<ul>
-			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 5) <=> Game.avgtotal(a.id, 5)}.first(15).each do |user| %>
-			  	  <% if Game.avgtotal(user.id, 5) != -1 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.avgtotal(user.id, 5) %></span></li>
+			  <% User.all.sort {|a,b| Game.avgtotal(b.id, 5, true) <=> Game.avgtotal(a.id, 5, true)}.first(15).each do |user| %>
+			  	  <% if Game.avgtotal(user.id, 5, true) != -1 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= Game.avgtotal(user.id, 5, true) %></span></li>
 			    	<% end %>
 			  <% end %>
 			</ul>
@@ -83,6 +83,17 @@
 			</ul>
 		</div>
 
+		<div class="statcontainer total200">
+			  <span class="statcat">200+ Point Games (Giving & Guessing)</span>
+				<ul>
+				  <% User.all.sort {|a,b| (b.statgiverscoretwohundred + b.statguesserscoretwohundred) <=> (a.statgiverscoretwohundred + a.statguesserscoretwohundred) }.first(15).each do |user| %>
+				  	  <% if user.statgiverscoretwohundred + user.statguesserscoretwohundred != 0 %>
+				    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statgiverscoretwohundred + user.statguesserscoretwohundred %></span></li>
+				    	<% end %>
+				  <% end %>
+				</ul>
+		  </div>
+
 		<div class="statcontainer atnonspoiler">
 		  <span class="statcat">All-time Giver Non-Spoiler Streak</span>
 			<ul>
@@ -94,17 +105,6 @@
 			</ul>
 	  </div>
 
-	  <div class="statcontainer atgsnonspoiler">
-		  <span class="statcat">All-time Guesser Non-Spoiler Streak</span>
-			<ul>
-			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
-			  	  <% if user.statalltimeguesserstreak != 0 %>
-			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimeguesserstreak %></span></li>
-			    	<% end %>
-			  <% end %>
-			</ul>
-	  </div>		
-
 	  <div class="statcontainer wknonspoiler">
 			  <span class="statcat">Current Giver Non-Spoiler Streak</span>
 				<ul>
@@ -115,6 +115,17 @@
 				  <% end %>
 				</ul>
 		  </div>
+
+	  <div class="statcontainer atgsnonspoiler">
+		  <span class="statcat">All-time Guesser Non-Spoiler Streak</span>
+			<ul>
+			  <% User.all.sort {|a,b| b.statalltimeguesserstreak <=> a.statalltimeguesserstreak }.first(15).each do |user| %>
+			  	  <% if user.statalltimeguesserstreak != 0 %>
+			    		<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right"><%= user.statalltimeguesserstreak %></span></li>
+			    	<% end %>
+			  <% end %>
+			</ul>
+	  </div>		
 
 		  <div class="statcontainer wkgsnonspoiler">
 			  <span class="statcat">Current Guesser Non-Spoiler Streak</span>
@@ -128,7 +139,7 @@
 		  </div>
 
 		  <div class="statcontainer totalguesser">
-			  <span class="statcat">Total Games Played as Guesser</span>
+			  <span class="statcat">Games Played as Guesser</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimegamesguesser <=> a.lifetimegamesguesser }.first(15).each do |user| %>
 				  	  <% if user.lifetimegamesguesser != 0 %>
@@ -139,7 +150,7 @@
 		  </div>
 
 		  <div class="statcontainer totalgiver">
-			  <span class="statcat">Total Games Created as Giver</span>
+			  <span class="statcat">Games Created</span>
 				<ul>
 				  <% User.all.sort {|a,b| b.lifetimegamesgiver <=> a.lifetimegamesgiver }.first(15).each do |user| %>
 				  	  <% if user.lifetimegamesgiver != 0 %>
@@ -152,7 +163,7 @@
 	</div>
 	<span class="rankfloatingnum"><span class="innernum" style="left: 0;">•</span></span>
 
-	<span class="ratingdefinition">*WSRatings calculated as: (average guess score + average give score (minimum 5 each)) x 10 + give ratio bonus (maximum 300 if you maintain 1/6 give/guess ratio)</span>
+	<span class="ratingdefinition">*WSRatings calculated as: (avg guess score + avg give score (min 5 each)) x 10 + give ratio bonus (max 300 if you maintain 1/6 give/guess ratio) (Players active within last month)</span>
 
 <!-- </div> -->
 

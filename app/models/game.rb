@@ -251,8 +251,10 @@ class Game < ApplicationRecord
     return avg
   end
 
-  def self.avgtotal(userid, min)
-    if User.find(userid).lifetimegamesguesser < min || User.find(userid).lifetimegamesgiver < min
+  def self.avgtotal(userid, min, monthago)
+    if monthago == true && User.find(userid).updated_at > 1.month.ago == false
+      avg = -1
+    elsif User.find(userid).lifetimegamesguesser < min || User.find(userid).lifetimegamesgiver < min
       avg = -1
     else
       #gamecreatedmult = (User.find(userid).lifetimegamesgiver.to_f * User.find(userid).averagehearts.to_f).round(4)
