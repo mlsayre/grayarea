@@ -2313,7 +2313,7 @@ span.spinnerwait {
   }
 }
 span.calcwait {
-      width: fit-content;
+    width: fit-content;
     display: block;
     margin: 0 auto;
     padding: 6px;
@@ -2331,6 +2331,37 @@ span.calcwait {
   to {
     text-shadow: purple 9px 9px 6px;
   }
+}
+span.randomfact {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+  padding: 6px;
+  border-radius: 10px;
+  animation: rando 3s alternate infinite;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40%;
+  text-align: center;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.5);
+}
+@keyframes rando {
+  from {
+    text-shadow: blue -2px -2px 4px;
+  }
+  to {
+    text-shadow: green 3px 3px 4px;
+  }
+}
+.randIdeaKey {
+    font-style: italic;
+    font-size: 28px;
+    color: lightyellow;
+}
+.randIdeaValue {
+    font-size: 19px;
 }
 .statcontainer {
     width: 73%;

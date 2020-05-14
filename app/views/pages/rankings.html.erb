@@ -4,6 +4,11 @@
 	<div class="rankweeklycontent">
 		<span class="spinnerwait"><img src="/assets/spinner.gif"></span>
 		<span class="calcwait">Calculating...</span>
+		<span class="randomfact">
+			Random <span class="wordortip"></span>:
+			<div class="randIdeaKey">: </div>
+			<div class="randIdeaValue"></div>
+		</span>
 		<span class="loadlate"></span>
 	</div>
 
@@ -92,6 +97,46 @@
 </section>
 
 <script>
+var randidea = {
+		"Game Tip": "When creating games, put the harder clues first so the guesser can try again if needed during make up rounds.",
+		"Game Tip": "When doing 'Chance It' guessing, use the Spoiler Detector power-up to avoid the spoiler!",
+		"Game Tip": "Don't forget to use power-ups to narrow things down.",
+		"Game Tip": "Try to keep a 1:6 give:guess ratio to rise up the Supreme Stretchers list!",
+		"Game Tip": "Don't be afraid to delete a game you're making if the spoiler is in any danger of being picked.",
+		"nabob": "An Indian ruler within the Mogul Empire; Someone of great wealth or importance.",
+		"macrospatial": "Relating to relatively large spaces.",
+		"solemnity": "The quality of being deeply serious and sober or solemn.",
+		"psychobiology": "The study of the biological basis for cognition and other mental processes.",
+		"uguisubari": "Wooden floors designed to creak at the slightest pressure, warning the inhabitants of any approach.",
+		"kikepa": "A Hawaiian garment like a sarong.",
+		"collyrium": "Eye lotion or ointment.",
+		"phrontistery": "A thinking-place; place for study.",
+		"affreighter": "One who hires or charters a ship to convey goods.",
+		"myriarch": "A captain or commander of ten thousand people.",
+		"demiwolf": "A half wolf; a mongrel dog, between a dog and a wolf.",
+		"cornbind": "A weed that binds stalks of corn.",
+		"cassonade": "Raw sugar; sugar not refined.",
+		"vinedresser": "One who cultivates, prunes, or cares for, grapevines; a laborer in a vineyard.",
+		"parlous": "Attended with peril; dangerous; Venturesome; bold; mischievous; keen.",
+		"ennoble": "To make noble; to elevate in degree, qualities, or excellence; to dignify.",
+		"decipiency": "State of being deceived; hallucination.",
+		"lumbrical": "Resembling a worm; as, the lumbrical muscles of the hands of the hands and feet.",
+		"previse": "To foresee.",
+		"simar": "A woman's long dress or robe; also light covering; a scarf.",
+		"contesseration": "An assemblage; a collection; harmonious union.",
+		"hallier": "A kind of net for catching birds."
+	}
+var randkeys = Object.keys(randidea);
+var therand = randkeys[Math.floor(Math.random() * randkeys.length)];
+var randword = therand;
+var randdef = randidea[randword];
+if (randword === "Game Tip") {
+	$(".wordortip").text("Thought")
+} else {
+	$(".wordortip").text("Definition")
+}
+$(".randIdeaKey").text(randword);
+$(".randIdeaValue").text(randdef);
 $(document).on("click", ".rtweekly", function() {
 	$(".ranktime").removeClass("rankselected");
 	$(this).addClass("rankselected");
@@ -294,7 +339,7 @@ $(document).ready(function() {
 			})
 			$(".spinnerwait").fadeOut(1200)
 			$(".calcwait").fadeOut(200)
-
+			$(".randomfact").fadeOut(200)
 		});
 	}, 250)
 		
@@ -320,4 +365,5 @@ $(document).ready(function() {
 	// 	}
 	// }
 })
+
 </script>
