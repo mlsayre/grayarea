@@ -754,7 +754,7 @@ class GamesController < ApplicationController
 
     @temp1 = Game.checkfeats(current_user.id, current_user.id, "giver")
     @returnedfeats.push(@temp1)
-    @randnum = rand(24)
+    @randnum = rand(12) # was 24
     if @randnum == 0
       @returnedfeats.push("randomNeutPup")
       current_user.increment!(:pupneutraltworemove, by = 4)

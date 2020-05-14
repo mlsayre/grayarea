@@ -1153,6 +1153,7 @@ var ready = function() {
 										 "guessin6" : "Guess in 6 Games,,+20,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_003.png",
 										 "guessin3" : "Guess in 3 Games,,+10,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_001.png",
 										 "scoretwohundred" : "You Scored 200+!,,+300,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_029.png",
+										 "scoretwohundredextra" : "200+ Points Again!,,+50,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_029.png",
 										 "scorehundred100" : "You Scored 100+,100x,+100,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_025.png",
 										 "scorehundred50" : "You Scored 100+,50x,+60,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_020.png",
 										 "scorehundred20" : "You Scored 100+,20x,+40,https://s3-us-west-2.amazonaws.com/wordstretch/awards/obj_guesser_medal_015.png",
