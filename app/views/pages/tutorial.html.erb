@@ -170,7 +170,7 @@
   <div class="menudialog menudialogaboutgiver">
   	About <%= @game[:tutcreator] %>: "I'm not an actual player."<br><br>
   	WSRating: 1220<br>
-  	<span style="font-size:14px;margin-top: 4px;display: block;">(Your WSRating: <%= Game.avgtotal(current_user.id, 0) %>)</span>
+  	<span style="font-size:14px;margin-top: 4px;display: block;">(Your WSRating: <%= Game.avgtotal(current_user.id, 0, false) %>)</span>
   </div>
 
 	<div class="roundannounce hidden">
