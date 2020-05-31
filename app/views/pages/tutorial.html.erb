@@ -1,4 +1,9 @@
-<section class="playboard-signedin <%= current_user.theme %>">
+<% if user_signed_in? == false %>
+  <% @usertheme = "theme-default" %>
+ <% else %>
+ 	<% @usertheme = current_user.theme %>
+<% end %>
+<section class="playboard-signedin <%= @usertheme %>">
 	<div class="gametop">Playing Guess Tutorial<br>
 	</div>
 
@@ -73,7 +78,7 @@
 				
 				<div class="streakwarn">
 					<!-- <span class="bonusstreakheadline">Current non-spoiler streaks at risk:</span> -->
-					<span class="bonusstreak bonusguesserstreak">Your Streak: <%= current_user.statguessernospoilers %></span>
+					<span class="bonusstreak bonusguesserstreak">Your Streak: 0</span>
 					<span class="bonusstreak bonusgiverstreak"><%= @game[:tutcreator] %>'s Streak: 17</span>
 				</div>
 				<div class="guessbottomarea">
@@ -97,7 +102,7 @@
 							<img src=<%= @avguesserdecourl %>>
 						</div>
 					</span>
-					<span class="guessername"><%= current_user.username %></span>
+					<span class="guessername">Tutorial Player</span>
 					<div class="guesserskiparea">
 						<div class="riskytext">Too risky?</div>
 						<button class="button skip1">Go to next hint!</button>
@@ -106,7 +111,7 @@
 				<span class="menuarea">
 					<button class="menu"><img src="/assets/btn_menu.png"></button>
 					<span class="pupcontainer">
-						<% if current_user.pupneutraltworemove == 0 %>
+						<% if 1 == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_tworemove pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_minus2.png"></button>
 								<span class="pupnum neutralzero">3</span>
@@ -117,7 +122,7 @@
 								<span class="pupnum">3</span>
 							</div>
 						<% end %>
-						<% if current_user.pupspoilerdetector == 0 %>
+						<% if 1 == 0 %>
 							<div class="activepup">
 								<button class="pupbutton pup_spoilerdetect pupnotactive"><img src="https://wordstretch.s3-us-west-2.amazonaws.com/pups/btn_detect.png"></button>
 								<span class="pupnum spoilerzero">3</span>
@@ -170,7 +175,7 @@
   <div class="menudialog menudialogaboutgiver">
   	About <%= @game[:tutcreator] %>: "I'm not an actual player."<br><br>
   	WSRating: 1220<br>
-  	<span style="font-size:14px;margin-top: 4px;display: block;">(Your WSRating: <%= Game.avgtotal(current_user.id, 0, false) %>)</span>
+  	<span style="font-size:14px;margin-top: 4px;display: block;"></span>
   </div>
 
 	<div class="roundannounce hidden">
@@ -204,7 +209,7 @@
         <div class="mmheading">Continue</div>
 
           <div class="actions">
-          <% if current_user.lifetimegamesguesser > 2 %>
+          <% if user_signed_in? == true && current_user.lifetimegamesguesser > 2 %>
             <button class="button contmainplay">Give</button>
           <% else %>
             <button class="button contmainplay disabled">Give</button>
@@ -213,7 +218,7 @@
 
         <button class="button startguess">Guess</button><br>
 
-        <% if current_user.lifetimegamesguesser < 3 %>
+        <% if user_signed_in? == true && current_user.lifetimegamesguesser < 3 %>
           <span class="guessermsg">(Play 3 games as Guesser to activate Give button)</span>
         <% end %>
 
@@ -1573,7 +1578,7 @@ var tutscript = { 1:{ showbubble: true,
 											shownext: 0,
 											arrow: "none",
 											heading: "Tutorial Complete!",
-											copy: "You\'ve completed the tutorial and now know the basics of the game. Check out <img src='/assets/btn_help.png'> from the main menu to see more details, like how scoring works (basically, streaks are good!). Have fun, and thanks for stretching your mind with us!",
+											copy: "You\'ve completed the tutorial and now know the basics of the game. Check out <img src='/assets/btn_help.png'> from the main menu to see more details, like how scoring works (basically, streaks are good!). Have fun, and thanks for stretching your mind with us! Press 'Continue' above to continue...",
 											position: "middle",
 											button: "none",
 											boardshownotclick: "",

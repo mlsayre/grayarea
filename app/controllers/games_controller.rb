@@ -1078,6 +1078,9 @@ class GamesController < ApplicationController
         @firstorsecond = "bothdone"
       end
     end
+    if current_user.pupspoilerdetector < 0
+      current_user.update(:pupspoilerdetector => 0)
+    end
 
     respond_to do |format|
       format.json { render json: { :firstorsecond => @firstorsecond, :newloc => @newloc }  }
@@ -1186,6 +1189,10 @@ class GamesController < ApplicationController
         @firstorsecond = "bothdone"
       end
 
+
+    end
+    if current_user.pupneutraltworemove < 0
+      current_user.update(:pupneutraltworemove => 0)
     end
 
     respond_to do |format|

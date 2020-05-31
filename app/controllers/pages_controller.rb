@@ -147,7 +147,11 @@ class PagesController < ApplicationController
     avguessereyesnum = ''
     avguesserhairnum = ''
     avguesserdeconum = ''
-    avguesserarray = current_user.avatar_content_type.split("-")
+    if user_signed_in? == false
+      avguesserarray = "bg:001-head:001-mouth:001-eyes:006-hair:009-deco:002".split("-")
+    else
+      avguesserarray = current_user.avatar_content_type.split("-")
+    end
     avguesserarray.each do |str|
       puts str
       if str.include?("bg")
