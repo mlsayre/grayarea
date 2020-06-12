@@ -185,11 +185,18 @@ $(document).ready(function() {
 		wrapper.load("/pages/alltimeranks .atcontent", function() {
 		   wrapper.children("." + container).unwrap();
 		   var curusername = "<%= current_user.username %>";
+		   $(".totalratio li").each(function() {
+			  	if ($(this).data("ratio") === 0) {
+			  		$(this).css("color", "green").find(".ratiobehind").remove();
+
+			  	}
+			  })
 			  $(".statcontainer" + " li").each(function() {
 			  	if ($(this).data("uname") === curusername) {
 			  		$(this).css("color", "red").css("box-shadow", "red 0px 0px 3px 0px inset");
 			  	}
 			  })
+
 			console.log("loaded js")
 			var containernum = $(".statcontainer").length - 1;
 			var indicatorwidth = $(".rankfloatingnum").width() - $(".innernum").width();

@@ -165,12 +165,7 @@
 				<ul>
 				  <% User.all.sort {|a,b| User.giveguessratio(b.id, 10)[0] <=> User.giveguessratio(a.id, 10)[0] }.reverse.last(15).each do |user| %>
 				  	  <% if User.giveguessratio(user.id, 10)[0] != -1 %>
-				  	    <% if User.giveguessratio(user.id, 10)[1] > 0 %>
-				  	    	<li style="list-style-type: decimal; color: red;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %> (-<%= User.giveguessratio(user.id, 10)[1] %>gms)</span></li>
-				  	    <% else %>
-				  	    	<li style="list-style-type: decimal; color:green;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %></span></li>
-				  	    <% end %>
-				    		
+				  	    	<li style="list-style-type: decimal;" data-uname="<%= user.username %>" data-ratio="<%= User.giveguessratio(user.id, 10)[1] %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %> <span class="ratiobehind">(-<%= User.giveguessratio(user.id, 10)[1] %>)</span></span></li>
 				    	<% end %>
 				  <% end %>
 				</ul>
