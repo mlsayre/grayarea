@@ -149,6 +149,21 @@ class User < ApplicationRecord
     end
   end
 
+  def self.giveguessratio(userid, min)
+    if User.find(userid).lifetimegamesguesser < min
+      rat = -1
+    else
+      rat = (User.find(userid).lifetimegamesguesser.to_f / User.find(userid).lifetimegamesgiver.to_f).round(2)
+      if rat > 6
+        shouldbe = (User.find(userid).lifetimegamesguesser.to_f / 6.to_f).ceil
+        behind = shouldbe - User.find(userid).lifetimegamesgiver
+      else
+        behind = 0
+      end
+    end
+    return [rat, behind]
+  end
+
   def password_required?
     super && provider.blank?
   end
