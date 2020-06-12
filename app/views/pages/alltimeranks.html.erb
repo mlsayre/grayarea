@@ -168,7 +168,7 @@
 				  	    <% if User.giveguessratio(user.id, 10)[1] > 0 %>
 				  	    	<li style="list-style-type: decimal; color: red;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %> (-<%= User.giveguessratio(user.id, 10)[1] %>gms)</span></li>
 				  	    <% else %>
-				  	    	<li style="list-style-type: decimal;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %></span></li>
+				  	    	<li style="list-style-type: decimal; color:green;" data-uname="<%= user.username %>"><%= user.username %> <span style="float:right">1:<%= User.giveguessratio(user.id, 10)[0] %></span></li>
 				  	    <% end %>
 				    		
 				    	<% end %>
